@@ -10,6 +10,13 @@ import Foundation
 import ReactiveCocoa
 
 
+extension NSURLRequest {
+    internal static func create(server: Server, _ endpoint: Client.Endpoint) -> NSURLRequest {
+        let URL = NSURL(string: server.endpoint)!.URLByAppendingPathComponent(endpoint.path)
+        return NSURLRequest(URL: URL)
+    }
+}
+
 /// A GitHub API Client
 public final class Client {
     /// An error from the Client.

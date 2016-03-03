@@ -18,6 +18,7 @@
 		BE88E8321C88D33D0034A112 /* Release.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8311C88D33D0034A112 /* Release.swift */; };
 		BE88E84D1C88E6D60034A112 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E84B1C88E6D60034A112 /* Argo.framework */; };
 		BE88E84E1C88E6D60034A112 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E84C1C88E6D60034A112 /* Curry.framework */; };
+		BE88E8751C88F0C50034A112 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8741C88F0C50034A112 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,13 @@
 		BE88E8311C88D33D0034A112 /* Release.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Release.swift; sourceTree = "<group>"; };
 		BE88E84B1C88E6D60034A112 /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Argo.framework; path = Carthage/Checkouts/Argo/build/Debug/Argo.framework; sourceTree = SOURCE_ROOT; };
 		BE88E84C1C88E6D60034A112 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Checkouts/Curry/build/Debug/Curry.framework; sourceTree = SOURCE_ROOT; };
+		BE88E85B1C88ED750034A112 /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Argo.framework; path = Carthage/Checkouts/Argo/build/Debug/Argo.framework; sourceTree = SOURCE_ROOT; };
+		BE88E85C1C88ED750034A112 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Checkouts/Curry/build/Debug/Curry.framework; sourceTree = SOURCE_ROOT; };
+		BE88E85D1C88ED750034A112 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Tentacle-ccmhupuixpvscyhijvefkbwpmbkt/Build/Products/Debug/ReactiveCocoa.framework"; sourceTree = "<group>"; };
+		BE88E85E1C88ED750034A112 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Tentacle-ccmhupuixpvscyhijvefkbwpmbkt/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
+		BE88E8671C88F0990034A112 /* update-test-fixtures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "update-test-fixtures.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE88E8701C88F0990034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE88E8741C88F0C50034A112 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +75,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE88E8641C88F0990034A112 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -75,6 +90,7 @@
 			children = (
 				BE88E7F41C88C6B30034A112 /* Tentacle */,
 				BE88E8001C88C6B30034A112 /* Tests */,
+				BE88E8681C88F0990034A112 /* update-test-fixtures */,
 				BE88E8271C88C7E90034A112 /* Frameworks */,
 				BE88E7F31C88C6B30034A112 /* Products */,
 			);
@@ -86,6 +102,7 @@
 			children = (
 				BE88E7F21C88C6B30034A112 /* Tentacle.framework */,
 				BE88E7FC1C88C6B30034A112 /* TentacleTests.xctest */,
+				BE88E8671C88F0990034A112 /* update-test-fixtures.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +132,10 @@
 		BE88E8271C88C7E90034A112 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE88E85B1C88ED750034A112 /* Argo.framework */,
+				BE88E85C1C88ED750034A112 /* Curry.framework */,
+				BE88E85D1C88ED750034A112 /* ReactiveCocoa.framework */,
+				BE88E85E1C88ED750034A112 /* Result.framework */,
 				BE88E84B1C88E6D60034A112 /* Argo.framework */,
 				BE88E84C1C88E6D60034A112 /* Curry.framework */,
 				BE88E8281C88C8850034A112 /* ReactiveCocoa.framework */,
@@ -122,6 +143,15 @@
 			);
 			name = Frameworks;
 			path = Tentacle;
+			sourceTree = "<group>";
+		};
+		BE88E8681C88F0990034A112 /* update-test-fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				BE88E8701C88F0990034A112 /* Info.plist */,
+				BE88E8741C88F0C50034A112 /* main.swift */,
+			);
+			path = "update-test-fixtures";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +204,23 @@
 			productReference = BE88E7FC1C88C6B30034A112 /* TentacleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		BE88E8661C88F0990034A112 /* update-test-fixtures */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE88E8711C88F0990034A112 /* Build configuration list for PBXNativeTarget "update-test-fixtures" */;
+			buildPhases = (
+				BE88E8631C88F0990034A112 /* Sources */,
+				BE88E8641C88F0990034A112 /* Frameworks */,
+				BE88E8651C88F0990034A112 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "update-test-fixtures";
+			productName = "update-test-fixtures";
+			productReference = BE88E8671C88F0990034A112 /* update-test-fixtures.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -190,6 +237,9 @@
 					BE88E7FB1C88C6B30034A112 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
+					BE88E8661C88F0990034A112 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 				};
 			};
 			buildConfigurationList = BE88E7EC1C88C6B30034A112 /* Build configuration list for PBXProject "Tentacle" */;
@@ -198,6 +248,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = BE88E7E81C88C6B30034A112;
 			productRefGroup = BE88E7F31C88C6B30034A112 /* Products */;
@@ -206,6 +257,7 @@
 			targets = (
 				BE88E7F11C88C6B30034A112 /* Tentacle */,
 				BE88E7FB1C88C6B30034A112 /* TentacleTests */,
+				BE88E8661C88F0990034A112 /* update-test-fixtures */,
 			);
 		};
 /* End PBXProject section */
@@ -219,6 +271,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BE88E7FA1C88C6B30034A112 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE88E8651C88F0990034A112 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -244,6 +303,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88E8021C88C6B30034A112 /* TentacleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE88E8631C88F0990034A112 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE88E8751C88F0C50034A112 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +472,30 @@
 			};
 			name = Release;
 		};
+		BE88E8721C88F0990034A112 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "update-test-fixtures/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diephouse.matt.update-test-fixtures";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BE88E8731C88F0990034A112 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "update-test-fixtures/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diephouse.matt.update-test-fixtures";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -434,6 +525,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BE88E8711C88F0990034A112 /* Build configuration list for PBXNativeTarget "update-test-fixtures" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE88E8721C88F0990034A112 /* Debug */,
+				BE88E8731C88F0990034A112 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
