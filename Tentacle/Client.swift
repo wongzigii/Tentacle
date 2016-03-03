@@ -9,7 +9,24 @@
 import Foundation
 import ReactiveCocoa
 
+
 /// A GitHub API Client
 public final class Client {
+    /// An error from the Client.
+    public enum Error: ErrorType {
+        /// An error occurred in a network operation.
+        case NetworkError(NSError)
+    }
     
+    /// A GitHub API endpoint.
+    internal enum Endpoint {
+        case ReleaseByTagName(owner: String, repository: String, tag: String)
+        
+        var path: String {
+            switch self {
+            case let .ReleaseByTagName(owner, repo, tag):
+                return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
+            }
+        }
+    }
 }
