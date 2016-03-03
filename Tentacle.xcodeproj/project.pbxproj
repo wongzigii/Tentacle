@@ -73,6 +73,7 @@
 				BE88E7F31C88C6B30034A112 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		BE88E7F31C88C6B30034A112 /* Products */ = {
 			isa = PBXGroup;
