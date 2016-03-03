@@ -29,4 +29,12 @@ public final class Client {
             }
         }
     }
+    
+    /// The Server that the Client connects to.
+    public let server: Server
+    
+    /// Create an unauthenticated client for the given Server.
+    public init(server: Server) {
+        self.server = server
+    }
 }
