@@ -13,6 +13,7 @@
 		BE88E80D1C88C72B0034A112 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E80C1C88C72B0034A112 /* Client.swift */; };
 		BE88E82A1C88C8850034A112 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E8281C88C8850034A112 /* ReactiveCocoa.framework */; };
 		BE88E82B1C88C8850034A112 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E8291C88C8850034A112 /* Result.framework */; };
+		BE88E82D1C88C94D0034A112 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E82C1C88C94D0034A112 /* Server.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		BE88E80C1C88C72B0034A112 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		BE88E8281C88C8850034A112 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Checkouts/ReactiveCocoa/build/Debug/ReactiveCocoa.framework; sourceTree = SOURCE_ROOT; };
 		BE88E8291C88C8850034A112 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Checkouts/Result/build/Debug/Result.framework; sourceTree = SOURCE_ROOT; };
+		BE88E82C1C88C94D0034A112 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			children = (
 				BE88E7F51C88C6B30034A112 /* Tentacle.h */,
 				BE88E80C1C88C72B0034A112 /* Client.swift */,
+				BE88E82C1C88C94D0034A112 /* Server.swift */,
 				BE88E7F71C88C6B30034A112 /* Info.plist */,
 			);
 			path = Tentacle;
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE88E82D1C88C94D0034A112 /* Server.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
