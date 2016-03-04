@@ -9,6 +9,8 @@
 import Foundation
 @testable import Tentacle
 
+/// A dummy class, so we can ask for the current bundle in Fixture.URL
+private class ImportedWithFixture { }
 
 struct Fixture {
     static var allFixtures: [Fixture] = [
@@ -40,7 +42,7 @@ struct Fixture {
     
     /// The URL of the fixture within the test bundle.
     var URL: NSURL {
-        let bundle = NSBundle(forClass: GitHubErrorTests.self)
+        let bundle = NSBundle(forClass: ImportedWithFixture.self)
         return bundle.URLForResource(filename.stringByDeletingPathExtension, withExtension: filename.pathExtension)!
     }
     
