@@ -6,8 +6,10 @@
 //  Copyright © 2016 Matt Diephouse. All rights reserved.
 //
 
+import Argo
 import Foundation
 import ReactiveCocoa
+import Result
 
 
 extension NSURLRequest {
@@ -23,6 +25,12 @@ public final class Client {
     public enum Error: ErrorType {
         /// An error occurred in a network operation.
         case NetworkError(NSError)
+        
+        /// An error occurred while deserializing JSON.
+        case JSONDeserializationError(NSError)
+        
+        /// An error occurred while decoding JSON.
+        case JSONDecodingError(DecodeError)
     }
     
     /// A GitHub API endpoint.
@@ -50,6 +58,40 @@ public final class Client {
     /// Create an unauthenticated client for the given Server.
     public init(_ server: Server) {
         self.server = server
+    }
+    
+    /// Fetch the release corresponding to the given tag in the given repository.
+    public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<Release, Error> {
+        precondition(repository.server == server)
+        return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
+    }
+    
+    /// Fetch an object from the API.
+    internal func fetchOne<Object: Decodable where Object.DecodedType == Object>(endpoint: Endpoint) -> SignalProducer<Object, Error> {
+        return NSURLSession
+            .sharedSession()
+            .rac_dataWithRequest(NSURLRequest.create(server, endpoint))
+            .mapError(Error.NetworkError)
+            .flatMap(.Concat) { data, response in
+                return SignalProducer<NSDictionary, Error>
+                    .attempt {
+                        do {
+                            let JSON = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+                            return .Success(JSON as! NSDictionary)
+                        }
+                        catch {
+                            return .Failure(.JSONDeserializationError(error as NSError))
+                        }
+                    }
+            }
+            .attemptMap { JSON in
+                switch Object.decode(.parse(JSON)) {
+                case let .Success(object):
+                    return .Success(object)
+                case let .Failure(error):
+                    return .Failure(.JSONDecodingError(error))
+                }
+            }
     }
 }
 
