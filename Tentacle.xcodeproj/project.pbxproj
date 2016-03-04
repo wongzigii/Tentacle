@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE0F40A01C89098E00E3B11A /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixtures.swift */; };
+		BE0F40A51C89191600E3B11A /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixtures.swift */; };
 		BE88E7F61C88C6B30034A112 /* Tentacle.h in Headers */ = {isa = PBXBuildFile; fileRef = BE88E7F51C88C6B30034A112 /* Tentacle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
 		BE88E8021C88C6B30034A112 /* TentacleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8011C88C6B30034A112 /* TentacleTests.swift */; };
@@ -32,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE0F409F1C89098E00E3B11A /* Fixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixtures.swift; path = Tests/Fixtures.swift; sourceTree = SOURCE_ROOT; };
 		BE88E7F21C88C6B30034A112 /* Tentacle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tentacle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E7F51C88C6B30034A112 /* Tentacle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tentacle.h; sourceTree = "<group>"; };
 		BE88E7F71C88C6B30034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE0F40961C8908CB00E3B11A /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				BE0F40971C8908CB00E3B11A /* repos */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
 		BE88E7E81C88C6B30034A112 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +134,8 @@
 		BE88E8001C88C6B30034A112 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BE0F40961C8908CB00E3B11A /* Fixtures */,
+				BE0F409F1C89098E00E3B11A /* Fixtures.swift */,
 				BE88E8011C88C6B30034A112 /* TentacleTests.swift */,
 				BE88E8031C88C6B30034A112 /* Info.plist */,
 			);
@@ -303,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88E8021C88C6B30034A112 /* TentacleTests.swift in Sources */,
+				BE0F40A01C89098E00E3B11A /* Fixtures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88E8751C88F0C50034A112 /* main.swift in Sources */,
+				BE0F40A51C89191600E3B11A /* Fixtures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +548,7 @@
 				BE88E8731C88F0990034A112 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

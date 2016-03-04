@@ -16,14 +16,9 @@ import Result
 
 let baseURL = NSURL(fileURLWithPath: Process.arguments[1])
 
-/// All the fixtures to download from the API.
-let fixtures: [Client.Endpoint] = [
-    .ReleaseByTagName(owner: "Carthage", repository: "Carthage", tag: "0.15")
-]
-
 let fileManager = NSFileManager.defaultManager()
 let session = NSURLSession.sharedSession()
-let result = SignalProducer(values: fixtures)
+let result = SignalProducer(values: Fixtures.endpoints)
     .flatMap(.Concat) { endpoint -> SignalProducer<(), NSError> in
         let request = NSURLRequest.create(.DotCom, endpoint)
         print("*** Downloading \(request.URL!)")
