@@ -24,6 +24,9 @@
 		BE88E84D1C88E6D60034A112 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E84B1C88E6D60034A112 /* Argo.framework */; };
 		BE88E84E1C88E6D60034A112 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E84C1C88E6D60034A112 /* Curry.framework */; };
 		BE88E8751C88F0C50034A112 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8741C88F0C50034A112 /* main.swift */; };
+		BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765C1C8A001C00ABD373 /* GitHubError.swift */; };
+		BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */; };
+		BEB076631C8A022800ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json in Resources */ = {isa = PBXBuildFile; fileRef = BEB076611C8A020300ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,9 @@
 		BE88E8671C88F0990034A112 /* update-test-fixtures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "update-test-fixtures.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E8701C88F0990034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE88E8741C88F0C50034A112 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		BEB0765C1C8A001C00ABD373 /* GitHubError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubError.swift; sourceTree = "<group>"; };
+		BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubErrorTests.swift; sourceTree = "<group>"; };
+		BEB076611C8A020300ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "repos-mdiep-NonExistent-releases-tags-tag.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */,
+				BEB076611C8A020300ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -130,6 +137,7 @@
 				BE88E7F51C88C6B30034A112 /* Tentacle.h */,
 				BE88E80C1C88C72B0034A112 /* Client.swift */,
 				BE0F40A31C89135D00E3B11A /* Decodable.swift */,
+				BEB0765C1C8A001C00ABD373 /* GitHubError.swift */,
 				BE88E8311C88D33D0034A112 /* Release.swift */,
 				BE88E82F1C88CDAB0034A112 /* Repository.swift */,
 				BE88E82C1C88C94D0034A112 /* Server.swift */,
@@ -143,6 +151,7 @@
 			children = (
 				BE0F40961C8908CB00E3B11A /* Fixtures */,
 				BE0F409F1C89098E00E3B11A /* Fixture.swift */,
+				BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */,
 				BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */,
 				BE88E8011C88C6B30034A112 /* TentacleTests.swift */,
 				BE88E8031C88C6B30034A112 /* Info.plist */,
@@ -296,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE0F40A81C8929CB00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */,
+				BEB076631C8A022800ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88E82D1C88C94D0034A112 /* Server.swift in Sources */,
+				BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */,
 				BE88E8321C88D33D0034A112 /* Release.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,
 				BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */,
@@ -326,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88E8021C88C6B30034A112 /* TentacleTests.swift in Sources */,
+				BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */,
 				BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */,
 				BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */,
 			);

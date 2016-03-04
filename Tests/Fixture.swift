@@ -13,10 +13,12 @@ import Foundation
 struct Fixture {
     static var allFixtures: [Fixture] = [
         Release.Carthage0_15,
+        Release.Nonexistent,
     ]
     
     struct Release {
         static var Carthage0_15 = Fixture(.ReleaseByTagName(owner: "Carthage", repository: "Carthage", tag: "0.15"))
+        static var Nonexistent = Fixture(.ReleaseByTagName(owner: "mdiep", repository: "NonExistent", tag: "tag"))
     }
     
     init(_ endpoint: Client.Endpoint) {
