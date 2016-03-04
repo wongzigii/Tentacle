@@ -33,6 +33,8 @@ extension NSURLRequest {
         let URL = NSURL(string: server.endpoint)!.URLByAppendingPathComponent(endpoint.path)
         let request = NSMutableURLRequest(URL: URL)
         
+        request.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        
         if let userAgent = Client.userAgent {
             request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         }
