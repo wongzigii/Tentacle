@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE0F40A01C89098E00E3B11A /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixtures.swift */; };
-		BE0F40A51C89191600E3B11A /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixtures.swift */; };
+		BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
+		BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */; };
+		BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A31C89135D00E3B11A /* Decodable.swift */; };
+		BE0F40A51C89191600E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
+		BE0F40A81C8929CB00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */; };
 		BE88E7F61C88C6B30034A112 /* Tentacle.h in Headers */ = {isa = PBXBuildFile; fileRef = BE88E7F51C88C6B30034A112 /* Tentacle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
 		BE88E8021C88C6B30034A112 /* TentacleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8011C88C6B30034A112 /* TentacleTests.swift */; };
@@ -34,7 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BE0F409F1C89098E00E3B11A /* Fixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixtures.swift; path = Tests/Fixtures.swift; sourceTree = SOURCE_ROOT; };
+		BE0F409F1C89098E00E3B11A /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Fixture.swift; sourceTree = SOURCE_ROOT; };
+		BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseTests.swift; sourceTree = "<group>"; };
+		BE0F40A31C89135D00E3B11A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
+		BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "repos-Carthage-Carthage-releases-tags-0.15.json"; sourceTree = "<group>"; };
 		BE88E7F21C88C6B30034A112 /* Tentacle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tentacle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E7F51C88C6B30034A112 /* Tentacle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tentacle.h; sourceTree = "<group>"; };
 		BE88E7F71C88C6B30034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,7 +97,7 @@
 		BE0F40961C8908CB00E3B11A /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				BE0F40971C8908CB00E3B11A /* repos */,
+				BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -123,6 +129,7 @@
 			children = (
 				BE88E7F51C88C6B30034A112 /* Tentacle.h */,
 				BE88E80C1C88C72B0034A112 /* Client.swift */,
+				BE0F40A31C89135D00E3B11A /* Decodable.swift */,
 				BE88E8311C88D33D0034A112 /* Release.swift */,
 				BE88E82F1C88CDAB0034A112 /* Repository.swift */,
 				BE88E82C1C88C94D0034A112 /* Server.swift */,
@@ -135,7 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				BE0F40961C8908CB00E3B11A /* Fixtures */,
-				BE0F409F1C89098E00E3B11A /* Fixtures.swift */,
+				BE0F409F1C89098E00E3B11A /* Fixture.swift */,
+				BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */,
 				BE88E8011C88C6B30034A112 /* TentacleTests.swift */,
 				BE88E8031C88C6B30034A112 /* Info.plist */,
 			);
@@ -287,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE0F40A81C8929CB00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +316,7 @@
 				BE88E82D1C88C94D0034A112 /* Server.swift in Sources */,
 				BE88E8321C88D33D0034A112 /* Release.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,
+				BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */,
 				BE88E8301C88CDAB0034A112 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,7 +326,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88E8021C88C6B30034A112 /* TentacleTests.swift in Sources */,
-				BE0F40A01C89098E00E3B11A /* Fixtures.swift in Sources */,
+				BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */,
+				BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88E8751C88F0C50034A112 /* main.swift in Sources */,
-				BE0F40A51C89191600E3B11A /* Fixtures.swift in Sources */,
+				BE0F40A51C89191600E3B11A /* Fixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

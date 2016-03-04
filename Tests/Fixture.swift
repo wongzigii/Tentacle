@@ -11,7 +11,40 @@ import Foundation
 
 
 struct Fixture {
-    static var endpoints: [Client.Endpoint] = [
-        .ReleaseByTagName(owner: "Carthage", repository: "Carthage", tag: "0.15")
+    static var allFixtures: [Fixture] = [
+        Release.Carthage0_15,
     ]
+    
+    struct Release {
+        static var Carthage0_15 = Fixture(.ReleaseByTagName(owner: "Carthage", repository: "Carthage", tag: "0.15"))
+    }
+    
+    init(_ endpoint: Client.Endpoint) {
+        self.endpoint = endpoint
+    }
+    
+    /// The Endpoint that the fixture came from.
+    let endpoint: Client.Endpoint
+    
+    /// The filename used for the local fixture.
+    var filename: NSString {
+        let path: NSString = self.endpoint.path
+        let filename: NSString = path
+            .pathComponents
+            .dropFirst()
+            .joinWithSeparator("-")
+        return filename.stringByAppendingPathExtension("json")!
+    }
+    
+    /// The URL of the fixture within the test bundle.
+    var URL: NSURL {
+        let bundle = NSBundle(identifier: "com.diephouse.matt.TentacleTests")!
+        return bundle.URLForResource(filename.stringByDeletingPathExtension, withExtension: filename.pathExtension)!
+    }
+    
+    /// The JSON from the Endpoint.
+    lazy var JSON: NSDictionary = {
+        let data = NSData(contentsOfURL: self.URL)!
+        return try! NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary
+    }()
 }

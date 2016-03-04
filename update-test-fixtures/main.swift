@@ -18,14 +18,15 @@ let baseURL = NSURL(fileURLWithPath: Process.arguments[1])
 
 let fileManager = NSFileManager.defaultManager()
 let session = NSURLSession.sharedSession()
-let result = SignalProducer(values: Fixtures.endpoints)
-    .flatMap(.Concat) { endpoint -> SignalProducer<(), NSError> in
-        let request = NSURLRequest.create(.DotCom, endpoint)
-        print("*** Downloading \(request.URL!)")
+let result = SignalProducer(values: Fixture.allFixtures)
+    .flatMap(.Concat) { fixture -> SignalProducer<(), NSError> in
+        let request = NSURLRequest.create(.DotCom, fixture.endpoint)
+        let URL = baseURL.URLByAppendingPathComponent(fixture.filename as String)
+        let path = (URL.path! as NSString).stringByAbbreviatingWithTildeInPath
+        print("*** Downloading \(request.URL!)\n    to \(path)")
         return session
             .rac_dataWithRequest(request)
             .on(next: { data, response in
-                let URL = baseURL.URLByAppendingPathComponent(endpoint.path).URLByAppendingPathExtension("json")
                 try! fileManager.createDirectoryAtURL(URL.URLByDeletingLastPathComponent!, withIntermediateDirectories: true, attributes: nil)
                 data.writeToURL(URL, atomically: true)
             })

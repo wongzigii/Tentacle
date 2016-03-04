@@ -6,15 +6,20 @@
 //  Copyright © 2016 Matt Diephouse. All rights reserved.
 //
 
+import Argo
+import Curry
 import Foundation
 
+private func toString(number: Int) -> Decoded<String> {
+    return .Success(number.description)
+}
 
 /// A Release of a Repository.
 public struct Release: Hashable, CustomStringConvertible {
     /// An Asset attached to a Release.
     public struct Asset: Hashable, CustomStringConvertible {
         /// The unique ID for this release asset.
-        public let ID: Int
+        public let ID: String
 
         /// The filename of this asset.
         public let name: String
@@ -33,7 +38,7 @@ public struct Release: Hashable, CustomStringConvertible {
             return "\(URL)"
         }
 
-        public init(ID: Int, name: String, contentType: String, URL: NSURL) {
+        public init(ID: String, name: String, contentType: String, URL: NSURL) {
             self.ID = ID
             self.name = name
             self.contentType = contentType
@@ -93,4 +98,28 @@ public func ==(lhs: Release, rhs: Release) -> Bool {
         && lhs.draft == rhs.draft
         && lhs.prerelease == rhs.prerelease
         && lhs.assets == rhs.assets
+}
+
+extension Release.Asset: Decodable {
+    public static func decode(j: JSON) -> Decoded<Release.Asset> {
+        return curry(self.init)
+            <^> (j <| "id" >>- toString)
+            <*> (j <| "name")
+            <*> (j <| "content_type")
+            <*> (j <| "browser_download_url")
+    }
+}
+
+extension Release: Decodable {
+    public static func decode(j: JSON) -> Decoded<Release> {
+        let f = curry(Release.init)
+        return f
+            <^> (j <| "id" >>- toString)
+            <*> j <| "tag_name"
+            <*> j <| "html_url"
+            <*> j <|? "name"
+            <*> j <| "draft"
+            <*> j <| "prerelease"
+            <*> j <|| "assets"
+    }
 }
