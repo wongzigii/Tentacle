@@ -29,9 +29,15 @@ extension NSJSONSerialization {
 }
 
 extension NSURLRequest {
-    internal static func create(server: Server, _ endpoint: Client.Endpoint) -> NSURLRequest {
+    internal static func create(server: Server, _ endpoint: Client.Endpoint, _ credentials: Client.Credentials?) -> NSURLRequest {
         let URL = NSURL(string: server.endpoint)!.URLByAppendingPathComponent(endpoint.path)
-        return NSURLRequest(URL: URL)
+        let request = NSMutableURLRequest(URL: URL)
+        
+        if let credentials = credentials {
+            request.setValue(credentials.authorizationHeader, forHTTPHeaderField: "Authorization")
+        }
+        
+        return request
     }
 }
 
@@ -50,6 +56,23 @@ public final class Client {
         
         /// An error that was returned from the API.
         case APIError(GitHubError)
+    }
+    
+    /// Credentials for the GitHub API.
+    internal enum Credentials {
+        case Token(String)
+        case Basic(username: String, password: String)
+        
+        var authorizationHeader: String {
+            switch self {
+            case let .Token(token):
+                return "token \(token)"
+            case let .Basic(username, password):
+                let data = "\(username):\(password)".dataUsingEncoding(NSUTF8StringEncoding)!
+                let encodedString = data.base64EncodedStringWithOptions([])
+                return "Basic \(encodedString)"
+            }
+        }
     }
     
     /// A GitHub API endpoint.
@@ -74,9 +97,25 @@ public final class Client {
     /// The Server that the Client connects to.
     public let server: Server
     
+    /// The Credentials for the API.
+    private let credentials: Credentials?
+    
     /// Create an unauthenticated client for the given Server.
     public init(_ server: Server) {
         self.server = server
+        self.credentials = nil
+    }
+    
+    /// Create an authenticated client for the given Server with a token.
+    public init(_ server: Server, token: String) {
+        self.server = server
+        self.credentials = .Token(token)
+    }
+    
+    /// Create an authenticated client for the given Server with a username and password.
+    public init(_ server: Server, username: String, password: String) {
+        self.server = server
+        self.credentials = .Basic(username: username, password: password)
     }
     
     /// Fetch the release corresponding to the given tag in the given repository.
@@ -89,7 +128,7 @@ public final class Client {
     internal func fetchOne<Object: Decodable where Object.DecodedType == Object>(endpoint: Endpoint) -> SignalProducer<Object, Error> {
         return NSURLSession
             .sharedSession()
-            .rac_dataWithRequest(NSURLRequest.create(server, endpoint))
+            .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials))
             .mapError(Error.NetworkError)
             .flatMap(.Concat) { data, response -> SignalProducer<Object, Error> in
                 let response = response as! NSHTTPURLResponse
