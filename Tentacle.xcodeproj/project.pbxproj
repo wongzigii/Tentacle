@@ -14,7 +14,6 @@
 		BE0F40A81C8929CB00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */; };
 		BE88E7F61C88C6B30034A112 /* Tentacle.h in Headers */ = {isa = PBXBuildFile; fileRef = BE88E7F51C88C6B30034A112 /* Tentacle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
-		BE88E8021C88C6B30034A112 /* TentacleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8011C88C6B30034A112 /* TentacleTests.swift */; };
 		BE88E80D1C88C72B0034A112 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E80C1C88C72B0034A112 /* Client.swift */; };
 		BE88E82A1C88C8850034A112 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E8281C88C8850034A112 /* ReactiveCocoa.framework */; };
 		BE88E82B1C88C8850034A112 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E8291C88C8850034A112 /* Result.framework */; };
@@ -48,7 +47,6 @@
 		BE88E7F51C88C6B30034A112 /* Tentacle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tentacle.h; sourceTree = "<group>"; };
 		BE88E7F71C88C6B30034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE88E7FC1C88C6B30034A112 /* TentacleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TentacleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE88E8011C88C6B30034A112 /* TentacleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TentacleTests.swift; sourceTree = "<group>"; };
 		BE88E8031C88C6B30034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE88E80C1C88C72B0034A112 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		BE88E8281C88C8850034A112 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Checkouts/ReactiveCocoa/build/Debug/ReactiveCocoa.framework; sourceTree = SOURCE_ROOT; };
@@ -153,7 +151,6 @@
 				BE0F409F1C89098E00E3B11A /* Fixture.swift */,
 				BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */,
 				BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */,
-				BE88E8011C88C6B30034A112 /* TentacleTests.swift */,
 				BE88E8031C88C6B30034A112 /* Info.plist */,
 			);
 			path = Tests;
@@ -336,7 +333,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE88E8021C88C6B30034A112 /* TentacleTests.swift in Sources */,
 				BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */,
 				BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */,
 				BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */,
