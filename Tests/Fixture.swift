@@ -40,7 +40,7 @@ struct Fixture {
     
     /// The URL of the fixture within the test bundle.
     var URL: NSURL {
-        let bundle = NSBundle(identifier: "com.diephouse.matt.TentacleTests")!
+        let bundle = NSBundle(forClass: TentacleTests.self)
         return bundle.URLForResource(filename.stringByDeletingPathExtension, withExtension: filename.pathExtension)!
     }
     
