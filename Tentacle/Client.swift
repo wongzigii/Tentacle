@@ -12,6 +12,12 @@ import ReactiveCocoa
 import Result
 
 
+extension NSJSONSerialization {
+    internal static func deserializeJSON(data: NSData) -> Result<NSDictionary, NSError> {
+        return Result(try NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary)
+    }
+}
+
 extension NSURLRequest {
     internal static func create(server: Server, _ endpoint: Client.Endpoint) -> NSURLRequest {
         let URL = NSURL(string: server.endpoint)!.URLByAppendingPathComponent(endpoint.path)
@@ -72,17 +78,10 @@ public final class Client {
             .sharedSession()
             .rac_dataWithRequest(NSURLRequest.create(server, endpoint))
             .mapError(Error.NetworkError)
-            .flatMap(.Concat) { data, response in
-                return SignalProducer<NSDictionary, Error>
-                    .attempt {
-                        do {
-                            let JSON = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-                            return .Success(JSON as! NSDictionary)
-                        }
-                        catch {
-                            return .Failure(.JSONDeserializationError(error as NSError))
-                        }
-                    }
+            .flatMap(FlattenStrategy.Concat) { data, response in
+                return SignalProducer
+                    .attempt { NSJSONSerialization.deserializeJSON(data) }
+                    .mapError(Error.JSONDeserializationError)
             }
             .attemptMap { JSON in
                 switch Object.decode(.parse(JSON)) {
