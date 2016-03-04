@@ -22,6 +22,7 @@ extension Decodable {
         }
     }
 }
+
 extension NSJSONSerialization {
     internal static func deserializeJSON(data: NSData) -> Result<NSDictionary, NSError> {
         return Result(try NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary)
