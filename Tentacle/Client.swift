@@ -47,6 +47,9 @@ public final class Client {
         
         /// An error occurred while decoding JSON.
         case JSONDecodingError(DecodeError)
+        
+        /// An error that was returned from the API.
+        case APIError(GitHubError)
     }
     
     /// A GitHub API endpoint.
@@ -88,12 +91,18 @@ public final class Client {
             .sharedSession()
             .rac_dataWithRequest(NSURLRequest.create(server, endpoint))
             .mapError(Error.NetworkError)
-            .flatMap(.Concat) { data, response in
+            .flatMap(.Concat) { data, response -> SignalProducer<Object, Error> in
+                let response = response as! NSHTTPURLResponse
                 return SignalProducer
                     .attempt {
                         return NSJSONSerialization.deserializeJSON(data).mapError(Error.JSONDeserializationError)
                     }
                     .attemptMap { JSON in
+                        if response.statusCode >= 400 && response.statusCode < 600 {
+                            return GitHubError.decode(JSON)
+                                .mapError(Error.JSONDecodingError)
+                                .flatMap { .Failure(Error.APIError($0)) }
+                        }
                         return Object.decode(JSON).mapError(Error.JSONDecodingError)
                     }
             }
