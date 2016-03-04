@@ -33,6 +33,10 @@ extension NSURLRequest {
         let URL = NSURL(string: server.endpoint)!.URLByAppendingPathComponent(endpoint.path)
         let request = NSMutableURLRequest(URL: URL)
         
+        if let userAgent = Client.userAgent {
+            request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        }
+        
         if let credentials = credentials {
             request.setValue(credentials.authorizationHeader, forHTTPHeaderField: "Authorization")
         }
@@ -93,6 +97,9 @@ public final class Client {
             }
         }
     }
+    
+    /// The user-agent to use for API requests.
+    public static var userAgent: String?
     
     /// The Server that the Client connects to.
     public let server: Server
