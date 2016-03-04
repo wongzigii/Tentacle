@@ -26,13 +26,20 @@ public final class Client {
     }
     
     /// A GitHub API endpoint.
-    internal enum Endpoint {
+    internal enum Endpoint: Hashable {
         case ReleaseByTagName(owner: String, repository: String, tag: String)
         
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
+            }
+        }
+        
+        var hashValue: Int {
+            switch self {
+            case let .ReleaseByTagName(owner, repo, tag):
+                return owner.hashValue ^ repo.hashValue ^ tag.hashValue
             }
         }
     }
@@ -43,5 +50,12 @@ public final class Client {
     /// Create an unauthenticated client for the given Server.
     public init(server: Server) {
         self.server = server
+    }
+}
+
+internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
+    switch (lhs, rhs) {
+    case let (.ReleaseByTagName(owner1, repo1, tag1), .ReleaseByTagName(owner2, repo2, tag2)):
+        return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
     }
 }
