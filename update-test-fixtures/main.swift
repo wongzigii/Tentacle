@@ -20,7 +20,7 @@ let fileManager = NSFileManager.defaultManager()
 let session = NSURLSession.sharedSession()
 let result = SignalProducer(values: Fixture.allFixtures)
     .flatMap(.Concat) { fixture -> SignalProducer<(), NSError> in
-        let request = NSURLRequest.create(.DotCom, fixture.endpoint)
+        let request = NSURLRequest.create(.DotCom, fixture.endpoint, nil)
         let URL = baseURL.URLByAppendingPathComponent(fixture.filename as String)
         let path = (URL.path! as NSString).stringByAbbreviatingWithTildeInPath
         print("*** Downloading \(request.URL!)\n    to \(path)")
