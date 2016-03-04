@@ -11,7 +11,7 @@ import Argo
 import XCTest
 
 class ReleaseTests: XCTestCase {
-    func testJSONDecoding() {
+    func testDecode() {
         let expected = Release(
             ID: "2698201",
             tag: "0.15",
