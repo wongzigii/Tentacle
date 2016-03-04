@@ -48,7 +48,7 @@ public final class Client {
     public let server: Server
     
     /// Create an unauthenticated client for the given Server.
-    public init(server: Server) {
+    public init(_ server: Server) {
         self.server = server
     }
 }
