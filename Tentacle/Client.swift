@@ -12,6 +12,16 @@ import ReactiveCocoa
 import Result
 
 
+extension Decodable {
+    internal static func decode(JSON: NSDictionary) -> Result<DecodedType, DecodeError> {
+        switch decode(.parse(JSON)) {
+        case let .Success(object):
+            return .Success(object)
+        case let .Failure(error):
+            return .Failure(error)
+        }
+    }
+}
 extension NSJSONSerialization {
     internal static func deserializeJSON(data: NSData) -> Result<NSDictionary, NSError> {
         return Result(try NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary)
@@ -78,18 +88,14 @@ public final class Client {
             .sharedSession()
             .rac_dataWithRequest(NSURLRequest.create(server, endpoint))
             .mapError(Error.NetworkError)
-            .flatMap(FlattenStrategy.Concat) { data, response in
+            .flatMap(.Concat) { data, response in
                 return SignalProducer
-                    .attempt { NSJSONSerialization.deserializeJSON(data) }
-                    .mapError(Error.JSONDeserializationError)
-            }
-            .attemptMap { JSON in
-                switch Object.decode(.parse(JSON)) {
-                case let .Success(object):
-                    return .Success(object)
-                case let .Failure(error):
-                    return .Failure(.JSONDecodingError(error))
-                }
+                    .attempt {
+                        return NSJSONSerialization.deserializeJSON(data).mapError(Error.JSONDeserializationError)
+                    }
+                    .attemptMap { JSON in
+                        return Object.decode(JSON).mapError(Error.JSONDecodingError)
+                    }
             }
     }
 }
