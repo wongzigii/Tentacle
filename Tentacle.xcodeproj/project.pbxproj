@@ -30,6 +30,8 @@
 		BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A31C89135D00E3B11A /* Decodable.swift */; };
 		BE0F40A51C89191600E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
 		BE0F40A81C8929CB00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */; };
+		BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */; };
+		BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */; };
 		BE88E7F61C88C6B30034A112 /* Tentacle.h in Headers */ = {isa = PBXBuildFile; fileRef = BE88E7F51C88C6B30034A112 /* Tentacle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
 		BE88E80D1C88C72B0034A112 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E80C1C88C72B0034A112 /* Client.swift */; };
@@ -70,6 +72,8 @@
 		BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseTests.swift; sourceTree = "<group>"; };
 		BE0F40A31C89135D00E3B11A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
 		BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "repos-Carthage-Carthage-releases-tags-0.15.json"; sourceTree = "<group>"; };
+		BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = "Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug-iphoneos/OHHTTPStubs.framework"; sourceTree = SOURCE_ROOT; };
+		BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug/OHHTTPStubs.framework; sourceTree = SOURCE_ROOT; };
 		BE88E7F21C88C6B30034A112 /* Tentacle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tentacle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E7F51C88C6B30034A112 /* Tentacle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tentacle.h; sourceTree = "<group>"; };
 		BE88E7F71C88C6B30034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */,
 				619081821C8A2D2B001BE2F8 /* Tentacle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */,
 				BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +213,8 @@
 		BE88E8271C88C7E90034A112 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */,
+				BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */,
 				BE88E85B1C88ED750034A112 /* Argo.framework */,
 				BE88E85C1C88ED750034A112 /* Curry.framework */,
 				BE88E85D1C88ED750034A112 /* ReactiveCocoa.framework */,
