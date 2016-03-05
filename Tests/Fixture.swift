@@ -6,6 +6,7 @@
 //  Copyright © 2016 Matt Diephouse. All rights reserved.
 //
 
+import Argo
 import Foundation
 @testable import Tentacle
 
@@ -18,14 +19,26 @@ struct Fixture {
         Release.Nonexistent,
     ]
     
-    struct Release {
-        static var Carthage0_15 = Fixture(.ReleaseByTagName(owner: "Carthage", repository: "Carthage", tag: "0.15"))
-        static var Nonexistent = Fixture(.ReleaseByTagName(owner: "mdiep", repository: "NonExistent", tag: "tag"))
+    /// Returns the fixture for the given URL, or nil if no such fixture exists.
+    static func fixtureForURL(URL: NSURL) -> Fixture? {
+        if let index = allFixtures.indexOf({ $0.URL == URL }) {
+            return allFixtures[index]
+        }
+        return nil
     }
     
-    init(_ endpoint: Client.Endpoint) {
+    struct Release {
+        static var Carthage0_15 = Fixture(.DotCom, .ReleaseByTagName(owner: "Carthage", repository: "Carthage", tag: "0.15"))
+        static var Nonexistent = Fixture(.DotCom, .ReleaseByTagName(owner: "mdiep", repository: "NonExistent", tag: "tag"))
+    }
+    
+    init(_ server: Server, _ endpoint: Client.Endpoint) {
+        self.server = server
         self.endpoint = endpoint
     }
+    
+    /// The server that the fixture came from.
+    let server: Server
     
     /// The Endpoint that the fixture came from.
     let endpoint: Client.Endpoint
@@ -40,15 +53,29 @@ struct Fixture {
         return filename.stringByAppendingPathExtension("json")!
     }
     
-    /// The URL of the fixture within the test bundle.
+    /// The URL of the fixture on the API.
     var URL: NSURL {
+        return NSURLRequest.create(self.server, self.endpoint, nil).URL!
+    }
+    
+    /// The URL of the fixture within the test bundle.
+    var fileURL: NSURL {
         let bundle = NSBundle(forClass: ImportedWithFixture.self)
         return bundle.URLForResource(filename.stringByDeletingPathExtension, withExtension: filename.pathExtension)!
     }
     
+    /// The data from the endpoint.
+    var data: NSData {
+       return NSData(contentsOfURL: fileURL)!
+    }
+    
     /// The JSON from the Endpoint.
-    lazy var JSON: NSDictionary = {
-        let data = NSData(contentsOfURL: self.URL)!
+    var JSON: NSDictionary {
         return try! NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary
-    }()
+    }
+    
+    /// Decode the fixture's JSON as an object of the returned type.
+    func decode<Object: Decodable where Object.DecodedType == Object>() -> Object? {
+        return Argo.decode(JSON).value
+    }
 }

@@ -32,6 +32,6 @@ class ReleaseTests: XCTestCase {
                 )
             ]
         )
-        XCTAssertEqual(decode(Fixture.Release.Carthage0_15.JSON), expected)
+        XCTAssertEqual(Fixture.Release.Carthage0_15.decode(), expected)
     }
 }
