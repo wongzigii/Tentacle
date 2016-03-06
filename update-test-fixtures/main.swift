@@ -21,14 +21,19 @@ let session = NSURLSession.sharedSession()
 let result = SignalProducer(values: Fixture.allFixtures)
     .flatMap(.Concat) { fixture -> SignalProducer<(), NSError> in
         let request = NSURLRequest.create(fixture.server, fixture.endpoint, nil)
-        let URL = baseURL.URLByAppendingPathComponent(fixture.dataFilename as String)
-        let path = (URL.path! as NSString).stringByAbbreviatingWithTildeInPath
+        let dataURL = baseURL.URLByAppendingPathComponent(fixture.dataFilename as String)
+        let responseURL = baseURL.URLByAppendingPathComponent(fixture.responseFilename as String)
+        let path = (dataURL.path! as NSString).stringByAbbreviatingWithTildeInPath
         print("*** Downloading \(request.URL!)\n    to \(path)")
         return session
             .rac_dataWithRequest(request)
             .on(next: { data, response in
-                try! fileManager.createDirectoryAtURL(URL.URLByDeletingLastPathComponent!, withIntermediateDirectories: true, attributes: nil)
-                data.writeToURL(URL, atomically: true)
+                try! fileManager.createDirectoryAtURL(dataURL.URLByDeletingLastPathComponent!, withIntermediateDirectories: true, attributes: nil)
+                data.writeToURL(dataURL, atomically: true)
+                
+                NSKeyedArchiver
+                    .archivedDataWithRootObject(response)
+                    .writeToURL(responseURL, atomically: true)
             })
             .map { _, _ in () }
     }
