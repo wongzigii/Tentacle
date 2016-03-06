@@ -7,7 +7,9 @@ before_install:
   - brew upgrade carthage
 before_script:
   - carthage bootstrap --use-submodules --no-build
-script: 
-  - xctool -workspace Tentacle.xcworkspace -scheme Tentacle test CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=
-  - xctool -workspace Tentacle.xcworkspace -scheme TentacleiOS -sdk iphonesimulator test CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=
-  - xctool -workspace Tentacle.xcworkspace -scheme update-test-fixtures build
+script: script/cibuild "$TRAVIS_XCODE_WORKSPACE" "$TRAVIS_XCODE_SCHEME"
+xcode_workspace: Tentacle.xcworkspace
+xcode_scheme:
+ - Tentacle
+ - TentacleiOS
+ - update-test-fixtures

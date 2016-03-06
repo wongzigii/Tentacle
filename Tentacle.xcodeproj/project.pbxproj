@@ -34,6 +34,7 @@
 		BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
 		BE2B6A6D1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
+		BE0F40B11C8BA97400E3B11A /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
 		BE88E7F61C88C6B30034A112 /* Tentacle.h in Headers */ = {isa = PBXBuildFile; fileRef = BE88E7F51C88C6B30034A112 /* Tentacle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
 		BE88E80D1C88C72B0034A112 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E80C1C88C72B0034A112 /* Client.swift */; };
@@ -147,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE0F40B11C8BA97400E3B11A /* Tentacle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
