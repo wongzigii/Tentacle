@@ -23,18 +23,27 @@
 		619081891C8A2DB7001BE2F8 /* GitHubErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */; };
 		6190818A1C8A2DB7001BE2F8 /* ReleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */; };
 		6190818B1C8A2DB7001BE2F8 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		619081911C8A301E001BE2F8 /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */; };
-		619081921C8A3023001BE2F8 /* repos-mdiep-NonExistent-releases-tags-tag.json in Resources */ = {isa = PBXBuildFile; fileRef = BEB076611C8A020300ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json */; };
 		BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
 		BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */; };
 		BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A31C89135D00E3B11A /* Decodable.swift */; };
 		BE0F40A51C89191600E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
-		BE0F40A81C8929CB00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */; };
+		BE0F40B11C8BA97400E3B11A /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
+		BE0F40E01C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40D81C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data */; };
+		BE0F40E11C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */; };
+		BE0F40E21C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */; };
+		BE0F40E31C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */; };
+		BE0F40E41C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40D81C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data */; };
+		BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */; };
+		BE0F40E61C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */; };
+		BE0F40E71C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */; };
+		BE0F40EC1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */; };
+		BE0F40ED1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */; };
+		BE0F40EE1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */; };
+		BE0F40EF1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */; };
 		BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
 		BE2B6A6D1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
-		BE0F40B11C8BA97400E3B11A /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
 		BE88E7F61C88C6B30034A112 /* Tentacle.h in Headers */ = {isa = PBXBuildFile; fileRef = BE88E7F51C88C6B30034A112 /* Tentacle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E7F21C88C6B30034A112 /* Tentacle.framework */; };
 		BE88E80D1C88C72B0034A112 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E80C1C88C72B0034A112 /* Client.swift */; };
@@ -48,7 +57,6 @@
 		BE88E8751C88F0C50034A112 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8741C88F0C50034A112 /* main.swift */; };
 		BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765C1C8A001C00ABD373 /* GitHubError.swift */; };
 		BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */; };
-		BEB076631C8A022800ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json in Resources */ = {isa = PBXBuildFile; fileRef = BEB076611C8A020300ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +82,12 @@
 		BE0F409F1C89098E00E3B11A /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Fixture.swift; sourceTree = SOURCE_ROOT; };
 		BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseTests.swift; sourceTree = "<group>"; };
 		BE0F40A31C89135D00E3B11A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
-		BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "repos-Carthage-Carthage-releases-tags-0.15.json"; sourceTree = "<group>"; };
+		BE0F40D81C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-Carthage-Carthage-releases-tags-0.15.data"; sourceTree = "<group>"; };
+		BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-Carthage-Carthage-releases-tags-0.15.response"; sourceTree = "<group>"; };
+		BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-mdiep-NonExistent-releases-tags-tag.data"; sourceTree = "<group>"; };
+		BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-NonExistent-releases-tags-tag.response"; sourceTree = "<group>"; };
+		BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-torvalds-linux-releases-tags-v4.4.data"; sourceTree = "<group>"; };
+		BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-torvalds-linux-releases-tags-v4.4.response"; sourceTree = "<group>"; };
 		BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = "Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug-iphoneos/OHHTTPStubs.framework"; sourceTree = SOURCE_ROOT; };
 		BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug/OHHTTPStubs.framework; sourceTree = SOURCE_ROOT; };
 		BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
@@ -100,7 +113,6 @@
 		BE88E8741C88F0C50034A112 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BEB0765C1C8A001C00ABD373 /* GitHubError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubError.swift; sourceTree = "<group>"; };
 		BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubErrorTests.swift; sourceTree = "<group>"; };
-		BEB076611C8A020300ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "repos-mdiep-NonExistent-releases-tags-tag.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,8 +170,12 @@
 		BE0F40961C8908CB00E3B11A /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				BE0F40A61C8926CA00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json */,
-				BEB076611C8A020300ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json */,
+				BE0F40D81C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data */,
+				BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */,
+				BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */,
+				BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */,
+				BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */,
+				BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -415,8 +431,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				619081911C8A301E001BE2F8 /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */,
-				619081921C8A3023001BE2F8 /* repos-mdiep-NonExistent-releases-tags-tag.json in Resources */,
+				BE0F40E41C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data in Resources */,
+				BE0F40E61C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */,
+				BE0F40E71C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */,
+				BE0F40EF1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
+				BE0F40EE1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
+				BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,8 +451,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE0F40A81C8929CB00E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.json in Resources */,
-				BEB076631C8A022800ABD373 /* repos-mdiep-NonExistent-releases-tags-tag.json in Resources */,
+				BE0F40E01C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data in Resources */,
+				BE0F40E21C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */,
+				BE0F40E31C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */,
+				BE0F40ED1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
+				BE0F40EC1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
+				BE0F40E11C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
