@@ -182,6 +182,9 @@ public final class Client {
     }
     
     /// Fetch the release corresponding to the given tag in the given repository.
+    ///
+    /// If the tag exists, but there's not a correspoding GitHub Release, this method will return a
+    /// `.DoesNotExist` error. This is indistinguishable from a nonexistent tag.
     public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<Release, Error> {
         precondition(repository.server == server)
         return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
