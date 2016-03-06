@@ -26,11 +26,12 @@ class ClientTests: XCTestCase {
     }
     
     func testReleaseForTagInRepository() {
+        let fixture = Fixture.Release.Carthage0_15
         let values = client
-            .releaseForTag("0.15", inRepository: Repository(owner: "Carthage", name: "Carthage"))
+            .releaseForTag(fixture.tag, inRepository: fixture.repository)
             .collect()
             .single()?
             .value
-        XCTAssertEqual(values!, [Fixture.Release.Carthage0_15.decode()!])
+        XCTAssertEqual(values!, [fixture.decode()!])
     }
 }
