@@ -69,7 +69,7 @@ class ClientTests: XCTestCase {
         let fixture = Fixture.Release.Nonexistent
         ExpectError(
             client.releaseForTag(fixture.tag, inRepository: fixture.repository),
-            .APIError(GitHubError(message: "Not Found"))
+            .APIError(404, GitHubError(message: "Not Found"))
         )
     }
     
@@ -77,7 +77,7 @@ class ClientTests: XCTestCase {
         let fixture = Fixture.Release.TagOnly
         ExpectError(
             client.releaseForTag(fixture.tag, inRepository: fixture.repository),
-            .APIError(GitHubError(message: "Not Found"))
+            .APIError(404, GitHubError(message: "Not Found"))
         )
     }
 }
