@@ -14,6 +14,6 @@ import XCTest
 class GitHubErrorTests: XCTestCase {
     func testDecode() {
         let expected = GitHubError(message: "Not Found")
-        XCTAssertEqual(decode(Fixture.Release.Nonexistent.JSON), expected)
+        XCTAssertEqual(Fixture.Release.Nonexistent.decode(), expected)
     }
 }
