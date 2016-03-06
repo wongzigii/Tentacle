@@ -82,7 +82,7 @@ extension FixtureType {
     }
 }
 
-struct Fixture: FixtureType {
+struct Fixture {
     private static let DataExtension = "data"
     private static let ResponseExtension = "response"
     
@@ -119,15 +119,4 @@ struct Fixture: FixtureType {
             self.tag = tag
         }
     }
-    
-    init(_ server: Server, _ endpoint: Client.Endpoint) {
-        self.server = server
-        self.endpoint = endpoint
-    }
-    
-    /// The server that the fixture came from.
-    let server: Server
-    
-    /// The Endpoint that the fixture came from.
-    let endpoint: Client.Endpoint
 }
