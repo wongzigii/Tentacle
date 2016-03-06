@@ -20,6 +20,7 @@ struct Fixture {
     static var allFixtures: [Fixture] = [
         Release.Carthage0_15,
         Release.Nonexistent,
+        Release.TagOnly,
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -33,6 +34,7 @@ struct Fixture {
     struct Release {
         static var Carthage0_15 = Fixture(.DotCom, .ReleaseByTagName(owner: "Carthage", repository: "Carthage", tag: "0.15"))
         static var Nonexistent = Fixture(.DotCom, .ReleaseByTagName(owner: "mdiep", repository: "NonExistent", tag: "tag"))
+        static var TagOnly = Fixture(.DotCom, .ReleaseByTagName(owner: "torvalds", repository: "linux", tag: "v4.4"))
     }
     
     init(_ server: Server, _ endpoint: Client.Endpoint) {

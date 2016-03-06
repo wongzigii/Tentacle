@@ -36,6 +36,10 @@
 		BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */; };
 		BE0F40E61C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */; };
 		BE0F40E71C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */; };
+		BE0F40EC1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */; };
+		BE0F40ED1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */; };
+		BE0F40EE1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */; };
+		BE0F40EF1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */; };
 		BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
@@ -82,6 +86,8 @@
 		BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-Carthage-Carthage-releases-tags-0.15.response"; sourceTree = "<group>"; };
 		BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-mdiep-NonExistent-releases-tags-tag.data"; sourceTree = "<group>"; };
 		BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-NonExistent-releases-tags-tag.response"; sourceTree = "<group>"; };
+		BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-torvalds-linux-releases-tags-v4.4.data"; sourceTree = "<group>"; };
+		BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-torvalds-linux-releases-tags-v4.4.response"; sourceTree = "<group>"; };
 		BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = "Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug-iphoneos/OHHTTPStubs.framework"; sourceTree = SOURCE_ROOT; };
 		BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug/OHHTTPStubs.framework; sourceTree = SOURCE_ROOT; };
 		BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
@@ -168,6 +174,8 @@
 				BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */,
 				BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */,
 				BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */,
+				BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */,
+				BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -426,6 +434,8 @@
 				BE0F40E41C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data in Resources */,
 				BE0F40E61C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */,
 				BE0F40E71C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */,
+				BE0F40EF1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
+				BE0F40EE1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
 				BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +454,8 @@
 				BE0F40E01C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data in Resources */,
 				BE0F40E21C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */,
 				BE0F40E31C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */,
+				BE0F40ED1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
+				BE0F40EC1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
 				BE0F40E11C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
