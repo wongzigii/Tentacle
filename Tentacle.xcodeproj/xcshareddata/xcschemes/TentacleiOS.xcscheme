@@ -42,10 +42,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D047260B19E49F82006002AA"
-               BuildableName = "ReactiveCocoa.framework"
-               BlueprintName = "ReactiveCocoa-iOS"
-               ReferencedContainer = "container:Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj">
+               BlueprintIdentifier = "D454807C1A957361009D7229"
+               BuildableName = "Result.framework"
+               BlueprintName = "Result-iOS"
+               ReferencedContainer = "container:Carthage/Checkouts/Result/Result.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -56,10 +56,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D454807C1A957361009D7229"
-               BuildableName = "Result.framework"
-               BlueprintName = "Result-iOS"
-               ReferencedContainer = "container:Carthage/Checkouts/Result/Result.xcodeproj">
+               BlueprintIdentifier = "D047260B19E49F82006002AA"
+               BuildableName = "ReactiveCocoa.framework"
+               BlueprintName = "ReactiveCocoa-iOS"
+               ReferencedContainer = "container:Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
