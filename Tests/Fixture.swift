@@ -58,15 +58,15 @@ struct Fixture {
         return NSURLRequest.create(self.server, self.endpoint, nil).URL!
     }
     
-    /// The URL of the fixture within the test bundle.
-    var fileURL: NSURL {
+    /// The URL of the fixture's data within the test bundle.
+    var dataFileURL: NSURL {
         let bundle = NSBundle(forClass: ImportedWithFixture.self)
         return bundle.URLForResource(filename.stringByDeletingPathExtension, withExtension: filename.pathExtension)!
     }
     
     /// The data from the endpoint.
     var data: NSData {
-       return NSData(contentsOfURL: fileURL)!
+       return NSData(contentsOfURL: dataFileURL)!
     }
     
     /// The JSON from the Endpoint.

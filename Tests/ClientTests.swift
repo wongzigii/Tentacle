@@ -20,7 +20,7 @@ class ClientTests: XCTestCase {
                 return Fixture.fixtureForURL(request.URL!) != nil
             }, withStubResponse: { request -> OHHTTPStubsResponse in
                 let fixture = Fixture.fixtureForURL(request.URL!)!
-                return OHHTTPStubsResponse(fileURL: fixture.fileURL, statusCode: 200, headers: nil)
+                return OHHTTPStubsResponse(fileURL: fixture.dataFileURL, statusCode: 200, headers: nil)
             })
     }
     
