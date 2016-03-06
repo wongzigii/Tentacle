@@ -43,8 +43,8 @@ struct Fixture {
     /// The Endpoint that the fixture came from.
     let endpoint: Client.Endpoint
     
-    /// The filename used for the local fixture.
-    var filename: NSString {
+    /// The filename used for the local fixture's data.
+    var dataFilename: NSString {
         let path: NSString = self.endpoint.path
         let filename: NSString = path
             .pathComponents
@@ -61,7 +61,7 @@ struct Fixture {
     /// The URL of the fixture's data within the test bundle.
     var dataFileURL: NSURL {
         let bundle = NSBundle(forClass: ImportedWithFixture.self)
-        return bundle.URLForResource(filename.stringByDeletingPathExtension, withExtension: filename.pathExtension)!
+        return bundle.URLForResource(dataFilename.stringByDeletingPathExtension, withExtension: dataFilename.pathExtension)!
     }
     
     /// The data from the endpoint.
