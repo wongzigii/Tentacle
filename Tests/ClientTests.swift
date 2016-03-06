@@ -23,7 +23,15 @@ public func == <T: Equatable, Error: Equatable> (left: Result<[T], Error>, right
 }
 
 func ExpectResult<O: Equatable>(producer: SignalProducer<O, Client.Error>, _ result: Result<[O], Client.Error>, file: String = __FILE__, line: UInt = __LINE__) {
-    XCTAssertTrue(producer.collect().single()! == result, file: file, line: line)
+    let actual = producer.collect().single()!
+    let message: String
+    switch result {
+    case let .Success(value):
+        message = "\(actual) is not equal to \(value)"
+    case let .Failure(error):
+        message = "\(actual) is not equal to \(error)"
+    }
+    XCTAssertTrue(actual == result, message, file: file, line: line)
 }
 
 func ExpectError<O: Equatable>(producer: SignalProducer<O, Client.Error>, _ error: Client.Error, file: String = __FILE__, line: UInt = __LINE__) {
