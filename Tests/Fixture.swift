@@ -13,41 +13,12 @@ import Foundation
 /// A dummy class, so we can ask for the current bundle in Fixture.URL
 private class ImportedWithFixture { }
 
-struct Fixture {
-    private static let DataExtension = "data"
-    private static let ResponseExtension = "response"
-    
-    static var allFixtures: [Fixture] = [
-        Release.Carthage0_15,
-        Release.Nonexistent,
-        Release.TagOnly,
-    ]
-    
-    /// Returns the fixture for the given URL, or nil if no such fixture exists.
-    static func fixtureForURL(URL: NSURL) -> Fixture? {
-        if let index = allFixtures.indexOf({ $0.URL == URL }) {
-            return allFixtures[index]
-        }
-        return nil
-    }
-    
-    struct Release {
-        static var Carthage0_15 = Fixture(.DotCom, .ReleaseByTagName(owner: "Carthage", repository: "Carthage", tag: "0.15"))
-        static var Nonexistent = Fixture(.DotCom, .ReleaseByTagName(owner: "mdiep", repository: "NonExistent", tag: "tag"))
-        static var TagOnly = Fixture(.DotCom, .ReleaseByTagName(owner: "torvalds", repository: "linux", tag: "v4.4"))
-    }
-    
-    init(_ server: Server, _ endpoint: Client.Endpoint) {
-        self.server = server
-        self.endpoint = endpoint
-    }
-    
-    /// The server that the fixture came from.
-    let server: Server
-    
-    /// The Endpoint that the fixture came from.
-    let endpoint: Client.Endpoint
-    
+protocol FixtureType {
+    var server: Server { get }
+    var endpoint: Client.Endpoint { get }
+}
+
+extension FixtureType {
     /// The filename used for the local fixture, without an extension
     private func filenameWithExtension(ext: String) -> NSString {
         let path: NSString = endpoint.path
@@ -108,5 +79,44 @@ struct Fixture {
     /// Decode the fixture's JSON as an object of the returned type.
     func decode<Object: Decodable where Object.DecodedType == Object>() -> Object? {
         return Argo.decode(JSON).value
+    }
+}
+
+struct Fixture {
+    private static let DataExtension = "data"
+    private static let ResponseExtension = "response"
+    
+    static var allFixtures: [FixtureType] = [
+        Release.Carthage0_15,
+        Release.Nonexistent,
+        Release.TagOnly,
+    ]
+    
+    /// Returns the fixture for the given URL, or nil if no such fixture exists.
+    static func fixtureForURL(URL: NSURL) -> FixtureType? {
+        if let index = allFixtures.indexOf({ $0.URL == URL }) {
+            return allFixtures[index]
+        }
+        return nil
+    }
+    
+    struct Release: FixtureType {
+        static var Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
+        static var Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
+        static var TagOnly = Release(.DotCom, owner: "torvalds", name: "linux", tag: "v4.4")
+        
+        let server: Server
+        let repository: Repository
+        let tag: String
+        
+        var endpoint: Client.Endpoint {
+            return .ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag)
+        }
+        
+        init(_ server: Server, owner: String, name: String, tag: String) {
+            self.server = server
+            repository = Repository(owner: owner, name: name)
+            self.tag = tag
+        }
     }
 }
