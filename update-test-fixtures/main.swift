@@ -28,12 +28,19 @@ let result = SignalProducer(values: Fixture.allFixtures)
         return session
             .rac_dataWithRequest(request)
             .on(next: { data, response in
-                try! fileManager.createDirectoryAtURL(dataURL.URLByDeletingLastPathComponent!, withIntermediateDirectories: true, attributes: nil)
-                data.writeToURL(dataURL, atomically: true)
+                let existing = NSData(contentsOfURL: dataURL)
+                let changed = existing != data
                 
-                NSKeyedArchiver
-                    .archivedDataWithRootObject(response)
-                    .writeToURL(responseURL, atomically: true)
+                if changed {
+                    try! fileManager.createDirectoryAtURL(dataURL.URLByDeletingLastPathComponent!, withIntermediateDirectories: true, attributes: nil)
+                    data.writeToURL(dataURL, atomically: true)
+                }
+                
+                if changed || !fileManager.fileExistsAtPath(responseURL.path!) {
+                    NSKeyedArchiver
+                        .archivedDataWithRootObject(response)
+                        .writeToURL(responseURL, atomically: true)
+                }
             })
             .map { _, _ in () }
     }
