@@ -10,6 +10,6 @@ before_script:
 script: script/cibuild "$TRAVIS_XCODE_WORKSPACE" "$TRAVIS_XCODE_SCHEME"
 xcode_workspace: Tentacle.xcworkspace
 xcode_scheme:
- - Tentacle
- - TentacleiOS
+ - Tentacle-OSX
+ - Tentacle-iOS
  - update-test-fixtures
