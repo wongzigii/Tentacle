@@ -78,7 +78,7 @@
 
 /* Begin PBXFileReference section */
 		61377C6C1C8A2B2C0081FF24 /* Tentacle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tentacle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6190817D1C8A2D2B001BE2F8 /* TentacleiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TentacleiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6190817D1C8A2D2B001BE2F8 /* Tentacle-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tentacle-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE0F409F1C89098E00E3B11A /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Fixture.swift; sourceTree = SOURCE_ROOT; };
 		BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseTests.swift; sourceTree = "<group>"; };
 		BE0F40A31C89135D00E3B11A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		BE88E7F21C88C6B30034A112 /* Tentacle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tentacle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E7F51C88C6B30034A112 /* Tentacle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tentacle.h; sourceTree = "<group>"; };
 		BE88E7F71C88C6B30034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE88E7FC1C88C6B30034A112 /* TentacleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TentacleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE88E7FC1C88C6B30034A112 /* Tentacle-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tentacle-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E8031C88C6B30034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE88E80C1C88C72B0034A112 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		BE88E8281C88C8850034A112 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Checkouts/ReactiveCocoa/build/Debug/ReactiveCocoa.framework; sourceTree = SOURCE_ROOT; };
@@ -196,10 +196,10 @@
 			isa = PBXGroup;
 			children = (
 				BE88E7F21C88C6B30034A112 /* Tentacle.framework */,
-				BE88E7FC1C88C6B30034A112 /* TentacleTests.xctest */,
+				BE88E7FC1C88C6B30034A112 /* Tentacle-OSXTests.xctest */,
 				BE88E8671C88F0990034A112 /* update-test-fixtures.app */,
 				61377C6C1C8A2B2C0081FF24 /* Tentacle.framework */,
-				6190817D1C8A2D2B001BE2F8 /* TentacleiOSTests.xctest */,
+				6190817D1C8A2D2B001BE2F8 /* Tentacle-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -281,9 +281,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		61377C6B1C8A2B2C0081FF24 /* TentacleiOS */ = {
+		61377C6B1C8A2B2C0081FF24 /* Tentacle-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 61377C731C8A2B2C0081FF24 /* Build configuration list for PBXNativeTarget "TentacleiOS" */;
+			buildConfigurationList = 61377C731C8A2B2C0081FF24 /* Build configuration list for PBXNativeTarget "Tentacle-iOS" */;
 			buildPhases = (
 				61377C671C8A2B2C0081FF24 /* Sources */,
 				61377C681C8A2B2C0081FF24 /* Frameworks */,
@@ -294,14 +294,14 @@
 			);
 			dependencies = (
 			);
-			name = TentacleiOS;
+			name = "Tentacle-iOS";
 			productName = TentacleiOS;
 			productReference = 61377C6C1C8A2B2C0081FF24 /* Tentacle.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6190817C1C8A2D2B001BE2F8 /* TentacleiOSTests */ = {
+		6190817C1C8A2D2B001BE2F8 /* Tentacle-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 619081851C8A2D2B001BE2F8 /* Build configuration list for PBXNativeTarget "TentacleiOSTests" */;
+			buildConfigurationList = 619081851C8A2D2B001BE2F8 /* Build configuration list for PBXNativeTarget "Tentacle-iOSTests" */;
 			buildPhases = (
 				619081791C8A2D2B001BE2F8 /* Sources */,
 				6190817A1C8A2D2B001BE2F8 /* Frameworks */,
@@ -312,14 +312,14 @@
 			dependencies = (
 				619081841C8A2D2B001BE2F8 /* PBXTargetDependency */,
 			);
-			name = TentacleiOSTests;
+			name = "Tentacle-iOSTests";
 			productName = TentacleiOSTests;
-			productReference = 6190817D1C8A2D2B001BE2F8 /* TentacleiOSTests.xctest */;
+			productReference = 6190817D1C8A2D2B001BE2F8 /* Tentacle-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BE88E7F11C88C6B30034A112 /* Tentacle */ = {
+		BE88E7F11C88C6B30034A112 /* Tentacle-OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE88E8061C88C6B30034A112 /* Build configuration list for PBXNativeTarget "Tentacle" */;
+			buildConfigurationList = BE88E8061C88C6B30034A112 /* Build configuration list for PBXNativeTarget "Tentacle-OSX" */;
 			buildPhases = (
 				BE88E7ED1C88C6B30034A112 /* Sources */,
 				BE88E7EE1C88C6B30034A112 /* Frameworks */,
@@ -330,14 +330,14 @@
 			);
 			dependencies = (
 			);
-			name = Tentacle;
+			name = "Tentacle-OSX";
 			productName = Tentacle;
 			productReference = BE88E7F21C88C6B30034A112 /* Tentacle.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BE88E7FB1C88C6B30034A112 /* TentacleTests */ = {
+		BE88E7FB1C88C6B30034A112 /* Tentacle-OSXTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE88E8091C88C6B30034A112 /* Build configuration list for PBXNativeTarget "TentacleTests" */;
+			buildConfigurationList = BE88E8091C88C6B30034A112 /* Build configuration list for PBXNativeTarget "Tentacle-OSXTests" */;
 			buildPhases = (
 				BE88E7F81C88C6B30034A112 /* Sources */,
 				BE88E7F91C88C6B30034A112 /* Frameworks */,
@@ -348,9 +348,9 @@
 			dependencies = (
 				BE88E7FF1C88C6B30034A112 /* PBXTargetDependency */,
 			);
-			name = TentacleTests;
+			name = "Tentacle-OSXTests";
 			productName = TentacleTests;
-			productReference = BE88E7FC1C88C6B30034A112 /* TentacleTests.xctest */;
+			productReference = BE88E7FC1C88C6B30034A112 /* Tentacle-OSXTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		BE88E8661C88F0990034A112 /* update-test-fixtures */ = {
@@ -410,10 +410,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BE88E7F11C88C6B30034A112 /* Tentacle */,
-				61377C6B1C8A2B2C0081FF24 /* TentacleiOS */,
-				BE88E7FB1C88C6B30034A112 /* TentacleTests */,
-				6190817C1C8A2D2B001BE2F8 /* TentacleiOSTests */,
+				BE88E7F11C88C6B30034A112 /* Tentacle-OSX */,
+				61377C6B1C8A2B2C0081FF24 /* Tentacle-iOS */,
+				BE88E7FB1C88C6B30034A112 /* Tentacle-OSXTests */,
+				6190817C1C8A2D2B001BE2F8 /* Tentacle-iOSTests */,
 				BE88E8661C88F0990034A112 /* update-test-fixtures */,
 			);
 		};
@@ -533,12 +533,12 @@
 /* Begin PBXTargetDependency section */
 		619081841C8A2D2B001BE2F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 61377C6B1C8A2B2C0081FF24 /* TentacleiOS */;
+			target = 61377C6B1C8A2B2C0081FF24 /* Tentacle-iOS */;
 			targetProxy = 619081831C8A2D2B001BE2F8 /* PBXContainerItemProxy */;
 		};
 		BE88E7FF1C88C6B30034A112 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BE88E7F11C88C6B30034A112 /* Tentacle */;
+			target = BE88E7F11C88C6B30034A112 /* Tentacle-OSX */;
 			targetProxy = BE88E7FE1C88C6B30034A112 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -790,7 +790,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		61377C731C8A2B2C0081FF24 /* Build configuration list for PBXNativeTarget "TentacleiOS" */ = {
+		61377C731C8A2B2C0081FF24 /* Build configuration list for PBXNativeTarget "Tentacle-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				61377C711C8A2B2C0081FF24 /* Debug */,
@@ -799,7 +799,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		619081851C8A2D2B001BE2F8 /* Build configuration list for PBXNativeTarget "TentacleiOSTests" */ = {
+		619081851C8A2D2B001BE2F8 /* Build configuration list for PBXNativeTarget "Tentacle-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				619081861C8A2D2B001BE2F8 /* Debug */,
@@ -817,7 +817,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE88E8061C88C6B30034A112 /* Build configuration list for PBXNativeTarget "Tentacle" */ = {
+		BE88E8061C88C6B30034A112 /* Build configuration list for PBXNativeTarget "Tentacle-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE88E8071C88C6B30034A112 /* Debug */,
@@ -826,7 +826,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE88E8091C88C6B30034A112 /* Build configuration list for PBXNativeTarget "TentacleTests" */ = {
+		BE88E8091C88C6B30034A112 /* Build configuration list for PBXNativeTarget "Tentacle-OSXTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE88E80A1C88C6B30034A112 /* Debug */,
