@@ -92,8 +92,11 @@ public final class Client {
         /// An error occurred while decoding JSON.
         case JSONDecodingError(DecodeError)
         
-        /// An error that was returned from the API.
-        case APIError(GitHubError)
+        /// A status code and error that was returned from the API.
+        case APIError(Int, GitHubError)
+        
+        /// The requested object does not exist.
+        case DoesNotExist
         
         public var hashValue: Int {
             switch self {
@@ -106,8 +109,11 @@ public final class Client {
             case let .JSONDecodingError(error):
                 return error.hashValue
                 
-            case let .APIError(error):
-                return error.hashValue
+            case let .APIError(statusCode, error):
+                return statusCode.hashValue ^ error.hashValue
+                
+            case .DoesNotExist:
+                return 4
             }
         }
     }
@@ -176,6 +182,9 @@ public final class Client {
     }
     
     /// Fetch the release corresponding to the given tag in the given repository.
+    ///
+    /// If the tag exists, but there's not a correspoding GitHub Release, this method will return a
+    /// `.DoesNotExist` error. This is indistinguishable from a nonexistent tag.
     public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<Release, Error> {
         precondition(repository.server == server)
         return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
@@ -194,10 +203,13 @@ public final class Client {
                         return NSJSONSerialization.deserializeJSON(data).mapError(Error.JSONDeserializationError)
                     }
                     .attemptMap { JSON in
+                        if response.statusCode == 404 {
+                            return .Failure(.DoesNotExist)
+                        }
                         if response.statusCode >= 400 && response.statusCode < 600 {
                             return GitHubError.decode(JSON)
                                 .mapError(Error.JSONDecodingError)
-                                .flatMap { .Failure(Error.APIError($0)) }
+                                .flatMap { .Failure(Error.APIError(response.statusCode, $0)) }
                         }
                         return Object.decode(JSON).mapError(Error.JSONDecodingError)
                     }
@@ -216,8 +228,11 @@ public func ==(lhs: Client.Error, rhs: Client.Error) -> Bool {
     case let (.JSONDecodingError(error1), .JSONDecodingError(error2)):
         return error1 == error2
         
-    case let (.APIError(error1), .APIError(error2)):
-        return error1 == error2
+    case let (.APIError(statusCode1, error1), .APIError(statusCode2, error2)):
+        return statusCode1 == statusCode2 && error1 == error2
+        
+    case (.DoesNotExist, .DoesNotExist):
+        return true
         
     default:
         return false

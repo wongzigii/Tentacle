@@ -64,4 +64,20 @@ class ClientTests: XCTestCase {
             fixture.decode()!
         )
     }
+    
+    func testReleaseForTagInRepositoryNonExistent() {
+        let fixture = Fixture.Release.Nonexistent
+        ExpectError(
+            client.releaseForTag(fixture.tag, inRepository: fixture.repository),
+            .DoesNotExist
+        )
+    }
+    
+    func testReleaseForTagInRepositoryTagOnly() {
+        let fixture = Fixture.Release.TagOnly
+        ExpectError(
+            client.releaseForTag(fixture.tag, inRepository: fixture.repository),
+            .DoesNotExist
+        )
+    }
 }
