@@ -10,9 +10,6 @@ import Argo
 import Curry
 import Foundation
 
-private func toString(number: Int) -> Decoded<String> {
-    return .Success(number.description)
-}
 
 /// A Release of a Repository.
 public struct Release: Hashable, CustomStringConvertible {
