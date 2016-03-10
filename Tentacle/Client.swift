@@ -191,12 +191,12 @@ public final class Client {
     }
     
     /// Fetch an object from the API.
-    internal func fetchOne<Object: Decodable where Object.DecodedType == Object>(endpoint: Endpoint) -> SignalProducer<Object, Error> {
+    internal func fetchOne<Resource: ResourceType where Resource.DecodedType == Resource>(endpoint: Endpoint) -> SignalProducer<Resource, Error> {
         return NSURLSession
             .sharedSession()
             .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials))
             .mapError(Error.NetworkError)
-            .flatMap(.Concat) { data, response -> SignalProducer<Object, Error> in
+            .flatMap(.Concat) { data, response -> SignalProducer<Resource, Error> in
                 let response = response as! NSHTTPURLResponse
                 return SignalProducer
                     .attempt {
@@ -211,7 +211,7 @@ public final class Client {
                                 .mapError(Error.JSONDecodingError)
                                 .flatMap { .Failure(Error.APIError(response.statusCode, $0)) }
                         }
-                        return Object.decode(JSON).mapError(Error.JSONDecodingError)
+                        return Resource.decode(JSON).mapError(Error.JSONDecodingError)
                     }
             }
     }
