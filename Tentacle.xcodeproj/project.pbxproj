@@ -57,6 +57,8 @@
 		BE88E8751C88F0C50034A112 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8741C88F0C50034A112 /* main.swift */; };
 		BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765C1C8A001C00ABD373 /* GitHubError.swift */; };
 		BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */; };
+		BEEE47421C91B8DF000FFC21 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47411C91B8DF000FFC21 /* ResourceType.swift */; };
+		BEEE47431C91B8DF000FFC21 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47411C91B8DF000FFC21 /* ResourceType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,7 @@
 		BE88E8741C88F0C50034A112 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BEB0765C1C8A001C00ABD373 /* GitHubError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubError.swift; sourceTree = "<group>"; };
 		BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubErrorTests.swift; sourceTree = "<group>"; };
+		BEEE47411C91B8DF000FFC21 /* ResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +216,7 @@
 				BEB0765C1C8A001C00ABD373 /* GitHubError.swift */,
 				BE88E8311C88D33D0034A112 /* Release.swift */,
 				BE88E82F1C88CDAB0034A112 /* Repository.swift */,
+				BEEE47411C91B8DF000FFC21 /* ResourceType.swift */,
 				BE88E82C1C88C94D0034A112 /* Server.swift */,
 				BE88E7F71C88C6B30034A112 /* Info.plist */,
 			);
@@ -475,6 +479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61377C791C8A2B760081FF24 /* Client.swift in Sources */,
+				BEEE47431C91B8DF000FFC21 /* ResourceType.swift in Sources */,
 				61377C7C1C8A2B760081FF24 /* Release.swift in Sources */,
 				61377C7D1C8A2B760081FF24 /* Repository.swift in Sources */,
 				61377C7B1C8A2B760081FF24 /* GitHubError.swift in Sources */,
@@ -500,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88E82D1C88C94D0034A112 /* Server.swift in Sources */,
+				BEEE47421C91B8DF000FFC21 /* ResourceType.swift in Sources */,
 				BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */,
 				BE88E8321C88D33D0034A112 /* Release.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,

@@ -100,7 +100,7 @@ public func ==(lhs: Release, rhs: Release) -> Bool {
         && lhs.assets == rhs.assets
 }
 
-extension Release.Asset: Decodable {
+extension Release.Asset: ResourceType {
     public static func decode(j: JSON) -> Decoded<Release.Asset> {
         return curry(self.init)
             <^> (j <| "id" >>- toString)
@@ -110,7 +110,7 @@ extension Release.Asset: Decodable {
     }
 }
 
-extension Release: Decodable {
+extension Release: ResourceType {
     public static func decode(j: JSON) -> Decoded<Release> {
         let f = curry(Release.init)
         return f
