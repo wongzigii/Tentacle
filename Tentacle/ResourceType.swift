@@ -9,6 +9,6 @@
 import Argo
 
 /// A Resource from the GitHub API.
-protocol ResourceType: Decodable {
+public protocol ResourceType: Decodable, Hashable {
     static func decode(json: JSON) -> Decoded<Self>
 }
