@@ -143,18 +143,18 @@ public final class Client {
     ///
     /// If the tag exists, but there's not a correspoding GitHub Release, this method will return a
     /// `.DoesNotExist` error. This is indistinguishable from a nonexistent tag.
-    public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<Release, Error> {
+    public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<(Response, Release), Error> {
         precondition(repository.server == server)
         return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
     }
     
     /// Fetch an object from the API.
-    internal func fetchOne<Resource: ResourceType where Resource.DecodedType == Resource>(endpoint: Endpoint) -> SignalProducer<Resource, Error> {
+    internal func fetchOne<Resource: ResourceType where Resource.DecodedType == Resource>(endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error> {
         return NSURLSession
             .sharedSession()
             .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials))
             .mapError(Error.NetworkError)
-            .flatMap(.Concat) { data, response -> SignalProducer<Resource, Error> in
+            .flatMap(.Concat) { data, response -> SignalProducer<(Response, Resource), Error> in
                 let response = response as! NSHTTPURLResponse
                 return SignalProducer
                     .attempt {
@@ -170,6 +170,9 @@ public final class Client {
                                 .flatMap { .Failure(Error.APIError(response.statusCode, $0)) }
                         }
                         return Resource.decode(JSON).mapError(Error.JSONDecodingError)
+                    }
+                    .map { resource in
+                        return (Response(headerFields: response.allHeaderFields as! [String:String]), resource)
                     }
             }
     }

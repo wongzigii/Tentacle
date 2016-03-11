@@ -22,8 +22,8 @@ public func == <T: Equatable, Error: Equatable> (left: Result<[T], Error>, right
     return false
 }
 
-func ExpectResult<O: Equatable>(producer: SignalProducer<O, Client.Error>, _ result: Result<[O], Client.Error>, file: String = __FILE__, line: UInt = __LINE__) {
-    let actual = producer.collect().single()!
+func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[O], Client.Error>, file: String = __FILE__, line: UInt = __LINE__) {
+    let actual = producer.map { $1 }.collect().single()!
     let message: String
     switch result {
     case let .Success(value):
@@ -34,11 +34,11 @@ func ExpectResult<O: Equatable>(producer: SignalProducer<O, Client.Error>, _ res
     XCTAssertTrue(actual == result, message, file: file, line: line)
 }
 
-func ExpectError<O: Equatable>(producer: SignalProducer<O, Client.Error>, _ error: Client.Error, file: String = __FILE__, line: UInt = __LINE__) {
+func ExpectError<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ error: Client.Error, file: String = __FILE__, line: UInt = __LINE__) {
     ExpectResult(producer, .Failure(error), file: file, line: line)
 }
 
-func ExpectValues<O: Equatable>(producer: SignalProducer<O, Client.Error>, _ values: O..., file: String = __FILE__, line: UInt = __LINE__) {
+func ExpectValues<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ values: O..., file: String = __FILE__, line: UInt = __LINE__) {
     ExpectResult(producer, .Success(values), file: file, line: line)
 }
 
