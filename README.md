@@ -5,7 +5,7 @@ A Swift framework for the GitHub API
 let client = Client(.DotCom, token: "…")
 client
     .releaseForTag("tag-name", inRepository: Repository(owner: "ReactiveCocoa", name: "ReactiveCocoa"))
-    .startWithNext { release in
+    .startWithNext { response, release in
         print("Downloaded release: \(release)")
     }
 ```

@@ -50,8 +50,8 @@ public final class Client {
         /// An error occurred while decoding JSON.
         case JSONDecodingError(DecodeError)
         
-        /// A status code and error that was returned from the API.
-        case APIError(Int, GitHubError)
+        /// A status code, response, and error that was returned from the API.
+        case APIError(Int, Response, GitHubError)
         
         /// The requested object does not exist.
         case DoesNotExist
@@ -67,8 +67,8 @@ public final class Client {
             case let .JSONDecodingError(error):
                 return error.hashValue
                 
-            case let .APIError(statusCode, error):
-                return statusCode.hashValue ^ error.hashValue
+            case let .APIError(statusCode, response, error):
+                return statusCode.hashValue ^ response.hashValue ^ error.hashValue
                 
             case .DoesNotExist:
                 return 4
@@ -143,19 +143,20 @@ public final class Client {
     ///
     /// If the tag exists, but there's not a correspoding GitHub Release, this method will return a
     /// `.DoesNotExist` error. This is indistinguishable from a nonexistent tag.
-    public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<Release, Error> {
+    public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<(Response, Release), Error> {
         precondition(repository.server == server)
         return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
     }
     
     /// Fetch an object from the API.
-    internal func fetchOne<Resource: ResourceType where Resource.DecodedType == Resource>(endpoint: Endpoint) -> SignalProducer<Resource, Error> {
+    internal func fetchOne<Resource: ResourceType where Resource.DecodedType == Resource>(endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error> {
         return NSURLSession
             .sharedSession()
             .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials))
             .mapError(Error.NetworkError)
-            .flatMap(.Concat) { data, response -> SignalProducer<Resource, Error> in
+            .flatMap(.Concat) { data, response -> SignalProducer<(Response, Resource), Error> in
                 let response = response as! NSHTTPURLResponse
+                let headers = response.allHeaderFields as! [String:String]
                 return SignalProducer
                     .attempt {
                         return NSJSONSerialization.deserializeJSON(data).mapError(Error.JSONDeserializationError)
@@ -167,9 +168,14 @@ public final class Client {
                         if response.statusCode >= 400 && response.statusCode < 600 {
                             return GitHubError.decode(JSON)
                                 .mapError(Error.JSONDecodingError)
-                                .flatMap { .Failure(Error.APIError(response.statusCode, $0)) }
+                                .flatMap { error in
+                                    .Failure(Error.APIError(response.statusCode, Response(headerFields: headers), error))
+                                }
                         }
                         return Resource.decode(JSON).mapError(Error.JSONDecodingError)
+                    }
+                    .map { resource in
+                        return (Response(headerFields: headers), resource)
                     }
             }
     }
@@ -186,8 +192,8 @@ public func ==(lhs: Client.Error, rhs: Client.Error) -> Bool {
     case let (.JSONDecodingError(error1), .JSONDecodingError(error2)):
         return error1 == error2
         
-    case let (.APIError(statusCode1, error1), .APIError(statusCode2, error2)):
-        return statusCode1 == statusCode2 && error1 == error2
+    case let (.APIError(statusCode1, response1, error1), .APIError(statusCode2, response2, error2)):
+        return statusCode1 == statusCode2 && response1 == response2 && error1 == error2
         
     case (.DoesNotExist, .DoesNotExist):
         return true
