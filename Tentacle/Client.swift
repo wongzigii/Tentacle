@@ -18,9 +18,20 @@ extension NSJSONSerialization {
     }
 }
 
+extension NSURL {
+    internal func URLWithQueryItems(queryItems: [NSURLQueryItem]) -> NSURL {
+        let components = NSURLComponents(URL: self, resolvingAgainstBaseURL: true)!
+        components.queryItems = (components.queryItems ?? []) + queryItems
+        return components.URL!
+    }
+}
+
 extension NSURLRequest {
     internal static func create(server: Server, _ endpoint: Client.Endpoint, _ credentials: Client.Credentials?) -> NSURLRequest {
-        let URL = NSURL(string: server.endpoint)!.URLByAppendingPathComponent(endpoint.path)
+        let URL = NSURL(string: server.endpoint)!
+            .URLByAppendingPathComponent(endpoint.path)
+            .URLWithQueryItems(endpoint.queryItems)
+        
         let request = NSMutableURLRequest(URL: URL)
         
         request.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
@@ -108,6 +119,18 @@ public final class Client {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return owner.hashValue ^ repo.hashValue ^ tag.hashValue
+            }
+        }
+        
+        var queryItems: [NSURLQueryItem] {
+            switch self {
+            case .ReleaseByTagName:
+                return []
+            case let .ReleasesInRepository(_, _, page, pageSize):
+                return [
+                    NSURLQueryItem(name: "page", value: "\(page)"),
+                    NSURLQueryItem(name: "per_page", value: "\(pageSize)")
+                ]
             }
         }
     }
