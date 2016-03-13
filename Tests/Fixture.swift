@@ -101,9 +101,9 @@ struct Fixture {
     }
     
     struct Release: FixtureType {
-        static var Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
-        static var Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
-        static var TagOnly = Release(.DotCom, owner: "torvalds", name: "linux", tag: "v4.4")
+        static let Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
+        static let Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
+        static let TagOnly = Release(.DotCom, owner: "torvalds", name: "linux", tag: "v4.4")
         
         let server: Server
         let repository: Repository
