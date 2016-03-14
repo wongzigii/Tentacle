@@ -103,6 +103,8 @@ struct Fixture {
         Release.Carthage0_15,
         Release.Nonexistent,
         Release.TagOnly,
+        Releases.Carthage[0],
+        Releases.Carthage[1],
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -130,6 +132,29 @@ struct Fixture {
             self.server = server
             repository = Repository(owner: owner, name: name)
             self.tag = tag
+        }
+    }
+    
+    struct Releases: FixtureType {
+        static let Carthage = [
+            Releases(.DotCom, "Carthage", "Carthage", 1, 30),
+            Releases(.DotCom, "Carthage", "Carthage", 2, 30),
+        ]
+        
+        let server: Server
+        let repository: Repository
+        let page: UInt
+        let pageSize: UInt
+        
+        var endpoint: Client.Endpoint {
+            return .ReleasesInRepository(owner: repository.owner, repository: repository.name, page: page, pageSize: pageSize)
+        }
+        
+        init(_ server: Server, _ owner: String, _ name: String, _ page: UInt, _ pageSize: UInt) {
+            self.server = server
+            repository = Repository(owner: owner, name: name)
+            self.page = page
+            self.pageSize = pageSize
         }
     }
 }
