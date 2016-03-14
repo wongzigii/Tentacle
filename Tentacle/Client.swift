@@ -106,6 +106,7 @@ public final class Client {
     
     /// A GitHub API endpoint.
     internal enum Endpoint: Hashable {
+        // https://developer.github.com/v3/repos/releases/#get-a-release-by-tag-name
         case ReleaseByTagName(owner: String, repository: String, tag: String)
         
         var path: String {
