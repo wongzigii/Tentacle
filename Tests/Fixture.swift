@@ -21,12 +21,25 @@ protocol FixtureType {
 extension FixtureType {
     /// The filename used for the local fixture, without an extension
     private func filenameWithExtension(ext: String) -> NSString {
-        let path: NSString = endpoint.path
-        let filename: NSString = path
+        let path = (endpoint.path as NSString)
             .pathComponents
             .dropFirst()
             .joinWithSeparator("-")
-        return filename.stringByAppendingPathExtension(ext)!
+        
+        let query = endpoint.queryItems
+            .map { item in
+                if let value = item.value {
+                    return "\(item.name)-\(value)"
+                } else {
+                    return item.name
+                }
+            }
+            .joinWithSeparator("-")
+        
+        if query == "" {
+            return "\(path).\(ext)"
+        }
+        return "\(path).\(query).\(ext)"
     }
     
     /// The filename used for the local fixture's data.
