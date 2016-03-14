@@ -13,8 +13,8 @@ import Result
 
 
 extension NSJSONSerialization {
-    internal static func deserializeJSON(data: NSData) -> Result<NSDictionary, NSError> {
-        return Result(try NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary)
+    internal static func deserializeJSON(data: NSData) -> Result<AnyObject, NSError> {
+        return Result(try NSJSONSerialization.JSONObjectWithData(data, options: []))
     }
 }
 
@@ -170,6 +170,12 @@ public final class Client {
         self.credentials = .Basic(username: username, password: password)
     }
     
+    /// https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
+    public func releasesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
+        precondition(repository.server == server)
+        return fetchMany(Endpoint.ReleasesInRepository(owner: repository.owner, repository: repository.name, page: page, pageSize: perPage))
+    }
+    
     /// Fetch the release corresponding to the given tag in the given repository.
     ///
     /// If the tag exists, but there's not a correspoding GitHub Release, this method will return a
@@ -179,13 +185,13 @@ public final class Client {
         return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
     }
     
-    /// Fetch an object from the API.
-    internal func fetchOne<Resource: ResourceType where Resource.DecodedType == Resource>(endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error> {
+    /// Fetch an endpoint from the API.
+    private func fetch(endpoint: Endpoint) -> SignalProducer<(Response, AnyObject), Error> {
         return NSURLSession
             .sharedSession()
             .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials))
             .mapError(Error.NetworkError)
-            .flatMap(.Concat) { data, response -> SignalProducer<(Response, Resource), Error> in
+            .flatMap(.Concat) { data, response -> SignalProducer<(Response, AnyObject), Error> in
                 let response = response as! NSHTTPURLResponse
                 let headers = response.allHeaderFields as! [String:String]
                 return SignalProducer
@@ -197,17 +203,47 @@ public final class Client {
                             return .Failure(.DoesNotExist)
                         }
                         if response.statusCode >= 400 && response.statusCode < 600 {
-                            return GitHubError.decode(JSON)
+                            return decode(JSON)
                                 .mapError(Error.JSONDecodingError)
                                 .flatMap { error in
                                     .Failure(Error.APIError(response.statusCode, Response(headerFields: headers), error))
                                 }
                         }
-                        return Resource.decode(JSON).mapError(Error.JSONDecodingError)
+                        return .Success(JSON)
                     }
+                    .map { JSON in
+                        return (Response(headerFields: headers), JSON)
+                    }
+            }
+    }
+    
+    /// Fetch an object from the API.
+    internal func fetchOne
+        <Resource: ResourceType where Resource.DecodedType == Resource>
+        (endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error>
+    {
+        return fetch(endpoint)
+            .attemptMap { response, JSON in
+                return decode(JSON)
                     .map { resource in
-                        return (Response(headerFields: headers), resource)
+                        (response, resource)
                     }
+                    .mapError(Error.JSONDecodingError)
+            }
+    }
+    
+    /// Fetch a list of objects from the API.
+    internal func fetchMany
+        <Resource: ResourceType where Resource.DecodedType == Resource>
+        (endpoint: Endpoint) -> SignalProducer<(Response, [Resource]), Error>
+    {
+        return fetch(endpoint)
+            .attemptMap { response, JSON in
+                return decode(JSON)
+                    .map { resource in
+                        (response, resource)
+                    }
+                    .mapError(Error.JSONDecodingError)
             }
     }
 }

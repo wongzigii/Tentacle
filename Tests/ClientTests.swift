@@ -22,7 +22,34 @@ public func == <T: Equatable, Error: Equatable> (left: Result<[T], Error>, right
     return false
 }
 
+public func == <T: Equatable, Error: Equatable> (left: Result<[[T]], Error>, right: Result<[[T]], Error>) -> Bool {
+    if let left = left.value, right = right.value {
+        guard left.count == right.count else { return false }
+        for idx in left.indices {
+            if left[idx] != right[idx] {
+                return false
+            }
+        }
+        return true
+    } else if let left = left.error, right = right.error {
+        return left == right
+    }
+    return false
+}
+
 func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[O], Client.Error>, file: String = __FILE__, line: UInt = __LINE__) {
+    let actual = producer.map { $1 }.collect().single()!
+    let message: String
+    switch result {
+    case let .Success(value):
+        message = "\(actual) is not equal to \(value)"
+    case let .Failure(error):
+        message = "\(actual) is not equal to \(error)"
+    }
+    XCTAssertTrue(actual == result, message, file: file, line: line)
+}
+
+func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<[[O]], Client.Error>, file: String = __FILE__, line: UInt = __LINE__) {
     let actual = producer.map { $1 }.collect().single()!
     let message: String
     switch result {
@@ -42,6 +69,10 @@ func ExpectValues<O: Equatable>(producer: SignalProducer<(Response, O), Client.E
     ExpectResult(producer, .Success(values), file: file, line: line)
 }
 
+func ExpectValues<O: Equatable>(producer: SignalProducer<(Response, [O]), Client.Error>, _ values: [O]..., file: String = __FILE__, line: UInt = __LINE__) {
+    ExpectResult(producer, .Success(values), file: file, line: line)
+}
+
 
 class ClientTests: XCTestCase {
     private let client = Client(.DotCom)
@@ -55,6 +86,15 @@ class ClientTests: XCTestCase {
                 let response = fixture.response
                 return OHHTTPStubsResponse(fileURL: fixture.dataFileURL, statusCode: Int32(response.statusCode), headers: response.allHeaderFields)
             })
+    }
+    
+    func testReleasesInRepository() {
+        let fixtures = Fixture.Releases.Carthage
+        let pages: [[Release]] = fixtures.map { $0.decode()! }
+        ExpectValues(
+            client.releasesInRepository(fixtures[0].repository),
+            pages[0]
+        )
     }
     
     func testReleaseForTagInRepository() {

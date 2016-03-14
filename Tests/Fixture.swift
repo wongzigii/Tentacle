@@ -85,12 +85,17 @@ extension FixtureType {
     }
     
     /// The JSON from the Endpoint.
-    var JSON: NSDictionary {
-        return try! NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary
+    var JSON: AnyObject {
+        return try! NSJSONSerialization.JSONObjectWithData(data, options: [])
     }
     
     /// Decode the fixture's JSON as an object of the returned type.
     func decode<Object: Decodable where Object.DecodedType == Object>() -> Object? {
+        return Argo.decode(JSON).value
+    }
+    
+    /// Decode the fixture's JSON as an array of objects of the returned type.
+    func decode<Object: Decodable where Object.DecodedType == Object>() -> [Object]? {
         return Argo.decode(JSON).value
     }
 }
