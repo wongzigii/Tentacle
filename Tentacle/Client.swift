@@ -109,10 +109,15 @@ public final class Client {
         // https://developer.github.com/v3/repos/releases/#get-a-release-by-tag-name
         case ReleaseByTagName(owner: String, repository: String, tag: String)
         
+        // https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
+        case ReleasesInRepository(owner: String, repository: String, page: UInt, pageSize: UInt)
+        
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
+            case let .ReleasesInRepository(owner, repo, _, _):
+                return "/repos/\(owner)/\(repo)/releases"
             }
         }
         
@@ -120,6 +125,8 @@ public final class Client {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return owner.hashValue ^ repo.hashValue ^ tag.hashValue
+            case let .ReleasesInRepository(owner, repo, page, pageSize):
+                return owner.hashValue ^ repo.hashValue ^ Int(page) ^ Int(pageSize)
             }
         }
         
@@ -231,5 +238,9 @@ internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
     switch (lhs, rhs) {
     case let (.ReleaseByTagName(owner1, repo1, tag1), .ReleaseByTagName(owner2, repo2, tag2)):
         return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
+    case let (.ReleasesInRepository(owner1, repo1, page1, pageSize1), .ReleasesInRepository(owner2, repo2, page2, pageSize2)):
+        return owner1 == owner2 && repo1 == repo2 && page1 == page2 && pageSize1 == pageSize2
+    default:
+        return false
     }
 }
