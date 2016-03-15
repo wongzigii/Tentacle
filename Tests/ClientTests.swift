@@ -37,7 +37,10 @@ public func == <T: Equatable, Error: Equatable> (left: Result<[[T]], Error>, rig
     return false
 }
 
-func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[O], Client.Error>, file: String = __FILE__, line: UInt = __LINE__) {
+func ExpectResult
+    <O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[O], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+{
     let actual = producer.map { $1 }.collect().single()!
     let message: String
     switch result {
@@ -49,7 +52,18 @@ func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, O), Client.E
     XCTAssertTrue(actual == result, message, file: file, line: line)
 }
 
-func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<[[O]], Client.Error>, file: String = __FILE__, line: UInt = __LINE__) {
+func ExpectResult
+    <F: FixtureType, O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[F], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+{
+    let expected = result.map { fixtures -> [O] in fixtures.map { $0.decode()! } }
+    ExpectResult(producer, expected, file: file, line: line)
+}
+
+func ExpectResult
+    <O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<[[O]], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+{
     let actual = producer.map { $1 }.collect().single()!
     let message: String
     switch result {
@@ -61,16 +75,33 @@ func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, [O]), Client
     XCTAssertTrue(actual == result, message, file: file, line: line)
 }
 
-func ExpectError<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ error: Client.Error, file: String = __FILE__, line: UInt = __LINE__) {
-    ExpectResult(producer, .Failure(error), file: file, line: line)
+func ExpectResult
+    <F: FixtureType, O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<[F], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+{
+    let expected = result.map { fixtures -> [[O]] in fixtures.map { $0.decode()! } }
+    ExpectResult(producer, expected, file: file, line: line)
 }
 
-func ExpectValues<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ values: O..., file: String = __FILE__, line: UInt = __LINE__) {
-    ExpectResult(producer, .Success(values), file: file, line: line)
+func ExpectError
+    <O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, O), Client.Error>, _ error: Client.Error, file: String = __FILE__, line: UInt = __LINE__)
+{
+    ExpectResult(producer, Result<[O], Client.Error>.Failure(error), file: file, line: line)
 }
 
-func ExpectValues<O: Equatable>(producer: SignalProducer<(Response, [O]), Client.Error>, _ values: [O]..., file: String = __FILE__, line: UInt = __LINE__) {
-    ExpectResult(producer, .Success(values), file: file, line: line)
+func ExpectFixtures
+    <F: FixtureType, O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, O), Client.Error>, _ fixtures: F..., file: String = __FILE__, line: UInt = __LINE__)
+{
+    ExpectResult(producer, Result<[F], Client.Error>.Success(fixtures), file: file, line: line)
+}
+
+func ExpectFixtures
+    <F: FixtureType, O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ fixtures: F..., file: String = __FILE__, line: UInt = __LINE__)
+{
+    ExpectResult(producer, .Success(fixtures), file: file, line: line)
 }
 
 
@@ -90,18 +121,17 @@ class ClientTests: XCTestCase {
     
     func testReleasesInRepository() {
         let fixtures = Fixture.Releases.Carthage
-        let pages: [[Release]] = fixtures.map { $0.decode()! }
-        ExpectValues(
+        ExpectFixtures(
             client.releasesInRepository(fixtures[0].repository),
-            pages[0]
+            fixtures[0]
         )
     }
     
     func testReleaseForTagInRepository() {
         let fixture = Fixture.Release.Carthage0_15
-        ExpectValues(
+        ExpectFixtures(
             client.releaseForTag(fixture.tag, inRepository: fixture.repository),
-            fixture.decode()!
+            fixture
         )
     }
     
