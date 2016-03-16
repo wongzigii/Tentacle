@@ -76,8 +76,8 @@ func ExpectResult
 }
 
 func ExpectResult
-    <F: FixtureType, O: ResourceType where O.DecodedType == O>
-    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<[F], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+    <F: FixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<C, Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
 {
     let expected = result.map { fixtures -> [[O]] in fixtures.map { $0.decode()! } }
     ExpectResult(producer, expected, file: file, line: line)
@@ -98,8 +98,8 @@ func ExpectFixtures
 }
 
 func ExpectFixtures
-    <F: FixtureType, O: ResourceType where O.DecodedType == O>
-    (producer: SignalProducer<(Response, [O]), Client.Error>, _ fixtures: F..., file: String = __FILE__, line: UInt = __LINE__)
+    <F: FixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ fixtures: C, file: String = __FILE__, line: UInt = __LINE__)
 {
     ExpectResult(producer, .Success(fixtures), file: file, line: line)
 }
@@ -123,7 +123,7 @@ class ClientTests: XCTestCase {
         let fixtures = Fixture.Releases.Carthage
         ExpectFixtures(
             client.releasesInRepository(fixtures[0].repository),
-            fixtures[0]
+            [ fixtures[0] ]
         )
     }
     
