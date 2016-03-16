@@ -127,6 +127,14 @@ class ClientTests: XCTestCase {
         )
     }
     
+    func testReleasesInRepositoryPage2() {
+        let fixtures = Fixture.Releases.Carthage
+        ExpectFixtures(
+            client.releasesInRepository(fixtures[0].repository, page: 2),
+            fixtures.dropFirst()
+        )
+    }
+    
     func testReleaseForTagInRepository() {
         let fixture = Fixture.Release.Carthage0_15
         ExpectFixtures(
