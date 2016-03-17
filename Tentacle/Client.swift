@@ -167,6 +167,11 @@ public final class Client {
         self.credentials = .Basic(username: username, password: password)
     }
     
+    /// Fetch the releases in the given repository, starting at the given page.
+    ///
+    /// This method will automatically fetch all pages. Each value in the returned signal producer
+    /// will be the response and releases from a single page.
+    ///
     /// https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
     public func releasesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
         precondition(repository.server == server)
