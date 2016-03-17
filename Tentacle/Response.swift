@@ -8,7 +8,7 @@
 
 import Foundation
 
-let LinksRegex = try! NSRegularExpression(pattern: "(?:\\A|,) *<([^>]+)>( *; *\\w+ *= *\"[^\"]+\")* *(?:\\Z|,)", options: [])
+let LinksRegex = try! NSRegularExpression(pattern: "(?<=\\A|,) *<([^>]+)>( *; *\\w+ *= *\"[^\"]+\")* *(?=\\z|,)", options: [])
 let LinkParamRegex = try! NSRegularExpression(pattern: "; *(\\w+) *= *\"([^\"]+)\"", options: [])
 
 /// Returns any links, keyed by `rel`, from the RFC 5988 link header.
