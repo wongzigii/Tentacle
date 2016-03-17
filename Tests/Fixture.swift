@@ -16,17 +16,21 @@ private class ImportedWithFixture { }
 protocol FixtureType {
     var server: Server { get }
     var endpoint: Client.Endpoint { get }
+    var page: UInt? { get }
+    var pageSize: UInt? { get }
 }
 
 extension FixtureType {
     /// The filename used for the local fixture, without an extension
     private func filenameWithExtension(ext: String) -> NSString {
-        let path = (endpoint.path as NSString)
+        let components = NSURLComponents(URL: URL, resolvingAgainstBaseURL: false)!
+        
+        let path = (components.path! as NSString)
             .pathComponents
             .dropFirst()
             .joinWithSeparator("-")
         
-        let query = endpoint.queryItems
+        let query = components.queryItems!
             .map { item in
                 if let value = item.value {
                     return "\(item.name)-\(value)"
@@ -54,7 +58,7 @@ extension FixtureType {
     
     /// The URL of the fixture on the API.
     var URL: NSURL {
-        return NSURLRequest.create(self.server, self.endpoint, nil).URL!
+        return NSURLRequest.create(self.server, self.endpoint, nil, page: page, pageSize: pageSize).URL!
     }
     
     private func fileURLWithExtension(ext: String) -> NSURL {
@@ -128,6 +132,8 @@ struct Fixture {
         let server: Server
         let repository: Repository
         let tag: String
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
         
         var endpoint: Client.Endpoint {
             return .ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag)
@@ -148,11 +154,11 @@ struct Fixture {
         
         let server: Server
         let repository: Repository
-        let page: UInt
-        let pageSize: UInt
+        let page: UInt?
+        let pageSize: UInt?
         
         var endpoint: Client.Endpoint {
-            return .ReleasesInRepository(owner: repository.owner, repository: repository.name, page: page, pageSize: pageSize)
+            return .ReleasesInRepository(owner: repository.owner, repository: repository.name)
         }
         
         init(_ server: Server, _ owner: String, _ name: String, _ page: UInt, _ pageSize: UInt) {

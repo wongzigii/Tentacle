@@ -27,10 +27,15 @@ extension NSURL {
 }
 
 extension NSURLRequest {
-    internal static func create(server: Server, _ endpoint: Client.Endpoint, _ credentials: Client.Credentials?) -> NSURLRequest {
+    internal static func create(server: Server, _ endpoint: Client.Endpoint, _ credentials: Client.Credentials?, page: UInt? = nil, pageSize: UInt? = nil) -> NSURLRequest {
+        let queryItems = [ ("page", page), ("per_page", pageSize) ]
+            .filter { _, value in value != nil }
+            .map { name, value in NSURLQueryItem(name: name, value: "\(value!)") }
+        
         let URL = NSURL(string: server.endpoint)!
             .URLByAppendingPathComponent(endpoint.path)
             .URLWithQueryItems(endpoint.queryItems)
+            .URLWithQueryItems(queryItems)
         
         let request = NSMutableURLRequest(URL: URL)
         
@@ -110,13 +115,13 @@ public final class Client {
         case ReleaseByTagName(owner: String, repository: String, tag: String)
         
         // https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
-        case ReleasesInRepository(owner: String, repository: String, page: UInt, pageSize: UInt)
+        case ReleasesInRepository(owner: String, repository: String)
         
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
-            case let .ReleasesInRepository(owner, repo, _, _):
+            case let .ReleasesInRepository(owner, repo):
                 return "/repos/\(owner)/\(repo)/releases"
             }
         }
@@ -125,21 +130,13 @@ public final class Client {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return owner.hashValue ^ repo.hashValue ^ tag.hashValue
-            case let .ReleasesInRepository(owner, repo, page, pageSize):
-                return owner.hashValue ^ repo.hashValue ^ Int(page) ^ Int(pageSize)
+            case let .ReleasesInRepository(owner, repo):
+                return owner.hashValue ^ repo.hashValue
             }
         }
         
         var queryItems: [NSURLQueryItem] {
-            switch self {
-            case .ReleaseByTagName:
-                return []
-            case let .ReleasesInRepository(_, _, page, pageSize):
-                return [
-                    NSURLQueryItem(name: "page", value: "\(page)"),
-                    NSURLQueryItem(name: "per_page", value: "\(pageSize)")
-                ]
-            }
+            return []
         }
     }
     
@@ -173,7 +170,7 @@ public final class Client {
     /// https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
     public func releasesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
         precondition(repository.server == server)
-        return fetchMany(Endpoint.ReleasesInRepository(owner: repository.owner, repository: repository.name, page: page, pageSize: perPage))
+        return fetchMany(Endpoint.ReleasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
     
     /// Fetch the release corresponding to the given tag in the given repository.
@@ -186,10 +183,10 @@ public final class Client {
     }
     
     /// Fetch an endpoint from the API.
-    private func fetch(endpoint: Endpoint) -> SignalProducer<(Response, AnyObject), Error> {
+    private func fetch(endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, AnyObject), Error> {
         return NSURLSession
             .sharedSession()
-            .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials))
+            .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials, page: page, pageSize: pageSize))
             .mapError(Error.NetworkError)
             .flatMap(.Concat) { data, response -> SignalProducer<(Response, AnyObject), Error> in
                 let response = response as! NSHTTPURLResponse
@@ -222,7 +219,7 @@ public final class Client {
         <Resource: ResourceType where Resource.DecodedType == Resource>
         (endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error>
     {
-        return fetch(endpoint)
+        return fetch(endpoint, page: nil, pageSize: nil)
             .attemptMap { response, JSON in
                 return decode(JSON)
                     .map { resource in
@@ -235,9 +232,9 @@ public final class Client {
     /// Fetch a list of objects from the API.
     internal func fetchMany
         <Resource: ResourceType where Resource.DecodedType == Resource>
-        (endpoint: Endpoint) -> SignalProducer<(Response, [Resource]), Error>
+        (endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, [Resource]), Error>
     {
-        return fetch(endpoint)
+        return fetch(endpoint, page: page, pageSize: pageSize)
             .attemptMap { response, JSON in
                 return decode(JSON)
                     .map { resource in
@@ -274,8 +271,8 @@ internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
     switch (lhs, rhs) {
     case let (.ReleaseByTagName(owner1, repo1, tag1), .ReleaseByTagName(owner2, repo2, tag2)):
         return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
-    case let (.ReleasesInRepository(owner1, repo1, page1, pageSize1), .ReleasesInRepository(owner2, repo2, page2, pageSize2)):
-        return owner1 == owner2 && repo1 == repo2 && page1 == page2 && pageSize1 == pageSize2
+    case let (.ReleasesInRepository(owner1, repo1), .ReleasesInRepository(owner2, repo2)):
+        return owner1 == owner2 && repo1 == repo2
     default:
         return false
     }
