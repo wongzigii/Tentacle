@@ -16,17 +16,34 @@ private class ImportedWithFixture { }
 protocol FixtureType {
     var server: Server { get }
     var endpoint: Client.Endpoint { get }
+    var page: UInt? { get }
+    var pageSize: UInt? { get }
 }
 
 extension FixtureType {
     /// The filename used for the local fixture, without an extension
     private func filenameWithExtension(ext: String) -> NSString {
-        let path: NSString = endpoint.path
-        let filename: NSString = path
+        let components = NSURLComponents(URL: URL, resolvingAgainstBaseURL: false)!
+        
+        let path = (components.path! as NSString)
             .pathComponents
             .dropFirst()
             .joinWithSeparator("-")
-        return filename.stringByAppendingPathExtension(ext)!
+        
+        let query = components.queryItems!
+            .map { item in
+                if let value = item.value {
+                    return "\(item.name)-\(value)"
+                } else {
+                    return item.name
+                }
+            }
+            .joinWithSeparator("-")
+        
+        if query == "" {
+            return "\(path).\(ext)"
+        }
+        return "\(path).\(query).\(ext)"
     }
     
     /// The filename used for the local fixture's data.
@@ -41,7 +58,7 @@ extension FixtureType {
     
     /// The URL of the fixture on the API.
     var URL: NSURL {
-        return NSURLRequest.create(self.server, self.endpoint, nil).URL!
+        return NSURLRequest.create(self.server, self.endpoint, nil, page: page, pageSize: pageSize).URL!
     }
     
     private func fileURLWithExtension(ext: String) -> NSURL {
@@ -72,12 +89,17 @@ extension FixtureType {
     }
     
     /// The JSON from the Endpoint.
-    var JSON: NSDictionary {
-        return try! NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary
+    var JSON: AnyObject {
+        return try! NSJSONSerialization.JSONObjectWithData(data, options: [])
     }
     
     /// Decode the fixture's JSON as an object of the returned type.
     func decode<Object: Decodable where Object.DecodedType == Object>() -> Object? {
+        return Argo.decode(JSON).value
+    }
+    
+    /// Decode the fixture's JSON as an array of objects of the returned type.
+    func decode<Object: Decodable where Object.DecodedType == Object>() -> [Object]? {
         return Argo.decode(JSON).value
     }
 }
@@ -90,6 +112,8 @@ struct Fixture {
         Release.Carthage0_15,
         Release.Nonexistent,
         Release.TagOnly,
+        Releases.Carthage[0],
+        Releases.Carthage[1],
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -101,13 +125,15 @@ struct Fixture {
     }
     
     struct Release: FixtureType {
-        static var Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
-        static var Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
-        static var TagOnly = Release(.DotCom, owner: "torvalds", name: "linux", tag: "v4.4")
+        static let Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
+        static let Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
+        static let TagOnly = Release(.DotCom, owner: "torvalds", name: "linux", tag: "v4.4")
         
         let server: Server
         let repository: Repository
         let tag: String
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
         
         var endpoint: Client.Endpoint {
             return .ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag)
@@ -117,6 +143,29 @@ struct Fixture {
             self.server = server
             repository = Repository(owner: owner, name: name)
             self.tag = tag
+        }
+    }
+    
+    struct Releases: FixtureType {
+        static let Carthage = [
+            Releases(.DotCom, "Carthage", "Carthage", 1, 30),
+            Releases(.DotCom, "Carthage", "Carthage", 2, 30),
+        ]
+        
+        let server: Server
+        let repository: Repository
+        let page: UInt?
+        let pageSize: UInt?
+        
+        var endpoint: Client.Endpoint {
+            return .ReleasesInRepository(owner: repository.owner, repository: repository.name)
+        }
+        
+        init(_ server: Server, _ owner: String, _ name: String, _ page: UInt, _ pageSize: UInt) {
+            self.server = server
+            repository = Repository(owner: owner, name: name)
+            self.page = page
+            self.pageSize = pageSize
         }
     }
 }

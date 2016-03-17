@@ -22,7 +22,25 @@ public func == <T: Equatable, Error: Equatable> (left: Result<[T], Error>, right
     return false
 }
 
-func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[O], Client.Error>, file: String = __FILE__, line: UInt = __LINE__) {
+public func == <T: Equatable, Error: Equatable> (left: Result<[[T]], Error>, right: Result<[[T]], Error>) -> Bool {
+    if let left = left.value, right = right.value {
+        guard left.count == right.count else { return false }
+        for idx in left.indices {
+            if left[idx] != right[idx] {
+                return false
+            }
+        }
+        return true
+    } else if let left = left.error, right = right.error {
+        return left == right
+    }
+    return false
+}
+
+func ExpectResult
+    <O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[O], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+{
     let actual = producer.map { $1 }.collect().single()!
     let message: String
     switch result {
@@ -34,12 +52,56 @@ func ExpectResult<O: Equatable>(producer: SignalProducer<(Response, O), Client.E
     XCTAssertTrue(actual == result, message, file: file, line: line)
 }
 
-func ExpectError<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ error: Client.Error, file: String = __FILE__, line: UInt = __LINE__) {
-    ExpectResult(producer, .Failure(error), file: file, line: line)
+func ExpectResult
+    <F: FixtureType, O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[F], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+{
+    let expected = result.map { fixtures -> [O] in fixtures.map { $0.decode()! } }
+    ExpectResult(producer, expected, file: file, line: line)
 }
 
-func ExpectValues<O: Equatable>(producer: SignalProducer<(Response, O), Client.Error>, _ values: O..., file: String = __FILE__, line: UInt = __LINE__) {
-    ExpectResult(producer, .Success(values), file: file, line: line)
+func ExpectResult
+    <O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<[[O]], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+{
+    let actual = producer.map { $1 }.collect().single()!
+    let message: String
+    switch result {
+    case let .Success(value):
+        message = "\(actual) is not equal to \(value)"
+    case let .Failure(error):
+        message = "\(actual) is not equal to \(error)"
+    }
+    XCTAssertTrue(actual == result, message, file: file, line: line)
+}
+
+func ExpectResult
+    <F: FixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<C, Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
+{
+    let expected = result.map { fixtures -> [[O]] in fixtures.map { $0.decode()! } }
+    ExpectResult(producer, expected, file: file, line: line)
+}
+
+func ExpectError
+    <O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, O), Client.Error>, _ error: Client.Error, file: String = __FILE__, line: UInt = __LINE__)
+{
+    ExpectResult(producer, Result<[O], Client.Error>.Failure(error), file: file, line: line)
+}
+
+func ExpectFixtures
+    <F: FixtureType, O: ResourceType where O.DecodedType == O>
+    (producer: SignalProducer<(Response, O), Client.Error>, _ fixtures: F..., file: String = __FILE__, line: UInt = __LINE__)
+{
+    ExpectResult(producer, Result<[F], Client.Error>.Success(fixtures), file: file, line: line)
+}
+
+func ExpectFixtures
+    <F: FixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ fixtures: C, file: String = __FILE__, line: UInt = __LINE__)
+{
+    ExpectResult(producer, .Success(fixtures), file: file, line: line)
 }
 
 
@@ -49,7 +111,7 @@ class ClientTests: XCTestCase {
     override func setUp() {
         OHHTTPStubs
             .stubRequestsPassingTest({ request in
-                return Fixture.fixtureForURL(request.URL!) != nil
+                return true
             }, withStubResponse: { request -> OHHTTPStubsResponse in
                 let fixture = Fixture.fixtureForURL(request.URL!)!
                 let response = fixture.response
@@ -57,11 +119,27 @@ class ClientTests: XCTestCase {
             })
     }
     
+    func testReleasesInRepository() {
+        let fixtures = Fixture.Releases.Carthage
+        ExpectFixtures(
+            client.releasesInRepository(fixtures[0].repository),
+            fixtures
+        )
+    }
+    
+    func testReleasesInRepositoryPage2() {
+        let fixtures = Fixture.Releases.Carthage
+        ExpectFixtures(
+            client.releasesInRepository(fixtures[0].repository, page: 2),
+            fixtures.dropFirst()
+        )
+    }
+    
     func testReleaseForTagInRepository() {
         let fixture = Fixture.Release.Carthage0_15
-        ExpectValues(
+        ExpectFixtures(
             client.releaseForTag(fixture.tag, inRepository: fixture.repository),
-            fixture.decode()!
+            fixture
         )
     }
     

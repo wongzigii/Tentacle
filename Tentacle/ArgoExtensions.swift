@@ -10,14 +10,23 @@ import Argo
 import Result
 
 
-extension Decodable {
-    internal static func decode(JSON: NSDictionary) -> Result<DecodedType, DecodeError> {
-        switch decode(.parse(JSON)) {
-        case let .Success(object):
-            return .Success(object)
-        case let .Failure(error):
-            return .Failure(error)
-        }
+internal func decode<T: Decodable where T == T.DecodedType>(object: AnyObject) -> Result<T, DecodeError> {
+    let decoded: Decoded<T> = decode(object)
+    switch decoded {
+    case let .Success(object):
+        return .Success(object)
+    case let .Failure(error):
+        return .Failure(error)
+    }
+}
+
+internal func decode<T: Decodable where T == T.DecodedType>(object: AnyObject) -> Result<[T], DecodeError> {
+    let decoded: Decoded<[T]> = decode(object)
+    switch decoded {
+    case let .Success(object):
+        return .Success(object)
+    case let .Failure(error):
+        return .Failure(error)
     }
 }
 

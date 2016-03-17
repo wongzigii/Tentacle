@@ -13,14 +13,30 @@ import Result
 
 
 extension NSJSONSerialization {
-    internal static func deserializeJSON(data: NSData) -> Result<NSDictionary, NSError> {
-        return Result(try NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary)
+    internal static func deserializeJSON(data: NSData) -> Result<AnyObject, NSError> {
+        return Result(try NSJSONSerialization.JSONObjectWithData(data, options: []))
+    }
+}
+
+extension NSURL {
+    internal func URLWithQueryItems(queryItems: [NSURLQueryItem]) -> NSURL {
+        let components = NSURLComponents(URL: self, resolvingAgainstBaseURL: true)!
+        components.queryItems = (components.queryItems ?? []) + queryItems
+        return components.URL!
     }
 }
 
 extension NSURLRequest {
-    internal static func create(server: Server, _ endpoint: Client.Endpoint, _ credentials: Client.Credentials?) -> NSURLRequest {
-        let URL = NSURL(string: server.endpoint)!.URLByAppendingPathComponent(endpoint.path)
+    internal static func create(server: Server, _ endpoint: Client.Endpoint, _ credentials: Client.Credentials?, page: UInt? = nil, pageSize: UInt? = nil) -> NSURLRequest {
+        let queryItems = [ ("page", page), ("per_page", pageSize) ]
+            .filter { _, value in value != nil }
+            .map { name, value in NSURLQueryItem(name: name, value: "\(value!)") }
+        
+        let URL = NSURL(string: server.endpoint)!
+            .URLByAppendingPathComponent(endpoint.path)
+            .URLWithQueryItems(endpoint.queryItems)
+            .URLWithQueryItems(queryItems)
+        
         let request = NSMutableURLRequest(URL: URL)
         
         request.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
@@ -95,12 +111,18 @@ public final class Client {
     
     /// A GitHub API endpoint.
     internal enum Endpoint: Hashable {
+        // https://developer.github.com/v3/repos/releases/#get-a-release-by-tag-name
         case ReleaseByTagName(owner: String, repository: String, tag: String)
+        
+        // https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
+        case ReleasesInRepository(owner: String, repository: String)
         
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
+            case let .ReleasesInRepository(owner, repo):
+                return "/repos/\(owner)/\(repo)/releases"
             }
         }
         
@@ -108,7 +130,13 @@ public final class Client {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return owner.hashValue ^ repo.hashValue ^ tag.hashValue
+            case let .ReleasesInRepository(owner, repo):
+                return owner.hashValue ^ repo.hashValue
             }
+        }
+        
+        var queryItems: [NSURLQueryItem] {
+            return []
         }
     }
     
@@ -139,6 +167,17 @@ public final class Client {
         self.credentials = .Basic(username: username, password: password)
     }
     
+    /// Fetch the releases in the given repository, starting at the given page.
+    ///
+    /// This method will automatically fetch all pages. Each value in the returned signal producer
+    /// will be the response and releases from a single page.
+    ///
+    /// https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
+    public func releasesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
+        precondition(repository.server == server)
+        return fetchMany(Endpoint.ReleasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+    }
+    
     /// Fetch the release corresponding to the given tag in the given repository.
     ///
     /// If the tag exists, but there's not a correspoding GitHub Release, this method will return a
@@ -148,13 +187,13 @@ public final class Client {
         return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
     }
     
-    /// Fetch an object from the API.
-    internal func fetchOne<Resource: ResourceType where Resource.DecodedType == Resource>(endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error> {
+    /// Fetch an endpoint from the API.
+    private func fetch(endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, AnyObject), Error> {
         return NSURLSession
             .sharedSession()
-            .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials))
+            .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials, page: page, pageSize: pageSize))
             .mapError(Error.NetworkError)
-            .flatMap(.Concat) { data, response -> SignalProducer<(Response, Resource), Error> in
+            .flatMap(.Concat) { data, response -> SignalProducer<(Response, AnyObject), Error> in
                 let response = response as! NSHTTPURLResponse
                 let headers = response.allHeaderFields as! [String:String]
                 return SignalProducer
@@ -166,17 +205,52 @@ public final class Client {
                             return .Failure(.DoesNotExist)
                         }
                         if response.statusCode >= 400 && response.statusCode < 600 {
-                            return GitHubError.decode(JSON)
+                            return decode(JSON)
                                 .mapError(Error.JSONDecodingError)
                                 .flatMap { error in
                                     .Failure(Error.APIError(response.statusCode, Response(headerFields: headers), error))
                                 }
                         }
-                        return Resource.decode(JSON).mapError(Error.JSONDecodingError)
+                        return .Success(JSON)
                     }
+                    .map { JSON in
+                        return (Response(headerFields: headers), JSON)
+                    }
+            }
+    }
+    
+    /// Fetch an object from the API.
+    internal func fetchOne
+        <Resource: ResourceType where Resource.DecodedType == Resource>
+        (endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error>
+    {
+        return fetch(endpoint, page: nil, pageSize: nil)
+            .attemptMap { response, JSON in
+                return decode(JSON)
                     .map { resource in
-                        return (Response(headerFields: headers), resource)
+                        (response, resource)
                     }
+                    .mapError(Error.JSONDecodingError)
+            }
+    }
+    
+    /// Fetch a list of objects from the API.
+    internal func fetchMany
+        <Resource: ResourceType where Resource.DecodedType == Resource>
+        (endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, [Resource]), Error>
+    {
+        let nextPage = (page ?? 1) + 1
+        return fetch(endpoint, page: page, pageSize: pageSize)
+            .attemptMap { response, JSON in
+                return decode(JSON)
+                    .map { resource in
+                        (response, resource)
+                    }
+                    .mapError(Error.JSONDecodingError)
+            }
+            .flatMap(.Concat) { response, JSON -> SignalProducer<(Response, [Resource]), Error> in
+                return SignalProducer(value: (response, JSON))
+                    .concat(response.links["next"] == nil ? SignalProducer.empty : self.fetchMany(endpoint, page: nextPage, pageSize: pageSize))
             }
     }
 }
@@ -207,5 +281,9 @@ internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
     switch (lhs, rhs) {
     case let (.ReleaseByTagName(owner1, repo1, tag1), .ReleaseByTagName(owner2, repo2, tag2)):
         return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
+    case let (.ReleasesInRepository(owner1, repo1), .ReleasesInRepository(owner2, repo2)):
+        return owner1 == owner2 && repo1 == repo2
+    default:
+        return false
     }
 }

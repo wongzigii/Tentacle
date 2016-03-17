@@ -40,6 +40,16 @@
 		BE0F40ED1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */; };
 		BE0F40EE1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */; };
 		BE0F40EF1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */ = {isa = PBXBuildFile; fileRef = BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */; };
+		BE1E03621C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E035A1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data */; };
+		BE1E03631C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E035B1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response */; };
+		BE1E03641C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E035C1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data */; };
+		BE1E03651C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E035D1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response */; };
+		BE1E03661C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E035A1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data */; };
+		BE1E03671C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E035B1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response */; };
+		BE1E03681C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E035C1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data */; };
+		BE1E03691C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E035D1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response */; };
+		BE1E036B1C9AD87F001296C2 /* ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */; };
+		BE1E036C1C9AD87F001296C2 /* ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */; };
 		BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
@@ -94,6 +104,11 @@
 		BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-NonExistent-releases-tags-tag.response"; sourceTree = "<group>"; };
 		BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-torvalds-linux-releases-tags-v4.4.data"; sourceTree = "<group>"; };
 		BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-torvalds-linux-releases-tags-v4.4.response"; sourceTree = "<group>"; };
+		BE1E035A1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-Carthage-Carthage-releases.page-1-per_page-30.data"; sourceTree = "<group>"; };
+		BE1E035B1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-Carthage-Carthage-releases.page-1-per_page-30.response"; sourceTree = "<group>"; };
+		BE1E035C1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-Carthage-Carthage-releases.page-2-per_page-30.data"; sourceTree = "<group>"; };
+		BE1E035D1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-Carthage-Carthage-releases.page-2-per_page-30.response"; sourceTree = "<group>"; };
+		BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseTests.swift; sourceTree = "<group>"; };
 		BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = "Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug-iphoneos/OHHTTPStubs.framework"; sourceTree = SOURCE_ROOT; };
 		BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug/OHHTTPStubs.framework; sourceTree = SOURCE_ROOT; };
 		BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
@@ -181,6 +196,10 @@
 			children = (
 				BE0F40D81C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data */,
 				BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */,
+				BE1E035A1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data */,
+				BE1E035B1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response */,
+				BE1E035C1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data */,
+				BE1E035D1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response */,
 				BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */,
 				BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */,
 				BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */,
@@ -239,6 +258,7 @@
 				BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */,
 				BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */,
 				BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */,
+				BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */,
 				BE88E8031C88C6B30034A112 /* Info.plist */,
 			);
 			path = Tests;
@@ -447,8 +467,12 @@
 				BE0F40E61C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */,
 				BE0F40E71C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */,
 				BE0F40EF1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
+				BE1E03671C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */,
+				BE1E03661C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */,
+				BE1E03681C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */,
 				BE0F40EE1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
 				BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
+				BE1E03691C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,8 +491,12 @@
 				BE0F40E21C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */,
 				BE0F40E31C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */,
 				BE0F40ED1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
+				BE1E03631C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */,
+				BE1E03621C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */,
+				BE1E03641C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */,
 				BE0F40EC1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
 				BE0F40E11C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
+				BE1E03651C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +534,7 @@
 				BE2B6A6D1C8B854F0080BFEB /* ClientTests.swift in Sources */,
 				6190818B1C8A2DB7001BE2F8 /* (null) in Sources */,
 				619081891C8A2DB7001BE2F8 /* GitHubErrorTests.swift in Sources */,
+				BE1E036C1C9AD87F001296C2 /* ResponseTests.swift in Sources */,
 				6190818A1C8A2DB7001BE2F8 /* ReleaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1E036B1C9AD87F001296C2 /* ResponseTests.swift in Sources */,
 				BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */,
 				BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */,
 				BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */,
@@ -669,7 +699,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -710,7 +741,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				VERSIONING_SYSTEM = "apple-generic";
