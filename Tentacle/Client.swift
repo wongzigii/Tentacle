@@ -234,6 +234,7 @@ public final class Client {
         <Resource: ResourceType where Resource.DecodedType == Resource>
         (endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, [Resource]), Error>
     {
+        let nextPage = (page ?? 1) + 1
         return fetch(endpoint, page: page, pageSize: pageSize)
             .attemptMap { response, JSON in
                 return decode(JSON)
@@ -241,6 +242,10 @@ public final class Client {
                         (response, resource)
                     }
                     .mapError(Error.JSONDecodingError)
+            }
+            .flatMap(.Concat) { response, JSON -> SignalProducer<(Response, [Resource]), Error> in
+                return SignalProducer(value: (response, JSON))
+                    .concat(response.links["next"] == nil ? SignalProducer.empty : self.fetchMany(endpoint, page: nextPage, pageSize: pageSize))
             }
     }
 }

@@ -111,7 +111,7 @@ class ClientTests: XCTestCase {
     override func setUp() {
         OHHTTPStubs
             .stubRequestsPassingTest({ request in
-                return Fixture.fixtureForURL(request.URL!) != nil
+                return true
             }, withStubResponse: { request -> OHHTTPStubsResponse in
                 let fixture = Fixture.fixtureForURL(request.URL!)!
                 let response = fixture.response
@@ -123,7 +123,7 @@ class ClientTests: XCTestCase {
         let fixtures = Fixture.Releases.Carthage
         ExpectFixtures(
             client.releasesInRepository(fixtures[0].repository),
-            [ fixtures[0] ]
+            fixtures
         )
     }
     
