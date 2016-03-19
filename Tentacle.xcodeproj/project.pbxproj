@@ -69,8 +69,10 @@
 		BE88E84D1C88E6D60034A112 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E84B1C88E6D60034A112 /* Argo.framework */; };
 		BE88E84E1C88E6D60034A112 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E84C1C88E6D60034A112 /* Curry.framework */; };
 		BE88E8751C88F0C50034A112 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8741C88F0C50034A112 /* main.swift */; };
-		BEAB17591C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17571C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data */; };
-		BEAB175A1C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */; };
+		BEAB175B1C9D0AB7009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17571C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data */; };
+		BEAB175C1C9D0AB7009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */; };
+		BEAB175D1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17571C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data */; };
+		BEAB175E1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */; };
 		BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765C1C8A001C00ABD373 /* GitHubError.swift */; };
 		BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */; };
 		BEEE47421C91B8DF000FFC21 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47411C91B8DF000FFC21 /* ResourceType.swift */; };
@@ -483,8 +485,10 @@
 				BE0F40EF1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
 				BE1E03671C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */,
 				BE1E03701C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */,
+				BEAB175C1C9D0AB7009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */,
 				BE1E03661C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */,
 				BE1E03681C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */,
+				BEAB175B1C9D0AB7009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */,
 				BE0F40EE1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
 				BE1E03721C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */,
 				BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
@@ -496,8 +500,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEAB175A1C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */,
-				BEAB17591C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,8 +513,10 @@
 				BE0F40ED1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
 				BE1E03631C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */,
 				BE1E036F1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */,
+				BEAB175E1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */,
 				BE1E03621C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */,
 				BE1E03641C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */,
+				BEAB175D1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */,
 				BE0F40EC1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
 				BE1E03711C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */,
 				BE0F40E11C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
