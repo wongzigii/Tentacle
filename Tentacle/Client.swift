@@ -236,7 +236,7 @@ public final class Client {
     public func downloadAsset(asset: Release.Asset) -> SignalProducer<NSURL, Error> {
         return NSURLSession
             .sharedSession()
-            .downloadFile(NSURLRequest.create(asset.URL, credentials, contentType: Client.DownloadContentType))
+            .downloadFile(NSURLRequest.create(asset.APIURL, credentials, contentType: Client.DownloadContentType))
             .mapError(Error.NetworkError)
     }
     

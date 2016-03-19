@@ -157,7 +157,7 @@ struct Fixture {
         }
         
         struct Asset: FixtureType {
-            static let MDPSplitView_framework_zip = Asset("https://github.com/mdiep/MDPSplitView/releases/download/1.0.2/MDPSplitView.framework.zip")
+            static let MDPSplitView_framework_zip = Asset("https://api.github.com/repos/mdiep/MDPSplitView/releases/assets/433845")
             
             let URL: NSURL
             let contentType = Client.DownloadContentType
