@@ -14,6 +14,11 @@ import Foundation
 private class ImportedWithFixture { }
 
 protocol FixtureType {
+    var URL: NSURL { get }
+    var contentType: String { get }
+}
+
+protocol EndpointFixtureType: FixtureType {
     var server: Server { get }
     var endpoint: Client.Endpoint { get }
     var page: UInt? { get }
@@ -30,7 +35,7 @@ extension FixtureType {
             .dropFirst()
             .joinWithSeparator("-")
         
-        let query = components.queryItems!
+        let query = components.queryItems?
             .map { item in
                 if let value = item.value {
                     return "\(item.name)-\(value)"
@@ -40,10 +45,10 @@ extension FixtureType {
             }
             .joinWithSeparator("-")
         
-        if query == "" {
-            return "\(path).\(ext)"
+        if let query = query where query != "" {
+            return "\(path).\(query).\(ext)"
         }
-        return "\(path).\(query).\(ext)"
+        return "\(path).\(ext)"
     }
     
     /// The filename used for the local fixture's data.
@@ -54,11 +59,6 @@ extension FixtureType {
     /// The filename used for the local fixture's HTTP response.
     var responseFilename: NSString {
         return filenameWithExtension(Fixture.ResponseExtension)
-    }
-    
-    /// The URL of the fixture on the API.
-    var URL: NSURL {
-        return NSURLRequest.create(self.server, self.endpoint, nil, page: page, pageSize: pageSize).URL!
     }
     
     private func fileURLWithExtension(ext: String) -> NSURL {
@@ -87,6 +87,13 @@ extension FixtureType {
         let data = NSData(contentsOfURL: responseFileURL)!
         return NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSHTTPURLResponse
     }
+}
+
+extension EndpointFixtureType {
+    /// The URL of the fixture on the API.
+    var URL: NSURL {
+        return NSURL(self.server, self.endpoint, page: page, pageSize: pageSize)
+    }
     
     /// The JSON from the Endpoint.
     var JSON: AnyObject {
@@ -110,8 +117,10 @@ struct Fixture {
     
     static var allFixtures: [FixtureType] = [
         Release.Carthage0_15,
+        Release.MDPSplitView1_0_2,
         Release.Nonexistent,
         Release.TagOnly,
+        Release.Asset.MDPSplitView_framework_zip,
         Releases.Carthage[0],
         Releases.Carthage[1],
     ]
@@ -124,8 +133,9 @@ struct Fixture {
         return nil
     }
     
-    struct Release: FixtureType {
+    struct Release: EndpointFixtureType {
         static let Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
+        static let MDPSplitView1_0_2 = Release(.DotCom, owner: "mdiep", name: "MDPSplitView", tag: "1.0.2")
         static let Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
         static let TagOnly = Release(.DotCom, owner: "torvalds", name: "linux", tag: "v4.4")
         
@@ -134,6 +144,7 @@ struct Fixture {
         let tag: String
         let page: UInt? = nil
         let pageSize: UInt? = nil
+        let contentType = Client.APIContentType
         
         var endpoint: Client.Endpoint {
             return .ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag)
@@ -144,9 +155,20 @@ struct Fixture {
             repository = Repository(owner: owner, name: name)
             self.tag = tag
         }
+        
+        struct Asset: FixtureType {
+            static let MDPSplitView_framework_zip = Asset("https://api.github.com/repos/mdiep/MDPSplitView/releases/assets/433845")
+            
+            let URL: NSURL
+            let contentType = Client.DownloadContentType
+            
+            init(_ URLString: String) {
+                URL = NSURL(string: URLString)!
+            }
+        }
     }
     
-    struct Releases: FixtureType {
+    struct Releases: EndpointFixtureType {
         static let Carthage = [
             Releases(.DotCom, "Carthage", "Carthage", 1, 30),
             Releases(.DotCom, "Carthage", "Carthage", 2, 30),
@@ -156,6 +178,7 @@ struct Fixture {
         let repository: Repository
         let page: UInt?
         let pageSize: UInt?
+        let contentType = Client.APIContentType
         
         var endpoint: Client.Endpoint {
             return .ReleasesInRepository(owner: repository.owner, repository: repository.name)

@@ -26,6 +26,9 @@ public struct Release: Hashable, CustomStringConvertible {
 
         /// The URL at which the asset can be downloaded directly.
         public let URL: NSURL
+        
+        /// The URL at which the asset can be downloaded via the API.
+        public let APIURL: NSURL
 
         public var hashValue: Int {
             return ID.hashValue
@@ -35,11 +38,12 @@ public struct Release: Hashable, CustomStringConvertible {
             return "\(URL)"
         }
 
-        public init(ID: String, name: String, contentType: String, URL: NSURL) {
+        public init(ID: String, name: String, contentType: String, URL: NSURL, APIURL: NSURL) {
             self.ID = ID
             self.name = name
             self.contentType = contentType
             self.URL = URL
+            self.APIURL = APIURL
         }
     }
     
@@ -101,9 +105,10 @@ extension Release.Asset: ResourceType {
     public static func decode(j: JSON) -> Decoded<Release.Asset> {
         return curry(self.init)
             <^> (j <| "id" >>- toString)
-            <*> (j <| "name")
-            <*> (j <| "content_type")
-            <*> (j <| "browser_download_url")
+            <*> j <| "name"
+            <*> j <| "content_type"
+            <*> j <| "browser_download_url"
+            <*> j <| "url"
     }
 }
 

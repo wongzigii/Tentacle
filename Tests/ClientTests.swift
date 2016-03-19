@@ -53,7 +53,7 @@ func ExpectResult
 }
 
 func ExpectResult
-    <F: FixtureType, O: ResourceType where O.DecodedType == O>
+    <F: EndpointFixtureType, O: ResourceType where O.DecodedType == O>
     (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[F], Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
 {
     let expected = result.map { fixtures -> [O] in fixtures.map { $0.decode()! } }
@@ -76,7 +76,7 @@ func ExpectResult
 }
 
 func ExpectResult
-    <F: FixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
+    <F: EndpointFixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
     (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<C, Client.Error>, file: String = __FILE__, line: UInt = __LINE__)
 {
     let expected = result.map { fixtures -> [[O]] in fixtures.map { $0.decode()! } }
@@ -91,14 +91,14 @@ func ExpectError
 }
 
 func ExpectFixtures
-    <F: FixtureType, O: ResourceType where O.DecodedType == O>
+    <F: EndpointFixtureType, O: ResourceType where O.DecodedType == O>
     (producer: SignalProducer<(Response, O), Client.Error>, _ fixtures: F..., file: String = __FILE__, line: UInt = __LINE__)
 {
     ExpectResult(producer, Result<[F], Client.Error>.Success(fixtures), file: file, line: line)
 }
 
 func ExpectFixtures
-    <F: FixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
+    <F: EndpointFixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
     (producer: SignalProducer<(Response, [O]), Client.Error>, _ fixtures: C, file: String = __FILE__, line: UInt = __LINE__)
 {
     ExpectResult(producer, .Success(fixtures), file: file, line: line)
@@ -157,5 +157,20 @@ class ClientTests: XCTestCase {
             client.releaseForTag(fixture.tag, inRepository: fixture.repository),
             .DoesNotExist
         )
+    }
+    
+    func testDownloadAsset() {
+        let release: Release = Fixture.Release.MDPSplitView1_0_2.decode()!
+        let asset = release.assets
+            .filter { $0.name == "MDPSplitView.framework.zip" }
+            .first!
+        
+        let result = client
+            .downloadAsset(asset)
+            .map { URL in
+                return NSData(contentsOfURL: URL)!
+            }
+            .single()!
+        XCTAssertEqual(result.value, Fixture.Release.Asset.MDPSplitView_framework_zip.data)
     }
 }
