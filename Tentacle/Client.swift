@@ -40,10 +40,10 @@ extension NSURL {
 }
 
 extension NSURLRequest {
-    internal static func create(URL: NSURL, _ credentials: Client.Credentials?) -> NSURLRequest {
+    internal static func create(URL: NSURL, _ credentials: Client.Credentials?, contentType: String? = Client.APIContentType) -> NSURLRequest {
         let request = NSMutableURLRequest(URL: URL)
         
-        request.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        request.setValue(contentType, forHTTPHeaderField: "Accept")
         
         if let userAgent = Client.userAgent {
             request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
@@ -59,6 +59,9 @@ extension NSURLRequest {
 
 /// A GitHub API Client
 public final class Client {
+    /// The type of content to request from the GitHub API.
+    internal static let APIContentType = "application/vnd.github.v3+json"
+    
     /// An error from the Client.
     public enum Error: Hashable, ErrorType {
         /// An error occurred in a network operation.

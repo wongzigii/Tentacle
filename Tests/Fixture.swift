@@ -15,6 +15,7 @@ private class ImportedWithFixture { }
 
 protocol FixtureType {
     var URL: NSURL { get }
+    var contentType: String { get }
 }
 
 protocol EndpointFixtureType: FixtureType {
@@ -142,6 +143,7 @@ struct Fixture {
         let tag: String
         let page: UInt? = nil
         let pageSize: UInt? = nil
+        let contentType = Client.APIContentType
         
         var endpoint: Client.Endpoint {
             return .ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag)
@@ -164,6 +166,7 @@ struct Fixture {
         let repository: Repository
         let page: UInt?
         let pageSize: UInt?
+        let contentType = Client.APIContentType
         
         var endpoint: Client.Endpoint {
             return .ReleasesInRepository(owner: repository.owner, repository: repository.name)
