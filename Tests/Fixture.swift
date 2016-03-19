@@ -110,6 +110,7 @@ struct Fixture {
     
     static var allFixtures: [FixtureType] = [
         Release.Carthage0_15,
+        Release.MDPSplitView1_0_2,
         Release.Nonexistent,
         Release.TagOnly,
         Releases.Carthage[0],
@@ -126,6 +127,7 @@ struct Fixture {
     
     struct Release: FixtureType {
         static let Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
+        static let MDPSplitView1_0_2 = Release(.DotCom, owner: "mdiep", name: "MDPSplitView", tag: "1.0.2")
         static let Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
         static let TagOnly = Release(.DotCom, owner: "torvalds", name: "linux", tag: "v4.4")
         
