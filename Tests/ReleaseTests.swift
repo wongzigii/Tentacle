@@ -22,13 +22,15 @@ class ReleaseTests: XCTestCase {
                     ID: "1358331",
                     name: "Carthage.pkg",
                     contentType: "application/octet-stream",
-                    URL: NSURL(string: "https://github.com/Carthage/Carthage/releases/download/0.15/Carthage.pkg")!
+                    URL: NSURL(string: "https://github.com/Carthage/Carthage/releases/download/0.15/Carthage.pkg")!,
+                    APIURL: NSURL(string: "https://api.github.com/repos/Carthage/Carthage/releases/assets/1358331")!
                 ),
                 Release.Asset(
                     ID: "1358332",
                     name: "CarthageKit.framework.zip",
                     contentType: "application/zip",
-                    URL: NSURL(string: "https://github.com/Carthage/Carthage/releases/download/0.15/CarthageKit.framework.zip")!
+                    URL: NSURL(string: "https://github.com/Carthage/Carthage/releases/download/0.15/CarthageKit.framework.zip")!,
+                    APIURL: NSURL(string: "https://api.github.com/repos/Carthage/Carthage/releases/assets/1358332")!
                 )
             ]
         )
