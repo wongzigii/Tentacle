@@ -120,6 +120,7 @@ struct Fixture {
         Release.MDPSplitView1_0_2,
         Release.Nonexistent,
         Release.TagOnly,
+        Release.Asset.MDPSplitView_framework_zip,
         Releases.Carthage[0],
         Releases.Carthage[1],
     ]
@@ -153,6 +154,17 @@ struct Fixture {
             self.server = server
             repository = Repository(owner: owner, name: name)
             self.tag = tag
+        }
+        
+        struct Asset: FixtureType {
+            static let MDPSplitView_framework_zip = Asset("https://github.com/mdiep/MDPSplitView/releases/download/1.0.2/MDPSplitView.framework.zip")
+            
+            let URL: NSURL
+            let contentType = Client.DownloadContentType
+            
+            init(_ URLString: String) {
+                URL = NSURL(string: URLString)!
+            }
         }
     }
     

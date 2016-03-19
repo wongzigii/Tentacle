@@ -54,6 +54,10 @@
 		BE1E03701C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036D1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data */; };
 		BE1E03711C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */; };
 		BE1E03721C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */; };
+		BE1E03751C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E03731C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data */; };
+		BE1E03761C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E03731C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data */; };
+		BE1E03771C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E03741C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response */; };
+		BE1E03781C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E03741C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response */; };
 		BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
@@ -115,6 +119,8 @@
 		BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseTests.swift; sourceTree = "<group>"; };
 		BE1E036D1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-mdiep-MDPSplitView-releases-tags-1.0.2.data"; sourceTree = "<group>"; };
 		BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-MDPSplitView-releases-tags-1.0.2.response"; sourceTree = "<group>"; };
+		BE1E03731C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data"; sourceTree = "<group>"; };
+		BE1E03741C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response"; sourceTree = "<group>"; };
 		BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = "Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug-iphoneos/OHHTTPStubs.framework"; sourceTree = SOURCE_ROOT; };
 		BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/build/Debug/OHHTTPStubs.framework; sourceTree = SOURCE_ROOT; };
 		BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
@@ -200,6 +206,8 @@
 		BE0F40961C8908CB00E3B11A /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				BE1E03731C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data */,
+				BE1E03741C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response */,
 				BE0F40D81C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data */,
 				BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */,
 				BE1E035A1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data */,
@@ -478,11 +486,13 @@
 				BE1E03671C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */,
 				BE1E03701C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */,
 				BE1E03661C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */,
+				BE1E03781C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response in Resources */,
 				BE1E03681C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */,
 				BE0F40EE1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
 				BE1E03721C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */,
 				BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
 				BE1E03691C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */,
+				BE1E03761C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,11 +514,13 @@
 				BE1E03631C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */,
 				BE1E036F1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */,
 				BE1E03621C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */,
+				BE1E03771C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.response in Resources */,
 				BE1E03641C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */,
 				BE0F40EC1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data in Resources */,
 				BE1E03711C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */,
 				BE0F40E11C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
 				BE1E03651C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */,
+				BE1E03751C9CFF78001296C2 /* mdiep-MDPSplitView-releases-download-1.0.2-MDPSplitView.framework.zip.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
