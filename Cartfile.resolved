@@ -1,4 +1,4 @@
-github "thoughtbot/Argo" "v2.2.0"
+github "thoughtbot/Argo" "v2.3.0"
 github "thoughtbot/Curry" "v1.4.0"
 github "AliSoftware/OHHTTPStubs" "4.8.0"
 github "antitypical/Result" "1.0.2"
