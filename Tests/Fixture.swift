@@ -58,7 +58,7 @@ extension FixtureType {
     
     /// The URL of the fixture on the API.
     var URL: NSURL {
-        return NSURLRequest.create(self.server, self.endpoint, nil, page: page, pageSize: pageSize).URL!
+        return NSURL(self.server, self.endpoint, page: page, pageSize: pageSize)
     }
     
     private func fileURLWithExtension(ext: String) -> NSURL {

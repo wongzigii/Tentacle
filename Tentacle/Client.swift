@@ -24,10 +24,8 @@ extension NSURL {
         components.queryItems = (components.queryItems ?? []) + queryItems
         return components.URL!
     }
-}
-
-extension NSURLRequest {
-    internal static func create(server: Server, _ endpoint: Client.Endpoint, _ credentials: Client.Credentials?, page: UInt? = nil, pageSize: UInt? = nil) -> NSURLRequest {
+    
+    internal convenience init(_ server: Server, _ endpoint: Client.Endpoint, page: UInt? = nil, pageSize: UInt? = nil) {
         let queryItems = [ ("page", page), ("per_page", pageSize) ]
             .filter { _, value in value != nil }
             .map { name, value in NSURLQueryItem(name: name, value: "\(value!)") }
@@ -37,6 +35,12 @@ extension NSURLRequest {
             .URLWithQueryItems(endpoint.queryItems)
             .URLWithQueryItems(queryItems)
         
+        self.init(string: URL.absoluteString)!
+    }
+}
+
+extension NSURLRequest {
+    internal static func create(URL: NSURL, _ credentials: Client.Credentials?) -> NSURLRequest {
         let request = NSMutableURLRequest(URL: URL)
         
         request.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
@@ -189,9 +193,11 @@ public final class Client {
     
     /// Fetch an endpoint from the API.
     private func fetch(endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, AnyObject), Error> {
+        let URL = NSURL(server, endpoint, page: page, pageSize: pageSize)
+        let request = NSURLRequest.create(URL, credentials)
         return NSURLSession
             .sharedSession()
-            .rac_dataWithRequest(NSURLRequest.create(server, endpoint, credentials, page: page, pageSize: pageSize))
+            .rac_dataWithRequest(request)
             .mapError(Error.NetworkError)
             .flatMap(.Concat) { data, response -> SignalProducer<(Response, AnyObject), Error> in
                 let response = response as! NSHTTPURLResponse
