@@ -14,6 +14,10 @@ import Foundation
 private class ImportedWithFixture { }
 
 protocol FixtureType {
+    var URL: NSURL { get }
+}
+
+protocol EndpointFixtureType: FixtureType {
     var server: Server { get }
     var endpoint: Client.Endpoint { get }
     var page: UInt? { get }
@@ -30,7 +34,7 @@ extension FixtureType {
             .dropFirst()
             .joinWithSeparator("-")
         
-        let query = components.queryItems!
+        let query = components.queryItems?
             .map { item in
                 if let value = item.value {
                     return "\(item.name)-\(value)"
@@ -40,10 +44,10 @@ extension FixtureType {
             }
             .joinWithSeparator("-")
         
-        if query == "" {
-            return "\(path).\(ext)"
+        if let query = query where query != "" {
+            return "\(path).\(query).\(ext)"
         }
-        return "\(path).\(query).\(ext)"
+        return "\(path).\(ext)"
     }
     
     /// The filename used for the local fixture's data.
@@ -54,11 +58,6 @@ extension FixtureType {
     /// The filename used for the local fixture's HTTP response.
     var responseFilename: NSString {
         return filenameWithExtension(Fixture.ResponseExtension)
-    }
-    
-    /// The URL of the fixture on the API.
-    var URL: NSURL {
-        return NSURL(self.server, self.endpoint, page: page, pageSize: pageSize)
     }
     
     private func fileURLWithExtension(ext: String) -> NSURL {
@@ -86,6 +85,13 @@ extension FixtureType {
     var response: NSHTTPURLResponse {
         let data = NSData(contentsOfURL: responseFileURL)!
         return NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSHTTPURLResponse
+    }
+}
+
+extension EndpointFixtureType {
+    /// The URL of the fixture on the API.
+    var URL: NSURL {
+        return NSURL(self.server, self.endpoint, page: page, pageSize: pageSize)
     }
     
     /// The JSON from the Endpoint.
@@ -125,7 +131,7 @@ struct Fixture {
         return nil
     }
     
-    struct Release: FixtureType {
+    struct Release: EndpointFixtureType {
         static let Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
         static let MDPSplitView1_0_2 = Release(.DotCom, owner: "mdiep", name: "MDPSplitView", tag: "1.0.2")
         static let Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
@@ -148,7 +154,7 @@ struct Fixture {
         }
     }
     
-    struct Releases: FixtureType {
+    struct Releases: EndpointFixtureType {
         static let Carthage = [
             Releases(.DotCom, "Carthage", "Carthage", 1, 30),
             Releases(.DotCom, "Carthage", "Carthage", 2, 30),
