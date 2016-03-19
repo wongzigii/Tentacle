@@ -158,4 +158,19 @@ class ClientTests: XCTestCase {
             .DoesNotExist
         )
     }
+    
+    func testDownloadAsset() {
+        let release: Release = Fixture.Release.MDPSplitView1_0_2.decode()!
+        let asset = release.assets
+            .filter { $0.name == "MDPSplitView.framework.zip" }
+            .first!
+        
+        let result = client
+            .downloadAsset(asset)
+            .map { URL in
+                return NSData(contentsOfURL: URL)!
+            }
+            .single()!
+        XCTAssertEqual(result.value, Fixture.Release.Asset.MDPSplitView_framework_zip.data)
+    }
 }

@@ -57,10 +57,45 @@ extension NSURLRequest {
     }
 }
 
+extension NSURLSession {
+	/// Returns a producer that will download a file using the given request. The file will be
+	/// deleted after the producer terminates.
+	internal func downloadFile(request: NSURLRequest) -> SignalProducer<NSURL, NSError> {
+		return SignalProducer { observer, disposable in
+			let serialDisposable = SerialDisposable()
+			let handle = disposable.addDisposable(serialDisposable)
+
+			let task = self.downloadTaskWithRequest(request) { (URL, response, error) in
+				// Avoid invoking cancel(), or the download may be deleted.
+				handle.remove()
+
+				if let URL = URL {
+					observer.sendNext(URL)
+					observer.sendCompleted()
+				} else if let error = error {
+					observer.sendFailed(error)
+                } else {
+                    fatalError("Request neither succeeded nor failed: \(request.URL)")
+                }
+			}
+
+			serialDisposable.innerDisposable = ActionDisposable {
+				task.cancel()
+			}
+
+			task.resume()
+		}
+	}
+}
+
 /// A GitHub API Client
 public final class Client {
     /// The type of content to request from the GitHub API.
     internal static let APIContentType = "application/vnd.github.v3+json"
+    
+    /// The type of content to request from the GitHub API when downloading assets
+    /// from releases.
+    internal static let DownloadContentType = "application/octet-stream"
     
     /// An error from the Client.
     public enum Error: Hashable, ErrorType {
@@ -192,6 +227,17 @@ public final class Client {
     public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<(Response, Release), Error> {
         precondition(repository.server == server)
         return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
+    }
+    
+    /// Downloads the indicated release asset to a temporary file, returning the URL to the file on
+    /// disk.
+    ///
+    /// The downloaded file will be deleted after the URL has been sent upon the signal.
+    public func downloadAsset(asset: Release.Asset) -> SignalProducer<NSURL, Error> {
+        return NSURLSession
+            .sharedSession()
+            .downloadFile(NSURLRequest.create(asset.URL, credentials, contentType: Client.DownloadContentType))
+            .mapError(Error.NetworkError)
     }
     
     /// Fetch an endpoint from the API.
