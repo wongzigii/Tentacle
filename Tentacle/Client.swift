@@ -188,6 +188,11 @@ public final class Client {
     /// The Server that the Client connects to.
     public let server: Server
     
+    /// Whether the Client is authenticated.
+    public var authenticated: Bool {
+        return credentials != nil
+    }
+    
     /// The Credentials for the API.
     private let credentials: Credentials?
     
