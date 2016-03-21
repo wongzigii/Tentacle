@@ -39,7 +39,7 @@ public enum Server: Hashable, CustomStringConvertible {
     }
     
     public var hashValue: Int {
-        return endpoint.hashValue
+        return endpoint.lowercaseString.hashValue
     }
     
     public var description: String {
@@ -52,8 +52,8 @@ public func ==(lhs: Server, rhs: Server) -> Bool {
     case (.DotCom, .DotCom):
         return true
     
-    case let (.Enterprise(URL1), .Enterprise(URL2)):
-        return URL1 == URL2
+    case (.Enterprise, .Enterprise):
+        return lhs.endpoint.caseInsensitiveCompare(rhs.endpoint) == .OrderedSame
         
     default:
         return false

@@ -69,6 +69,10 @@
 		BE88E84D1C88E6D60034A112 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E84B1C88E6D60034A112 /* Argo.framework */; };
 		BE88E84E1C88E6D60034A112 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88E84C1C88E6D60034A112 /* Curry.framework */; };
 		BE88E8751C88F0C50034A112 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E8741C88F0C50034A112 /* main.swift */; };
+		BEA86F9A1C9F7C230049360B /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86F991C9F7C230049360B /* ServerTests.swift */; };
+		BEA86F9B1C9F7C230049360B /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86F991C9F7C230049360B /* ServerTests.swift */; };
+		BEA86F9D1C9F7E1E0049360B /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86F9C1C9F7E1E0049360B /* RepositoryTests.swift */; };
+		BEA86F9E1C9F7E1E0049360B /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86F9C1C9F7E1E0049360B /* RepositoryTests.swift */; };
 		BEAB175B1C9D0AB7009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17571C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data */; };
 		BEAB175C1C9D0AB7009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */; };
 		BEAB175D1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17571C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data */; };
@@ -142,6 +146,8 @@
 		BE88E8671C88F0990034A112 /* update-test-fixtures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "update-test-fixtures.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E8701C88F0990034A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE88E8741C88F0C50034A112 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		BEA86F991C9F7C230049360B /* ServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTests.swift; sourceTree = "<group>"; };
+		BEA86F9C1C9F7E1E0049360B /* RepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		BEAB17571C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data */ = {isa = PBXFileReference; lastKnownFileType = file; path = "repos-mdiep-MDPSplitView-releases-assets-433845.data"; sourceTree = "<group>"; };
 		BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-MDPSplitView-releases-assets-433845.response"; sourceTree = "<group>"; };
 		BEB0765C1C8A001C00ABD373 /* GitHubError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubError.swift; sourceTree = "<group>"; };
@@ -274,7 +280,9 @@
 				BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */,
 				BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */,
 				BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */,
+				BEA86F9C1C9F7E1E0049360B /* RepositoryTests.swift */,
 				BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */,
+				BEA86F991C9F7C230049360B /* ServerTests.swift */,
 				BE88E8031C88C6B30034A112 /* Info.plist */,
 			);
 			path = Tests;
@@ -556,6 +564,8 @@
 			files = (
 				619081881C8A2DB7001BE2F8 /* Fixture.swift in Sources */,
 				BE2B6A6D1C8B854F0080BFEB /* ClientTests.swift in Sources */,
+				BEA86F9B1C9F7C230049360B /* ServerTests.swift in Sources */,
+				BEA86F9E1C9F7E1E0049360B /* RepositoryTests.swift in Sources */,
 				6190818B1C8A2DB7001BE2F8 /* (null) in Sources */,
 				619081891C8A2DB7001BE2F8 /* GitHubErrorTests.swift in Sources */,
 				BE1E036C1C9AD87F001296C2 /* ResponseTests.swift in Sources */,
@@ -584,9 +594,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE1E036B1C9AD87F001296C2 /* ResponseTests.swift in Sources */,
+				BEA86F9D1C9F7E1E0049360B /* RepositoryTests.swift in Sources */,
 				BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */,
 				BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */,
 				BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */,
+				BEA86F9A1C9F7C230049360B /* ServerTests.swift in Sources */,
 				BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
