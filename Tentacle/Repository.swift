@@ -29,7 +29,7 @@ public struct Repository: Hashable, CustomStringConvertible {
     }
     
     public var hashValue: Int {
-        return URL.hashValue
+        return description.lowercaseString.hashValue
     }
     
     public var description: String {
@@ -39,6 +39,6 @@ public struct Repository: Hashable, CustomStringConvertible {
 
 public func ==(lhs: Repository, rhs: Repository) -> Bool {
     return lhs.server == rhs.server
-        && lhs.owner == rhs.owner
-        && lhs.name == rhs.name
+        && lhs.owner.caseInsensitiveCompare(rhs.owner) == .OrderedSame
+        && lhs.name.caseInsensitiveCompare(rhs.name) == .OrderedSame
 }
