@@ -39,7 +39,7 @@ public func == <T: Equatable, Error: Equatable> (left: Result<[[T]], Error>, rig
 
 func ExpectResult
     <O: ResourceType where O.DecodedType == O>
-    (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[O], Client.Error>, file: StaticString = #file, line: UInt = __LINE__)
+    (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[O], Client.Error>, file: StaticString = #file, line: UInt = #line)
 {
     let actual = producer.map { $1 }.collect().single()!
     let message: String
@@ -54,7 +54,7 @@ func ExpectResult
 
 func ExpectResult
     <F: EndpointFixtureType, O: ResourceType where O.DecodedType == O>
-    (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[F], Client.Error>, file: StaticString = #file, line: UInt = __LINE__)
+    (producer: SignalProducer<(Response, O), Client.Error>, _ result: Result<[F], Client.Error>, file: StaticString = #file, line: UInt = #line)
 {
     let expected = result.map { fixtures -> [O] in fixtures.map { $0.decode()! } }
     ExpectResult(producer, expected, file: file, line: line)
@@ -62,7 +62,7 @@ func ExpectResult
 
 func ExpectResult
     <O: ResourceType where O.DecodedType == O>
-    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<[[O]], Client.Error>, file: StaticString = #file, line: UInt = __LINE__)
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<[[O]], Client.Error>, file: StaticString = #file, line: UInt = #line)
 {
     let actual = producer.map { $1 }.collect().single()!
     let message: String
@@ -77,7 +77,7 @@ func ExpectResult
 
 func ExpectResult
     <F: EndpointFixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
-    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<C, Client.Error>, file: StaticString = #file, line: UInt = __LINE__)
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ result: Result<C, Client.Error>, file: StaticString = #file, line: UInt = #line)
 {
     let expected = result.map { fixtures -> [[O]] in fixtures.map { $0.decode()! } }
     ExpectResult(producer, expected, file: file, line: line)
@@ -85,21 +85,21 @@ func ExpectResult
 
 func ExpectError
     <O: ResourceType where O.DecodedType == O>
-    (producer: SignalProducer<(Response, O), Client.Error>, _ error: Client.Error, file: StaticString = #file, line: UInt = __LINE__)
+    (producer: SignalProducer<(Response, O), Client.Error>, _ error: Client.Error, file: StaticString = #file, line: UInt = #line)
 {
     ExpectResult(producer, Result<[O], Client.Error>.Failure(error), file: file, line: line)
 }
 
 func ExpectFixtures
     <F: EndpointFixtureType, O: ResourceType where O.DecodedType == O>
-    (producer: SignalProducer<(Response, O), Client.Error>, _ fixtures: F..., file: StaticString = #file, line: UInt = __LINE__)
+    (producer: SignalProducer<(Response, O), Client.Error>, _ fixtures: F..., file: StaticString = #file, line: UInt = #line)
 {
     ExpectResult(producer, Result<[F], Client.Error>.Success(fixtures), file: file, line: line)
 }
 
 func ExpectFixtures
     <F: EndpointFixtureType, O: ResourceType, C: CollectionType where O.DecodedType == O, C.Generator.Element == F>
-    (producer: SignalProducer<(Response, [O]), Client.Error>, _ fixtures: C, file: StaticString = #file, line: UInt = __LINE__)
+    (producer: SignalProducer<(Response, [O]), Client.Error>, _ fixtures: C, file: StaticString = #file, line: UInt = #line)
 {
     ExpectResult(producer, .Success(fixtures), file: file, line: line)
 }
