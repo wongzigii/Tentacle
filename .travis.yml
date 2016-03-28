@@ -3,7 +3,7 @@ notifications:
   email: false
 osx_image: xcode7.3
 before_install:
-  - true
+  - brew uninstall xctool && brew install --HEAD xctool
 before_script:
   - carthage bootstrap --use-submodules --no-build
 script: script/cibuild "$TRAVIS_XCODE_WORKSPACE" "$TRAVIS_XCODE_SCHEME"
