@@ -173,4 +173,9 @@ class ClientTests: XCTestCase {
             .single()!
         XCTAssertEqual(result.value, Fixture.Release.Asset.MDPSplitView_framework_zip.data)
     }
+    
+    func testUserWithLogin() {
+        let fixture = Fixture.User.mdiep
+        ExpectFixtures(client.userWithLogin(fixture.login), fixture)
+    }
 }

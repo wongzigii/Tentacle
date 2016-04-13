@@ -229,7 +229,7 @@ public final class Client {
     /// https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
     public func releasesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
         precondition(repository.server == server)
-        return fetchMany(Endpoint.ReleasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+        return fetchMany(.ReleasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
     
     /// Fetch the release corresponding to the given tag in the given repository.
@@ -238,7 +238,7 @@ public final class Client {
     /// `.DoesNotExist` error. This is indistinguishable from a nonexistent tag.
     public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<(Response, Release), Error> {
         precondition(repository.server == server)
-        return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
+        return fetchOne(.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
     }
     
     /// Downloads the indicated release asset to a temporary file, returning the URL to the file on
@@ -250,6 +250,11 @@ public final class Client {
             .sharedSession()
             .downloadFile(NSURLRequest.create(asset.APIURL, credentials, contentType: Client.DownloadContentType))
             .mapError(Error.NetworkError)
+    }
+    
+    /// Fetch the user with the given login.
+    public func userWithLogin(login: String) -> SignalProducer<(Response, User), Error> {
+        return fetchOne(.User(login: login))
     }
     
     /// Fetch an endpoint from the API.
