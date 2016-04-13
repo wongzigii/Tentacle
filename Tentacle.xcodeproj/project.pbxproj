@@ -79,8 +79,10 @@
 		BEAB175E1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */; };
 		BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765C1C8A001C00ABD373 /* GitHubError.swift */; };
 		BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */; };
+		BECB8A8B1CBDCD17005D70A6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB8A8A1CBDCD17005D70A6 /* User.swift */; };
 		BECB8A8E1CBDD919005D70A6 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */; };
 		BECB8A8F1CBDD91D005D70A6 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */; };
+		BECB8A901CBDD920005D70A6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB8A8A1CBDCD17005D70A6 /* User.swift */; };
 		BECB8A991CBDDE4B005D70A6 /* users-mdiep.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */; };
 		BECB8A9A1CBDDE4B005D70A6 /* users-mdiep.response in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */; };
 		BECB8A9B1CBDDE4B005D70A6 /* users-test.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A931CBDDDBB005D70A6 /* users-test.data */; };
@@ -89,6 +91,8 @@
 		BECB8A9E1CBDDE4C005D70A6 /* users-mdiep.response in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */; };
 		BECB8A9F1CBDDE4C005D70A6 /* users-test.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A931CBDDDBB005D70A6 /* users-test.data */; };
 		BECB8AA01CBDDE4C005D70A6 /* users-test.response in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A941CBDDDBB005D70A6 /* users-test.response */; };
+		BECB8AA31CBDDF0F005D70A6 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB8AA11CBDDF0F005D70A6 /* UserTests.swift */; };
+		BECB8AA41CBDDF0F005D70A6 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB8AA11CBDDF0F005D70A6 /* UserTests.swift */; };
 		BEEE47421C91B8DF000FFC21 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47411C91B8DF000FFC21 /* ResourceType.swift */; };
 		BEEE47431C91B8DF000FFC21 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47411C91B8DF000FFC21 /* ResourceType.swift */; };
 		BEEE47451C91BB3A000FFC21 /* ArgoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */; };
@@ -162,11 +166,13 @@
 		BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-MDPSplitView-releases-assets-433845.response"; sourceTree = "<group>"; };
 		BEB0765C1C8A001C00ABD373 /* GitHubError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubError.swift; sourceTree = "<group>"; };
 		BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubErrorTests.swift; sourceTree = "<group>"; };
+		BECB8A8A1CBDCD17005D70A6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "users-mdiep.data"; sourceTree = "<group>"; };
 		BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "users-mdiep.response"; sourceTree = "<group>"; };
 		BECB8A931CBDDDBB005D70A6 /* users-test.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "users-test.data"; sourceTree = "<group>"; };
 		BECB8A941CBDDDBB005D70A6 /* users-test.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "users-test.response"; sourceTree = "<group>"; };
+		BECB8AA11CBDDF0F005D70A6 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		BEEE47411C91B8DF000FFC21 /* ResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
 		BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoExtensions.swift; sourceTree = "<group>"; };
 		BEEE474D1C92623E000FFC21 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -287,6 +293,7 @@
 				BEEE47411C91B8DF000FFC21 /* ResourceType.swift */,
 				BEEE474D1C92623E000FFC21 /* Response.swift */,
 				BE88E82C1C88C94D0034A112 /* Server.swift */,
+				BECB8A8A1CBDCD17005D70A6 /* User.swift */,
 				BE88E7F71C88C6B30034A112 /* Info.plist */,
 			);
 			path = Tentacle;
@@ -303,6 +310,7 @@
 				BEA86F9C1C9F7E1E0049360B /* RepositoryTests.swift */,
 				BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */,
 				BEA86F991C9F7C230049360B /* ServerTests.swift */,
+				BECB8AA11CBDDF0F005D70A6 /* UserTests.swift */,
 				BE88E8031C88C6B30034A112 /* Info.plist */,
 			);
 			path = Tests;
@@ -584,6 +592,7 @@
 				61377C7B1C8A2B760081FF24 /* GitHubError.swift in Sources */,
 				61377C7E1C8A2B760081FF24 /* Server.swift in Sources */,
 				61377C7A1C8A2B760081FF24 /* Decodable.swift in Sources */,
+				BECB8A901CBDD920005D70A6 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +606,7 @@
 				BEA86F9E1C9F7E1E0049360B /* RepositoryTests.swift in Sources */,
 				6190818B1C8A2DB7001BE2F8 /* (null) in Sources */,
 				619081891C8A2DB7001BE2F8 /* GitHubErrorTests.swift in Sources */,
+				BECB8AA41CBDDF0F005D70A6 /* UserTests.swift in Sources */,
 				BE1E036C1C9AD87F001296C2 /* ResponseTests.swift in Sources */,
 				6190818A1C8A2DB7001BE2F8 /* ReleaseTests.swift in Sources */,
 			);
@@ -614,6 +624,7 @@
 				BE88E8321C88D33D0034A112 /* Release.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,
 				BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */,
+				BECB8A8B1CBDCD17005D70A6 /* User.swift in Sources */,
 				BECB8A8E1CBDD919005D70A6 /* FoundationExtensions.swift in Sources */,
 				BE88E8301C88CDAB0034A112 /* Repository.swift in Sources */,
 			);
@@ -627,6 +638,7 @@
 				BEA86F9D1C9F7E1E0049360B /* RepositoryTests.swift in Sources */,
 				BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */,
 				BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */,
+				BECB8AA31CBDDF0F005D70A6 /* UserTests.swift in Sources */,
 				BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */,
 				BEA86F9A1C9F7C230049360B /* ServerTests.swift in Sources */,
 				BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */,
