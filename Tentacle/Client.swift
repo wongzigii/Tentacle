@@ -159,12 +159,17 @@ public final class Client {
         // https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
         case ReleasesInRepository(owner: String, repository: String)
         
+        // https://developer.github.com/v3/users/#get-a-single-user
+        case User(login: String)
+        
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
             case let .ReleasesInRepository(owner, repo):
                 return "/repos/\(owner)/\(repo)/releases"
+            case let .User(login):
+                return "/users/\(login)"
             }
         }
         
@@ -174,6 +179,8 @@ public final class Client {
                 return owner.hashValue ^ repo.hashValue ^ tag.hashValue
             case let .ReleasesInRepository(owner, repo):
                 return owner.hashValue ^ repo.hashValue
+            case let .User(login):
+                return login.hashValue
             }
         }
         
@@ -343,6 +350,8 @@ internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
         return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
     case let (.ReleasesInRepository(owner1, repo1), .ReleasesInRepository(owner2, repo2)):
         return owner1 == owner2 && repo1 == repo2
+    case let (.User(login1), .User(login2)):
+        return login1 == login2
     default:
         return false
     }
