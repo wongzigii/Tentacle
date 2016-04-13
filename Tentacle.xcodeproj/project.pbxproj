@@ -79,6 +79,8 @@
 		BEAB175E1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */; };
 		BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765C1C8A001C00ABD373 /* GitHubError.swift */; };
 		BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */; };
+		BECB8A8E1CBDD919005D70A6 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */; };
+		BECB8A8F1CBDD91D005D70A6 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */; };
 		BECB8A991CBDDE4B005D70A6 /* users-mdiep.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */; };
 		BECB8A9A1CBDDE4B005D70A6 /* users-mdiep.response in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */; };
 		BECB8A9B1CBDDE4B005D70A6 /* users-test.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A931CBDDDBB005D70A6 /* users-test.data */; };
@@ -160,6 +162,7 @@
 		BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-MDPSplitView-releases-assets-433845.response"; sourceTree = "<group>"; };
 		BEB0765C1C8A001C00ABD373 /* GitHubError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubError.swift; sourceTree = "<group>"; };
 		BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubErrorTests.swift; sourceTree = "<group>"; };
+		BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "users-mdiep.data"; sourceTree = "<group>"; };
 		BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "users-mdiep.response"; sourceTree = "<group>"; };
 		BECB8A931CBDDDBB005D70A6 /* users-test.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "users-test.data"; sourceTree = "<group>"; };
@@ -277,6 +280,7 @@
 				BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */,
 				BE88E80C1C88C72B0034A112 /* Client.swift */,
 				BE0F40A31C89135D00E3B11A /* Decodable.swift */,
+				BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */,
 				BEB0765C1C8A001C00ABD373 /* GitHubError.swift */,
 				BE88E8311C88D33D0034A112 /* Release.swift */,
 				BE88E82F1C88CDAB0034A112 /* Repository.swift */,
@@ -576,6 +580,7 @@
 				61377C7C1C8A2B760081FF24 /* Release.swift in Sources */,
 				BEEE474F1C92623E000FFC21 /* Response.swift in Sources */,
 				61377C7D1C8A2B760081FF24 /* Repository.swift in Sources */,
+				BECB8A8F1CBDD91D005D70A6 /* FoundationExtensions.swift in Sources */,
 				61377C7B1C8A2B760081FF24 /* GitHubError.swift in Sources */,
 				61377C7E1C8A2B760081FF24 /* Server.swift in Sources */,
 				61377C7A1C8A2B760081FF24 /* Decodable.swift in Sources */,
@@ -609,6 +614,7 @@
 				BE88E8321C88D33D0034A112 /* Release.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,
 				BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */,
+				BECB8A8E1CBDD919005D70A6 /* FoundationExtensions.swift in Sources */,
 				BE88E8301C88CDAB0034A112 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
