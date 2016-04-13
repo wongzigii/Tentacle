@@ -36,11 +36,13 @@ private func linksInLinkHeader(header: NSString) -> [String: NSURL] {
 
 /// A response from the GitHub API.
 public struct Response: Hashable {
-    /// The number of requests remaining in the current rate limit window.
-    public let rateLimitRemaining: UInt
+    /// The number of requests remaining in the current rate limit window, or nil if the server
+    /// isn't rate-limited.
+    public let rateLimitRemaining: UInt?
     
-    /// The time at which the current rate limit window resets
-    public let rateLimitReset: NSDate
+    /// The time at which the current rate limit window resets, or nil if the server isn't
+    /// rate-limited.
+    public let rateLimitReset: NSDate?
     
     /// Any links that are included in the response.
     public let links: [String: NSURL]
@@ -53,13 +55,17 @@ public struct Response: Hashable {
     
     /// Initialize a response with HTTP header fields.
     internal init(headerFields: [String : String]) {
-        self.rateLimitRemaining = UInt(headerFields["X-RateLimit-Remaining"]!)!
-        self.rateLimitReset = NSDate(timeIntervalSince1970: NSTimeInterval(headerFields["X-RateLimit-Reset"]!)!)
+        self.rateLimitRemaining = headerFields["X-RateLimit-Remaining"].flatMap { UInt($0) }
+        self.rateLimitReset = headerFields["X-RateLimit-Reset"]
+            .flatMap { NSTimeInterval($0) }
+            .map { NSDate(timeIntervalSince1970: $0) }
         self.links = linksInLinkHeader(headerFields["Link"] ?? "")
     }
     
     public var hashValue: Int {
-        return rateLimitRemaining.hashValue ^ rateLimitReset.hashValue ^ Array(links.values).reduce(0) { $0 ^ $1.hashValue }
+        return (rateLimitRemaining?.hashValue ?? 0)
+             ^ (rateLimitReset?.hashValue ?? 0)
+             ^ Array(links.values).reduce(0) { $0 ^ $1.hashValue }
     }
 }
 
