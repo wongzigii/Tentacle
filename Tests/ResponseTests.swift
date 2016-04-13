@@ -28,4 +28,15 @@ class ResponseTests: XCTestCase {
             ]
         )
     }
+    
+    // Enterprise Instances don't have rate-limit fields.
+    func testInitWithNoRateLimitFields() {
+        let headers = [
+            "Link": "<https://api.github.com/user/repos?page=3&per_page=100>; rel=\"next\", <https://api.github.com/user/repos?page=50&per_page=100>; rel=\"last\""
+        ]
+
+        let response = Response(headerFields: headers)
+        XCTAssertNil(response.rateLimitRemaining)
+        XCTAssertNil(response.rateLimitReset)
+    }
 }
