@@ -159,12 +159,17 @@ public final class Client {
         // https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
         case ReleasesInRepository(owner: String, repository: String)
         
+        // https://developer.github.com/v3/users/#get-a-single-user
+        case User(login: String)
+        
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
             case let .ReleasesInRepository(owner, repo):
                 return "/repos/\(owner)/\(repo)/releases"
+            case let .User(login):
+                return "/users/\(login)"
             }
         }
         
@@ -174,6 +179,8 @@ public final class Client {
                 return owner.hashValue ^ repo.hashValue ^ tag.hashValue
             case let .ReleasesInRepository(owner, repo):
                 return owner.hashValue ^ repo.hashValue
+            case let .User(login):
+                return login.hashValue
             }
         }
         
@@ -222,7 +229,7 @@ public final class Client {
     /// https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
     public func releasesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
         precondition(repository.server == server)
-        return fetchMany(Endpoint.ReleasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+        return fetchMany(.ReleasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
     
     /// Fetch the release corresponding to the given tag in the given repository.
@@ -231,7 +238,7 @@ public final class Client {
     /// `.DoesNotExist` error. This is indistinguishable from a nonexistent tag.
     public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<(Response, Release), Error> {
         precondition(repository.server == server)
-        return fetchOne(Endpoint.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
+        return fetchOne(.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
     }
     
     /// Downloads the indicated release asset to a temporary file, returning the URL to the file on
@@ -243,6 +250,11 @@ public final class Client {
             .sharedSession()
             .downloadFile(NSURLRequest.create(asset.APIURL, credentials, contentType: Client.DownloadContentType))
             .mapError(Error.NetworkError)
+    }
+    
+    /// Fetch the user with the given login.
+    public func userWithLogin(login: String) -> SignalProducer<(Response, User), Error> {
+        return fetchOne(.User(login: login))
     }
     
     /// Fetch an endpoint from the API.
@@ -343,6 +355,8 @@ internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
         return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
     case let (.ReleasesInRepository(owner1, repo1), .ReleasesInRepository(owner2, repo2)):
         return owner1 == owner2 && repo1 == repo2
+    case let (.User(login1), .User(login2)):
+        return login1 == login2
     default:
         return false
     }

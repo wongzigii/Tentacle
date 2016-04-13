@@ -123,6 +123,8 @@ struct Fixture {
         Release.Asset.MDPSplitView_framework_zip,
         Releases.Carthage[0],
         Releases.Carthage[1],
+        User.mdiep,
+        User.test,
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -189,6 +191,27 @@ struct Fixture {
             repository = Repository(owner: owner, name: name)
             self.page = page
             self.pageSize = pageSize
+        }
+    }
+    
+    struct User: EndpointFixtureType {
+        static let mdiep = User(.DotCom, "mdiep")
+        static let test = User(.DotCom, "test")
+        
+        let server: Server
+        let login: String
+        
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+        let contentType = Client.APIContentType
+        
+        var endpoint: Client.Endpoint {
+            return .User(login: login)
+        }
+        
+        init(_ server: Server, _ login: String) {
+            self.server = server
+            self.login = login
         }
     }
 }

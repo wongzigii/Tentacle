@@ -7,6 +7,7 @@
 //
 
 import Argo
+import Foundation
 import Result
 
 
@@ -32,4 +33,12 @@ internal func decode<T: Decodable where T == T.DecodedType>(object: AnyObject) -
 
 internal func toString(number: Int) -> Decoded<String> {
     return .Success(number.description)
+}
+
+internal func toNSDate(string: String) -> Decoded<NSDate> {
+    if let date = NSDateFormatter.ISO8601.dateFromString(string) {
+        return .Success(date)
+    } else {
+        return .Failure(.Custom("Date is not ISO8601 formatted"))
+    }
 }
