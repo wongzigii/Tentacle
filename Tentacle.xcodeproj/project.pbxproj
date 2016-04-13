@@ -79,6 +79,14 @@
 		BEAB175E1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */ = {isa = PBXBuildFile; fileRef = BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */; };
 		BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765C1C8A001C00ABD373 /* GitHubError.swift */; };
 		BEB076601C8A019E00ABD373 /* GitHubErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */; };
+		BECB8A991CBDDE4B005D70A6 /* users-mdiep.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */; };
+		BECB8A9A1CBDDE4B005D70A6 /* users-mdiep.response in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */; };
+		BECB8A9B1CBDDE4B005D70A6 /* users-test.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A931CBDDDBB005D70A6 /* users-test.data */; };
+		BECB8A9C1CBDDE4B005D70A6 /* users-test.response in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A941CBDDDBB005D70A6 /* users-test.response */; };
+		BECB8A9D1CBDDE4C005D70A6 /* users-mdiep.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */; };
+		BECB8A9E1CBDDE4C005D70A6 /* users-mdiep.response in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */; };
+		BECB8A9F1CBDDE4C005D70A6 /* users-test.data in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A931CBDDDBB005D70A6 /* users-test.data */; };
+		BECB8AA01CBDDE4C005D70A6 /* users-test.response in Resources */ = {isa = PBXBuildFile; fileRef = BECB8A941CBDDDBB005D70A6 /* users-test.response */; };
 		BEEE47421C91B8DF000FFC21 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47411C91B8DF000FFC21 /* ResourceType.swift */; };
 		BEEE47431C91B8DF000FFC21 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47411C91B8DF000FFC21 /* ResourceType.swift */; };
 		BEEE47451C91BB3A000FFC21 /* ArgoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */; };
@@ -152,6 +160,10 @@
 		BEAB17581C9D062D009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-MDPSplitView-releases-assets-433845.response"; sourceTree = "<group>"; };
 		BEB0765C1C8A001C00ABD373 /* GitHubError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubError.swift; sourceTree = "<group>"; };
 		BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubErrorTests.swift; sourceTree = "<group>"; };
+		BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "users-mdiep.data"; sourceTree = "<group>"; };
+		BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "users-mdiep.response"; sourceTree = "<group>"; };
+		BECB8A931CBDDDBB005D70A6 /* users-test.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "users-test.data"; sourceTree = "<group>"; };
+		BECB8A941CBDDDBB005D70A6 /* users-test.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "users-test.response"; sourceTree = "<group>"; };
 		BEEE47411C91B8DF000FFC21 /* ResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
 		BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoExtensions.swift; sourceTree = "<group>"; };
 		BEEE474D1C92623E000FFC21 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -226,6 +238,10 @@
 				BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */,
 				BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */,
 				BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */,
+				BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */,
+				BECB8A921CBDDDBB005D70A6 /* users-mdiep.response */,
+				BECB8A931CBDDDBB005D70A6 /* users-test.data */,
+				BECB8A941CBDDDBB005D70A6 /* users-test.response */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -488,12 +504,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE0F40E41C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data in Resources */,
+				BECB8A9F1CBDDE4C005D70A6 /* users-test.data in Resources */,
 				BE0F40E61C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */,
+				BECB8A9D1CBDDE4C005D70A6 /* users-mdiep.data in Resources */,
 				BE0F40E71C8CA13900E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */,
 				BE0F40EF1C8CA1E100E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
 				BE1E03671C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */,
 				BE1E03701C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */,
 				BEAB175C1C9D0AB7009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */,
+				BECB8AA01CBDDE4C005D70A6 /* users-test.response in Resources */,
 				BE1E03661C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */,
 				BE1E03681C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */,
 				BEAB175B1C9D0AB7009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */,
@@ -501,6 +520,7 @@
 				BE1E03721C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */,
 				BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
 				BE1E03691C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */,
+				BECB8A9E1CBDDE4C005D70A6 /* users-mdiep.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,12 +536,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE0F40E01C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data in Resources */,
+				BECB8A9B1CBDDE4B005D70A6 /* users-test.data in Resources */,
 				BE0F40E21C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data in Resources */,
+				BECB8A991CBDDE4B005D70A6 /* users-mdiep.data in Resources */,
 				BE0F40E31C8CA13800E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response in Resources */,
 				BE0F40ED1C8CA1E000E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response in Resources */,
 				BE1E03631C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.response in Resources */,
 				BE1E036F1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */,
 				BEAB175E1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.response in Resources */,
+				BECB8A9C1CBDDE4B005D70A6 /* users-test.response in Resources */,
 				BE1E03621C964F98001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data in Resources */,
 				BE1E03641C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.data in Resources */,
 				BEAB175D1C9D0AB8009F8F58 /* repos-mdiep-MDPSplitView-releases-assets-433845.data in Resources */,
@@ -529,6 +552,7 @@
 				BE1E03711C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */,
 				BE0F40E11C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
 				BE1E03651C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */,
+				BECB8A9A1CBDDE4B005D70A6 /* users-mdiep.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
