@@ -214,4 +214,20 @@ struct Fixture {
             self.login = login
         }
     }
+
+    struct Issues: EndpointFixtureType {
+        let server: Server
+
+        var endpoint: Client.Endpoint {
+            return .Issues
+        }
+
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+        let contentType = Client.APIContentType
+
+        init(_ server: Server) {
+            self.server = server
+        }
+    }
 }
