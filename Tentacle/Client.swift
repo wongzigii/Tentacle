@@ -165,6 +165,9 @@ public final class Client {
         // https://developer.github.com/v3/issues/#list-issues
         case Issues
 
+        // https://developer.github.com/v3/issues/#list-issues-for-a-repository
+        case IssuesInRepository(owner: String, repository: String)
+        
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
@@ -175,6 +178,8 @@ public final class Client {
                 return "/users/\(login)"
             case .Issues:
                 return "/issues"
+            case .IssuesInRepository(let owner, let repository):
+                return "/repos/\(owner)/\(repository)/issues"
             }
         }
         
@@ -188,6 +193,8 @@ public final class Client {
                 return login.hashValue
             case .Issues:
                 return "Issues".hashValue
+            case .IssuesInRepository(let owner, let repository):
+                return "Issues".hashValue ^ owner.hashValue ^ repository.hashValue
             }
         }
         
