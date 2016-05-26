@@ -34,8 +34,8 @@ public struct Issue: Hashable, CustomStringConvertible {
 //	public let assignee: User?
 //	public let milestone: Milestone?
 
-//	public let locked: Bool?
-//	public let comments: Int?
+	public let locked: Bool
+	public let comments: Int
 //  public let pullRequest: PullRequest?
 //	public let closedAt: NSDate?
 //	public let createdAt: NSDate?
@@ -49,12 +49,14 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(id: Int, number: Int, state: State, title: String, body: String) {
+    public init(id: Int, number: Int, state: State, title: String, body: String, locked: Bool, comments: Int) {
         self.id = id
         self.number = number
         self.state = state
         self.title = title
         self.body = body
+        self.locked = locked
+        self.comments = comments
     }
 
 }
@@ -65,6 +67,8 @@ public func ==(lhs: Issue, rhs: Issue) -> Bool {
         && lhs.state == rhs.state
         && lhs.title == rhs.title
         && lhs.body == rhs.body
+        && lhs.locked == rhs.locked
+        && lhs.comments == rhs.comments
 }
 
 extension Issue: ResourceType {
@@ -86,8 +90,8 @@ extension Issue: ResourceType {
 //			<*> j <|| "labels"
 //			<*> j <| "assignee"
 //			<*> j <| "milestone"
-//			<*> j <| "locked"
-//			<*> j <| "comments"
+			<*> j <| "locked"
+			<*> j <| "comments"
 //			<*> (j <| "closed_at" >>- toNSDate)
 //			<*> (j <| "created_at" >>- toNSDate)
 //			<*> (j <| "updated_at" >>- toNSDate)

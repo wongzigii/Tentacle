@@ -37,13 +37,13 @@ class IssuesTests: XCTestCase {
                 number: 1,
                 state: .Open,
                 title: "This issue is open",
-                body: "Issues are pretty cool."
+                body: "Issues are pretty cool.",
 //                user: palleasOpensource,
 //                labels: [],
 //                assignee: nil,
 //                milestone: nil,
-//                locked: false,
-//                comments: 0,
+                locked: false,
+                comments: 0
 //                pullRequest: nil,
 //                closedAt: nil,
 //                createdAt: formatter.dateFromString("2016-05-24T23:38:39Z")!,
