@@ -61,6 +61,10 @@ public struct Issue: Hashable, CustomStringConvertible {
 
 public func ==(lhs: Issue, rhs: Issue) -> Bool {
     return lhs.id == rhs.id
+        && lhs.number == rhs.number
+        && lhs.state == rhs.state
+        && lhs.title == rhs.title
+        && lhs.body == rhs.body
 }
 
 extension Issue: ResourceType {

@@ -35,6 +35,14 @@ internal func toString(number: Int) -> Decoded<String> {
     return .Success(number.description)
 }
 
+internal func toInt(string: String) -> Decoded<Int> {
+    if let int = Int(string) {
+        return .Success(int)
+    } else {
+        return .Failure(.Custom("String is not a valid number"))
+    }
+}
+
 internal func toIssueState(string: String) -> Decoded<Issue.State> {
     if let state = Issue.State(rawValue: string) {
         return .Success(state)

@@ -107,7 +107,9 @@ extension EndpointFixtureType {
     
     /// Decode the fixture's JSON as an array of objects of the returned type.
     func decode<Object: Decodable where Object.DecodedType == Object>() -> [Object]? {
-        return Argo.decode(JSON).value
+        let decoded: Decoded<[Object]> = Argo.decode(JSON)
+        print("decoded = \(decoded)")
+        return decoded.value
     }
 }
 
