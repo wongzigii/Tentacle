@@ -17,13 +17,7 @@ public struct Issue: Hashable, CustomStringConvertible {
 	}
 	
     public let id: Int
-//    public let url: NSURL?
-
-//	public let repositoryUrl: NSURL?
-//	public let labelsUrl: NSURL?
-//	public let commentsUrl: NSURL?
-//	public let eventsUrl: NSURL?
-//	public let htmlUrl: NSURL?
+    public let url: NSURL?
 
 	public let number: Int
 	public let state: State
@@ -38,8 +32,8 @@ public struct Issue: Hashable, CustomStringConvertible {
 	public let comments: Int
 //  public let pullRequest: PullRequest?
 //	public let closedAt: NSDate?
-//	public let createdAt: NSDate?
-//	public let updatedAt: NSDate?
+	public let createdAt: NSDate?
+	public let updatedAt: NSDate?
 
     public var hashValue: Int {
         return id.hashValue
@@ -49,26 +43,33 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(id: Int, number: Int, state: State, title: String, body: String, locked: Bool, comments: Int) {
+    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, locked: Bool, comments: Int, /*closedAt: NSDate?,*/ createdAt: NSDate?, updatedAt: NSDate?) {
         self.id = id
+        self.url = url
         self.number = number
         self.state = state
         self.title = title
         self.body = body
         self.locked = locked
         self.comments = comments
+//        self.closedAt = closedAt
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 
 }
 
 public func ==(lhs: Issue, rhs: Issue) -> Bool {
     return lhs.id == rhs.id
+        && lhs.url == rhs.url
         && lhs.number == rhs.number
         && lhs.state == rhs.state
         && lhs.title == rhs.title
         && lhs.body == rhs.body
         && lhs.locked == rhs.locked
         && lhs.comments == rhs.comments
+        && lhs.createdAt == rhs.createdAt
+        && lhs.updatedAt == rhs.updatedAt
 }
 
 extension Issue: ResourceType {
@@ -76,12 +77,7 @@ extension Issue: ResourceType {
         let f = curry(Issue.init)
         return f
             <^> j <| "id"
-//            <*> (j <| "url" >>- toNSURL)
-//            <*> (j <| "repository_url" >>- toNSURL)
-//			<*> (j <| "labels_url" >>- toNSURL)
-//			<*> (j <| "comments_url" >>- toNSURL)
-//			<*> (j <| "events_url" >>- toNSURL)
-//			<*> (j <| "html_url" >>- toNSURL)
+            <*> (j <| "url" >>- toNSURL)
 			<*> j <| "number"
 			<*> (j <| "state" >>- toIssueState)
 			<*> j <| "title"
@@ -92,8 +88,8 @@ extension Issue: ResourceType {
 //			<*> j <| "milestone"
 			<*> j <| "locked"
 			<*> j <| "comments"
-//			<*> (j <| "closed_at" >>- toNSDate)
-//			<*> (j <| "created_at" >>- toNSDate)
-//			<*> (j <| "updated_at" >>- toNSDate)
+//			<*> (j <|? "closed_at" >>- toNSDate)
+			<*> (j <| "created_at" >>- toNSDate)
+			<*> (j <| "updated_at" >>- toNSDate)
     }
 }
