@@ -35,10 +35,26 @@ internal func toString(number: Int) -> Decoded<String> {
     return .Success(number.description)
 }
 
+internal func toIssueState(string: String) -> Decoded<Issue.State> {
+    if let state = Issue.State(rawValue: string) {
+        return .Success(state)
+    } else {
+        return .Failure(.Custom("String \(string) does not represent a valid issue state"))
+    }
+}
+
 internal func toNSDate(string: String) -> Decoded<NSDate> {
     if let date = NSDateFormatter.ISO8601.dateFromString(string) {
         return .Success(date)
     } else {
         return .Failure(.Custom("Date is not ISO8601 formatted"))
+    }
+}
+
+internal func toNSURL(string: String) -> Decoded<NSURL> {
+    if let url = NSURL(string: string) {
+        return .Success(url)
+    } else {
+        return .Failure(.Custom("URL is not properly formatted"))
     }
 }

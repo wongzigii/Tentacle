@@ -13,8 +13,46 @@ import XCTest
 class IssuesTests: XCTestCase {
     
     func testDecodedPalleasOpensourceIssues() {
-        let issues = []
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
 
-        Fixture.Issues.PalleasOpensource.decode()
+        let palleasOpensource = User(ID: "15802020",
+                                     login: "Palleas-opensource",
+                                     URL: NSURL(string: "https://api.github.com/users/Palleas-opensource")!,
+                                     avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
+                                     name: nil,
+                                     email: nil,
+                                     websiteURL: nil,
+                                     company: nil,
+                                     joinedDate: NSDate.distantPast())
+
+        let expected = [
+            Issue(id: 156633109,
+//                url: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/issues/1")!,
+//                repositoryUrl: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository")!,
+//                labelsUrl: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/issues/1/labels{/name}")!,
+//                commentsUrl: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/issues/1/comments")!,
+//                eventsUrl: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/issues/1/events")!,
+//                htmlUrl: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1")!,
+                number: 1,
+                state: .Open,
+                title: "This issue is open",
+                body: "Issues are pretty cool."
+//                user: palleasOpensource,
+//                labels: [],
+//                assignee: nil,
+//                milestone: nil,
+//                locked: false,
+//                comments: 0,
+//                pullRequest: nil,
+//                closedAt: nil,
+//                createdAt: formatter.dateFromString("2016-05-24T23:38:39Z")!,
+//                updatedAt: formatter.dateFromString("2016-05-24T23:38:39Z")!
+            )
+        ]
+
+        let issues: [Issue]? = Fixture.IssuesInRepository.PalleasOpensource.decode()
+
+        XCTAssertEqual(issues!, expected)
     }
 }
