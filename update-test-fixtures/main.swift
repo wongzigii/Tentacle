@@ -18,7 +18,7 @@ let baseURL = NSURL(fileURLWithPath: Process.arguments[1])
 
 let fileManager = NSFileManager.defaultManager()
 let session = NSURLSession.sharedSession()
-let result = SignalProducer(values: Fixture.allFixtures)
+let result = SignalProducer<FixtureType, NSError>(values: Fixture.allFixtures)
     .flatMap(.Concat) { fixture -> SignalProducer<(), NSError> in
         let request = NSURLRequest.create(fixture.URL, nil, contentType: fixture.contentType)
         let dataURL = baseURL.URLByAppendingPathComponent(fixture.dataFilename as String)
