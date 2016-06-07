@@ -43,7 +43,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, locked: Bool, comments: Int, /*closedAt: NSDate?,*/ createdAt: NSDate?, updatedAt: NSDate?) {
+    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, locked: Bool, comments: Int, /*closedAt: NSDate?,*/ createdAt: NSDate?, updatedAt: NSDate?) {
         self.id = id
         self.url = url
         self.number = number
@@ -82,7 +82,7 @@ extension Issue: ResourceType {
 			<*> (j <| "state" >>- toIssueState)
 			<*> j <| "title"
 			<*> j <| "body"
-//			<*> j <| "user"
+			<*> j <| "user"
 //			<*> j <|| "labels"
 //			<*> j <| "assignee"
 //			<*> j <| "milestone"

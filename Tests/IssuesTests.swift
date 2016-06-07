@@ -13,9 +13,6 @@ import XCTest
 class IssuesTests: XCTestCase {
     
     func testDecodedPalleasOpensourceIssues() {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-
         let palleasOpensource = User(ID: "15802020",
                                      login: "Palleas-opensource",
                                      URL: NSURL(string: "https://api.github.com/users/Palleas-opensource")!,
@@ -33,7 +30,7 @@ class IssuesTests: XCTestCase {
                 state: .Open,
                 title: "This issue is open",
                 body: "Issues are pretty cool.",
-//                user: palleasOpensource,
+                user: palleasOpensource,
 //                labels: [],
 //                assignee: nil,
 //                milestone: nil,
