@@ -160,7 +160,7 @@ public final class Client {
         case ReleasesInRepository(owner: String, repository: String)
         
         // https://developer.github.com/v3/users/#get-a-single-user
-        case User(login: String)
+        case UserInfo(login: String)
         
         var path: String {
             switch self {
@@ -168,7 +168,7 @@ public final class Client {
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
             case let .ReleasesInRepository(owner, repo):
                 return "/repos/\(owner)/\(repo)/releases"
-            case let .User(login):
+            case let .UserInfo(login):
                 return "/users/\(login)"
             }
         }
@@ -179,7 +179,7 @@ public final class Client {
                 return owner.hashValue ^ repo.hashValue ^ tag.hashValue
             case let .ReleasesInRepository(owner, repo):
                 return owner.hashValue ^ repo.hashValue
-            case let .User(login):
+            case let .UserInfo(login):
                 return login.hashValue
             }
         }
@@ -253,8 +253,8 @@ public final class Client {
     }
     
     /// Fetch the user with the given login.
-    public func userWithLogin(login: String) -> SignalProducer<(Response, User), Error> {
-        return fetchOne(.User(login: login))
+    public func userWithLogin(login: String) -> SignalProducer<(Response, UserInfo), Error> {
+        return fetchOne(.UserInfo(login: login))
     }
     
     /// Fetch an endpoint from the API.
@@ -355,7 +355,7 @@ internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
         return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
     case let (.ReleasesInRepository(owner1, repo1), .ReleasesInRepository(owner2, repo2)):
         return owner1 == owner2 && repo1 == repo2
-    case let (.User(login1), .User(login2)):
+    case let (.UserInfo(login1), .UserInfo(login2)):
         return login1 == login2
     default:
         return false
