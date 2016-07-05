@@ -23,6 +23,47 @@ public struct User: Hashable, CustomStringConvertible {
     /// The URL of the user's avatar.
     public let avatarURL: NSURL
     
+    public var hashValue: Int {
+        return ID.hashValue
+    }
+    
+    public var description: String {
+        return login
+    }
+    
+    public init(ID: String, login: String, URL: NSURL, avatarURL: NSURL) {
+        self.ID = ID
+        self.login = login
+        self.URL = URL
+        self.avatarURL = avatarURL
+    }
+}
+
+public func ==(lhs: User, rhs: User) -> Bool {
+    return lhs.ID == rhs.ID
+        && lhs.login == rhs.login
+        && lhs.URL == rhs.URL
+        && lhs.avatarURL == rhs.avatarURL
+}
+
+extension User: ResourceType {
+    public static func decode(j: JSON) -> Decoded<User> {
+        return curry(self.init)
+            <^> (j <| "id" >>- toString)
+            <*> j <| "login"
+            <*> j <| "html_url"
+            <*> j <| "avatar_url"
+    }
+}
+
+/// Extended information about a user on GitHub.
+public struct UserInfo {
+    /// The user that this information refers to.
+    public let user: User
+    
+    /// The date that the user joined GitHub.
+    public let joinedDate: NSDate
+    
     /// The user's name if they've set one.
     public let name: String?
     
@@ -35,54 +76,41 @@ public struct User: Hashable, CustomStringConvertible {
     /// The user's company if they've set one.
     public let company: String?
     
-    /// The date that the user joined GitHub.
-    public let joinedDate: NSDate
-    
     public var hashValue: Int {
-        return ID.hashValue
+        return user.hashValue
     }
     
     public var description: String {
-        return login
+        return user.description
     }
     
-    public init(ID: String, login: String, URL: NSURL, avatarURL: NSURL, name: String?, email: String?, websiteURL: NSURL?, company: String?, joinedDate: NSDate) {
-        self.ID = ID
-        self.login = login
-        self.URL = URL
-        self.avatarURL = avatarURL
+    public init(user: User, joinedDate: NSDate, name: String?, email: String?, websiteURL: NSURL?, company: String?) {
+        self.user = user
+        self.joinedDate = joinedDate
         self.name = name
         self.email = email
         self.websiteURL = websiteURL
         self.company = company
-        self.joinedDate = joinedDate
     }
 }
 
-public func ==(lhs: User, rhs: User) -> Bool {
-    return lhs.ID == rhs.ID
-        && lhs.login == rhs.login
-        && lhs.URL == rhs.URL
-        && lhs.avatarURL == rhs.avatarURL
+public func ==(lhs: UserInfo, rhs: UserInfo) -> Bool {
+    return lhs.user == rhs.user
+        && lhs.joinedDate == rhs.joinedDate
         && lhs.name == rhs.name
         && lhs.email == rhs.email
         && lhs.websiteURL == rhs.websiteURL
         && lhs.company == rhs.company
-        && lhs.joinedDate == rhs.joinedDate
 }
 
-extension User: ResourceType {
-    public static func decode(j: JSON) -> Decoded<User> {
-        let f = curry(self.init)
-        return f
-            <^> (j <| "id" >>- toString)
-            <*> j <| "login"
-            <*> j <| "html_url"
-            <*> j <| "avatar_url"
+extension UserInfo: ResourceType {
+    public static func decode(j: JSON) -> Decoded<UserInfo> {
+        return curry(self.init)
+            <^> j <| []
+            <*> (j <| "created_at" >>- toNSDate)
             <*> j <|? "name"
             <*> j <|? "email"
             <*> j <|? "blog"
             <*> j <|? "company"
-            <*> (j <| "created_at" >>- toNSDate)
     }
 }
