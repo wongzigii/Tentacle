@@ -16,12 +16,13 @@ class IssuesTests: XCTestCase {
         let palleasOpensource = User(ID: "15802020",
                                      login: "Palleas-opensource",
                                      URL: NSURL(string: "https://api.github.com/users/Palleas-opensource")!,
-                                     avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
-                                     name: nil,
-                                     email: nil,
-                                     websiteURL: nil,
-                                     company: nil,
-                                     joinedDate: NSDate.distantPast())
+                                     avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!
+//                                     name: nil,
+//                                     email: nil,User
+//                                     websiteURL: nil,
+//                                     company: nil,
+//                                     joinedDate: NSDate.distantPast()
+        )
 
         let expected = [
             Issue(id: 156633109,
