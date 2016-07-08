@@ -270,7 +270,11 @@ public final class Client {
     public func userWithLogin(login: String) -> SignalProducer<(Response, UserInfo), Error> {
         return fetchOne(.UserInfo(login: login))
     }
-    
+
+    public func issues(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
+        return fetchMany(.Issues, page: page, pageSize: 30)
+    }
+
     /// Fetch an endpoint from the API.
     private func fetch(endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, AnyObject), Error> {
         let URL = NSURL(server, endpoint, page: page, pageSize: pageSize)
