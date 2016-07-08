@@ -53,7 +53,6 @@ internal func toIssueState(string: String) -> Decoded<Issue.State> {
 
 internal func toNSDate(string: String) -> Decoded<NSDate> {
     if let date = NSDateFormatter.ISO8601.dateFromString(string) {
-        print("Returning date: \(date)")
         return .Success(date)
     } else {
         return .Failure(.Custom("Date is not ISO8601 formatted"))
