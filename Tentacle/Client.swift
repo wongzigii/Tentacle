@@ -275,6 +275,11 @@ public final class Client {
         return fetchMany(.Issues, page: page, pageSize: 30)
     }
 
+    public func issuesForRepositories(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
+        precondition(repository.server == server)
+        return fetchMany(.IssuesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+    }
+
     /// Fetch an endpoint from the API.
     private func fetch(endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, AnyObject), Error> {
         let URL = NSURL(server, endpoint, page: page, pageSize: pageSize)
