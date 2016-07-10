@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Argo
+import Curry
 
 public struct Label: Hashable, CustomStringConvertible {
     public let URL: NSURL
@@ -24,4 +26,14 @@ public struct Label: Hashable, CustomStringConvertible {
 
 public func ==(lhs: Label, rhs: Label) -> Bool {
     return lhs.name == rhs.name
+}
+
+extension Label: ResourceType {
+    public static func decode(json: JSON) -> Decoded<Label> {
+        let f = curry(Label.init)
+        return f
+            <^> (json <| "url" >>- toNSURL)
+            <*> json <| "name"
+            <*> json <| "color"
+    }
 }

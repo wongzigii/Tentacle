@@ -51,6 +51,14 @@ internal func toIssueState(string: String) -> Decoded<Issue.State> {
     }
 }
 
+//internal func toLabel() -> Decoded<Label> {
+////    public let URL: NSURL
+////    public let name: String
+////    public let color: String
+//
+//    return .Success(Label(URL: NSURL(string: "http://github.com")!, name: "", ""
+//}
+
 internal func toNSDate(string: String) -> Decoded<NSDate> {
     if let date = NSDateFormatter.ISO8601.dateFromString(string) {
         return .Success(date)
