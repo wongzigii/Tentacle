@@ -25,7 +25,7 @@ public struct Issue: Hashable, CustomStringConvertible {
 	public let body: String
 //	public let user: User?
 	public let labels: [Label]
-//	public let assignee: User?
+	public let assignee: User?
 //	public let milestone: Milestone?
 
 	public let locked: Bool
@@ -43,7 +43,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], locked: Bool, comments: Int, closedAt: NSDate?, createdAt: NSDate?, updatedAt: NSDate?) {
+    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignee: User?, locked: Bool, comments: Int, closedAt: NSDate?, createdAt: NSDate?, updatedAt: NSDate?) {
         self.id = id
         self.url = url
         self.number = number
@@ -53,6 +53,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         self.locked = locked
         self.comments = comments
         self.labels = labels
+        self.assignee = assignee
 //        self.closedAt = closedAt
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -79,8 +80,6 @@ extension Issue: ResourceType {
         let f = curry(Issue.init)
 
         let closed_at: Decoded<NSDate?> = (j <|? "closed_at").flatMap(toOptionalNSDate)
-//        let created_at: Decoded<NSDate?> = (j <|? "created_at").flatMap(toOptionalNSDate)
-//        let udated_at: Decoded<NSDate?> = (j <|? "updated_at").flatMap(toOptionalNSDate)
 
         return f
             <^> j <| "id"
@@ -91,7 +90,7 @@ extension Issue: ResourceType {
 			<*> j <| "body"
 			<*> j <| "user"
 			<*> j <|| "labels"
-//			<*> j <| "assignee"
+			<*> j <|? "assignee"
 //			<*> j <| "milestone"
 			<*> j <| "locked"
 			<*> j <| "comments"

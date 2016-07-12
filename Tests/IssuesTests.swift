@@ -29,14 +29,14 @@ class IssuesTests: XCTestCase {
                 labels: [Label(URL: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/labels/bug")!, name: "bug", color: "ee0701"),
                     Label(URL: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/labels/duplicate")!, name: "duplicate", color: "cccccc"),
                     Label(URL: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/labels/enhancement")!, name: "enhancement", color: "84b6eb")],
-//                assignee: nil,
+                assignee: palleasOpensource,
 //                milestone: nil,
                 locked: false,
                 comments: 0,
 //                pullRequest: nil,
                 closedAt: nil,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-05-24T23:38:39Z")!,
-                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-10T00:50:33Z")!
+                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-12T01:54:50Z")!
             )
         ]
 
