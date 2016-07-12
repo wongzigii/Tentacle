@@ -31,7 +31,7 @@ public struct Issue: Hashable, CustomStringConvertible {
 	public let locked: Bool
 	public let comments: Int
 //  public let pullRequest: PullRequest?
-//	public let closedAt: NSDate?
+	public let closedAt: NSDate?
 	public let createdAt: NSDate?
 	public let updatedAt: NSDate?
 
@@ -54,7 +54,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         self.comments = comments
         self.labels = labels
         self.assignee = assignee
-//        self.closedAt = closedAt
+        self.closedAt = closedAt
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
