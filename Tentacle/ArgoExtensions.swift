@@ -67,6 +67,15 @@ internal func toNSDate(string: String) -> Decoded<NSDate> {
     }
 }
 
+internal func toOptionalNSDate(string: String?) -> Decoded<NSDate?> {
+    guard let string = string else { return .Success(nil) }
+    if let date = NSDateFormatter.ISO8601.dateFromString(string) {
+        return .Success(date)
+    } else {
+        return .Failure(.Custom("Date is not ISO8601 formatted"))
+    }
+}
+
 internal func toNSURL(string: String) -> Decoded<NSURL> {
     if let url = NSURL(string: string) {
         return .Success(url)

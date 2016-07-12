@@ -43,7 +43,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], locked: Bool, comments: Int, /*closedAt: NSDate?,*/ createdAt: NSDate?, updatedAt: NSDate?) {
+    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], locked: Bool, comments: Int, closedAt: NSDate?, createdAt: NSDate?, updatedAt: NSDate?) {
         self.id = id
         self.url = url
         self.number = number
@@ -77,6 +77,11 @@ public func ==(lhs: Issue, rhs: Issue) -> Bool {
 extension Issue: ResourceType {
     public static func decode(j: JSON) -> Decoded<Issue> {
         let f = curry(Issue.init)
+
+        let closed_at: Decoded<NSDate?> = (j <|? "closed_at").flatMap(toOptionalNSDate)
+//        let created_at: Decoded<NSDate?> = (j <|? "created_at").flatMap(toOptionalNSDate)
+//        let udated_at: Decoded<NSDate?> = (j <|? "updated_at").flatMap(toOptionalNSDate)
+
         return f
             <^> j <| "id"
             <*> (j <| "url" >>- toNSURL)
@@ -90,7 +95,7 @@ extension Issue: ResourceType {
 //			<*> j <| "milestone"
 			<*> j <| "locked"
 			<*> j <| "comments"
-//			<*> (j <| "closed_at" >>- toNSDate)
+			<*> closed_at
 			<*> (j <| "created_at" >>- toNSDate)
 			<*> (j <| "updated_at" >>- toNSDate)
     }

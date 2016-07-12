@@ -34,7 +34,7 @@ class IssuesTests: XCTestCase {
                 locked: false,
                 comments: 0,
 //                pullRequest: nil,
-//                closedAt: nil,
+                closedAt: nil,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-05-24T23:38:39Z")!,
                 updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-10T00:50:33Z")!
             )
