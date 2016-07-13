@@ -36,7 +36,7 @@ class IssuesTests: XCTestCase {
 //                pullRequest: nil,
                 closedAt: nil,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-05-24T23:38:39Z")!,
-                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-12T01:54:50Z")!
+                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-13T16:56:57Z")!
             )
         ]
 
