@@ -23,10 +23,10 @@ public struct Issue: Hashable, CustomStringConvertible {
 	public let state: State
 	public let title: String
 	public let body: String
-//	public let user: User?
+	public let user: User?
 	public let labels: [Label]
 	public let assignee: User?
-//	public let milestone: Milestone?
+	public let milestone: Milestone?
 
 	public let locked: Bool
 	public let comments: Int
@@ -43,13 +43,15 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignee: User?, locked: Bool, comments: Int, closedAt: NSDate?, createdAt: NSDate?, updatedAt: NSDate?) {
+    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignee: User?, milestone: Milestone?, locked: Bool, comments: Int, closedAt: NSDate?, createdAt: NSDate?, updatedAt: NSDate?) {
         self.id = id
         self.url = url
         self.number = number
         self.state = state
         self.title = title
         self.body = body
+        self.user = user
+        self.milestone = milestone
         self.locked = locked
         self.comments = comments
         self.labels = labels
@@ -73,6 +75,7 @@ public func ==(lhs: Issue, rhs: Issue) -> Bool {
         && lhs.createdAt == rhs.createdAt
         && lhs.updatedAt == rhs.updatedAt
         && lhs.labels == rhs.labels
+        && lhs.milestone == rhs.milestone
 }
 
 extension Issue: ResourceType {
@@ -91,7 +94,7 @@ extension Issue: ResourceType {
 			<*> j <| "user"
 			<*> j <|| "labels"
 			<*> j <|? "assignee"
-//			<*> j <| "milestone"
+			<*> j <|? "milestone"
 			<*> j <| "locked"
 			<*> j <| "comments"
 			<*> closed_at

@@ -70,10 +70,9 @@ extension Milestone: ResourceType {
             <*> (j <| "created_at" >>- toNSDate)
             <*> (j <| "updated_at" >>- toNSDate)
             <*> closed_at
-            <*> (j <| "dueOn" >>- toNSDate)
+            <*> (j <| "due_on" >>- toNSDate)
             <*> (j <| "url" >>- toNSURL)
             <*> (j <| "html_url" >>- toNSURL)
             <*> (j <| "labels_url" >>- toNSURL)
-
     }
 }
