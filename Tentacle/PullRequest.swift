@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Argo
+import Curry
 
 public struct PullRequest: Hashable, CustomStringConvertible {
 	public let URL: NSURL
@@ -25,4 +27,15 @@ public struct PullRequest: Hashable, CustomStringConvertible {
 
 public func ==(lhs: PullRequest, rhs: PullRequest) -> Bool {
     return lhs.URL == rhs.URL
+}
+
+extension PullRequest: ResourceType {
+    public static func decode(j: JSON) -> Decoded<PullRequest> {
+        return curry(self.init)
+            <^> (j <| "url" >>- toNSURL)
+            <*> (j <| "html_url" >>- toNSURL)
+            <*> (j <| "diff_url" >>- toNSURL)
+            <*> (j <| "patch_url" >>- toNSURL)
+
+    }
 }

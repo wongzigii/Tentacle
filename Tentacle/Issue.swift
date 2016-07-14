@@ -27,10 +27,9 @@ public struct Issue: Hashable, CustomStringConvertible {
 	public let labels: [Label]
 	public let assignee: User?
 	public let milestone: Milestone?
-
 	public let locked: Bool
 	public let comments: Int
-//  public let pullRequest: PullRequest?
+    public let pullRequest: PullRequest?
 	public let closedAt: NSDate?
 	public let createdAt: NSDate?
 	public let updatedAt: NSDate?
@@ -43,7 +42,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignee: User?, milestone: Milestone?, locked: Bool, comments: Int, closedAt: NSDate?, createdAt: NSDate?, updatedAt: NSDate?) {
+    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignee: User?, milestone: Milestone?, locked: Bool, comments: Int, pullRequest: PullRequest?, closedAt: NSDate?, createdAt: NSDate?, updatedAt: NSDate?) {
         self.id = id
         self.url = url
         self.number = number
@@ -54,6 +53,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         self.milestone = milestone
         self.locked = locked
         self.comments = comments
+        self.pullRequest = pullRequest
         self.labels = labels
         self.assignee = assignee
         self.closedAt = closedAt
@@ -76,6 +76,7 @@ public func ==(lhs: Issue, rhs: Issue) -> Bool {
         && lhs.updatedAt == rhs.updatedAt
         && lhs.labels == rhs.labels
         && lhs.milestone == rhs.milestone
+        && lhs.pullRequest == rhs.pullRequest
 }
 
 extension Issue: ResourceType {
@@ -97,6 +98,7 @@ extension Issue: ResourceType {
 			<*> j <|? "milestone"
 			<*> j <| "locked"
 			<*> j <| "comments"
+            <*> j <|? "pull_request"
 			<*> closed_at
 			<*> (j <| "created_at" >>- toNSDate)
 			<*> (j <| "updated_at" >>- toNSDate)
