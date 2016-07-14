@@ -21,6 +21,21 @@ class IssuesTests: XCTestCase {
         let shipItMilestone = Milestone(ID: 1881390, number: 1, state: .Open, title: "Release this app", contentDescription: "That'd be cool", creator: palleasOpensource, openIssues: 1, closedIssues: 0, createdAt: NSDateFormatter.ISO8601.dateFromString("2016-07-13T16:56:48Z")!, updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-13T16:56:57Z")!, closedAt: nil, dueOn: NSDateFormatter.ISO8601.dateFromString("2016-07-25T04:00:00Z")!, URL: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/milestones/1")!, htmlURL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/milestones/Release%20this%20app")!, labelsURL: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/milestones/1/labels")!)
 
         let expected = [
+            Issue(id: 165458041,
+                url: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/issues/3"),
+                number: 3,
+                state: .Open,
+                title: "Add informations in Readme",
+                body: "![Giphy](http://media2.giphy.com/media/jxhJ8ylaYIPbG/giphy.gif)",
+                user: palleasOpensource,
+                labels: [],
+                assignee: nil,
+                milestone: nil,
+                locked: false,
+                comments: 0,
+                closedAt: nil,
+                createdAt:  NSDateFormatter.ISO8601.dateFromString("2016-07-14T01:40:08Z")!,
+                updatedAt:  NSDateFormatter.ISO8601.dateFromString("2016-07-14T01:40:08Z")!),
             Issue(id: 156633109,
                 url: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/issues/1")!,
                 number: 1,
