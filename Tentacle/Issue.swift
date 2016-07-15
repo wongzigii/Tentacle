@@ -15,23 +15,53 @@ public struct Issue: Hashable, CustomStringConvertible {
         case Open = "open"
         case Closed = "closed"
 	}
-	
+
+    /// The id of the issue
     public let id: Int
+
+    /// The API URL to fetch this issue
     public let url: NSURL?
 
+    /// The number of the issue in the repository it belongs to
 	public let number: Int
+
+    /// The state of the issue, open or closed
 	public let state: State
+
+    /// The title of the issue
 	public let title: String
+
+    /// The body of the issue
 	public let body: String
+
+    /// The author of the issue
 	public let user: User?
+
+    /// The labels associated to this issue, if any
 	public let labels: [Label]
+
+    /// The user assigned to this issue, if any
 	public let assignee: User?
+
+    /// The milestone this issue belongs to, if any
 	public let milestone: Milestone?
+
+    /// True if the issue has been closed by a contributor
 	public let locked: Bool
+
+    /// The number of comments
 	public let comments: Int
+
+    /// Contains the informations like the diff URL when the issue is a pull-request
     public let pullRequest: PullRequest?
+
+    /// The date this issue was closed at, if it ever were
 	public let closedAt: NSDate?
+
+    /// The date this issue was created at
 	public let createdAt: NSDate
+
+    /// The date this issue was updated at
 	public let updatedAt: NSDate
 
     public var hashValue: Int {
