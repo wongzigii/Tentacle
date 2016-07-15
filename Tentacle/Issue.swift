@@ -31,8 +31,8 @@ public struct Issue: Hashable, CustomStringConvertible {
 	public let comments: Int
     public let pullRequest: PullRequest?
 	public let closedAt: NSDate?
-	public let createdAt: NSDate?
-	public let updatedAt: NSDate?
+	public let createdAt: NSDate
+	public let updatedAt: NSDate
 
     public var hashValue: Int {
         return id.hashValue
@@ -42,7 +42,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignee: User?, milestone: Milestone?, locked: Bool, comments: Int, pullRequest: PullRequest?, closedAt: NSDate?, createdAt: NSDate?, updatedAt: NSDate?) {
+    public init(id: Int, url: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignee: User?, milestone: Milestone?, locked: Bool, comments: Int, pullRequest: PullRequest?, closedAt: NSDate?, createdAt: NSDate, updatedAt: NSDate) {
         self.id = id
         self.url = url
         self.number = number
