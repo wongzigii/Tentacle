@@ -33,7 +33,10 @@ let result = SignalProducer<FixtureType, NSError>(values: Fixture.allFixtures)
                 
                 if changed {
                     try! fileManager.createDirectoryAtURL(dataURL.URLByDeletingLastPathComponent!, withIntermediateDirectories: true, attributes: nil)
-                    data.writeToURL(dataURL, atomically: true)
+
+                    let JSONResponse = try! NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                    let formattedData = try! NSJSONSerialization.dataWithJSONObject(JSONResponse, options: .PrettyPrinted)
+                    formattedData.writeToURL(dataURL, atomically: true)
                 }
                 
                 if changed || !fileManager.fileExistsAtPath(responseURL.path!) {
