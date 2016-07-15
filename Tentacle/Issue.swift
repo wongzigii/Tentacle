@@ -19,7 +19,7 @@ public struct Issue: Hashable, CustomStringConvertible {
     /// The id of the issue
     public let id: Int
 
-    /// The API URL to fetch this issue
+    /// The URL to view this issue in a browser
     public let url: NSURL?
 
     /// The number of the issue in the repository it belongs to
@@ -117,7 +117,7 @@ extension Issue: ResourceType {
 
         return f
             <^> j <| "id"
-            <*> (j <| "url" >>- toNSURL)
+            <*> (j <| "html_url" >>- toNSURL)
 			<*> j <| "number"
 			<*> (j <| "state" >>- toIssueState)
 			<*> j <| "title"
