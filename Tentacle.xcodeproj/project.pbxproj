@@ -305,23 +305,23 @@
 		BE88E7F41C88C6B30034A112 /* Tentacle */ = {
 			isa = PBXGroup;
 			children = (
-				BE88E7F51C88C6B30034A112 /* Tentacle.h */,
 				BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */,
 				BE88E80C1C88C72B0034A112 /* Client.swift */,
 				BE0F40A31C89135D00E3B11A /* Decodable.swift */,
 				BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */,
 				BEB0765C1C8A001C00ABD373 /* GitHubError.swift */,
-				BE88E8311C88D33D0034A112 /* Release.swift */,
-				BE88E82F1C88CDAB0034A112 /* Repository.swift */,
-				BEEE47411C91B8DF000FFC21 /* ResourceType.swift */,
-				BEEE474D1C92623E000FFC21 /* Response.swift */,
-				BE88E82C1C88C94D0034A112 /* Server.swift */,
-				BECB8A8A1CBDCD17005D70A6 /* User.swift */,
 				BE88E7F71C88C6B30034A112 /* Info.plist */,
 				7A1A82551CF3DBAC0076E2DD /* Issue.swift */,
 				7A1A82571CF3DE4C0076E2DD /* Label.swift */,
 				7A1A82591CF3DEEA0076E2DD /* Milestone.swift */,
 				7A1A825D1CF3E5B60076E2DD /* PullRequest.swift */,
+				BE88E8311C88D33D0034A112 /* Release.swift */,
+				BE88E82F1C88CDAB0034A112 /* Repository.swift */,
+				BEEE47411C91B8DF000FFC21 /* ResourceType.swift */,
+				BEEE474D1C92623E000FFC21 /* Response.swift */,
+				BE88E82C1C88C94D0034A112 /* Server.swift */,
+				BE88E7F51C88C6B30034A112 /* Tentacle.h */,
+				BECB8A8A1CBDCD17005D70A6 /* User.swift */,
 			);
 			path = Tentacle;
 			sourceTree = "<group>";
@@ -330,16 +330,16 @@
 			isa = PBXGroup;
 			children = (
 				BE0F40961C8908CB00E3B11A /* Fixtures */,
-				BE0F409F1C89098E00E3B11A /* Fixture.swift */,
 				BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */,
+				BE0F409F1C89098E00E3B11A /* Fixture.swift */,
 				BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */,
+				BE88E8031C88C6B30034A112 /* Info.plist */,
+				7AAB00FC1CF51FC5005A7319 /* IssuesTests.swift */,
 				BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */,
 				BEA86F9C1C9F7E1E0049360B /* RepositoryTests.swift */,
 				BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */,
 				BEA86F991C9F7C230049360B /* ServerTests.swift */,
 				BECB8AA11CBDDF0F005D70A6 /* UserTests.swift */,
-				BE88E8031C88C6B30034A112 /* Info.plist */,
-				7AAB00FC1CF51FC5005A7319 /* IssuesTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
