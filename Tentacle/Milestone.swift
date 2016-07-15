@@ -22,15 +22,13 @@ public struct Milestone: Hashable, CustomStringConvertible {
     public let title: String
     public let contentDescription: String // TODO Change name ?
     public let creator: User
-    public let openIssues: Int
-    public let closedIssues: Int
+    public let numberOfOpenIssues: Int
+    public let numberOfClosedIssues: Int
     public let createdAt: NSDate
     public let updatedAt: NSDate
     public let closedAt: NSDate?
     public let dueOn: NSDate
     public let URL: NSURL
-    public let htmlURL: NSURL
-    public let labelsURL: NSURL
 
     public var hashValue: Int {
         return ID.hashValue
@@ -71,8 +69,6 @@ extension Milestone: ResourceType {
             <*> (j <| "updated_at" >>- toNSDate)
             <*> closed_at
             <*> (j <| "due_on" >>- toNSDate)
-            <*> (j <| "url" >>- toNSURL)
             <*> (j <| "html_url" >>- toNSURL)
-            <*> (j <| "labels_url" >>- toNSURL)
     }
 }
