@@ -10,7 +10,6 @@ import Argo
 import Foundation
 import Result
 
-
 internal func decode<T: Decodable where T == T.DecodedType>(object: AnyObject) -> Result<T, DecodeError> {
     let decoded: Decoded<T> = decode(object)
     switch decoded {
@@ -73,5 +72,13 @@ internal func toNSURL(string: String) -> Decoded<NSURL> {
         return .Success(url)
     } else {
         return .Failure(.Custom("URL is not properly formatted"))
+    }
+}
+
+internal func toColor(string: String) -> Decoded<SWColor> {
+    if let color = SWColor(hexString: string) {
+        return .Success(color)
+    } else {
+        return .Failure(.Custom("String is not a valid hex color"))
     }
 }

@@ -11,9 +11,8 @@ import Argo
 import Curry
 
 public struct Label: Hashable, CustomStringConvertible {
-    public let URL: NSURL
     public let name: String
-    public let color: String
+    public let color: SWColor
 
     public var hashValue: Int {
         return name.hashValue
@@ -32,8 +31,7 @@ extension Label: ResourceType {
     public static func decode(json: JSON) -> Decoded<Label> {
         let f = curry(Label.init)
         return f
-            <^> (json <| "url" >>- toNSURL)
-            <*> json <| "name"
-            <*> json <| "color"
+            <^> json <| "name"
+            <*> (json <| "color" >>- toColor)
     }
 }
