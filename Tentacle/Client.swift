@@ -272,7 +272,7 @@ public final class Client {
     }
 
     public func assignedIssues(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
-        return fetchMany(.Issues, page: page, pageSize: 30)
+        return fetchMany(.Issues, page: page, pageSize: perPage)
     }
 
     public func issuesForRepositories(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
