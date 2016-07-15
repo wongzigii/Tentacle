@@ -12,7 +12,7 @@ import Curry
 /// An Issue on Github
 public struct Issue: Hashable, CustomStringConvertible {
     public enum State: String {
-		case Open = "open"
+        case Open = "open"
         case Closed = "closed"
 	}
 	
