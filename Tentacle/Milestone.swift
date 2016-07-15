@@ -16,7 +16,7 @@ public struct Milestone: Hashable, CustomStringConvertible {
         case Closed = "closed"
     }
 
-    public let ID: Int
+    public let ID: String
     public let number: Int
     public let state: State
     public let title: String
@@ -59,7 +59,7 @@ extension Milestone: ResourceType {
         let closed_at: Decoded<NSDate?> = (j <|? "closed_at").flatMap(toOptionalNSDate)
 
         return curry(self.init)
-            <^> j <| "id"
+            <^> (j <| "id" >>- toString)
             <*> j <| "number"
             <*> (j <| "state" >>- toMilestoneState)
             <*> j <| "title"
