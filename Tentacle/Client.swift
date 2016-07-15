@@ -275,7 +275,7 @@ public final class Client {
         return fetchMany(.Issues, page: page, pageSize: perPage)
     }
 
-    public func issuesForRepositories(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
+    public func issuesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
         precondition(repository.server == server)
         return fetchMany(.IssuesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
