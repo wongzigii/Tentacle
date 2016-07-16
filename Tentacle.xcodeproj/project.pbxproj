@@ -36,9 +36,9 @@
 		7A2F66181CF53F6300463602 /* repos-Palleas-opensource-Sample-repository-issues.response in Resources */ = {isa = PBXBuildFile; fileRef = 7A2F660D1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.response */; };
 		7A2F66191CF53F6400463602 /* repos-Palleas-opensource-Sample-repository-issues.data in Resources */ = {isa = PBXBuildFile; fileRef = 7A2F660C1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.data */; };
 		7A2F661A1CF53F6400463602 /* repos-Palleas-opensource-Sample-repository-issues.response in Resources */ = {isa = PBXBuildFile; fileRef = 7A2F660D1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.response */; };
-		7A7B16581D388B9F00A04EEF /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B16571D388B9F00A04EEF /* SwiftColors.swift */; };
-		7A7B16591D388BC800A04EEF /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B16571D388B9F00A04EEF /* SwiftColors.swift */; };
 		7AAB00FD1CF51FC5005A7319 /* IssuesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB00FC1CF51FC5005A7319 /* IssuesTests.swift */; };
+		7AF08C041D39B35900C2CDA9 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF08C031D39B35900C2CDA9 /* SwiftHEXColors.swift */; };
+		7AF08C051D39B37A00C2CDA9 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF08C031D39B35900C2CDA9 /* SwiftHEXColors.swift */; };
 		BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
 		BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */; };
 		BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A31C89135D00E3B11A /* Decodable.swift */; };
@@ -143,8 +143,8 @@
 		7A1A825D1CF3E5B60076E2DD /* PullRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullRequest.swift; sourceTree = "<group>"; };
 		7A2F660C1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-Palleas-opensource-Sample-repository-issues.data"; sourceTree = "<group>"; };
 		7A2F660D1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-Palleas-opensource-Sample-repository-issues.response"; sourceTree = "<group>"; };
-		7A7B16571D388B9F00A04EEF /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColors.swift; sourceTree = "<group>"; };
 		7AAB00FC1CF51FC5005A7319 /* IssuesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuesTests.swift; sourceTree = "<group>"; };
+		7AF08C031D39B35900C2CDA9 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		BE0F409F1C89098E00E3B11A /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Fixture.swift; sourceTree = SOURCE_ROOT; };
 		BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseTests.swift; sourceTree = "<group>"; };
 		BE0F40A31C89135D00E3B11A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
@@ -254,10 +254,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7A7B16561D388B8F00A04EEF /* Externals */ = {
+		7AF08C021D39B33900C2CDA9 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
-				7A7B16571D388B9F00A04EEF /* SwiftColors.swift */,
+				7AF08C031D39B35900C2CDA9 /* SwiftHEXColors.swift */,
 			);
 			name = Externals;
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 		BE88E7F41C88C6B30034A112 /* Tentacle */ = {
 			isa = PBXGroup;
 			children = (
-				7A7B16561D388B8F00A04EEF /* Externals */,
+				7AF08C021D39B33900C2CDA9 /* Externals */,
 				BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */,
 				BE88E80C1C88C72B0034A112 /* Client.swift */,
 				BE0F40A31C89135D00E3B11A /* Decodable.swift */,
@@ -629,6 +629,7 @@
 				BEEE47461C91BB3A000FFC21 /* ArgoExtensions.swift in Sources */,
 				61377C791C8A2B760081FF24 /* Client.swift in Sources */,
 				BEEE47431C91B8DF000FFC21 /* ResourceType.swift in Sources */,
+				7AF08C051D39B37A00C2CDA9 /* SwiftHEXColors.swift in Sources */,
 				7A2F66141CF5281200463602 /* PullRequest.swift in Sources */,
 				61377C7C1C8A2B760081FF24 /* Release.swift in Sources */,
 				BEEE474F1C92623E000FFC21 /* Response.swift in Sources */,
@@ -637,7 +638,6 @@
 				61377C7D1C8A2B760081FF24 /* Repository.swift in Sources */,
 				BECB8A8F1CBDD91D005D70A6 /* FoundationExtensions.swift in Sources */,
 				61377C7B1C8A2B760081FF24 /* GitHubError.swift in Sources */,
-				7A7B16591D388BC800A04EEF /* SwiftColors.swift in Sources */,
 				61377C7E1C8A2B760081FF24 /* Server.swift in Sources */,
 				61377C7A1C8A2B760081FF24 /* Decodable.swift in Sources */,
 				BECB8A901CBDD920005D70A6 /* User.swift in Sources */,
@@ -671,13 +671,13 @@
 				BEEE47421C91B8DF000FFC21 /* ResourceType.swift in Sources */,
 				7A1A825E1CF3E5B60076E2DD /* PullRequest.swift in Sources */,
 				BEB0765D1C8A001C00ABD373 /* GitHubError.swift in Sources */,
+				7AF08C041D39B35900C2CDA9 /* SwiftHEXColors.swift in Sources */,
 				BEEE474E1C92623E000FFC21 /* Response.swift in Sources */,
 				7A1A82581CF3DE4C0076E2DD /* Label.swift in Sources */,
 				7A1A825A1CF3DEEA0076E2DD /* Milestone.swift in Sources */,
 				BE88E8321C88D33D0034A112 /* Release.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,
 				BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */,
-				7A7B16581D388B9F00A04EEF /* SwiftColors.swift in Sources */,
 				BECB8A8B1CBDCD17005D70A6 /* User.swift in Sources */,
 				BECB8A8E1CBDD919005D70A6 /* FoundationExtensions.swift in Sources */,
 				BE88E8301C88CDAB0034A112 /* Repository.swift in Sources */,
