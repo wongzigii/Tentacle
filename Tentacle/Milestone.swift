@@ -16,18 +16,43 @@ public struct Milestone: Hashable, CustomStringConvertible {
         case Closed = "closed"
     }
 
+    /// The ID of the milestone
     public let ID: String
+
+    /// The number of the milestone in the repository it belongs to
     public let number: Int
+
+    /// The state of the Milestone, open or closed
     public let state: State
+
+    /// The title of the milestone
     public let title: String
-    public let contentDescription: String // TODO Change name ?
+
+    /// The description of the milestone
+    public let contentDescription: String
+
+    /// The user who created the milestone
     public let creator: User
+
+    /// The number of the open issues in the milestone
     public let numberOfOpenIssues: Int
+
+    /// The number of closed issues in the milestone
     public let numberOfClosedIssues: Int
+
+    /// The date the milestone was created
     public let createdAt: NSDate
+
+    /// The date the milestone was last updated at
     public let updatedAt: NSDate
+
+    /// The date the milestone was closed at, if ever
     public let closedAt: NSDate?
+
+    /// The date the milestone is due on
     public let dueOn: NSDate
+
+    /// The URL to view this milestone in a browser
     public let URL: NSURL
 
     public var hashValue: Int {
