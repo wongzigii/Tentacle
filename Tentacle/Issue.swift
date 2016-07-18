@@ -41,7 +41,7 @@ public struct Issue: Hashable, CustomStringConvertible {
     public let labels: [Label]
 
     /// The user assigned to this issue, if any
-    public let assignee: User?
+    public let assignees: [User]
 
     /// The milestone this issue belongs to, if any
     public let milestone: Milestone?
@@ -72,7 +72,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(ID: String, URL: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignee: User?, milestone: Milestone?, locked: Bool, comments: Int, pullRequest: PullRequest?, closedAt: NSDate?, createdAt: NSDate, updatedAt: NSDate) {
+    public init(ID: String, URL: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, comments: Int, pullRequest: PullRequest?, closedAt: NSDate?, createdAt: NSDate, updatedAt: NSDate) {
         self.ID = ID
         self.URL = URL
         self.number = number
@@ -85,7 +85,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         self.comments = comments
         self.pullRequest = pullRequest
         self.labels = labels
-        self.assignee = assignee
+        self.assignees = assignees
         self.closedAt = closedAt
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -124,7 +124,7 @@ extension Issue: ResourceType {
         <*> j <| "body"
         <*> j <| "user"
         <*> j <|| "labels"
-        <*> j <|? "assignee"
+        <*> j <|| "assignee"
         <*> j <|? "milestone"
         <*> j <| "locked"
         <*> j <| "comments"
