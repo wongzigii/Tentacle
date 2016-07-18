@@ -43,8 +43,8 @@ class IssuesTests: XCTestCase {
         )
 
         let expected = [
-            Issue(id: 165458041,
-                url: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3"),
+            Issue(ID: "165458041",
+                URL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3"),
                 number: 3,
                 state: .Open,
                 title: "Add informations in Readme",
@@ -59,8 +59,8 @@ class IssuesTests: XCTestCase {
                 closedAt: nil,
                 createdAt:  NSDateFormatter.ISO8601.dateFromString("2016-07-14T01:40:08Z")!,
                 updatedAt:  NSDateFormatter.ISO8601.dateFromString("2016-07-14T01:40:08Z")!),
-            Issue(id: 156633109,
-                url: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1")!,
+            Issue(ID: "156633109",
+                URL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1")!,
                 number: 1,
                 state: .Open,
                 title: "This issue is open",
