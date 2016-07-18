@@ -51,7 +51,7 @@ class IssuesTests: XCTestCase {
                 body: "![Giphy](http://media2.giphy.com/media/jxhJ8ylaYIPbG/giphy.gif)",
                 user: palleasOpensource,
                 labels: [],
-                assignee: nil,
+                assignees: [],
                 milestone: nil,
                 locked: false,
                 comments: 0,
@@ -80,7 +80,7 @@ class IssuesTests: XCTestCase {
                         color: SWColor(hexString: "84b6eb")!
                     )
                 ],
-                assignee: palleasOpensource,
+                assignees: [palleasOpensource],
                 milestone: shipItMilestone,
                 locked: false,
                 comments: 0,

@@ -124,7 +124,7 @@ extension Issue: ResourceType {
         <*> j <| "body"
         <*> j <| "user"
         <*> j <|| "labels"
-        <*> j <|| "assignee"
+        <*> j <|| "assignees"
         <*> j <|? "milestone"
         <*> j <| "locked"
         <*> j <| "comments"
