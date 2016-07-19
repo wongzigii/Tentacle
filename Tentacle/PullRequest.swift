@@ -31,9 +31,9 @@ public func ==(lhs: PullRequest, rhs: PullRequest) -> Bool {
 extension PullRequest: ResourceType {
     public static func decode(j: JSON) -> Decoded<PullRequest> {
         return curry(self.init)
-        <^> (j <| "html_url" >>- toNSURL)
-        <*> (j <| "diff_url" >>- toNSURL)
-        <*> (j <| "patch_url" >>- toNSURL)
+            <^> (j <| "html_url" >>- toNSURL)
+            <*> (j <| "diff_url" >>- toNSURL)
+            <*> (j <| "patch_url" >>- toNSURL)
 
     }
 }

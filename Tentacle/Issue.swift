@@ -95,18 +95,18 @@ public struct Issue: Hashable, CustomStringConvertible {
 
 public func ==(lhs: Issue, rhs: Issue) -> Bool {
     return lhs.ID == rhs.ID
-    && lhs.URL == rhs.URL
-    && lhs.number == rhs.number
-    && lhs.state == rhs.state
-    && lhs.title == rhs.title
-    && lhs.body == rhs.body
-    && lhs.locked == rhs.locked
-    && lhs.comments == rhs.comments
-    && lhs.createdAt == rhs.createdAt
-    && lhs.updatedAt == rhs.updatedAt
-    && lhs.labels == rhs.labels
-    && lhs.milestone == rhs.milestone
-    && lhs.pullRequest == rhs.pullRequest
+        && lhs.URL == rhs.URL
+        && lhs.number == rhs.number
+        && lhs.state == rhs.state
+        && lhs.title == rhs.title
+        && lhs.body == rhs.body
+        && lhs.locked == rhs.locked
+        && lhs.comments == rhs.comments
+        && lhs.createdAt == rhs.createdAt
+        && lhs.updatedAt == rhs.updatedAt
+        && lhs.labels == rhs.labels
+        && lhs.milestone == rhs.milestone
+        && lhs.pullRequest == rhs.pullRequest
 }
 
 extension Issue: ResourceType {
@@ -116,21 +116,21 @@ extension Issue: ResourceType {
         let closed_at: Decoded<NSDate?> = (j <|? "closed_at").flatMap(toOptionalNSDate)
 
         return f
-        <^> (j <| "id" >>- toString)
-        <*> (j <| "html_url" >>- toNSURL)
-        <*> j <| "number"
-        <*> (j <| "state" >>- toIssueState)
-        <*> j <| "title"
-        <*> j <| "body"
-        <*> j <| "user"
-        <*> j <|| "labels"
-        <*> j <|| "assignees"
-        <*> j <|? "milestone"
-        <*> j <| "locked"
-        <*> j <| "comments"
-        <*> j <|? "pull_request"
-        <*> closed_at
-        <*> (j <| "created_at" >>- toNSDate)
-        <*> (j <| "updated_at" >>- toNSDate)
+            <^> (j <| "id" >>- toString)
+            <*> (j <| "html_url" >>- toNSURL)
+            <*> j <| "number"
+            <*> (j <| "state" >>- toIssueState)
+            <*> j <| "title"
+            <*> j <| "body"
+            <*> j <| "user"
+            <*> j <|| "labels"
+            <*> j <|| "assignees"
+            <*> j <|? "milestone"
+            <*> j <| "locked"
+            <*> j <| "comments"
+            <*> j <|? "pull_request"
+            <*> closed_at
+            <*> (j <| "created_at" >>- toNSDate)
+            <*> (j <| "updated_at" >>- toNSDate)
     }
 }
