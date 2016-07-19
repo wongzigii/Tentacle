@@ -12,7 +12,7 @@ import Curry
 
 public struct Label: Hashable, CustomStringConvertible {
     public let name: String
-    public let color: SWColor
+    public let color: Color
 
     public var hashValue: Int {
         return name.hashValue

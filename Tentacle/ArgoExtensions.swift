@@ -75,10 +75,6 @@ internal func toNSURL(string: String) -> Decoded<NSURL> {
     }
 }
 
-internal func toColor(string: String) -> Decoded<SWColor> {
-    if let color = SWColor(hexString: string) {
-        return .Success(color)
-    } else {
-        return .Failure(.Custom("String is not a valid hex color"))
-    }
+internal func toColor(string: String) -> Decoded<Color> {
+    return .Success(Color(hex: string))
 }

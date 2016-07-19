@@ -69,15 +69,15 @@ class IssuesTests: XCTestCase {
                 labels: [
                     Label(
                         name: "bug",
-                        color: SWColor(hexString: "ee0701")!
+                        color: Color(hex: "ee0701")
                     ),
                     Label(
                         name: "duplicate",
-                        color: SWColor(hexString: "cccccc")!
+                        color: Color(hex: "cccccc")
                     ),
                     Label(
                         name: "enhancement",
-                        color: SWColor(hexString: "84b6eb")!
+                        color: Color(hex: "84b6eb")
                     )
                 ],
                 assignees: [palleasOpensource],
