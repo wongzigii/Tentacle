@@ -50,7 +50,7 @@ public struct Issue: Hashable, CustomStringConvertible {
     public let locked: Bool
 
     /// The number of comments
-    public let comments: Int
+    public let commentCount: Int
 
     /// Contains the informations like the diff URL when the issue is a pull-request
     public let pullRequest: PullRequest?
@@ -72,7 +72,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(ID: String, URL: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, comments: Int, pullRequest: PullRequest?, closedAt: NSDate?, createdAt: NSDate, updatedAt: NSDate) {
+    public init(ID: String, URL: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: NSDate?, createdAt: NSDate, updatedAt: NSDate) {
         self.ID = ID
         self.URL = URL
         self.number = number
@@ -82,7 +82,7 @@ public struct Issue: Hashable, CustomStringConvertible {
         self.user = user
         self.milestone = milestone
         self.locked = locked
-        self.comments = comments
+        self.commentCount = commentCount
         self.pullRequest = pullRequest
         self.labels = labels
         self.assignees = assignees
@@ -101,7 +101,7 @@ public func ==(lhs: Issue, rhs: Issue) -> Bool {
         && lhs.title == rhs.title
         && lhs.body == rhs.body
         && lhs.locked == rhs.locked
-        && lhs.comments == rhs.comments
+        && lhs.commentCount == rhs.commentCount
         && lhs.createdAt == rhs.createdAt
         && lhs.updatedAt == rhs.updatedAt
         && lhs.labels == rhs.labels

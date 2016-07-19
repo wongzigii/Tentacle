@@ -35,10 +35,10 @@ public struct Milestone: Hashable, CustomStringConvertible {
     public let creator: User
 
     /// The number of the open issues in the milestone
-    public let numberOfOpenIssues: Int
+    public let openIssueCount: Int
 
     /// The number of closed issues in the milestone
-    public let numberOfClosedIssues: Int
+    public let closedIssueCount: Int
 
     /// The date the milestone was created
     public let createdAt: NSDate
