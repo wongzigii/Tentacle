@@ -25,7 +25,7 @@ class IssuesTests: XCTestCase {
             number: 1,
             state: .Open,
             title: "Release this app",
-            contentDescription: "That'd be cool",
+            body: "That'd be cool",
             creator: palleasOpensource,
             numberOfOpenIssues: 1,
             numberOfClosedIssues: 0,

@@ -29,7 +29,7 @@ public struct Milestone: Hashable, CustomStringConvertible {
     public let title: String
 
     /// The description of the milestone
-    public let contentDescription: String
+    public let body: String
 
     /// The user who created the milestone
     public let creator: User
