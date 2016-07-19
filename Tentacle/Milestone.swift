@@ -50,7 +50,7 @@ public struct Milestone: Hashable, CustomStringConvertible {
     public let closedAt: NSDate?
 
     /// The date the milestone is due on
-    public let dueOn: NSDate
+    public let dueOn: NSDate?
 
     /// The URL to view this milestone in a browser
     public let URL: NSURL
@@ -79,7 +79,8 @@ internal func toMilestoneState(string: String) -> Decoded<Milestone.State> {
 
 extension Milestone: ResourceType {
     public static func decode(j: JSON) -> Decoded<Milestone> {
-        let closed_at: Decoded<NSDate?> = (j <|? "closed_at").flatMap(toOptionalNSDate)
+        let closedAt: Decoded<NSDate?> = (j <|? "closed_at").flatMap(toOptionalNSDate)
+        let dueOn: Decoded<NSDate?> = (j <|? "due_on").flatMap(toOptionalNSDate)
 
         return curry(self.init)
             <^> (j <| "id" >>- toString)
@@ -92,8 +93,8 @@ extension Milestone: ResourceType {
             <*> j <| "closed_issues"
             <*> (j <| "created_at" >>- toNSDate)
             <*> (j <| "updated_at" >>- toNSDate)
-            <*> closed_at
-            <*> (j <| "due_on" >>- toNSDate)
+            <*> closedAt
+            <*> dueOn
             <*> (j <| "html_url" >>- toNSURL)
     }
 }
