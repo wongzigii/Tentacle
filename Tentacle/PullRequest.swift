@@ -11,8 +11,13 @@ import Argo
 import Curry
 
 public struct PullRequest: Hashable, CustomStringConvertible {
+    /// The URL to view the Pull Request is an browser
     public let URL: NSURL
+
+    /// The URL to the diff showing all the changes included in this pull request
     public let diffURL: NSURL
+
+    /// The URL to a downloadable patch for this pull request
     public let patchURL: NSURL
 
     public var hashValue: Int {
