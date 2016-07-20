@@ -113,8 +113,6 @@ extension Issue: ResourceType {
     public static func decode(j: JSON) -> Decoded<Issue> {
         let f = curry(Issue.init)
 
-        let closed_at: Decoded<NSDate?> = (j <|? "closed_at").flatMap(toOptionalNSDate)
-
         return f
             <^> (j <| "id" >>- toString)
             <*> (j <| "html_url" >>- toNSURL)
@@ -129,7 +127,7 @@ extension Issue: ResourceType {
             <*> j <| "locked"
             <*> j <| "comments"
             <*> j <|? "pull_request"
-            <*> closed_at
+            <*> (j <|? "closed_at" >>- toOptionalNSDate)
             <*> (j <| "created_at" >>- toNSDate)
             <*> (j <| "updated_at" >>- toNSDate)
     }

@@ -79,9 +79,6 @@ internal func toMilestoneState(string: String) -> Decoded<Milestone.State> {
 
 extension Milestone: ResourceType {
     public static func decode(j: JSON) -> Decoded<Milestone> {
-        let closedAt: Decoded<NSDate?> = (j <|? "closed_at").flatMap(toOptionalNSDate)
-        let dueOn: Decoded<NSDate?> = (j <|? "due_on").flatMap(toOptionalNSDate)
-
         return curry(self.init)
             <^> (j <| "id" >>- toString)
             <*> j <| "number"
@@ -93,8 +90,8 @@ extension Milestone: ResourceType {
             <*> j <| "closed_issues"
             <*> (j <| "created_at" >>- toNSDate)
             <*> (j <| "updated_at" >>- toNSDate)
-            <*> closedAt
-            <*> dueOn
+            <*> (j <|? "closed_at" >>- toOptionalNSDate)
+            <*> (j <|? "due_on" >>- toOptionalNSDate)
             <*> (j <| "html_url" >>- toNSURL)
     }
 }
