@@ -161,6 +161,12 @@ public final class Client {
         
         // https://developer.github.com/v3/users/#get-a-single-user
         case UserInfo(login: String)
+
+        // https://developer.github.com/v3/issues/#list-issues
+        case AssignedIssues
+
+        // https://developer.github.com/v3/issues/#list-issues-for-a-repository
+        case IssuesInRepository(owner: String, repository: String)
         
         var path: String {
             switch self {
@@ -170,6 +176,10 @@ public final class Client {
                 return "/repos/\(owner)/\(repo)/releases"
             case let .UserInfo(login):
                 return "/users/\(login)"
+            case .AssignedIssues:
+                return "/issues"
+            case .IssuesInRepository(let owner, let repository):
+                return "/repos/\(owner)/\(repository)/issues"
             }
         }
         
@@ -181,6 +191,10 @@ public final class Client {
                 return owner.hashValue ^ repo.hashValue
             case let .UserInfo(login):
                 return login.hashValue
+            case .AssignedIssues:
+                return "AssignedIssues".hashValue
+            case .IssuesInRepository(let owner, let repository):
+                return "Issues".hashValue ^ owner.hashValue ^ repository.hashValue
             }
         }
         
@@ -256,7 +270,16 @@ public final class Client {
     public func userWithLogin(login: String) -> SignalProducer<(Response, UserInfo), Error> {
         return fetchOne(.UserInfo(login: login))
     }
-    
+
+    public func assignedIssues(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
+        return fetchMany(.AssignedIssues, page: page, pageSize: perPage)
+    }
+
+    public func issuesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
+        precondition(repository.server == server)
+        return fetchMany(.IssuesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+    }
+
     /// Fetch an endpoint from the API.
     private func fetch(endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, AnyObject), Error> {
         let URL = NSURL(server, endpoint, page: page, pageSize: pageSize)

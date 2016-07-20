@@ -27,7 +27,11 @@ let result = SignalProducer<FixtureType, NSError>(values: Fixture.allFixtures)
         print("*** Downloading \(request.URL!)\n    to \(path)")
         return session
             .rac_dataWithRequest(request)
+            .on(failed: { error in
+                print("***** Download failed: \(error)")
+            })
             .on(next: { data, response in
+                
                 let existing = NSData(contentsOfURL: dataURL)
                 let changed = existing != data
                 

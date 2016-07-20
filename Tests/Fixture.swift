@@ -125,6 +125,7 @@ struct Fixture {
         Releases.Carthage[1],
         UserInfo.mdiep,
         UserInfo.test,
+        IssuesInRepository.PalleasOpensource
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -212,6 +213,29 @@ struct Fixture {
         init(_ server: Server, _ login: String) {
             self.server = server
             self.login = login
+        }
+    }
+
+    struct IssuesInRepository: EndpointFixtureType {
+        static let PalleasOpensource = IssuesInRepository(.DotCom, "Palleas-opensource", "Sample-repository")
+
+        let server: Server
+
+        var endpoint: Client.Endpoint {
+            return .IssuesInRepository(owner: owner, repository: repository)
+        }
+
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+        let contentType = Client.APIContentType
+
+        let owner: String
+        let repository: String
+
+        init(_ server: Server, _ owner: String, _ repository: String) {
+            self.server = server
+            self.owner = owner
+            self.repository = repository
         }
     }
 }
