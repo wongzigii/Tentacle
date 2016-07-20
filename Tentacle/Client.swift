@@ -168,6 +168,9 @@ public final class Client {
         // https://developer.github.com/v3/issues/#list-issues-for-a-repository
         case IssuesInRepository(owner: String, repository: String)
         
+        // https://developer.github.com/v3/users/#get-the-authenticated-user
+        case AuthenticatedUser
+
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
@@ -180,6 +183,8 @@ public final class Client {
                 return "/issues"
             case .IssuesInRepository(let owner, let repository):
                 return "/repos/\(owner)/\(repository)/issues"
+            case .AuthenticatedUser:
+                return "/user"
             }
         }
         
@@ -195,6 +200,8 @@ public final class Client {
                 return "AssignedIssues".hashValue
             case .IssuesInRepository(let owner, let repository):
                 return "Issues".hashValue ^ owner.hashValue ^ repository.hashValue
+            case .AuthenticatedUser:
+                return "authenticated-user".hashValue
             }
         }
         
@@ -269,6 +276,11 @@ public final class Client {
     /// Fetch the user with the given login.
     public func userWithLogin(login: String) -> SignalProducer<(Response, UserInfo), Error> {
         return fetchOne(.UserInfo(login: login))
+    }
+
+    /// Fetch the currently authenticated user
+    public func authenticatedUser() -> SignalProducer<(Response, UserInfo), Error> {
+        return fetchOne(.AuthenticatedUser)
     }
 
     public func assignedIssues(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
