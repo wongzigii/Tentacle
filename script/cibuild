@@ -10,6 +10,5 @@ my @args = ("-workspace", $WORKSPACE, "-scheme", $SCHEME, "test", "CODE_SIGNING_
 
 unshift @args, "-sdk", "iphonesimulator" if $buildSettings =~ /\bPLATFORM_NAME = iphoneos/i;
 
-print "xctool @args\n";
-exec("xctool", @args);
-
+print "xcodebuild @args\n";
+exec("xcodebuild", @args);
