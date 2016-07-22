@@ -11,4 +11,4 @@ my @args = ("-workspace", $WORKSPACE, "-scheme", $SCHEME, $ACTION, "CODE_SIGNING
 unshift @args, "-sdk", "iphonesimulator" if $buildSettings =~ /\bPLATFORM_NAME = iphoneos/i;
 
 print "xcodebuild @args\n";
-exec("xcodebuild", @args);
+exec("xcodebuild @args");
