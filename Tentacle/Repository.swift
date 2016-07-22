@@ -23,9 +23,15 @@ public struct Repository: Hashable, CustomStringConvertible {
     
     /// The URL of the repository.
     public var URL: NSURL {
-        return server.URL
-            .URLByAppendingPathComponent(owner)
-            .URLByAppendingPathComponent(name)
+        #if swift(>=2.3)
+            return server.URL
+                .URLByAppendingPathComponent(owner)!
+                .URLByAppendingPathComponent(name)!
+        #else
+            return server.URL
+                .URLByAppendingPathComponent(owner)
+                .URLByAppendingPathComponent(name)
+        #endif
     }
     
     public var hashValue: Int {

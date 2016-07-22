@@ -25,7 +25,11 @@ public struct PullRequest: Hashable, CustomStringConvertible {
     }
 
     public var description: String {
-        return URL.absoluteString
+        #if swift(>=2.3)
+            return URL.absoluteString!
+        #else
+            return URL.absoluteString
+        #endif
     }
 }
 

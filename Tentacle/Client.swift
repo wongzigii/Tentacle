@@ -29,13 +29,24 @@ extension NSURL {
         let queryItems = [ ("page", page), ("per_page", pageSize) ]
             .filter { _, value in value != nil }
             .map { name, value in NSURLQueryItem(name: name, value: "\(value!)") }
-        
-        let URL = NSURL(string: server.endpoint)!
-            .URLByAppendingPathComponent(endpoint.path)
-            .URLWithQueryItems(endpoint.queryItems)
-            .URLWithQueryItems(queryItems)
-        
-        self.init(string: URL.absoluteString)!
+
+        #if swift(>=2.3)
+            let URL = NSURL(string: server.endpoint)!
+                .URLByAppendingPathComponent(endpoint.path)!
+                .URLWithQueryItems(endpoint.queryItems)
+                .URLWithQueryItems(queryItems)
+        #else
+            let URL = NSURL(string: server.endpoint)!
+                .URLByAppendingPathComponent(endpoint.path)
+                .URLWithQueryItems(endpoint.queryItems)
+                .URLWithQueryItems(queryItems)
+        #endif
+
+        #if swift(>=2.3)
+            self.init(string: URL.absoluteString!)!
+        #else
+            self.init(string: URL.absoluteString)!
+        #endif
     }
 }
 
