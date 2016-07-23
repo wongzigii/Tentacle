@@ -6,7 +6,7 @@ my ($WORKSPACE, $SCHEME, $ACTION) = @ARGV;
 
 my $buildSettings = qx{xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -showBuildSettings};
 
-my @args = ("-workspace", $WORKSPACE, "-scheme", $SCHEME, $ACTION, "CODE_SIGNING_REQUIRED=NO", "CODE_SIGN_IDENTITY=");
+my @args = ("-workspace", $WORKSPACE, "-scheme", $SCHEME, split(/\s+/, $ACTION), "CODE_SIGNING_REQUIRED=NO", "CODE_SIGN_IDENTITY=");
 
 if ($buildSettings =~ /\bPLATFORM_NAME = iphoneos/i) {
   unshift @args, "-destination", "\"name=iPhone 6s\"";
@@ -14,4 +14,4 @@ if ($buildSettings =~ /\bPLATFORM_NAME = iphoneos/i) {
 }
 
 print "xcodebuild @args\n";
-exec("xcodebuild @args");
+exec("xcodebuild", @args);
