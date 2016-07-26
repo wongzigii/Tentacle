@@ -178,7 +178,10 @@ public final class Client {
 
         // https://developer.github.com/v3/issues/#list-issues-for-a-repository
         case IssuesInRepository(owner: String, repository: String)
-        
+
+        // https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
+        case CommentsOnIssue(number: String, owner: String, repository: String)
+
         // https://developer.github.com/v3/users/#get-the-authenticated-user
         case AuthenticatedUser
 
@@ -194,6 +197,8 @@ public final class Client {
                 return "/issues"
             case .IssuesInRepository(let owner, let repository):
                 return "/repos/\(owner)/\(repository)/issues"
+            case .CommentsOnIssue(let issue, let owner, let repository):
+                return "/repos/\(owner)/\(repository)/issues/\(issue)/comments"
             case .AuthenticatedUser:
                 return "/user"
             }
@@ -211,6 +216,8 @@ public final class Client {
                 return "AssignedIssues".hashValue
             case .IssuesInRepository(let owner, let repository):
                 return "Issues".hashValue ^ owner.hashValue ^ repository.hashValue
+            case .CommentsOnIssue(let issue, let owner, let repository):
+                return issue.hashValue ^ owner.hashValue ^ repository.hashValue
             case .AuthenticatedUser:
                 return "authenticated-user".hashValue
             }
