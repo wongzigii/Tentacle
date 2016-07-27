@@ -312,7 +312,6 @@ public final class Client {
 
     public func commentsOnIssue(issue: Issue, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
         precondition(repository.server == server)
-
         return fetchMany(.CommentsOnIssue(number: issue.number, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
 
