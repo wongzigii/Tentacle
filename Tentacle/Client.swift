@@ -180,7 +180,7 @@ public final class Client {
         case IssuesInRepository(owner: String, repository: String)
 
         // https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
-        case CommentsOnIssue(number: String, owner: String, repository: String)
+        case CommentsOnIssue(number: Int, owner: String, repository: String)
 
         // https://developer.github.com/v3/users/#get-the-authenticated-user
         case AuthenticatedUser
@@ -308,6 +308,12 @@ public final class Client {
     public func issuesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
         precondition(repository.server == server)
         return fetchMany(.IssuesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+    }
+
+    public func commentsOnIssue(issue: Issue, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
+        precondition(repository.server == server)
+
+        return fetchMany(.CommentsOnIssue(number: issue.number, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
 
     /// Fetch an endpoint from the API.

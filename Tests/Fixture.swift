@@ -241,13 +241,13 @@ struct Fixture {
     }
 
     struct CommentsOnIssue: EndpointFixtureType {
-        static let CommentsOnIssueInSampleRepository = CommentsOnIssue(.DotCom, "1", "Palleas-Opensource", "Sample-repository")
+        static let CommentsOnIssueInSampleRepository = CommentsOnIssue(.DotCom, 1, "Palleas-Opensource", "Sample-repository")
 
         let server: Server
         let page: UInt? = nil
         let pageSize: UInt? = nil
 
-        let number: String
+        let number: Int
         let owner: String
         let repository: String
 
@@ -257,7 +257,7 @@ struct Fixture {
             return .CommentsOnIssue(number: number, owner: owner, repository: repository)
         }
 
-        init(_ server: Server, _ number: String, _ owner: String, _ repository: String) {
+        init(_ server: Server, _ number: Int, _ owner: String, _ repository: String) {
             self.server = server
             self.number = number
             self.owner = owner
