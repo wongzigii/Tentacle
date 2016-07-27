@@ -274,10 +274,6 @@
 		BE0F40961C8908CB00E3B11A /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				7A2788751D4920B5007AC936 /* repos-Palleas-Opensource-Sample-repository-issues-1-comments.data */,
-				7A2788761D4920B5007AC936 /* repos-Palleas-Opensource-Sample-repository-issues-1-comments.response */,
-				7A2F660C1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.data */,
-				7A2F660D1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.response */,
 				BE0F40D81C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data */,
 				BE0F40D91C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response */,
 				BE1E035A1C964F8B001296C2 /* repos-Carthage-Carthage-releases.page-1-per_page-30.data */,
@@ -290,6 +286,10 @@
 				BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */,
 				BE0F40DA1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.data */,
 				BE0F40DB1C8CA13400E3B11A /* repos-mdiep-NonExistent-releases-tags-tag.response */,
+				7A2788751D4920B5007AC936 /* repos-Palleas-Opensource-Sample-repository-issues-1-comments.data */,
+				7A2788761D4920B5007AC936 /* repos-Palleas-Opensource-Sample-repository-issues-1-comments.response */,
+				7A2F660C1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.data */,
+				7A2F660D1CF523F300463602 /* repos-Palleas-opensource-Sample-repository-issues.response */,
 				BE0F40E81C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.data */,
 				BE0F40E91C8CA1DB00E3B11A /* repos-torvalds-linux-releases-tags-v4.4.response */,
 				BECB8A911CBDDDBB005D70A6 /* users-mdiep.data */,
