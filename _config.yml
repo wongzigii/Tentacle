@@ -1,0 +1,2 @@
+exclude: ["Tentacle", "Gemfile", "Gemfile.lock", "docsets"]
+
