@@ -22,8 +22,8 @@ public struct Comment: Hashable, CustomStringConvertible {
     public let updatedAt: NSDate
     /// The body of the comment
     public let body: String
-    /// The user who posted this comment
-    public let user: User
+    /// The author of this comment
+    public let author: User
     
     public var hashValue: Int {
         return ID.hashValue

@@ -34,7 +34,7 @@ class CommentsTests: XCTestCase {
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:28:21Z")!,
                 updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:28:21Z")!,
                 body: "I know right?!",
-                user: palleas
+                author: palleas
             ),
             Comment(
                 ID: "235455603",
@@ -42,7 +42,7 @@ class CommentsTests: XCTestCase {
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:29:31Z")!,
                 updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:29:31Z")!,
                 body: "👍 Good idea to say stuff like that on internet!",
-                user: palleasOpensource
+                author: palleasOpensource
             )
         ]
 
