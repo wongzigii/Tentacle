@@ -185,6 +185,18 @@ public final class Client {
         // https://developer.github.com/v3/users/#get-the-authenticated-user
         case AuthenticatedUser
 
+        // https://developer.github.com/v3/repos/#list-your-repositories
+        case Repositories
+
+        // https://developer.github.com/v3/repos/#list-user-repositories
+        case ReposiroriesForUser(user: String)
+
+        // https://developer.github.com/v3/repos/#list-organization-repositories
+        case RepositoriesForOrganization(organisation: String)
+
+        // https://developer.github.com/v3/repos/#list-all-public-repositories
+        case PublicRepositories
+
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
@@ -201,6 +213,14 @@ public final class Client {
                 return "/repos/\(owner)/\(repository)/issues/\(issue)/comments"
             case .AuthenticatedUser:
                 return "/user"
+            case .Repositories:
+                return "/user/repos"
+            case .ReposiroriesForUser(let user):
+                return "/users/\(user)/repos"
+            case .RepositoriesForOrganization(let organisation):
+                return "/orgs/\(organisation)/repos"
+            case .PublicRepositories:
+                return "/repositories"
             }
         }
         
@@ -220,6 +240,14 @@ public final class Client {
                 return issue.hashValue ^ owner.hashValue ^ repository.hashValue
             case .AuthenticatedUser:
                 return "authenticated-user".hashValue
+            case .Repositories:
+                return "Repositories".hashValue
+            case .ReposiroriesForUser(let user):
+                return user.hashValue
+            case .RepositoriesForOrganization(let organisation):
+                return organisation.hashValue
+            case .PublicRepositories:
+                return "PublicRepositories".hashValue
             }
         }
         
