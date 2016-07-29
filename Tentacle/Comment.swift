@@ -12,11 +12,17 @@ import Argo
 
 public struct Comment: Hashable, CustomStringConvertible {
 
+    /// The id of the issue
     public let ID: String
+    /// The URL to view this comment in a browser
     public let URL: NSURL
+    /// The date this comment was created at
     public let createdAt: NSDate
+    /// The date this comment was last updated at
     public let updatedAt: NSDate
+    /// The body of the comment
     public let body: String
+    /// The user who posted this comment
     public let user: User
     
     public var hashValue: Int {

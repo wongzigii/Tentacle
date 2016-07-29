@@ -310,6 +310,7 @@ public final class Client {
         return fetchMany(.IssuesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
 
+    /// Fetch the comments posted on an issue
     public func commentsOnIssue(issue: Issue, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
         precondition(repository.server == server)
         return fetchMany(.CommentsOnIssue(number: issue.number, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
