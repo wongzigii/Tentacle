@@ -16,7 +16,7 @@ class IssuesTests: XCTestCase {
         let palleasOpensource = User(
             ID: "15802020",
             login: "Palleas-opensource",
-            URL: NSURL(string: "https://api.github.com/users/Palleas-opensource")!,
+            URL: NSURL(string: "https://github.com/Palleas-opensource")!,
             avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!
         )
 
@@ -83,11 +83,11 @@ class IssuesTests: XCTestCase {
                 assignees: [palleasOpensource],
                 milestone: shipItMilestone,
                 locked: false,
-                commentCount: 0,
+                commentCount: 2,
                 pullRequest: nil,
                 closedAt: nil,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-05-24T23:38:39Z")!,
-                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-13T16:56:57Z")!
+                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:29:31Z")!
             )
         ]
 

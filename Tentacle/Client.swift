@@ -178,7 +178,10 @@ public final class Client {
 
         // https://developer.github.com/v3/issues/#list-issues-for-a-repository
         case IssuesInRepository(owner: String, repository: String)
-        
+
+        // https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
+        case CommentsOnIssue(number: Int, owner: String, repository: String)
+
         // https://developer.github.com/v3/users/#get-the-authenticated-user
         case AuthenticatedUser
 
@@ -194,6 +197,8 @@ public final class Client {
                 return "/issues"
             case .IssuesInRepository(let owner, let repository):
                 return "/repos/\(owner)/\(repository)/issues"
+            case .CommentsOnIssue(let issue, let owner, let repository):
+                return "/repos/\(owner)/\(repository)/issues/\(issue)/comments"
             case .AuthenticatedUser:
                 return "/user"
             }
@@ -211,6 +216,8 @@ public final class Client {
                 return "AssignedIssues".hashValue
             case .IssuesInRepository(let owner, let repository):
                 return "Issues".hashValue ^ owner.hashValue ^ repository.hashValue
+            case .CommentsOnIssue(let issue, let owner, let repository):
+                return issue.hashValue ^ owner.hashValue ^ repository.hashValue
             case .AuthenticatedUser:
                 return "authenticated-user".hashValue
             }
@@ -301,6 +308,12 @@ public final class Client {
     public func issuesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
         precondition(repository.server == server)
         return fetchMany(.IssuesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+    }
+
+    /// Fetch the comments posted on an issue
+    public func commentsOnIssue(issue: Issue, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
+        precondition(repository.server == server)
+        return fetchMany(.CommentsOnIssue(number: issue.number, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
 
     /// Fetch an endpoint from the API.
