@@ -12,52 +12,52 @@ import Curry
 
 public struct RepositoryInfo: Hashable, CustomStringConvertible {
     /// The id of the repository
-    let id: String
+    public let id: String
     
     /// The basic informations about the owner of the repository, either an User or an Organization
-    let owner: Owner
+    public let owner: Owner
 
     /// The name of the repository
-    let name: String
+    public let name: String
 
     /// The name of the repository prefixed with the name of the owner
-    let fullName: String
+    public let fullName: String
 
     /// The description of the repository
-    let body: String
+    public let body: String
 
     /// The URL of the repository to load in a browser
-    let URL: NSURL
+    public let URL: NSURL
 
     /// The homepage of the reposutiry
-    let homepage: NSURL?
+    public let homepage: NSURL?
 
     /// Contains true if the repository is private
-    let isPrivate: Bool
+    public let isPrivate: Bool
 
     /// Contains true if the repository is a fork
-    let isFork: Bool
+    public let isFork: Bool
 
     /// The number of forks of this repository
-    let forksCount: Int
+    public let forksCount: Int
 
     /// The number of users who starred this repository
-    let stargazersCount: Int
+    public let stargazersCount: Int
 
     /// The number of users watching this repository
-    let watchersCount: Int
+    public let watchersCount: Int
 
     /// The number of open issues in this repository
-    let openIssuesCount: Int
+    public let openIssuesCount: Int
 
     /// The date the last push happened at
-    let pushedAt: NSDate
+    public let pushedAt: NSDate
 
     /// The date the repository was created at
-    let createdAt: NSDate
+    public let createdAt: NSDate
 
     /// The date the repository was last updated
-    let updatedAt: NSDate
+    public let updatedAt: NSDate
 
     public var hashValue: Int {
         return id.hashValue ^ fullName.hashValue
