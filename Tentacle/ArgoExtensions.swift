@@ -75,6 +75,23 @@ internal func toNSURL(string: String) -> Decoded<NSURL> {
     }
 }
 
+internal func toOptionalNSURL(string: String?) -> Decoded<NSURL?> {
+    guard let string = string else { return .Success(nil) }
+    if let url = NSURL(string: string) {
+        return .Success(url)
+    } else {
+        return .Failure(.Custom("URL is not properly formatted"))
+    }
+}
+
 internal func toColor(string: String) -> Decoded<Color> {
     return .Success(Color(hex: string))
+}
+
+internal func toOwnerType(string: String) -> Decoded<Owner.OwnerType> {
+    if let type = Owner.OwnerType(rawValue: string) {
+        return .Success(type)
+    } else {
+        return .Failure(.Custom("String \(string) does not represent a valid owner type"))
+    }
 }

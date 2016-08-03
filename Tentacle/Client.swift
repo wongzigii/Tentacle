@@ -189,7 +189,7 @@ public final class Client {
         case Repositories
 
         // https://developer.github.com/v3/repos/#list-user-repositories
-        case ReposiroriesForUser(user: String)
+        case RepositoriesForUser(user: String)
 
         // https://developer.github.com/v3/repos/#list-organization-repositories
         case RepositoriesForOrganization(organisation: String)
@@ -215,7 +215,7 @@ public final class Client {
                 return "/user"
             case .Repositories:
                 return "/user/repos"
-            case .ReposiroriesForUser(let user):
+            case .RepositoriesForUser(let user):
                 return "/users/\(user)/repos"
             case .RepositoriesForOrganization(let organisation):
                 return "/orgs/\(organisation)/repos"
@@ -242,7 +242,7 @@ public final class Client {
                 return "authenticated-user".hashValue
             case .Repositories:
                 return "Repositories".hashValue
-            case .ReposiroriesForUser(let user):
+            case .RepositoriesForUser(let user):
                 return user.hashValue
             case .RepositoriesForOrganization(let organisation):
                 return organisation.hashValue

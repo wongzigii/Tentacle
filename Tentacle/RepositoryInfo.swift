@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Argo
+import Curry
 
 public struct RepositoryInfo: Hashable, CustomStringConvertible {
     let id: String
@@ -16,7 +18,7 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     let fullName: String
     let body: String
     let URL: NSURL
-    let homepage: NSURL
+    let homepage: NSURL?
 
     let isPrivate: Bool
     let isFork: Bool
@@ -28,18 +30,12 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     let size: Int
     let defaultBranch: String
 
-    let language: String?
-    let hasIssues: Bool
-    let hasWiki: Bool
-    let hasPages: Bool
-    let hasDownloads: Bool
-
     let pushedAt: NSDate
     let createdAt: NSDate
     let updatedAt: NSDate
 
     public var hashValue: Int {
-        return id.hashValue ^ fullName.hashValue
+        return id.hashValue //^ fullName.hashValue
     }
 
     public var description: String {
@@ -49,6 +45,32 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
 
 public func ==(lhs: RepositoryInfo, rhs: RepositoryInfo) -> Bool {
     return lhs.id == rhs.id
-        && lhs.name == rhs.id
+        && lhs.name == rhs.name
         && lhs.fullName == rhs.fullName
+}
+
+extension RepositoryInfo: ResourceType {
+    public static func decode(j: JSON) -> Decoded<RepositoryInfo> {
+        let f = curry(RepositoryInfo.init)
+
+        return f
+            <^> (j <| "id" >>- toString)
+            <*> j <| "owner"
+            <*> j <| "name"
+            <*> j <| "full_name"
+            <*> j <| "description"
+            <*> (j <| "html_url" >>- toNSURL)
+            <*> (j <|? "homepage" >>- toOptionalNSURL)
+            <*> j <| "private"
+            <*> j <| "fork"
+            <*> j <| "forks_count"
+            <*> j <| "stargazers_count"
+            <*> j <| "watchers_count"
+            <*> j <| "open_issues_count"
+            <*> j <| "size"
+            <*> j <| "default_branch"
+            <*> (j <| "pushed_at" >>- toNSDate)
+            <*> (j <| "created_at" >>- toNSDate)
+            <*> (j <| "updated_at" >>- toNSDate)
+    }
 }

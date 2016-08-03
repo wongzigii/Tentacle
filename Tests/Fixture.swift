@@ -107,7 +107,9 @@ extension EndpointFixtureType {
     
     /// Decode the fixture's JSON as an array of objects of the returned type.
     func decode<Object: Decodable where Object.DecodedType == Object>() -> [Object]? {
-        return Argo.decode(JSON).value
+        let decoded: Decoded<[Object]> =  Argo.decode(JSON)
+        print("Decoded = \(decoded.error)")
+        return decoded.value
     }
 }
 
@@ -126,7 +128,8 @@ struct Fixture {
         UserInfo.mdiep,
         UserInfo.test,
         IssuesInRepository.PalleasOpensource,
-        CommentsOnIssue.CommentsOnIssueInSampleRepository
+        CommentsOnIssue.CommentsOnIssueInSampleRepository,
+        RepositoriesForUser.RepositoriesForPalleasOpensource
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -262,6 +265,27 @@ struct Fixture {
             self.number = number
             self.owner = owner
             self.repository = repository
+        }
+    }
+
+    struct RepositoriesForUser: EndpointFixtureType {
+        static let RepositoriesForPalleasOpensource = RepositoriesForUser(.DotCom, "Palleas-Opensource")
+        
+        let server: Server
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+
+        let owner: String
+
+        let contentType = Client.APIContentType
+
+        var endpoint: Client.Endpoint {
+            return .RepositoriesForUser(user: owner)
+        }
+
+        init(_ server: Server, _ owner: String) {
+            self.server = server
+            self.owner = owner
         }
     }
 }
