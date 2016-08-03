@@ -344,6 +344,22 @@ public final class Client {
         return fetchMany(.CommentsOnIssue(number: issue, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
 
+    public func repositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.Repositories, page: page, pageSize: perPage)
+    }
+
+    public func repositoriesForUser(user: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.RepositoriesForUser(user: user), page: page, pageSize: perPage)
+    }
+
+    public func RepositoriesForOrganization(organisation: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.RepositoriesForOrganization(organisation: organisation), page: page, pageSize: perPage)
+    }
+
+    public func publicRepositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.PublicRepositories, page: page, pageSize: perPage)
+    }
+
     /// Fetch an endpoint from the API.
     private func fetch(endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, AnyObject), Error> {
         let URL = NSURL(server, endpoint, page: page, pageSize: pageSize)
