@@ -16,11 +16,22 @@ public struct Owner: Hashable, CustomStringConvertible {
         case Organization = "Organization"
     }
 
+    /// The id of the owner
     let id: String
+
+    /// The login of the owner
     let login: String
+
+    /// The url to the owner's avatar
     let avatarURL: NSURL
+
+    /// The id of an owner's gravatar
     let gravatarID: String?
+
+    /// The URL to view this owner in a browser
     let URL: NSURL
+
+    /// The type of owner, either an user of an organization
     let type: OwnerType
 
     public var hashValue: Int {

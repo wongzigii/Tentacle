@@ -11,31 +11,56 @@ import Argo
 import Curry
 
 public struct RepositoryInfo: Hashable, CustomStringConvertible {
+    /// The id of the repository
     let id: String
+    
+    /// The basic informations about the owner of the repository, either an User or an Organization
     let owner: Owner
 
+    /// The name of the repository
     let name: String
+
+    /// The name of the repository prefixed with the name of the owner
     let fullName: String
+
+    /// The description of the repository
     let body: String
+
+    /// The URL of the repository to load in a browser
     let URL: NSURL
+
+    /// The homepage of the reposutiry
     let homepage: NSURL?
 
+    /// Contains true if the repository is private
     let isPrivate: Bool
+
+    /// Contains true if the repository is a fork
     let isFork: Bool
 
+    /// The number of forks of this repository
     let forksCount: Int
-    let stargazersCount: Int
-    let watchersCount: Int
-    let openIssuesCount: Int
-    let size: Int
-    let defaultBranch: String
 
+    /// The number of users who starred this repository
+    let stargazersCount: Int
+
+    /// The number of users watching this repository
+    let watchersCount: Int
+
+    /// The number of open issues in this repository
+    let openIssuesCount: Int
+
+    /// The date the last push happened at
     let pushedAt: NSDate
+
+    /// The date the repository was created at
     let createdAt: NSDate
+
+    /// The date the repository was last updated
     let updatedAt: NSDate
 
     public var hashValue: Int {
-        return id.hashValue //^ fullName.hashValue
+        return id.hashValue ^ fullName.hashValue
     }
 
     public var description: String {
@@ -67,8 +92,6 @@ extension RepositoryInfo: ResourceType {
             <*> j <| "stargazers_count"
             <*> j <| "watchers_count"
             <*> j <| "open_issues_count"
-            <*> j <| "size"
-            <*> j <| "default_branch"
             <*> (j <| "pushed_at" >>- toNSDate)
             <*> (j <| "created_at" >>- toNSDate)
             <*> (j <| "updated_at" >>- toNSDate)

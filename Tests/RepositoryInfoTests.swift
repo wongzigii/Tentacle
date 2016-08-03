@@ -37,8 +37,6 @@ class RepositoryInfoTests: XCTestCase {
                 stargazersCount: 0,
                 watchersCount: 0,
                 openIssuesCount: 2,
-                size: 2,
-                defaultBranch: "master",
                 pushedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-14T01:40:08Z")!,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-05-24T23:38:17Z")!,
                 updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-05-24T23:38:17Z")!
@@ -75,8 +73,6 @@ class RepositoryInfoTests: XCTestCase {
                 stargazersCount: 193,
                 watchersCount: 193,
                 openIssuesCount: 16,
-                size: 556,
-                defaultBranch: "master",
                 pushedAt: NSDateFormatter.ISO8601.dateFromString("2016-08-01T08:15:31Z")!,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2015-05-10T00:15:08Z")!,
                 updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-31T12:12:36Z")!
@@ -95,8 +91,6 @@ class RepositoryInfoTests: XCTestCase {
                 stargazersCount: 82,
                 watchersCount: 82,
                 openIssuesCount: 3,
-                size: 1391,
-                defaultBranch: "master",
                 pushedAt: NSDateFormatter.ISO8601.dateFromString("2016-04-27T07:22:45Z")!,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-01-12T01:00:02Z")!,
                 updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-08-02T16:07:39Z")!
@@ -115,8 +109,6 @@ class RepositoryInfoTests: XCTestCase {
                 stargazersCount: 16,
                 watchersCount: 16,
                 openIssuesCount: 4,
-                size: 8,
-                defaultBranch: "master",
                 pushedAt: NSDateFormatter.ISO8601.dateFromString("2016-05-02T10:35:31Z")!,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-05-02T00:27:44Z")!,
                 updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T11:39:23Z")!
@@ -135,8 +127,6 @@ class RepositoryInfoTests: XCTestCase {
                 stargazersCount: 5,
                 watchersCount: 5,
                 openIssuesCount: 0,
-                size: 39,
-                defaultBranch: "gh-pages",
                 pushedAt: NSDateFormatter.ISO8601.dateFromString("2016-06-07T23:47:44Z")!,
                 createdAt: NSDateFormatter.ISO8601.dateFromString("2016-05-18T14:47:59Z")!,
                 updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T11:39:11Z")!
