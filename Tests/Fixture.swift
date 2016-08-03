@@ -300,7 +300,7 @@ struct Fixture {
         let contentType = Client.APIContentType
 
         var endpoint: Client.Endpoint {
-            return .RepositoriesForOrganization(organisation: organization)
+            return .RepositoriesForOrganization(organization: organization)
         }
 
         init(_ server: Server, _ organization: String) {
