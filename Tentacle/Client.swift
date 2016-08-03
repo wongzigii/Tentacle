@@ -192,7 +192,7 @@ public final class Client {
         case RepositoriesForUser(user: String)
 
         // https://developer.github.com/v3/repos/#list-organization-repositories
-        case RepositoriesForOrganization(organisation: String)
+        case RepositoriesForOrganization(organization: String)
 
         // https://developer.github.com/v3/repos/#list-all-public-repositories
         case PublicRepositories
@@ -344,18 +344,22 @@ public final class Client {
         return fetchMany(.CommentsOnIssue(number: issue, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
 
+    /// Fetch the authenticated user's repositories
     public func repositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
         return fetchMany(.Repositories, page: page, pageSize: perPage)
     }
 
+    /// Fetch the repositories for a specific user
     public func repositoriesForUser(user: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
         return fetchMany(.RepositoriesForUser(user: user), page: page, pageSize: perPage)
     }
 
-    public func RepositoriesForOrganization(organisation: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
-        return fetchMany(.RepositoriesForOrganization(organisation: organisation), page: page, pageSize: perPage)
+    /// Fetch the repositories for a specific organisation 
+    public func RepositoriesForOrganization(organization: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.RepositoriesForOrganization(organization: organization), page: page, pageSize: perPage)
     }
 
+    /// Fetch the public repositories on Github
     public func publicRepositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
         return fetchMany(.PublicRepositories, page: page, pageSize: perPage)
     }
