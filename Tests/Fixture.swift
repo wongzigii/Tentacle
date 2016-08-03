@@ -129,7 +129,8 @@ struct Fixture {
         UserInfo.test,
         IssuesInRepository.PalleasOpensource,
         CommentsOnIssue.CommentsOnIssueInSampleRepository,
-        RepositoriesForUser.RepositoriesForPalleasOpensource
+        RepositoriesForUser.RepositoriesForPalleasOpensource,
+        RepositoriesForOrganization.RepositoriesForRACCommunity
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -286,6 +287,27 @@ struct Fixture {
         init(_ server: Server, _ owner: String) {
             self.server = server
             self.owner = owner
+        }
+    }
+
+    struct RepositoriesForOrganization: EndpointFixtureType {
+        static let RepositoriesForRACCommunity = RepositoriesForOrganization(.DotCom, "raccommunity")
+
+        let server: Server
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+
+        let organization: String
+
+        let contentType = Client.APIContentType
+
+        var endpoint: Client.Endpoint {
+            return .RepositoriesForOrganization(organisation: organization)
+        }
+
+        init(_ server: Server, _ organization: String) {
+            self.server = server
+            self.organization = organization
         }
     }
 }

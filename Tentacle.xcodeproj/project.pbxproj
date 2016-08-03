@@ -61,6 +61,10 @@
 		7ABFB4E61D517E620067B500 /* users-Palleas-Opensource-repos.response in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFB4E01D517E5B0067B500 /* users-Palleas-Opensource-repos.response */; };
 		7ABFB4E71D517E620067B500 /* users-Palleas-Opensource-repos.data in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFB4DF1D517E5B0067B500 /* users-Palleas-Opensource-repos.data */; };
 		7ABFB4E81D517E620067B500 /* users-Palleas-Opensource-repos.response in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFB4E01D517E5B0067B500 /* users-Palleas-Opensource-repos.response */; };
+		7ABFB4EF1D52398E0067B500 /* orgs-raccommunity-repos.data in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFB4E91D5186E50067B500 /* orgs-raccommunity-repos.data */; };
+		7ABFB4F01D52398E0067B500 /* orgs-raccommunity-repos.response in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFB4EA1D5186E50067B500 /* orgs-raccommunity-repos.response */; };
+		7ABFB4F11D52398E0067B500 /* orgs-raccommunity-repos.data in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFB4E91D5186E50067B500 /* orgs-raccommunity-repos.data */; };
+		7ABFB4F21D52398E0067B500 /* orgs-raccommunity-repos.response in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFB4EA1D5186E50067B500 /* orgs-raccommunity-repos.response */; };
 		BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
 		BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */; };
 		BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A31C89135D00E3B11A /* Decodable.swift */; };
@@ -177,6 +181,8 @@
 		7ABFB4DC1D5159F50067B500 /* RepositoryInfoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryInfoTests.swift; sourceTree = "<group>"; };
 		7ABFB4DF1D517E5B0067B500 /* users-Palleas-Opensource-repos.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "users-Palleas-Opensource-repos.data"; sourceTree = "<group>"; };
 		7ABFB4E01D517E5B0067B500 /* users-Palleas-Opensource-repos.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "users-Palleas-Opensource-repos.response"; sourceTree = "<group>"; };
+		7ABFB4E91D5186E50067B500 /* orgs-raccommunity-repos.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "orgs-raccommunity-repos.data"; sourceTree = "<group>"; };
+		7ABFB4EA1D5186E50067B500 /* orgs-raccommunity-repos.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "orgs-raccommunity-repos.response"; sourceTree = "<group>"; };
 		BE0F409F1C89098E00E3B11A /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Fixture.swift; sourceTree = SOURCE_ROOT; };
 		BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseTests.swift; sourceTree = "<group>"; };
 		BE0F40A31C89135D00E3B11A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
@@ -289,6 +295,8 @@
 		BE0F40961C8908CB00E3B11A /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				7ABFB4E91D5186E50067B500 /* orgs-raccommunity-repos.data */,
+				7ABFB4EA1D5186E50067B500 /* orgs-raccommunity-repos.response */,
 				7ABFB4DF1D517E5B0067B500 /* users-Palleas-Opensource-repos.data */,
 				7ABFB4E01D517E5B0067B500 /* users-Palleas-Opensource-repos.response */,
 				BE0F40D81C8CA13400E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.data */,
@@ -616,7 +624,9 @@
 				7ABFB4E81D517E620067B500 /* users-Palleas-Opensource-repos.response in Resources */,
 				BE1E03721C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */,
 				BE0F40E51C8CA13900E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
+				7ABFB4F21D52398E0067B500 /* orgs-raccommunity-repos.response in Resources */,
 				BE1E03691C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */,
+				7ABFB4F11D52398E0067B500 /* orgs-raccommunity-repos.data in Resources */,
 				BECB8A9E1CBDDE4C005D70A6 /* users-mdiep.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,7 +664,9 @@
 				7ABFB4E61D517E620067B500 /* users-Palleas-Opensource-repos.response in Resources */,
 				BE1E03711C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */,
 				BE0F40E11C8CA13800E3B11A /* repos-Carthage-Carthage-releases-tags-0.15.response in Resources */,
+				7ABFB4F01D52398E0067B500 /* orgs-raccommunity-repos.response in Resources */,
 				BE1E03651C964F98001296C2 /* repos-Carthage-Carthage-releases.page-2-per_page-30.response in Resources */,
+				7ABFB4EF1D52398E0067B500 /* orgs-raccommunity-repos.data in Resources */,
 				BECB8A9A1CBDDE4B005D70A6 /* users-mdiep.response in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

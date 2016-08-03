@@ -34,7 +34,7 @@
         "updated_at" : "2016-06-30T12:53:42Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.17.2\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 3347
+        "download_count" : 3416
       },
       {
         "id" : 1923766,
@@ -66,7 +66,7 @@
         "updated_at" : "2016-06-30T12:53:45Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.17.2\/CarthageKit.framework.zip",
         "name" : "CarthageKit.framework.zip",
-        "download_count" : 109
+        "download_count" : 112
       }
     ],
     "prerelease" : false,
@@ -136,7 +136,7 @@
         "updated_at" : "2016-06-24T12:22:49Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.17.1\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 716
+        "download_count" : 718
       },
       {
         "id" : 1896873,
@@ -238,7 +238,7 @@
         "updated_at" : "2016-06-22T13:08:38Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.17\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 253
+        "download_count" : 254
       },
       {
         "id" : 1885615,
@@ -340,7 +340,7 @@
         "updated_at" : "2016-04-13T12:36:09Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.16.2\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 11888
+        "download_count" : 11947
       },
       {
         "id" : 1544953,
@@ -952,7 +952,7 @@
         "updated_at" : "2016-02-11T19:25:45Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.14\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 7193
+        "download_count" : 7200
       },
       {
         "id" : 1301769,
@@ -1258,7 +1258,7 @@
         "updated_at" : "2015-12-02T02:15:13Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.11\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 12358
+        "download_count" : 12359
       },
       {
         "id" : 1089223,
@@ -1462,7 +1462,7 @@
         "updated_at" : "2015-10-27T13:12:13Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.9.4\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 12473
+        "download_count" : 12484
       },
       {
         "id" : 981860,

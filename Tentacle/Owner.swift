@@ -13,7 +13,7 @@ import Curry
 public struct Owner: Hashable, CustomStringConvertible {
     public enum OwnerType: String {
         case User = "User"
-        case Organization = "Org"
+        case Organization = "Organization"
     }
 
     let id: String
