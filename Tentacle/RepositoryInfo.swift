@@ -21,7 +21,7 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     public let name: String
 
     /// The name of the repository prefixed with the name of the owner
-    public let fullName: String
+    public let nameWithOwner: String
 
     /// The description of the repository
     public let body: String
@@ -60,18 +60,18 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     public let updatedAt: NSDate
 
     public var hashValue: Int {
-        return id.hashValue ^ fullName.hashValue
+        return id.hashValue ^ nameWithOwner.hashValue
     }
 
     public var description: String {
-        return fullName
+        return nameWithOwner
     }
 }
 
 public func ==(lhs: RepositoryInfo, rhs: RepositoryInfo) -> Bool {
     return lhs.id == rhs.id
         && lhs.name == rhs.name
-        && lhs.fullName == rhs.fullName
+        && lhs.nameWithOwner == rhs.nameWithOwner
 }
 
 extension RepositoryInfo: ResourceType {

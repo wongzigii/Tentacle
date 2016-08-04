@@ -77,7 +77,7 @@ internal func toNSURL(string: String) -> Decoded<NSURL> {
 
 internal func toOptionalNSURL(string: String?) -> Decoded<NSURL?> {
     guard let string = string else { return .Success(nil) }
-    
+
     return .Success(NSURL(string: string))
 }
 
