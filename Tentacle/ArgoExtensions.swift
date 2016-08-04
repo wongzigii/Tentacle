@@ -88,10 +88,10 @@ internal func toColor(string: String) -> Decoded<Color> {
     return .Success(Color(hex: string))
 }
 
-internal func toOwnerType(string: String) -> Decoded<Owner.OwnerType> {
-    if let type = Owner.OwnerType(rawValue: string) {
+internal func toUserType(string: String) -> Decoded<User.UserType> {
+    if let type = User.UserType(rawValue: string) {
         return .Success(type)
     } else {
-        return .Failure(.Custom("String \(string) does not represent a valid owner type"))
+        return .Failure(.Custom("String \(string) does not represent a valid user type"))
     }
 }

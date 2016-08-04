@@ -13,19 +13,18 @@ import Argo
 class RepositoryInfoTests: XCTestCase {
 
     func testUserRepositoryInfoAreEquals() {
-        let palleasOpensource = Owner(
-            id: "15802020",
+        let palleasOpensource = User(
+            ID: "15802020",
             login: "Palleas-opensource",
-            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
-            gravatarID: "", 
             URL: NSURL(string: "https://github.com/Palleas-opensource")!,
+            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
             type: .User
         )
 
         let expected = [
             RepositoryInfo(
                 id: "59615946",
-                owner: palleasOpensource,
+                user: palleasOpensource,
                 name: "Sample-repository",
                 fullName: "Palleas-opensource/Sample-repository",
                 body: "",
@@ -49,19 +48,18 @@ class RepositoryInfoTests: XCTestCase {
     }
 
     func testOrganizationRepositoryAreEqual() {
-        let raccommunity = Owner(
-            id: "18710012",
+        let raccommunity = User(
+            ID: "18710012",
             login: "RACCommunity",
-            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/18710012?v=3")!,
-            gravatarID: nil,
             URL: NSURL(string: "https://github.com/RACCommunity")!,
+            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/18710012?v=3")!,
             type: .Organization
         )
 
         let expected = [
             RepositoryInfo(
                 id: "35350514",
-                owner: raccommunity,
+                user: raccommunity,
                 name: "Rex",
                 fullName: "RACCommunity/Rex",
                 body: "ReactiveCocoa Extensions",
@@ -79,7 +77,7 @@ class RepositoryInfoTests: XCTestCase {
             ),
             RepositoryInfo(
                 id: "49464897",
-                owner: raccommunity,
+                user: raccommunity,
                 name: "RACNest",
                 fullName: "RACCommunity/RACNest",
                 body: "RAC + MVVM examples :mouse::mouse::mouse:",
@@ -97,7 +95,7 @@ class RepositoryInfoTests: XCTestCase {
             ),
             RepositoryInfo(
                 id: "57858100",
-                owner: raccommunity,
+                user: raccommunity,
                 name: "contributors",
                 fullName: "RACCommunity/contributors",
                 body: "ReactiveCocoa's Community Guidelines",
@@ -115,7 +113,7 @@ class RepositoryInfoTests: XCTestCase {
             ),
             RepositoryInfo(
                 id: "59124784",
-                owner: raccommunity,
+                user: raccommunity,
                 name: "racurated",
                 fullName: "RACCommunity/racurated",
                 body: "Curated list of ReactiveCocoa projects.",

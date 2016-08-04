@@ -17,7 +17,8 @@ class IssuesTests: XCTestCase {
             ID: "15802020",
             login: "Palleas-opensource",
             URL: NSURL(string: "https://github.com/Palleas-opensource")!,
-            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!
+            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
+            type: .User
         )
 
         let shipItMilestone = Milestone(

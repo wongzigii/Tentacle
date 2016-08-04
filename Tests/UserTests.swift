@@ -17,7 +17,8 @@ class UserTests: XCTestCase {
                 ID: "1302",
                 login: "mdiep",
                 URL: NSURL(string: "https://github.com/mdiep")!,
-                avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/1302?v=3")!
+                avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/1302?v=3")!,
+                type: .User
             ),
             joinedDate: NSDate(timeIntervalSince1970: 1204155107),
             name: "Matt Diephouse",
@@ -34,7 +35,8 @@ class UserTests: XCTestCase {
                 ID: "383316",
                 login: "test",
                 URL: NSURL(string: "https://github.com/test")!,
-                avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/383316?v=3")!
+                avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/383316?v=3")!,
+                type: .User
             ),
             joinedDate: NSDate(timeIntervalSince1970: 1283337552),
             name: nil,

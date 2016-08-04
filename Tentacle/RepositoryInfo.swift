@@ -15,7 +15,7 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     public let id: String
     
     /// The basic informations about the owner of the repository, either an User or an Organization
-    public let owner: Owner
+    public let user: User
 
     /// The name of the repository
     public let name: String

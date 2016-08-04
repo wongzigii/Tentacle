@@ -17,14 +17,16 @@ class CommentsTests: XCTestCase {
             ID: "15802020",
             login: "Palleas-opensource",
             URL: NSURL(string: "https://github.com/Palleas-opensource")!,
-            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!
+            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
+            type: .User
         )
 
         let palleas = User(
             ID: "48797",
             login: "Palleas",
             URL: NSURL(string: "https://github.com/Palleas")!,
-            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/48797?v=3")!
+            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/48797?v=3")!,
+            type: .User
         )
 
         let expected: [Comment] = [
