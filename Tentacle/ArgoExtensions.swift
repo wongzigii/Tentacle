@@ -71,7 +71,7 @@ internal func toNSURL(string: String) -> Decoded<NSURL> {
     if let url = NSURL(string: string) {
         return .Success(url)
     } else {
-        return .Failure(.Custom("URL is not properly formatted"))
+        return .Failure(.Custom("URL \(string) is not properly formatted"))
     }
 }
 
@@ -80,7 +80,7 @@ internal func toOptionalNSURL(string: String?) -> Decoded<NSURL?> {
     if let url = NSURL(string: string) {
         return .Success(url)
     } else {
-        return .Failure(.Custom("URL is not properly formatted"))
+        return .Failure(.Custom("URL \(string) is not properly formatted"))
     }
 }
 
