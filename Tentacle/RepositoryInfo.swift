@@ -24,7 +24,7 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     public let nameWithOwner: String
 
     /// The description of the repository
-    public let body: String
+    public let body: String?
 
     /// The URL of the repository to load in a browser
     public let URL: NSURL
@@ -83,7 +83,7 @@ extension RepositoryInfo: ResourceType {
             <*> j <| "owner"
             <*> j <| "name"
             <*> j <| "full_name"
-            <*> j <| "description"
+            <*> j <|? "description"
             <*> (j <| "html_url" >>- toNSURL)
             <*> (j <|? "homepage" >>- toOptionalNSURL)
             <*> j <| "private"
