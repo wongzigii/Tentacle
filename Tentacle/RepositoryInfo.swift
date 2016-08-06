@@ -29,7 +29,7 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     /// The URL of the repository to load in a browser
     public let URL: NSURL
 
-    /// The homepage of the reposutiry
+    /// The homepage of the repository
     public let homepage: NSURL?
 
     /// Contains true if the repository is private
