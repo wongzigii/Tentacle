@@ -24,7 +24,7 @@ class RepositoryInfoTests: XCTestCase {
         let expected = [
             RepositoryInfo(
                 id: "59615946",
-                user: palleasOpensource,
+                owner: palleasOpensource,
                 name: "Sample-repository",
                 nameWithOwner: "Palleas-opensource/Sample-repository",
                 body: "",
@@ -59,7 +59,7 @@ class RepositoryInfoTests: XCTestCase {
         let expected = [
             RepositoryInfo(
                 id: "35350514",
-                user: raccommunity,
+                owner: raccommunity,
                 name: "Rex",
                 nameWithOwner: "RACCommunity/Rex",
                 body: "ReactiveCocoa Extensions",
@@ -77,7 +77,7 @@ class RepositoryInfoTests: XCTestCase {
             ),
             RepositoryInfo(
                 id: "49464897",
-                user: raccommunity,
+                owner: raccommunity,
                 name: "RACNest",
                 nameWithOwner: "RACCommunity/RACNest",
                 body: "RAC + MVVM examples :mouse::mouse::mouse:",
@@ -95,7 +95,7 @@ class RepositoryInfoTests: XCTestCase {
             ),
             RepositoryInfo(
                 id: "57858100",
-                user: raccommunity,
+                owner: raccommunity,
                 name: "contributors",
                 nameWithOwner: "RACCommunity/contributors",
                 body: "ReactiveCocoa's Community Guidelines",
@@ -113,7 +113,7 @@ class RepositoryInfoTests: XCTestCase {
             ),
             RepositoryInfo(
                 id: "59124784",
-                user: raccommunity,
+                owner: raccommunity,
                 name: "racurated",
                 nameWithOwner: "RACCommunity/racurated",
                 body: "Curated list of ReactiveCocoa projects.",
