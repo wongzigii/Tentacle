@@ -11,6 +11,11 @@ import Curry
 
 /// A User on GitHub.
 public struct User: Hashable, CustomStringConvertible {
+    public enum UserType: String {
+        case User = "User"
+        case Organization = "Organization"
+    }
+
     /// The unique ID of the user.
     public let ID: String
     
@@ -22,20 +27,16 @@ public struct User: Hashable, CustomStringConvertible {
     
     /// The URL of the user's avatar.
     public let avatarURL: NSURL
-    
+
+    /// The type of user if it's a regular one or an organization
+    public let type: UserType
+
     public var hashValue: Int {
         return ID.hashValue
     }
     
     public var description: String {
         return login
-    }
-    
-    public init(ID: String, login: String, URL: NSURL, avatarURL: NSURL) {
-        self.ID = ID
-        self.login = login
-        self.URL = URL
-        self.avatarURL = avatarURL
     }
 }
 
@@ -53,6 +54,7 @@ extension User: ResourceType {
             <*> j <| "login"
             <*> j <| "html_url"
             <*> j <| "avatar_url"
+            <*> (j <| "type" >>- toUserType)
     }
 }
 

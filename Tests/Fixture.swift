@@ -126,7 +126,9 @@ struct Fixture {
         UserInfo.mdiep,
         UserInfo.test,
         IssuesInRepository.PalleasOpensource,
-        CommentsOnIssue.CommentsOnIssueInSampleRepository
+        CommentsOnIssue.CommentsOnIssueInSampleRepository,
+        RepositoriesForUser.RepositoriesForPalleasOpensource,
+        RepositoriesForOrganization.RepositoriesForRACCommunity
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -262,6 +264,48 @@ struct Fixture {
             self.number = number
             self.owner = owner
             self.repository = repository
+        }
+    }
+
+    struct RepositoriesForUser: EndpointFixtureType {
+        static let RepositoriesForPalleasOpensource = RepositoriesForUser(.DotCom, "Palleas-Opensource")
+        
+        let server: Server
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+
+        let owner: String
+
+        let contentType = Client.APIContentType
+
+        var endpoint: Client.Endpoint {
+            return .RepositoriesForUser(user: owner)
+        }
+
+        init(_ server: Server, _ owner: String) {
+            self.server = server
+            self.owner = owner
+        }
+    }
+
+    struct RepositoriesForOrganization: EndpointFixtureType {
+        static let RepositoriesForRACCommunity = RepositoriesForOrganization(.DotCom, "raccommunity")
+
+        let server: Server
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+
+        let organization: String
+
+        let contentType = Client.APIContentType
+
+        var endpoint: Client.Endpoint {
+            return .RepositoriesForOrganization(organization: organization)
+        }
+
+        init(_ server: Server, _ organization: String) {
+            self.server = server
+            self.organization = organization
         }
     }
 }

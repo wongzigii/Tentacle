@@ -185,6 +185,18 @@ public final class Client {
         // https://developer.github.com/v3/users/#get-the-authenticated-user
         case AuthenticatedUser
 
+        // https://developer.github.com/v3/repos/#list-your-repositories
+        case Repositories
+
+        // https://developer.github.com/v3/repos/#list-user-repositories
+        case RepositoriesForUser(user: String)
+
+        // https://developer.github.com/v3/repos/#list-organization-repositories
+        case RepositoriesForOrganization(organization: String)
+
+        // https://developer.github.com/v3/repos/#list-all-public-repositories
+        case PublicRepositories
+
         var path: String {
             switch self {
             case let .ReleaseByTagName(owner, repo, tag):
@@ -201,6 +213,14 @@ public final class Client {
                 return "/repos/\(owner)/\(repository)/issues/\(issue)/comments"
             case .AuthenticatedUser:
                 return "/user"
+            case .Repositories:
+                return "/user/repos"
+            case .RepositoriesForUser(let user):
+                return "/users/\(user)/repos"
+            case .RepositoriesForOrganization(let organisation):
+                return "/orgs/\(organisation)/repos"
+            case .PublicRepositories:
+                return "/repositories"
             }
         }
         
@@ -220,6 +240,14 @@ public final class Client {
                 return issue.hashValue ^ owner.hashValue ^ repository.hashValue
             case .AuthenticatedUser:
                 return "authenticated-user".hashValue
+            case .Repositories:
+                return "Repositories".hashValue
+            case .RepositoriesForUser(let user):
+                return user.hashValue
+            case .RepositoriesForOrganization(let organisation):
+                return organisation.hashValue
+            case .PublicRepositories:
+                return "PublicRepositories".hashValue
             }
         }
         
@@ -314,6 +342,26 @@ public final class Client {
     public func commentsOnIssue(issue: Int, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
         precondition(repository.server == server)
         return fetchMany(.CommentsOnIssue(number: issue, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+    }
+
+    /// Fetch the authenticated user's repositories
+    public func repositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.Repositories, page: page, pageSize: perPage)
+    }
+
+    /// Fetch the repositories for a specific user
+    public func repositoriesForUser(user: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.RepositoriesForUser(user: user), page: page, pageSize: perPage)
+    }
+
+    /// Fetch the repositories for a specific organisation 
+    public func repositoriesForOrganization(organization: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.RepositoriesForOrganization(organization: organization), page: page, pageSize: perPage)
+    }
+
+    /// Fetch the public repositories on Github
+    public func publicRepositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.PublicRepositories, page: page, pageSize: perPage)
     }
 
     /// Fetch an endpoint from the API.
