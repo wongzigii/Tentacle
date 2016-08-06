@@ -355,7 +355,7 @@ public final class Client {
     }
 
     /// Fetch the repositories for a specific organisation 
-    public func RepositoriesForOrganization(organization: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+    public func repositoriesForOrganization(organization: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
         return fetchMany(.RepositoriesForOrganization(organization: organization), page: page, pageSize: perPage)
     }
 
