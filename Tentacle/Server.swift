@@ -34,7 +34,11 @@ public enum Server: Hashable, CustomStringConvertible {
             return "https://api.github.com"
             
         case let .Enterprise(url):
-            return "\(url.scheme)://\(url.host!)/api/v3"
+            #if swift(>=2.3)
+                return "\(url.scheme!)://\(url.host!)/api/v3"
+            #else
+                return "\(url.scheme)://\(url.host!)/api/v3"
+            #endif
         }
     }
     
