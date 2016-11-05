@@ -328,7 +328,7 @@ public final class Client {
     }
 
     /// Fetch the comments posted on an issue
-    public func commentsOnIssue(_ issue: Int, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
+    public func comments(onIssue issue: Int, in repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
         precondition(repository.server == server)
         return fetchMany(.commentsOnIssue(number: issue, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }

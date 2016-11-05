@@ -31,4 +31,7 @@ extension Client {
 
     @available(*, unavailable, renamed: "issues(in:page:perPage:)")
     public func issuesInRepository(_ repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> { fatalError() }
+
+    @available(*, unavailable, renamed: "comments(onIssue:in:page:perPage:)")
+    public func commentsOnIssue(_ issue: Int, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> { fatalError() }
 }
