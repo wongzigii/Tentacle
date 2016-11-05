@@ -21,8 +21,8 @@ let session = URLSession.shared
 let result = SignalProducer<FixtureType, NSError>(values: Fixture.allFixtures)
     .flatMap(.concat) { fixture -> SignalProducer<(), NSError> in
         let request = URLRequest.create(fixture.url, nil, contentType: fixture.contentType)
-        let dataURL = baseURL.appendingPathComponent(fixture.dataFilename as String)
-        let responseURL = baseURL.appendingPathComponent(fixture.responseFilename as String)
+        let dataURL = baseURL.appendingPathComponent(fixture.dataFilename)
+        let responseURL = baseURL.appendingPathComponent(fixture.responseFilename)
         let path = (dataURL.path as NSString).abbreviatingWithTildeInPath
         print("*** Downloading \(request.url!)\n    to \(path)")
         return session
