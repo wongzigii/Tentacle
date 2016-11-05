@@ -61,7 +61,7 @@ extension FixtureType {
         return filename(withExtension: Fixture.ResponseExtension)
     }
     
-    fileprivate func fileURLWithExtension(_ ext: String) -> URL {
+    private func fileURL(withExtension ext: String) -> URL {
         let bundle = Bundle(for: ImportedWithFixture.self)
         let filename = self.filename(withExtension: ext) as NSString
         return bundle.url(forResource: filename.deletingPathExtension, withExtension: filename.pathExtension)!
@@ -69,12 +69,12 @@ extension FixtureType {
     
     /// The URL of the fixture's data within the test bundle.
     var dataFileURL: URL {
-        return fileURLWithExtension(Fixture.DataExtension)
+        return fileURL(withExtension: Fixture.DataExtension)
     }
     
     /// The URL of the fixture's HTTP response within the test bundle.
     var responseFileURL: URL {
-        return fileURLWithExtension(Fixture.ResponseExtension)
+        return fileURL(withExtension: Fixture.ResponseExtension)
     }
     
     /// The data from the endpoint.
