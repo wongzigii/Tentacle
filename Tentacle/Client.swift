@@ -334,7 +334,7 @@ public final class Client {
     }
 
     /// Fetch the authenticated user's repositories
-    public func repositories(_ page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+    public func repositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
         return fetchMany(.repositories, page: page, pageSize: perPage)
     }
 
