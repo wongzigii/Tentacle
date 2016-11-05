@@ -138,7 +138,7 @@ class ClientTests: XCTestCase {
     func testReleaseForTagInRepository() {
         let fixture = Fixture.Release.Carthage0_15
         ExpectFixtures(
-            client.releaseForTag(fixture.tag, inRepository: fixture.repository),
+            client.release(forTag: fixture.tag, in: fixture.repository),
             fixture
         )
     }
@@ -146,7 +146,7 @@ class ClientTests: XCTestCase {
     func testReleaseForTagInRepositoryNonExistent() {
         let fixture = Fixture.Release.Nonexistent
         ExpectError(
-            client.releaseForTag(fixture.tag, inRepository: fixture.repository),
+            client.release(forTag: fixture.tag, in: fixture.repository),
             .doesNotExist
         )
     }
@@ -154,7 +154,7 @@ class ClientTests: XCTestCase {
     func testReleaseForTagInRepositoryTagOnly() {
         let fixture = Fixture.Release.TagOnly
         ExpectError(
-            client.releaseForTag(fixture.tag, inRepository: fixture.repository),
+            client.release(forTag: fixture.tag, in: fixture.repository),
             .doesNotExist
         )
     }

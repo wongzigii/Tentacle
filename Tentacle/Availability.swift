@@ -23,6 +23,9 @@ extension Client {
     @available(*, unavailable, renamed: "releases(in:page:perPage:)")
     public func releasesInRepository(_ repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> { fatalError() }
 
+    @available(*, unavailable, renamed: "release(forTag:in:)")
+    public func releaseForTag(_ tag: String, inRepository repository: Repository) -> SignalProducer<(Response, Release), Error> { fatalError() }
+
     @available(*, unavailable, renamed: "download(asset:)")
     public func downloadAsset(_ asset: Release.Asset) -> SignalProducer<URL, Error> { fatalError() }
 
