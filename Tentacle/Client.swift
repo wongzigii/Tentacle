@@ -283,7 +283,7 @@ public final class Client {
     /// will be the response and releases from a single page.
     ///
     /// https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
-    public func releasesInRepository(_ repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
+    public func releases(in repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
         precondition(repository.server == server)
         return fetchMany(.releasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }

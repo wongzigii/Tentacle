@@ -122,7 +122,7 @@ class ClientTests: XCTestCase {
     func testReleasesInRepository() {
         let fixtures = Fixture.Releases.Carthage
         ExpectFixtures(
-            client.releasesInRepository(fixtures[0].repository),
+            client.releases(in: fixtures[0].repository),
             fixtures
         )
     }
@@ -130,7 +130,7 @@ class ClientTests: XCTestCase {
     func testReleasesInRepositoryPage2() {
         let fixtures = Fixture.Releases.Carthage
         ExpectFixtures(
-            client.releasesInRepository(fixtures[0].repository, page: 2),
+            client.releases(in: fixtures[0].repository, page: 2),
             fixtures.dropFirst()
         )
     }
