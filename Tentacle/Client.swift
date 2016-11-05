@@ -318,7 +318,7 @@ public final class Client {
         return fetchOne(.authenticatedUser)
     }
 
-    public func assignedIssues(_ page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
+    public func assignedIssues(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
         return fetchMany(.assignedIssues, page: page, pageSize: perPage)
     }
 
