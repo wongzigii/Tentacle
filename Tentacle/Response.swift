@@ -17,7 +17,7 @@ private func linksInLinkHeader(_ header: NSString) -> [String: URL] {
     for match in LinksRegex.matches(in: header as String, options: [], range: NSMakeRange(0, header.length)) {
         let URI = header.substring(with: match.rangeAt(1))
         let params = header.substring(with: match.rangeAt(2)) as NSString
-        guard let URL = URL(string: URI) else { continue }
+        guard let url = URL(string: URI) else { continue }
         
         var relName: String? = nil
         for match in LinkParamRegex.matches(in: params as String, options: [], range: NSMakeRange(0, params.length)) {
@@ -28,7 +28,7 @@ private func linksInLinkHeader(_ header: NSString) -> [String: URL] {
         }
         
         if let relName = relName {
-            links[relName] = URL
+            links[relName] = url
         }
     }
     return links
