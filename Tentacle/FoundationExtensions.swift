@@ -16,7 +16,4 @@ extension DateFormatter {
         formatter.timeZone = TimeZone(abbreviation:"UTC")
         return formatter
     }()
-
-    @available(*, unavailable, renamed: "iso8601")
-    @nonobjc public static var ISO8601: DateFormatter { fatalError() }
 }

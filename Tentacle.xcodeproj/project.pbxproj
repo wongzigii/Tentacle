@@ -141,6 +141,8 @@
 		CD5AE50C1DCDC6BF00AD5EFB /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5AE50B1DCDC6BF00AD5EFB /* ReactiveSwift.framework */; };
 		CD5AE50E1DCDC71F00AD5EFB /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5AE50D1DCDC71F00AD5EFB /* Runes.framework */; };
 		CD5AE5101DCDC72B00AD5EFB /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5AE50F1DCDC72B00AD5EFB /* ReactiveSwift.framework */; };
+		CD83C7BA1DCE379D00BC2608 /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD83C7B91DCE379D00BC2608 /* Availability.swift */; };
+		CD83C7BB1DCE379D00BC2608 /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD83C7B91DCE379D00BC2608 /* Availability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +241,7 @@
 		CD5AE50B1DCDC6BF00AD5EFB /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5AE50D1DCDC71F00AD5EFB /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Runes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5AE50F1DCDC72B00AD5EFB /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD83C7B91DCE379D00BC2608 /* Availability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Availability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +358,7 @@
 		BE88E7F41C88C6B30034A112 /* Tentacle */ = {
 			isa = PBXGroup;
 			children = (
+				CD83C7B91DCE379D00BC2608 /* Availability.swift */,
 				BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */,
 				BE88E80C1C88C72B0034A112 /* Client.swift */,
 				7A1F20EC1D3E85BB00F275F8 /* Color.swift */,
@@ -700,6 +704,7 @@
 				BEEE474F1C92623E000FFC21 /* Response.swift in Sources */,
 				7A2F66121CF5280200463602 /* Label.swift in Sources */,
 				7A2F66131CF5280600463602 /* Milestone.swift in Sources */,
+				CD83C7BB1DCE379D00BC2608 /* Availability.swift in Sources */,
 				61377C7D1C8A2B760081FF24 /* Repository.swift in Sources */,
 				BECB8A8F1CBDD91D005D70A6 /* FoundationExtensions.swift in Sources */,
 				61377C7B1C8A2B760081FF24 /* GitHubError.swift in Sources */,
@@ -746,6 +751,7 @@
 				BEEE474E1C92623E000FFC21 /* Response.swift in Sources */,
 				7A1A82581CF3DE4C0076E2DD /* Label.swift in Sources */,
 				7A1A825A1CF3DEEA0076E2DD /* Milestone.swift in Sources */,
+				CD83C7BA1DCE379D00BC2608 /* Availability.swift in Sources */,
 				BE88E8321C88D33D0034A112 /* Release.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,
 				BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */,
