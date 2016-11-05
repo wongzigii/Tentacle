@@ -257,7 +257,7 @@ public final class Client {
     }
     
     /// The Credentials for the API.
-    fileprivate let credentials: Credentials?
+    private let credentials: Credentials?
     
     /// Create an unauthenticated client for the given Server.
     public init(_ server: Server) {
@@ -354,7 +354,7 @@ public final class Client {
     }
 
     /// Fetch an endpoint from the API.
-    fileprivate func fetch(_ endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, Any), Error> {
+    private func fetch(_ endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, Any), Error> {
         let url = URL(server, endpoint, page: page, pageSize: pageSize)
         let request = URLRequest.create(url, credentials)
         return URLSession

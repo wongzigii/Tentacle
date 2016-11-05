@@ -106,7 +106,7 @@ func ExpectFixtures
 
 
 class ClientTests: XCTestCase {
-    fileprivate let client = Client(.dotCom)
+    private let client = Client(.dotCom)
     
     override func setUp() {
         OHHTTPStubs
