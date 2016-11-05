@@ -37,4 +37,7 @@ extension Client {
 
     @available(*, unavailable, renamed: "repositories(page:perPage:)")
     public func repositories(_ page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> { fatalError() }
+
+    @available(*, unavailable, renamed: "repositories(forUser:page:perPage:)")
+    public func repositoriesForUser(_ user: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> { fatalError() }
 }

@@ -339,7 +339,7 @@ public final class Client {
     }
 
     /// Fetch the repositories for a specific user
-    public func repositoriesForUser(_ user: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+    public func repositories(forUser user: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
         return fetchMany(.repositoriesForUser(user: user), page: page, pageSize: perPage)
     }
 
