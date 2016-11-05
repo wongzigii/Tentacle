@@ -30,10 +30,10 @@ class IssuesTests: XCTestCase {
             creator: palleasOpensource,
             openIssueCount: 1,
             closedIssueCount: 0,
-            createdAt: DateFormatter.ISO8601.date(from: "2016-07-13T16:56:48Z")!,
-            updatedAt: DateFormatter.ISO8601.date(from: "2016-07-13T16:56:57Z")!,
+            createdAt: DateFormatter.iso8601.date(from: "2016-07-13T16:56:48Z")!,
+            updatedAt: DateFormatter.iso8601.date(from: "2016-07-13T16:56:57Z")!,
             closedAt: nil,
-            dueOn: DateFormatter.ISO8601.date(from: "2016-07-25T04:00:00Z")!,
+            dueOn: DateFormatter.iso8601.date(from: "2016-07-25T04:00:00Z")!,
             url: URL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/milestones/1")!
         )
 
@@ -58,8 +58,8 @@ class IssuesTests: XCTestCase {
                 commentCount: 0,
                 pullRequest: updateReadmePullRequest,
                 closedAt: nil,
-                createdAt:  DateFormatter.ISO8601.date(from: "2016-07-14T01:40:08Z")!,
-                updatedAt:  DateFormatter.ISO8601.date(from: "2016-07-14T01:40:08Z")!),
+                createdAt:  DateFormatter.iso8601.date(from: "2016-07-14T01:40:08Z")!,
+                updatedAt:  DateFormatter.iso8601.date(from: "2016-07-14T01:40:08Z")!),
             Issue(ID: "156633109",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1")!,
                 number: 1,
@@ -87,8 +87,8 @@ class IssuesTests: XCTestCase {
                 commentCount: 2,
                 pullRequest: nil,
                 closedAt: nil,
-                createdAt: DateFormatter.ISO8601.date(from: "2016-05-24T23:38:39Z")!,
-                updatedAt: DateFormatter.ISO8601.date(from: "2016-07-27T01:29:31Z")!
+                createdAt: DateFormatter.iso8601.date(from: "2016-05-24T23:38:39Z")!,
+                updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T01:29:31Z")!
             )
         ]
 

@@ -9,11 +9,14 @@
 import Foundation
 
 extension DateFormatter {
-    @nonobjc public static var ISO8601: DateFormatter = {
+    @nonobjc public static var iso8601: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier:"en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         formatter.timeZone = TimeZone(abbreviation:"UTC")
         return formatter
     }()
+
+    @available(*, unavailable, renamed: "iso8601")
+    @nonobjc public static var ISO8601: DateFormatter { fatalError() }
 }

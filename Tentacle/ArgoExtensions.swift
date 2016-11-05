@@ -51,7 +51,7 @@ internal func toIssueState(_ string: String) -> Decoded<Issue.State> {
 }
 
 internal func toDate(_ string: String) -> Decoded<Date> {
-    if let date = DateFormatter.ISO8601.date(from: string) {
+    if let date = DateFormatter.iso8601.date(from: string) {
         return .success(date)
     } else {
         return .failure(.custom("Date is not ISO8601 formatted"))
@@ -60,7 +60,7 @@ internal func toDate(_ string: String) -> Decoded<Date> {
 
 internal func toOptionalDate(_ string: String?) -> Decoded<Date?> {
     guard let string = string else { return .success(nil) }
-    if let date = DateFormatter.ISO8601.date(from: string) {
+    if let date = DateFormatter.iso8601.date(from: string) {
         return .success(date)
     } else {
         return .failure(.custom("Date is not ISO8601 formatted"))

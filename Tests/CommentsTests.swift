@@ -33,16 +33,16 @@ class CommentsTests: XCTestCase {
             Comment(
                 ID: "235455442",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1#issuecomment-235455442")!,
-                createdAt: DateFormatter.ISO8601.date(from: "2016-07-27T01:28:21Z")!,
-                updatedAt: DateFormatter.ISO8601.date(from: "2016-07-27T01:28:21Z")!,
+                createdAt: DateFormatter.iso8601.date(from: "2016-07-27T01:28:21Z")!,
+                updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T01:28:21Z")!,
                 body: "I know right?!",
                 author: palleas
             ),
             Comment(
                 ID: "235455603",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1#issuecomment-235455603")!,
-                createdAt: DateFormatter.ISO8601.date(from: "2016-07-27T01:29:31Z")!,
-                updatedAt: DateFormatter.ISO8601.date(from: "2016-07-27T01:29:31Z")!,
+                createdAt: DateFormatter.iso8601.date(from: "2016-07-27T01:29:31Z")!,
+                updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T01:29:31Z")!,
                 body: "👍 Good idea to say stuff like that on internet!",
                 author: palleasOpensource
             )
