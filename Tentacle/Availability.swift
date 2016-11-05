@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReactiveSwift
 
 extension DateFormatter {
     @available(*, unavailable, renamed: "iso8601")
@@ -16,4 +17,9 @@ extension DateFormatter {
 extension Release.Asset {
     @available(*, unavailable, renamed: "apiURL")
     public var APIURL: URL { fatalError() }
+}
+
+extension Client {
+    @available(*, unavailable, renamed: "download(asset:)")
+    public func downloadAsset(_ asset: Release.Asset) -> SignalProducer<URL, Error> { fatalError() }
 }

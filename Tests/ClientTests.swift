@@ -166,7 +166,7 @@ class ClientTests: XCTestCase {
             .first!
         
         let result = client
-            .downloadAsset(asset)
+            .download(asset: asset)
             .map { url in
                 return try! Data(contentsOf: url)
             }

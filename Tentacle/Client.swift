@@ -301,7 +301,7 @@ public final class Client {
     /// disk.
     ///
     /// The downloaded file will be deleted after the URL has been sent upon the signal.
-    public func downloadAsset(_ asset: Release.Asset) -> SignalProducer<URL, Error> {
+    public func download(asset: Release.Asset) -> SignalProducer<URL, Error> {
         return URLSession
             .shared
             .downloadFile(URLRequest.create(asset.apiURL, credentials, contentType: Client.DownloadContentType))
