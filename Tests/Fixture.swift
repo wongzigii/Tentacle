@@ -27,7 +27,7 @@ protocol EndpointFixtureType: FixtureType {
 
 extension FixtureType {
     /// The filename used for the local fixture, without an extension
-    fileprivate func filenameWithExtension(_ ext: String) -> String {
+    private func filename(withExtension ext: String) -> String {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
 
         let path = (components.path as NSString)
@@ -53,17 +53,17 @@ extension FixtureType {
     
     /// The filename used for the local fixture's data.
     var dataFilename: String {
-        return filenameWithExtension(Fixture.DataExtension)
+        return filename(withExtension: Fixture.DataExtension)
     }
     
     /// The filename used for the local fixture's HTTP response.
     var responseFilename: String {
-        return filenameWithExtension(Fixture.ResponseExtension)
+        return filename(withExtension: Fixture.ResponseExtension)
     }
     
     fileprivate func fileURLWithExtension(_ ext: String) -> URL {
         let bundle = Bundle(for: ImportedWithFixture.self)
-        let filename = filenameWithExtension(ext) as NSString
+        let filename = self.filename(withExtension: ext) as NSString
         return bundle.url(forResource: filename.deletingPathExtension, withExtension: filename.pathExtension)!
     }
     
