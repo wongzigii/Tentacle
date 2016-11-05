@@ -8,6 +8,7 @@
 
 import Argo
 import Curry
+import Runes
 
 /// An Issue on Github
 public struct Issue: Hashable, CustomStringConvertible {
@@ -20,7 +21,7 @@ public struct Issue: Hashable, CustomStringConvertible {
     public let ID: String
 
     /// The URL to view this issue in a browser
-    public let URL: NSURL?
+    public let url: URL?
 
     /// The number of the issue in the repository it belongs to
     public let number: Int
@@ -56,13 +57,13 @@ public struct Issue: Hashable, CustomStringConvertible {
     public let pullRequest: PullRequest?
 
     /// The date this issue was closed at, if it ever were
-    public let closedAt: NSDate?
+    public let closedAt: Date?
 
     /// The date this issue was created at
-    public let createdAt: NSDate
+    public let createdAt: Date
 
     /// The date this issue was updated at
-    public let updatedAt: NSDate
+    public let updatedAt: Date
 
     public var hashValue: Int {
         return ID.hashValue
@@ -72,9 +73,9 @@ public struct Issue: Hashable, CustomStringConvertible {
         return title
     }
 
-    public init(ID: String, URL: NSURL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: NSDate?, createdAt: NSDate, updatedAt: NSDate) {
+    public init(ID: String, url: URL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: Date?, createdAt: Date, updatedAt: Date) {
         self.ID = ID
-        self.URL = URL
+        self.url = url
         self.number = number
         self.state = state
         self.title = title
@@ -95,7 +96,7 @@ public struct Issue: Hashable, CustomStringConvertible {
 
 public func ==(lhs: Issue, rhs: Issue) -> Bool {
     return lhs.ID == rhs.ID
-        && lhs.URL == rhs.URL
+        && lhs.url == rhs.url
         && lhs.number == rhs.number
         && lhs.state == rhs.state
         && lhs.title == rhs.title
@@ -110,25 +111,27 @@ public func ==(lhs: Issue, rhs: Issue) -> Bool {
 }
 
 extension Issue: ResourceType {
-    public static func decode(j: JSON) -> Decoded<Issue> {
+    public static func decode(_ j: JSON) -> Decoded<Issue> {
         let f = curry(Issue.init)
 
-        return f
+        let ff = f
             <^> (j <| "id" >>- toString)
-            <*> (j <| "html_url" >>- toNSURL)
+            <*> (j <| "html_url" >>- toURL)
             <*> j <| "number"
             <*> (j <| "state" >>- toIssueState)
             <*> j <| "title"
+        let fff = ff
             <*> j <| "body"
             <*> j <| "user"
             <*> j <|| "labels"
             <*> j <|| "assignees"
             <*> j <|? "milestone"
+        return fff
             <*> j <| "locked"
             <*> j <| "comments"
             <*> j <|? "pull_request"
-            <*> (j <|? "closed_at" >>- toOptionalNSDate)
-            <*> (j <| "created_at" >>- toNSDate)
-            <*> (j <| "updated_at" >>- toNSDate)
+            <*> (j <|? "closed_at" >>- toOptionalDate)
+            <*> (j <| "created_at" >>- toDate)
+            <*> (j <| "updated_at" >>- toDate)
     }
 }

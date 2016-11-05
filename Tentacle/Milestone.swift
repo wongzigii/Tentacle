@@ -9,6 +9,7 @@
 import Foundation
 import Argo
 import Curry
+import Runes
 
 public struct Milestone: Hashable, CustomStringConvertible {
     public enum State: String {
@@ -41,19 +42,19 @@ public struct Milestone: Hashable, CustomStringConvertible {
     public let closedIssueCount: Int
 
     /// The date the milestone was created
-    public let createdAt: NSDate
+    public let createdAt: Date
 
     /// The date the milestone was last updated at
-    public let updatedAt: NSDate
+    public let updatedAt: Date
 
     /// The date the milestone was closed at, if ever
-    public let closedAt: NSDate?
+    public let closedAt: Date?
 
     /// The date the milestone is due on
-    public let dueOn: NSDate?
+    public let dueOn: Date?
 
     /// The URL to view this milestone in a browser
-    public let URL: NSURL
+    public let url: URL
 
     public var hashValue: Int {
         return ID.hashValue
@@ -69,29 +70,33 @@ public func ==(lhs: Milestone, rhs: Milestone) -> Bool {
     return lhs.ID == rhs.ID
 }
 
-internal func toMilestoneState(string: String) -> Decoded<Milestone.State> {
+internal func toMilestoneState(_ string: String) -> Decoded<Milestone.State> {
     if let state = Milestone.State(rawValue: string) {
-        return .Success(state)
+        return .success(state)
     } else {
-        return .Failure(.Custom("Milestone state is invalid"))
+        return .failure(.custom("Milestone state is invalid"))
     }
 }
 
 extension Milestone: ResourceType {
-    public static func decode(j: JSON) -> Decoded<Milestone> {
-        return curry(self.init)
+    public static func decode(_ j: JSON) -> Decoded<Milestone> {
+        let f = curry(self.init)
+
+        let ff = f
             <^> (j <| "id" >>- toString)
             <*> j <| "number"
             <*> (j <| "state" >>- toMilestoneState)
             <*> j <| "title"
             <*> j <| "description"
+        let fff = ff
             <*> j <| "creator"
             <*> j <| "open_issues"
             <*> j <| "closed_issues"
-            <*> (j <| "created_at" >>- toNSDate)
-            <*> (j <| "updated_at" >>- toNSDate)
-            <*> (j <|? "closed_at" >>- toOptionalNSDate)
-            <*> (j <|? "due_on" >>- toOptionalNSDate)
-            <*> (j <| "html_url" >>- toNSURL)
+            <*> (j <| "created_at" >>- toDate)
+            <*> (j <| "updated_at" >>- toDate)
+        return fff
+            <*> (j <|? "closed_at" >>- toOptionalDate)
+            <*> (j <|? "due_on" >>- toOptionalDate)
+            <*> (j <| "html_url" >>- toURL)
     }
 }

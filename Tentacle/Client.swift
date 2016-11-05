@@ -12,47 +12,36 @@ import ReactiveSwift
 import Result
 
 
-extension NSJSONSerialization {
-    internal static func deserializeJSON(data: NSData) -> Result<AnyObject, NSError> {
-        return Result(try NSJSONSerialization.JSONObjectWithData(data, options: []))
+extension JSONSerialization {
+    internal static func deserializeJSON(_ data: Data) -> Result<Any, NSError> {
+        return Result(try JSONSerialization.jsonObject(with: data, options: []))
     }
 }
 
-extension NSURL {
-    internal func URLWithQueryItems(queryItems: [NSURLQueryItem]) -> NSURL {
-        let components = NSURLComponents(URL: self, resolvingAgainstBaseURL: true)!
+extension URL {
+    internal func url(with queryItems: [URLQueryItem]) -> URL {
+        var components = URLComponents(url: self, resolvingAgainstBaseURL: true)!
         components.queryItems = (components.queryItems ?? []) + queryItems
-        return components.URL!
+        return components.url!
     }
     
-    internal convenience init(_ server: Server, _ endpoint: Client.Endpoint, page: UInt? = nil, pageSize: UInt? = nil) {
+    internal init(_ server: Server, _ endpoint: Client.Endpoint, page: UInt? = nil, pageSize: UInt? = nil) {
         let queryItems = [ ("page", page), ("per_page", pageSize) ]
             .filter { _, value in value != nil }
-            .map { name, value in NSURLQueryItem(name: name, value: "\(value!)") }
+            .map { name, value in URLQueryItem(name: name, value: "\(value!)") }
 
-        #if swift(>=2.3)
-            let URL = NSURL(string: server.endpoint)!
-                .URLByAppendingPathComponent(endpoint.path)!
-                .URLWithQueryItems(endpoint.queryItems)
-                .URLWithQueryItems(queryItems)
-        #else
-            let URL = NSURL(string: server.endpoint)!
-                .URLByAppendingPathComponent(endpoint.path)
-                .URLWithQueryItems(endpoint.queryItems)
-                .URLWithQueryItems(queryItems)
-        #endif
+        let url = URL(string: server.endpoint)!
+            .appendingPathComponent(endpoint.path)
+            .url(with: endpoint.queryItems)
+            .url(with: queryItems)
 
-        #if swift(>=2.3)
-            self.init(string: URL.absoluteString!)!
-        #else
-            self.init(string: URL.absoluteString)!
-        #endif
+        self.init(string: url.absoluteString)!
     }
 }
 
-extension NSURLRequest {
-    internal static func create(URL: NSURL, _ credentials: Client.Credentials?, contentType: String? = Client.APIContentType) -> NSURLRequest {
-        let request = NSMutableURLRequest(URL: URL)
+extension URLRequest {
+    internal static func create(_ url: URL, _ credentials: Client.Credentials?, contentType: String? = Client.APIContentType) -> URLRequest {
+        var request = URLRequest(url: url)
         
         request.setValue(contentType, forHTTPHeaderField: "Accept")
         
@@ -68,25 +57,25 @@ extension NSURLRequest {
     }
 }
 
-extension NSURLSession {
+extension URLSession {
 	/// Returns a producer that will download a file using the given request. The file will be
 	/// deleted after the producer terminates.
-	internal func downloadFile(request: NSURLRequest) -> SignalProducer<NSURL, NSError> {
+	internal func downloadFile(_ request: URLRequest) -> SignalProducer<URL, NSError> {
 		return SignalProducer { observer, disposable in
 			let serialDisposable = SerialDisposable()
-			let handle = disposable.addDisposable(serialDisposable)
+			let handle = disposable.add(serialDisposable)
 
-			let task = self.downloadTaskWithRequest(request) { (URL, response, error) in
+			let task = self.downloadTask(with: request) { (url, response, error) in
 				// Avoid invoking cancel(), or the download may be deleted.
 				handle.remove()
 
-				if let URL = URL {
-					observer.sendNext(URL)
+				if let url = url {
+                    observer.send(value: url)
 					observer.sendCompleted()
 				} else if let error = error {
-					observer.sendFailed(error)
+					observer.send(error: error as NSError)
                 } else {
-                    fatalError("Request neither succeeded nor failed: \(request.URL)")
+                    fatalError("Request neither succeeded nor failed: \(request.url)")
                 }
 			}
 
@@ -109,37 +98,37 @@ public final class Client {
     internal static let DownloadContentType = "application/octet-stream"
     
     /// An error from the Client.
-    public enum Error: Hashable, ErrorType {
+    public enum Error: Swift.Error, Hashable {
         /// An error occurred in a network operation.
-        case NetworkError(NSError)
+        case networkError(NSError)
         
         /// An error occurred while deserializing JSON.
-        case JSONDeserializationError(NSError)
+        case jsonDeserializationError(NSError)
         
         /// An error occurred while decoding JSON.
-        case JSONDecodingError(DecodeError)
+        case jsonDecodingError(DecodeError)
         
         /// A status code, response, and error that was returned from the API.
-        case APIError(Int, Response, GitHubError)
+        case apiError(Int, Response, GitHubError)
         
         /// The requested object does not exist.
-        case DoesNotExist
+        case doesNotExist
         
         public var hashValue: Int {
             switch self {
-            case let .NetworkError(error):
+            case let .networkError(error):
                 return error.hashValue
                 
-            case let .JSONDeserializationError(error):
+            case let .jsonDeserializationError(error):
                 return error.hashValue
                 
-            case let .JSONDecodingError(error):
+            case let .jsonDecodingError(error):
                 return error.hashValue
                 
-            case let .APIError(statusCode, response, error):
+            case let .apiError(statusCode, response, error):
                 return statusCode.hashValue ^ response.hashValue ^ error.hashValue
                 
-            case .DoesNotExist:
+            case .doesNotExist:
                 return 4
             }
         }
@@ -147,16 +136,16 @@ public final class Client {
     
     /// Credentials for the GitHub API.
     internal enum Credentials {
-        case Token(String)
-        case Basic(username: String, password: String)
+        case token(String)
+        case basic(username: String, password: String)
         
         var authorizationHeader: String {
             switch self {
-            case let .Token(token):
+            case let .token(token):
                 return "token \(token)"
-            case let .Basic(username, password):
-                let data = "\(username):\(password)".dataUsingEncoding(NSUTF8StringEncoding)!
-                let encodedString = data.base64EncodedStringWithOptions([])
+            case let .basic(username, password):
+                let data = "\(username):\(password)".data(using: String.Encoding.utf8)!
+                let encodedString = data.base64EncodedString(options: [])
                 return "Basic \(encodedString)"
             }
         }
@@ -165,93 +154,93 @@ public final class Client {
     /// A GitHub API endpoint.
     internal enum Endpoint: Hashable {
         // https://developer.github.com/v3/repos/releases/#get-a-release-by-tag-name
-        case ReleaseByTagName(owner: String, repository: String, tag: String)
+        case releaseByTagName(owner: String, repository: String, tag: String)
         
         // https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
-        case ReleasesInRepository(owner: String, repository: String)
+        case releasesInRepository(owner: String, repository: String)
         
         // https://developer.github.com/v3/users/#get-a-single-user
-        case UserInfo(login: String)
+        case userInfo(login: String)
 
         // https://developer.github.com/v3/issues/#list-issues
-        case AssignedIssues
+        case assignedIssues
 
         // https://developer.github.com/v3/issues/#list-issues-for-a-repository
-        case IssuesInRepository(owner: String, repository: String)
+        case issuesInRepository(owner: String, repository: String)
 
         // https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
-        case CommentsOnIssue(number: Int, owner: String, repository: String)
+        case commentsOnIssue(number: Int, owner: String, repository: String)
 
         // https://developer.github.com/v3/users/#get-the-authenticated-user
-        case AuthenticatedUser
+        case authenticatedUser
 
         // https://developer.github.com/v3/repos/#list-your-repositories
-        case Repositories
+        case repositories
 
         // https://developer.github.com/v3/repos/#list-user-repositories
-        case RepositoriesForUser(user: String)
+        case repositoriesForUser(user: String)
 
         // https://developer.github.com/v3/repos/#list-organization-repositories
-        case RepositoriesForOrganization(organization: String)
+        case repositoriesForOrganization(organization: String)
 
         // https://developer.github.com/v3/repos/#list-all-public-repositories
-        case PublicRepositories
+        case publicRepositories
 
         var path: String {
             switch self {
-            case let .ReleaseByTagName(owner, repo, tag):
+            case let .releaseByTagName(owner, repo, tag):
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
-            case let .ReleasesInRepository(owner, repo):
+            case let .releasesInRepository(owner, repo):
                 return "/repos/\(owner)/\(repo)/releases"
-            case let .UserInfo(login):
+            case let .userInfo(login):
                 return "/users/\(login)"
-            case .AssignedIssues:
+            case .assignedIssues:
                 return "/issues"
-            case .IssuesInRepository(let owner, let repository):
+            case .issuesInRepository(let owner, let repository):
                 return "/repos/\(owner)/\(repository)/issues"
-            case .CommentsOnIssue(let issue, let owner, let repository):
+            case .commentsOnIssue(let issue, let owner, let repository):
                 return "/repos/\(owner)/\(repository)/issues/\(issue)/comments"
-            case .AuthenticatedUser:
+            case .authenticatedUser:
                 return "/user"
-            case .Repositories:
+            case .repositories:
                 return "/user/repos"
-            case .RepositoriesForUser(let user):
+            case .repositoriesForUser(let user):
                 return "/users/\(user)/repos"
-            case .RepositoriesForOrganization(let organisation):
+            case .repositoriesForOrganization(let organisation):
                 return "/orgs/\(organisation)/repos"
-            case .PublicRepositories:
+            case .publicRepositories:
                 return "/repositories"
             }
         }
         
         var hashValue: Int {
             switch self {
-            case let .ReleaseByTagName(owner, repo, tag):
+            case let .releaseByTagName(owner, repo, tag):
                 return owner.hashValue ^ repo.hashValue ^ tag.hashValue
-            case let .ReleasesInRepository(owner, repo):
+            case let .releasesInRepository(owner, repo):
                 return owner.hashValue ^ repo.hashValue
-            case let .UserInfo(login):
+            case let .userInfo(login):
                 return login.hashValue
-            case .AssignedIssues:
+            case .assignedIssues:
                 return "AssignedIssues".hashValue
-            case .IssuesInRepository(let owner, let repository):
+            case .issuesInRepository(let owner, let repository):
                 return "Issues".hashValue ^ owner.hashValue ^ repository.hashValue
-            case .CommentsOnIssue(let issue, let owner, let repository):
+            case .commentsOnIssue(let issue, let owner, let repository):
                 return issue.hashValue ^ owner.hashValue ^ repository.hashValue
-            case .AuthenticatedUser:
+            case .authenticatedUser:
                 return "authenticated-user".hashValue
-            case .Repositories:
+            case .repositories:
                 return "Repositories".hashValue
-            case .RepositoriesForUser(let user):
+            case .repositoriesForUser(let user):
                 return user.hashValue
-            case .RepositoriesForOrganization(let organisation):
+            case .repositoriesForOrganization(let organisation):
                 return organisation.hashValue
-            case .PublicRepositories:
+            case .publicRepositories:
                 return "PublicRepositories".hashValue
             }
         }
         
-        var queryItems: [NSURLQueryItem] {
+        var queryItems: [URLQueryItem] {
             return []
         }
     }
@@ -268,7 +257,7 @@ public final class Client {
     }
     
     /// The Credentials for the API.
-    private let credentials: Credentials?
+    fileprivate let credentials: Credentials?
     
     /// Create an unauthenticated client for the given Server.
     public init(_ server: Server) {
@@ -279,13 +268,13 @@ public final class Client {
     /// Create an authenticated client for the given Server with a token.
     public init(_ server: Server, token: String) {
         self.server = server
-        self.credentials = .Token(token)
+        self.credentials = .token(token)
     }
     
     /// Create an authenticated client for the given Server with a username and password.
     public init(_ server: Server, username: String, password: String) {
         self.server = server
-        self.credentials = .Basic(username: username, password: password)
+        self.credentials = .basic(username: username, password: password)
     }
     
     /// Fetch the releases in the given repository, starting at the given page.
@@ -294,103 +283,104 @@ public final class Client {
     /// will be the response and releases from a single page.
     ///
     /// https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
-    public func releasesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
+    public func releasesInRepository(_ repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> {
         precondition(repository.server == server)
-        return fetchMany(.ReleasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+        return fetchMany(.releasesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
     
     /// Fetch the release corresponding to the given tag in the given repository.
     ///
     /// If the tag exists, but there's not a correspoding GitHub Release, this method will return a
     /// `.DoesNotExist` error. This is indistinguishable from a nonexistent tag.
-    public func releaseForTag(tag: String, inRepository repository: Repository) -> SignalProducer<(Response, Release), Error> {
+    public func releaseForTag(_ tag: String, inRepository repository: Repository) -> SignalProducer<(Response, Release), Error> {
         precondition(repository.server == server)
-        return fetchOne(.ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
+        return fetchOne(.releaseByTagName(owner: repository.owner, repository: repository.name, tag: tag))
     }
     
     /// Downloads the indicated release asset to a temporary file, returning the URL to the file on
     /// disk.
     ///
     /// The downloaded file will be deleted after the URL has been sent upon the signal.
-    public func downloadAsset(asset: Release.Asset) -> SignalProducer<NSURL, Error> {
-        return NSURLSession
-            .sharedSession()
-            .downloadFile(NSURLRequest.create(asset.APIURL, credentials, contentType: Client.DownloadContentType))
-            .mapError(Error.NetworkError)
+    public func downloadAsset(_ asset: Release.Asset) -> SignalProducer<URL, Error> {
+        return URLSession
+            .shared
+            .downloadFile(URLRequest.create(asset.apiURL, credentials, contentType: Client.DownloadContentType))
+            .mapError(Error.networkError)
     }
     
     /// Fetch the user with the given login.
-    public func userWithLogin(login: String) -> SignalProducer<(Response, UserInfo), Error> {
-        return fetchOne(.UserInfo(login: login))
+    public func userWithLogin(_ login: String) -> SignalProducer<(Response, UserInfo), Error> {
+        return fetchOne(.userInfo(login: login))
     }
 
     /// Fetch the currently authenticated user
     public func authenticatedUser() -> SignalProducer<(Response, UserInfo), Error> {
-        return fetchOne(.AuthenticatedUser)
+        return fetchOne(.authenticatedUser)
     }
 
-    public func assignedIssues(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
-        return fetchMany(.AssignedIssues, page: page, pageSize: perPage)
+    public func assignedIssues(_ page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
+        return fetchMany(.assignedIssues, page: page, pageSize: perPage)
     }
 
-    public func issuesInRepository(repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
+    public func issuesInRepository(_ repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Issue]), Error> {
         precondition(repository.server == server)
-        return fetchMany(.IssuesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+        return fetchMany(.issuesInRepository(owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
 
     /// Fetch the comments posted on an issue
-    public func commentsOnIssue(issue: Int, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
+    public func commentsOnIssue(_ issue: Int, repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Comment]), Error> {
         precondition(repository.server == server)
-        return fetchMany(.CommentsOnIssue(number: issue, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
+        return fetchMany(.commentsOnIssue(number: issue, owner: repository.owner, repository: repository.name), page: page, pageSize: perPage)
     }
 
     /// Fetch the authenticated user's repositories
-    public func repositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
-        return fetchMany(.Repositories, page: page, pageSize: perPage)
+    public func repositories(_ page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.repositories, page: page, pageSize: perPage)
     }
 
     /// Fetch the repositories for a specific user
-    public func repositoriesForUser(user: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
-        return fetchMany(.RepositoriesForUser(user: user), page: page, pageSize: perPage)
+    public func repositoriesForUser(_ user: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.repositoriesForUser(user: user), page: page, pageSize: perPage)
     }
 
     /// Fetch the repositories for a specific organisation 
-    public func repositoriesForOrganization(organization: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
-        return fetchMany(.RepositoriesForOrganization(organization: organization), page: page, pageSize: perPage)
+    public func repositoriesForOrganization(_ organization: String, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.repositoriesForOrganization(organization: organization), page: page, pageSize: perPage)
     }
 
     /// Fetch the public repositories on Github
-    public func publicRepositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
-        return fetchMany(.PublicRepositories, page: page, pageSize: perPage)
+    public func publicRepositories(_ page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+        return fetchMany(.publicRepositories, page: page, pageSize: perPage)
     }
 
     /// Fetch an endpoint from the API.
-    private func fetch(endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, AnyObject), Error> {
-        let URL = NSURL(server, endpoint, page: page, pageSize: pageSize)
-        let request = NSURLRequest.create(URL, credentials)
-        return NSURLSession
-            .sharedSession()
-            .rac_dataWithRequest(request)
-            .mapError(Error.NetworkError)
-            .flatMap(.Concat) { data, response -> SignalProducer<(Response, AnyObject), Error> in
-                let response = response as! NSHTTPURLResponse
+    fileprivate func fetch(_ endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, Any), Error> {
+        let url = URL(server, endpoint, page: page, pageSize: pageSize)
+        let request = URLRequest.create(url, credentials)
+        return URLSession
+            .shared
+            .reactive
+            .data(with: request)
+            .mapError(Error.networkError)
+            .flatMap(.concat) { data, response -> SignalProducer<(Response, Any), Error> in
+                let response = response as! HTTPURLResponse
                 let headers = response.allHeaderFields as! [String:String]
                 return SignalProducer
                     .attempt {
-                        return NSJSONSerialization.deserializeJSON(data).mapError(Error.JSONDeserializationError)
+                        return JSONSerialization.deserializeJSON(data).mapError(Error.jsonDeserializationError)
                     }
                     .attemptMap { JSON in
                         if response.statusCode == 404 {
-                            return .Failure(.DoesNotExist)
+                            return .failure(.doesNotExist)
                         }
                         if response.statusCode >= 400 && response.statusCode < 600 {
                             return decode(JSON)
-                                .mapError(Error.JSONDecodingError)
+                                .mapError(Error.jsonDecodingError)
                                 .flatMap { error in
-                                    .Failure(Error.APIError(response.statusCode, Response(headerFields: headers), error))
+                                    .failure(Error.apiError(response.statusCode, Response(headerFields: headers), error))
                                 }
                         }
-                        return .Success(JSON)
+                        return .success(JSON)
                     }
                     .map { JSON in
                         return (Response(headerFields: headers), JSON)
@@ -400,8 +390,8 @@ public final class Client {
     
     /// Fetch an object from the API.
     internal func fetchOne
-        <Resource: ResourceType where Resource.DecodedType == Resource>
-        (endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error>
+        <Resource: ResourceType>
+        (_ endpoint: Endpoint) -> SignalProducer<(Response, Resource), Error> where Resource.DecodedType == Resource
     {
         return fetch(endpoint, page: nil, pageSize: nil)
             .attemptMap { response, JSON in
@@ -409,14 +399,14 @@ public final class Client {
                     .map { resource in
                         (response, resource)
                     }
-                    .mapError(Error.JSONDecodingError)
+                    .mapError(Error.jsonDecodingError)
             }
     }
     
     /// Fetch a list of objects from the API.
     internal func fetchMany
-        <Resource: ResourceType where Resource.DecodedType == Resource>
-        (endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, [Resource]), Error>
+        <Resource: ResourceType>
+        (_ endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, [Resource]), Error> where Resource.DecodedType == Resource
     {
         let nextPage = (page ?? 1) + 1
         return fetch(endpoint, page: page, pageSize: pageSize)
@@ -425,9 +415,9 @@ public final class Client {
                     .map { resource in
                         (response, resource)
                     }
-                    .mapError(Error.JSONDecodingError)
+                    .mapError(Error.jsonDecodingError)
             }
-            .flatMap(.Concat) { response, JSON -> SignalProducer<(Response, [Resource]), Error> in
+            .flatMap(.concat) { response, JSON -> SignalProducer<(Response, [Resource]), Error> in
                 return SignalProducer(value: (response, JSON))
                     .concat(response.links["next"] == nil ? SignalProducer.empty : self.fetchMany(endpoint, page: nextPage, pageSize: pageSize))
             }
@@ -436,19 +426,19 @@ public final class Client {
 
 public func ==(lhs: Client.Error, rhs: Client.Error) -> Bool {
     switch (lhs, rhs) {
-    case let (.NetworkError(error1), .NetworkError(error2)):
+    case let (.networkError(error1), .networkError(error2)):
         return error1 == error2
         
-    case let (.JSONDeserializationError(error1), .JSONDeserializationError(error2)):
+    case let (.jsonDeserializationError(error1), .jsonDeserializationError(error2)):
         return error1 == error2
         
-    case let (.JSONDecodingError(error1), .JSONDecodingError(error2)):
+    case let (.jsonDecodingError(error1), .jsonDecodingError(error2)):
         return error1 == error2
         
-    case let (.APIError(statusCode1, response1, error1), .APIError(statusCode2, response2, error2)):
+    case let (.apiError(statusCode1, response1, error1), .apiError(statusCode2, response2, error2)):
         return statusCode1 == statusCode2 && response1 == response2 && error1 == error2
         
-    case (.DoesNotExist, .DoesNotExist):
+    case (.doesNotExist, .doesNotExist):
         return true
         
     default:
@@ -458,11 +448,11 @@ public func ==(lhs: Client.Error, rhs: Client.Error) -> Bool {
 
 internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
     switch (lhs, rhs) {
-    case let (.ReleaseByTagName(owner1, repo1, tag1), .ReleaseByTagName(owner2, repo2, tag2)):
+    case let (.releaseByTagName(owner1, repo1, tag1), .releaseByTagName(owner2, repo2, tag2)):
         return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
-    case let (.ReleasesInRepository(owner1, repo1), .ReleasesInRepository(owner2, repo2)):
+    case let (.releasesInRepository(owner1, repo1), .releasesInRepository(owner2, repo2)):
         return owner1 == owner2 && repo1 == repo2
-    case let (.UserInfo(login1), .UserInfo(login2)):
+    case let (.userInfo(login1), .userInfo(login2)):
         return login1 == login2
     default:
         return false

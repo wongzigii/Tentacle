@@ -10,85 +10,85 @@ import Argo
 import Foundation
 import Result
 
-internal func decode<T: Decodable where T == T.DecodedType>(object: AnyObject) -> Result<T, DecodeError> {
+internal func decode<T: Decodable>(_ object: Any) -> Result<T, DecodeError> where T == T.DecodedType {
     let decoded: Decoded<T> = decode(object)
     switch decoded {
-    case let .Success(object):
-        return .Success(object)
-    case let .Failure(error):
-        return .Failure(error)
+    case let .success(object):
+        return .success(object)
+    case let .failure(error):
+        return .failure(error)
     }
 }
 
-internal func decode<T: Decodable where T == T.DecodedType>(object: AnyObject) -> Result<[T], DecodeError> {
+internal func decode<T: Decodable>(_ object: Any) -> Result<[T], DecodeError> where T == T.DecodedType {
     let decoded: Decoded<[T]> = decode(object)
     switch decoded {
-    case let .Success(object):
-        return .Success(object)
-    case let .Failure(error):
-        return .Failure(error)
+    case let .success(object):
+        return .success(object)
+    case let .failure(error):
+        return .failure(error)
     }
 }
 
-internal func toString(number: Int) -> Decoded<String> {
-    return .Success(number.description)
+internal func toString(_ number: Int) -> Decoded<String> {
+    return .success(number.description)
 }
 
-internal func toInt(string: String) -> Decoded<Int> {
+internal func toInt(_ string: String) -> Decoded<Int> {
     if let int = Int(string) {
-        return .Success(int)
+        return .success(int)
     } else {
-        return .Failure(.Custom("String is not a valid number"))
+        return .failure(.custom("String is not a valid number"))
     }
 }
 
-internal func toIssueState(string: String) -> Decoded<Issue.State> {
+internal func toIssueState(_ string: String) -> Decoded<Issue.State> {
     if let state = Issue.State(rawValue: string) {
-        return .Success(state)
+        return .success(state)
     } else {
-        return .Failure(.Custom("String \(string) does not represent a valid issue state"))
+        return .failure(.custom("String \(string) does not represent a valid issue state"))
     }
 }
 
-internal func toNSDate(string: String) -> Decoded<NSDate> {
-    if let date = NSDateFormatter.ISO8601.dateFromString(string) {
-        return .Success(date)
+internal func toDate(_ string: String) -> Decoded<Date> {
+    if let date = DateFormatter.ISO8601.date(from: string) {
+        return .success(date)
     } else {
-        return .Failure(.Custom("Date is not ISO8601 formatted"))
+        return .failure(.custom("Date is not ISO8601 formatted"))
     }
 }
 
-internal func toOptionalNSDate(string: String?) -> Decoded<NSDate?> {
-    guard let string = string else { return .Success(nil) }
-    if let date = NSDateFormatter.ISO8601.dateFromString(string) {
-        return .Success(date)
+internal func toOptionalDate(_ string: String?) -> Decoded<Date?> {
+    guard let string = string else { return .success(nil) }
+    if let date = DateFormatter.ISO8601.date(from: string) {
+        return .success(date)
     } else {
-        return .Failure(.Custom("Date is not ISO8601 formatted"))
+        return .failure(.custom("Date is not ISO8601 formatted"))
     }
 }
 
-internal func toNSURL(string: String) -> Decoded<NSURL> {
-    if let url = NSURL(string: string) {
-        return .Success(url)
+internal func toURL(_ string: String) -> Decoded<URL> {
+    if let url = URL(string: string) {
+        return .success(url)
     } else {
-        return .Failure(.Custom("URL \(string) is not properly formatted"))
+        return .failure(.custom("URL \(string) is not properly formatted"))
     }
 }
 
-internal func toOptionalNSURL(string: String?) -> Decoded<NSURL?> {
-    guard let string = string else { return .Success(nil) }
+internal func toOptionalURL(_ string: String?) -> Decoded<URL?> {
+    guard let string = string else { return .success(nil) }
 
-    return .Success(NSURL(string: string))
+    return .success(URL(string: string))
 }
 
-internal func toColor(string: String) -> Decoded<Color> {
-    return .Success(Color(hex: string))
+internal func toColor(_ string: String) -> Decoded<Color> {
+    return .success(Color(hex: string))
 }
 
-internal func toUserType(string: String) -> Decoded<User.UserType> {
+internal func toUserType(_ string: String) -> Decoded<User.UserType> {
     if let type = User.UserType(rawValue: string) {
-        return .Success(type)
+        return .success(type)
     } else {
-        return .Failure(.Custom("String \(string) does not represent a valid user type"))
+        return .failure(.custom("String \(string) does not represent a valid user type"))
     }
 }

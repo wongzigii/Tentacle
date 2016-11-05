@@ -16,14 +16,14 @@ class UserTests: XCTestCase {
             user: User(
                 ID: "1302",
                 login: "mdiep",
-                URL: NSURL(string: "https://github.com/mdiep")!,
-                avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/1302?v=3")!,
+                url: URL(string: "https://github.com/mdiep")!,
+                avatarURL: URL(string: "https://avatars.githubusercontent.com/u/1302?v=3")!,
                 type: .User
             ),
-            joinedDate: NSDate(timeIntervalSince1970: 1204155107),
+            joinedDate: Date(timeIntervalSince1970: 1204155107),
             name: "Matt Diephouse",
             email: "matt@diephouse.com",
-            websiteURL: NSURL(string: "http://matt.diephouse.com"),
+            websiteURL: URL(string: "http://matt.diephouse.com"),
             company: nil
         )
         XCTAssertEqual(Fixture.UserInfo.mdiep.decode(), expected)
@@ -34,11 +34,11 @@ class UserTests: XCTestCase {
             user: User(
                 ID: "383316",
                 login: "test",
-                URL: NSURL(string: "https://github.com/test")!,
-                avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/383316?v=3")!,
+                url: URL(string: "https://github.com/test")!,
+                avatarURL: URL(string: "https://avatars.githubusercontent.com/u/383316?v=3")!,
                 type: .User
             ),
-            joinedDate: NSDate(timeIntervalSince1970: 1283337552),
+            joinedDate: Date(timeIntervalSince1970: 1283337552),
             name: nil,
             email: nil,
             websiteURL: nil,

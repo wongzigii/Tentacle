@@ -20,9 +20,9 @@ extension Color {
     convenience init(hex: String) {
         precondition(hex.characters.count == 6)
 
-        let scanner = NSScanner(string: hex)
+        let scanner = Scanner(string: hex)
         var rgb: UInt32 = 0
-        scanner.scanHexInt(&rgb)
+        scanner.scanHexInt32(&rgb)
 
         let r = CGFloat((rgb & 0xff0000) >> 16) / 255.0
         let g = CGFloat((rgb & 0x00ff00) >>  8) / 255.0

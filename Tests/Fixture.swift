@@ -14,7 +14,7 @@ import Foundation
 private class ImportedWithFixture { }
 
 protocol FixtureType {
-    var URL: NSURL { get }
+    var url: URL { get }
     var contentType: String { get }
 }
 
@@ -27,13 +27,13 @@ protocol EndpointFixtureType: FixtureType {
 
 extension FixtureType {
     /// The filename used for the local fixture, without an extension
-    private func filenameWithExtension(ext: String) -> NSString {
-        let components = NSURLComponents(URL: URL, resolvingAgainstBaseURL: false)!
-        
-        let path = (components.path! as NSString)
+    fileprivate func filenameWithExtension(_ ext: String) -> String {
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+
+        let path = (components.path as NSString)
             .pathComponents
             .dropFirst()
-            .joinWithSeparator("-")
+            .joined(separator: "-")
         
         let query = components.queryItems?
             .map { item in
@@ -43,77 +43,77 @@ extension FixtureType {
                     return item.name
                 }
             }
-            .joinWithSeparator("-")
+            .joined(separator: "-")
         
-        if let query = query where query != "" {
+        if let query = query, query != "" {
             return "\(path).\(query).\(ext)"
         }
         return "\(path).\(ext)"
     }
     
     /// The filename used for the local fixture's data.
-    var dataFilename: NSString {
+    var dataFilename: String {
         return filenameWithExtension(Fixture.DataExtension)
     }
     
     /// The filename used for the local fixture's HTTP response.
-    var responseFilename: NSString {
+    var responseFilename: String {
         return filenameWithExtension(Fixture.ResponseExtension)
     }
     
-    private func fileURLWithExtension(ext: String) -> NSURL {
-        let bundle = NSBundle(forClass: ImportedWithFixture.self)
-        let filename = filenameWithExtension(ext)
-        return bundle.URLForResource(filename.stringByDeletingPathExtension, withExtension: filename.pathExtension)!
+    fileprivate func fileURLWithExtension(_ ext: String) -> URL {
+        let bundle = Bundle(for: ImportedWithFixture.self)
+        let filename = filenameWithExtension(ext) as NSString
+        return bundle.url(forResource: filename.deletingPathExtension, withExtension: filename.pathExtension)!
     }
     
     /// The URL of the fixture's data within the test bundle.
-    var dataFileURL: NSURL {
+    var dataFileURL: URL {
         return fileURLWithExtension(Fixture.DataExtension)
     }
     
     /// The URL of the fixture's HTTP response within the test bundle.
-    var responseFileURL: NSURL {
+    var responseFileURL: URL {
         return fileURLWithExtension(Fixture.ResponseExtension)
     }
     
     /// The data from the endpoint.
-    var data: NSData {
-       return NSData(contentsOfURL: dataFileURL)!
+    var data: Data {
+       return (try! Data(contentsOf: dataFileURL))
     }
     
     /// The HTTP response from the endpoint.
-    var response: NSHTTPURLResponse {
-        let data = NSData(contentsOfURL: responseFileURL)!
-        return NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSHTTPURLResponse
+    var response: HTTPURLResponse {
+        let data = try! Data(contentsOf: responseFileURL)
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as! HTTPURLResponse
     }
 }
 
 extension EndpointFixtureType {
     /// The URL of the fixture on the API.
-    var URL: NSURL {
-        return NSURL(self.server, self.endpoint, page: page, pageSize: pageSize)
+    var url: URL {
+        return URL(self.server, self.endpoint, page: page, pageSize: pageSize)
     }
     
     /// The JSON from the Endpoint.
-    var JSON: AnyObject {
-        return try! NSJSONSerialization.JSONObjectWithData(data, options: [])
+    var JSON: Any {
+        return try! JSONSerialization.jsonObject(with: data, options: [])
     }
     
     /// Decode the fixture's JSON as an object of the returned type.
-    func decode<Object: Decodable where Object.DecodedType == Object>() -> Object? {
+    func decode<Object: Decodable>() -> Object? where Object.DecodedType == Object {
         return Argo.decode(JSON).value
     }
     
     /// Decode the fixture's JSON as an array of objects of the returned type.
-    func decode<Object: Decodable where Object.DecodedType == Object>() -> [Object]? {
+    func decode<Object: Decodable>() -> [Object]? where Object.DecodedType == Object {
         return Argo.decode(JSON).value
     }
 }
 
 struct Fixture {
-    private static let DataExtension = "data"
-    private static let ResponseExtension = "response"
+    fileprivate static let DataExtension = "data"
+    fileprivate static let ResponseExtension = "response"
     
     static var allFixtures: [FixtureType] = [
         Release.Carthage0_15,
@@ -132,18 +132,18 @@ struct Fixture {
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
-    static func fixtureForURL(URL: NSURL) -> FixtureType? {
-        if let index = allFixtures.indexOf({ $0.URL == URL }) {
+    static func fixtureForURL(_ url: URL) -> FixtureType? {
+        if let index = allFixtures.index(where: { $0.url == url }) {
             return allFixtures[index]
         }
         return nil
     }
     
     struct Release: EndpointFixtureType {
-        static let Carthage0_15 = Release(.DotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
-        static let MDPSplitView1_0_2 = Release(.DotCom, owner: "mdiep", name: "MDPSplitView", tag: "1.0.2")
-        static let Nonexistent = Release(.DotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
-        static let TagOnly = Release(.DotCom, owner: "torvalds", name: "linux", tag: "v4.4")
+        static let Carthage0_15 = Release(.dotCom, owner: "Carthage", name: "Carthage", tag: "0.15")
+        static let MDPSplitView1_0_2 = Release(.dotCom, owner: "mdiep", name: "MDPSplitView", tag: "1.0.2")
+        static let Nonexistent = Release(.dotCom, owner: "mdiep", name: "NonExistent", tag: "tag")
+        static let TagOnly = Release(.dotCom, owner: "torvalds", name: "linux", tag: "v4.4")
         
         let server: Server
         let repository: Repository
@@ -153,7 +153,7 @@ struct Fixture {
         let contentType = Client.APIContentType
         
         var endpoint: Client.Endpoint {
-            return .ReleaseByTagName(owner: repository.owner, repository: repository.name, tag: tag)
+            return .releaseByTagName(owner: repository.owner, repository: repository.name, tag: tag)
         }
         
         init(_ server: Server, owner: String, name: String, tag: String) {
@@ -165,19 +165,19 @@ struct Fixture {
         struct Asset: FixtureType {
             static let MDPSplitView_framework_zip = Asset("https://api.github.com/repos/mdiep/MDPSplitView/releases/assets/433845")
             
-            let URL: NSURL
+            let url: URL
             let contentType = Client.DownloadContentType
             
             init(_ URLString: String) {
-                URL = NSURL(string: URLString)!
+                url = URL(string: URLString)!
             }
         }
     }
     
     struct Releases: EndpointFixtureType {
         static let Carthage = [
-            Releases(.DotCom, "Carthage", "Carthage", 1, 30),
-            Releases(.DotCom, "Carthage", "Carthage", 2, 30),
+            Releases(.dotCom, "Carthage", "Carthage", 1, 30),
+            Releases(.dotCom, "Carthage", "Carthage", 2, 30),
         ]
         
         let server: Server
@@ -187,7 +187,7 @@ struct Fixture {
         let contentType = Client.APIContentType
         
         var endpoint: Client.Endpoint {
-            return .ReleasesInRepository(owner: repository.owner, repository: repository.name)
+            return .releasesInRepository(owner: repository.owner, repository: repository.name)
         }
         
         init(_ server: Server, _ owner: String, _ name: String, _ page: UInt, _ pageSize: UInt) {
@@ -199,8 +199,8 @@ struct Fixture {
     }
     
     struct UserInfo: EndpointFixtureType {
-        static let mdiep = UserInfo(.DotCom, "mdiep")
-        static let test = UserInfo(.DotCom, "test")
+        static let mdiep = UserInfo(.dotCom, "mdiep")
+        static let test = UserInfo(.dotCom, "test")
         
         let server: Server
         let login: String
@@ -210,7 +210,7 @@ struct Fixture {
         let contentType = Client.APIContentType
         
         var endpoint: Client.Endpoint {
-            return .UserInfo(login: login)
+            return .userInfo(login: login)
         }
         
         init(_ server: Server, _ login: String) {
@@ -220,12 +220,12 @@ struct Fixture {
     }
 
     struct IssuesInRepository: EndpointFixtureType {
-        static let PalleasOpensource = IssuesInRepository(.DotCom, "Palleas-opensource", "Sample-repository")
+        static let PalleasOpensource = IssuesInRepository(.dotCom, "Palleas-opensource", "Sample-repository")
 
         let server: Server
 
         var endpoint: Client.Endpoint {
-            return .IssuesInRepository(owner: owner, repository: repository)
+            return .issuesInRepository(owner: owner, repository: repository)
         }
 
         let page: UInt? = nil
@@ -243,7 +243,7 @@ struct Fixture {
     }
 
     struct CommentsOnIssue: EndpointFixtureType {
-        static let CommentsOnIssueInSampleRepository = CommentsOnIssue(.DotCom, 1, "Palleas-Opensource", "Sample-repository")
+        static let CommentsOnIssueInSampleRepository = CommentsOnIssue(.dotCom, 1, "Palleas-Opensource", "Sample-repository")
 
         let server: Server
         let page: UInt? = nil
@@ -256,7 +256,7 @@ struct Fixture {
         let contentType = Client.APIContentType
 
         var endpoint: Client.Endpoint {
-            return .CommentsOnIssue(number: number, owner: owner, repository: repository)
+            return .commentsOnIssue(number: number, owner: owner, repository: repository)
         }
 
         init(_ server: Server, _ number: Int, _ owner: String, _ repository: String) {
@@ -268,7 +268,7 @@ struct Fixture {
     }
 
     struct RepositoriesForUser: EndpointFixtureType {
-        static let RepositoriesForPalleasOpensource = RepositoriesForUser(.DotCom, "Palleas-Opensource")
+        static let RepositoriesForPalleasOpensource = RepositoriesForUser(.dotCom, "Palleas-Opensource")
         
         let server: Server
         let page: UInt? = nil
@@ -279,7 +279,7 @@ struct Fixture {
         let contentType = Client.APIContentType
 
         var endpoint: Client.Endpoint {
-            return .RepositoriesForUser(user: owner)
+            return .repositoriesForUser(user: owner)
         }
 
         init(_ server: Server, _ owner: String) {
@@ -289,7 +289,7 @@ struct Fixture {
     }
 
     struct RepositoriesForOrganization: EndpointFixtureType {
-        static let RepositoriesForRACCommunity = RepositoriesForOrganization(.DotCom, "raccommunity")
+        static let RepositoriesForRACCommunity = RepositoriesForOrganization(.dotCom, "raccommunity")
 
         let server: Server
         let page: UInt? = nil
@@ -300,7 +300,7 @@ struct Fixture {
         let contentType = Client.APIContentType
 
         var endpoint: Client.Endpoint {
-            return .RepositoriesForOrganization(organization: organization)
+            return .repositoriesForOrganization(organization: organization)
         }
 
         init(_ server: Server, _ organization: String) {

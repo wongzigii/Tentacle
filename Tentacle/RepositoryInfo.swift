@@ -9,6 +9,7 @@
 import Foundation
 import Argo
 import Curry
+import Runes
 
 public struct RepositoryInfo: Hashable, CustomStringConvertible {
     /// The id of the repository
@@ -27,10 +28,10 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     public let body: String?
 
     /// The URL of the repository to load in a browser
-    public let URL: NSURL
+    public let url: URL
 
     /// The homepage of the repository
-    public let homepage: NSURL?
+    public let homepage: URL?
 
     /// Contains true if the repository is private
     public let isPrivate: Bool
@@ -51,13 +52,13 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     public let openIssuesCount: Int
 
     /// The date the last push happened at
-    public let pushedAt: NSDate
+    public let pushedAt: Date
 
     /// The date the repository was created at
-    public let createdAt: NSDate
+    public let createdAt: Date
 
     /// The date the repository was last updated
-    public let updatedAt: NSDate
+    public let updatedAt: Date
 
     public var hashValue: Int {
         return id.hashValue ^ nameWithOwner.hashValue
@@ -75,25 +76,27 @@ public func ==(lhs: RepositoryInfo, rhs: RepositoryInfo) -> Bool {
 }
 
 extension RepositoryInfo: ResourceType {
-    public static func decode(j: JSON) -> Decoded<RepositoryInfo> {
+    public static func decode(_ j: JSON) -> Decoded<RepositoryInfo> {
         let f = curry(RepositoryInfo.init)
 
-        return f
+        let ff = f
             <^> (j <| "id" >>- toString)
             <*> j <| "owner"
             <*> j <| "name"
             <*> j <| "full_name"
             <*> j <|? "description"
-            <*> (j <| "html_url" >>- toNSURL)
-            <*> (j <|? "homepage" >>- toOptionalNSURL)
+        let fff = ff
+            <*> (j <| "html_url" >>- toURL)
+            <*> (j <|? "homepage" >>- toOptionalURL)
             <*> j <| "private"
             <*> j <| "fork"
             <*> j <| "forks_count"
+        return fff
             <*> j <| "stargazers_count"
             <*> j <| "watchers_count"
             <*> j <| "open_issues_count"
-            <*> (j <| "pushed_at" >>- toNSDate)
-            <*> (j <| "created_at" >>- toNSDate)
-            <*> (j <| "updated_at" >>- toNSDate)
+            <*> (j <| "pushed_at" >>- toDate)
+            <*> (j <| "created_at" >>- toDate)
+            <*> (j <| "updated_at" >>- toDate)
     }
 }

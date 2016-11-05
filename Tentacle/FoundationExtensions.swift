@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension NSDateFormatter {
-    @nonobjc public static var ISO8601: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.locale = NSLocale(localeIdentifier:"en_US_POSIX")
+extension DateFormatter {
+    @nonobjc public static var ISO8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier:"en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        formatter.timeZone = NSTimeZone(abbreviation:"UTC")
+        formatter.timeZone = TimeZone(abbreviation:"UTC")
         return formatter
     }()
 }

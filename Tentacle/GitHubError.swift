@@ -8,11 +8,12 @@
 
 import Argo
 import Curry
+import Runes
 import Foundation
 
 
 /// An error from the GitHub API.
-public struct GitHubError: Hashable, CustomStringConvertible, ErrorType {
+public struct GitHubError: Hashable, CustomStringConvertible, Error {
     /// The error message from the API.
     public let message: String
     
@@ -34,7 +35,7 @@ public func ==(lhs: GitHubError, rhs: GitHubError) -> Bool {
 }
 
 extension GitHubError: Decodable {
-    public static func decode(j: JSON) -> Decoded<GitHubError> {
+    public static func decode(_ j: JSON) -> Decoded<GitHubError> {
         return curry(self.init) <^> j <| "message"
     }
 }

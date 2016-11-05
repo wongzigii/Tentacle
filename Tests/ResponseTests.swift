@@ -19,12 +19,12 @@ class ResponseTests: XCTestCase {
         
         let response = Response(headerFields: headers)
         XCTAssertEqual(response.rateLimitRemaining, 4987)
-        XCTAssertEqual(response.rateLimitReset, NSDate(timeIntervalSince1970: 1350085394))
+        XCTAssertEqual(response.rateLimitReset, Date(timeIntervalSince1970: 1350085394))
         XCTAssertEqual(
             response.links,
             [
-                "next": NSURL(string: "https://api.github.com/user/repos?page=3&per_page=100")!,
-                "last": NSURL(string: "https://api.github.com/user/repos?page=50&per_page=100")!,
+                "next": URL(string: "https://api.github.com/user/repos?page=3&per_page=100")!,
+                "last": URL(string: "https://api.github.com/user/repos?page=50&per_page=100")!,
             ]
         )
     }

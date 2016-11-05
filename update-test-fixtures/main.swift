@@ -14,47 +14,40 @@ import ReactiveSwift
 import Result
 @testable import Tentacle
 
-let baseURL = NSURL(fileURLWithPath: Process.arguments[1])
+let baseURL = URL(fileURLWithPath: CommandLine.arguments[1])
 
-let fileManager = NSFileManager.defaultManager()
-let session = NSURLSession.sharedSession()
+let fileManager = FileManager.default
+let session = URLSession.shared
 let result = SignalProducer<FixtureType, NSError>(values: Fixture.allFixtures)
-    .flatMap(.Concat) { fixture -> SignalProducer<(), NSError> in
-        let request = NSURLRequest.create(fixture.URL, nil, contentType: fixture.contentType)
-        #if swift(>=2.3)
-            let dataURL = baseURL.URLByAppendingPathComponent(fixture.dataFilename as String)!
-        #else
-            let dataURL = baseURL.URLByAppendingPathComponent(fixture.dataFilename as String)
-        #endif
-        #if swift(>=2.3)
-            let responseURL = baseURL.URLByAppendingPathComponent(fixture.responseFilename as String)!
-        #else
-            let responseURL = baseURL.URLByAppendingPathComponent(fixture.responseFilename as String)
-        #endif
-        let path = (dataURL.path! as NSString).stringByAbbreviatingWithTildeInPath
-        print("*** Downloading \(request.URL!)\n    to \(path)")
+    .flatMap(.concat) { fixture -> SignalProducer<(), NSError> in
+        let request = URLRequest.create(fixture.url, nil, contentType: fixture.contentType)
+        let dataURL = baseURL.appendingPathComponent(fixture.dataFilename as String)
+        let responseURL = baseURL.appendingPathComponent(fixture.responseFilename as String)
+        let path = (dataURL.path as NSString).abbreviatingWithTildeInPath
+        print("*** Downloading \(request.url!)\n    to \(path)")
         return session
-            .rac_dataWithRequest(request)
+            .reactive
+            .data(with: request)
             .on(failed: { error in
                 print("***** Download failed: \(error)")
             })
-            .on(next: { data, response in
+            .on(value: { data, response in
                 
-                let existing = NSData(contentsOfURL: dataURL)
+                let existing = try? Data(contentsOf: dataURL)
                 let changed = existing != data
                 
                 if changed {
-                    try! fileManager.createDirectoryAtURL(dataURL.URLByDeletingLastPathComponent!, withIntermediateDirectories: true, attributes: nil)
+                    try! fileManager.createDirectory(at: dataURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
 
-                    let JSONResponse = try! NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-                    let formattedData = try! NSJSONSerialization.dataWithJSONObject(JSONResponse, options: .PrettyPrinted)
-                    formattedData.writeToURL(dataURL, atomically: true)
+                    let JSONResponse = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    let formattedData = try! JSONSerialization.data(withJSONObject: JSONResponse, options: .prettyPrinted)
+                    try? formattedData.write(to: dataURL, options: .atomic)
                 }
                 
-                if changed || !fileManager.fileExistsAtPath(responseURL.path!) {
-                    NSKeyedArchiver
-                        .archivedDataWithRootObject(response)
-                        .writeToURL(responseURL, atomically: true)
+                if changed || !fileManager.fileExists(atPath: responseURL.path) {
+                    try? NSKeyedArchiver
+                        .archivedData(withRootObject: response)
+                        .write(to: responseURL, options: .atomic)
                 }
             })
             .map { _, _ in () }

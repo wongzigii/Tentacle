@@ -12,52 +12,48 @@ import Foundation
 /// A GitHub.com or GitHub Enterprise server.
 public enum Server: Hashable, CustomStringConvertible {
     /// The GitHub.com server.
-    case DotCom
+    case dotCom
     
     /// A GitHub Enterprise server.
-    case Enterprise(url: NSURL)
+    case enterprise(url: URL)
     
     /// The URL of the server.
-    public var URL: NSURL {
+    public var url: URL {
         switch self {
-        case .DotCom:
-            return NSURL(string: "https://github.com")!
+        case .dotCom:
+            return URL(string: "https://github.com")!
         
-        case let .Enterprise(url):
+        case let .enterprise(url):
             return url
         }
     }
     
     internal var endpoint: String {
         switch self {
-        case .DotCom:
+        case .dotCom:
             return "https://api.github.com"
             
-        case let .Enterprise(url):
-            #if swift(>=2.3)
-                return "\(url.scheme!)://\(url.host!)/api/v3"
-            #else
-                return "\(url.scheme)://\(url.host!)/api/v3"
-            #endif
+        case let .enterprise(url):
+            return "\(url.scheme!)://\(url.host!)/api/v3"
         }
     }
     
     public var hashValue: Int {
-        return endpoint.lowercaseString.hashValue
+        return endpoint.lowercased().hashValue
     }
     
     public var description: String {
-        return "\(URL)"
+        return "\(url)"
     }
 }
 
 public func ==(lhs: Server, rhs: Server) -> Bool {
     switch (lhs, rhs) {
-    case (.DotCom, .DotCom):
+    case (.dotCom, .dotCom):
         return true
     
-    case (.Enterprise, .Enterprise):
-        return lhs.endpoint.caseInsensitiveCompare(rhs.endpoint) == .OrderedSame
+    case (.enterprise, .enterprise):
+        return lhs.endpoint.caseInsensitiveCompare(rhs.endpoint) == .orderedSame
         
     default:
         return false

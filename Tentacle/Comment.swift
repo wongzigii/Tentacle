@@ -9,17 +9,18 @@
 import Foundation
 import Curry
 import Argo
+import Runes
 
 public struct Comment: Hashable, CustomStringConvertible {
 
     /// The id of the issue
     public let ID: String
     /// The URL to view this comment in a browser
-    public let URL: NSURL
+    public let url: URL
     /// The date this comment was created at
-    public let createdAt: NSDate
+    public let createdAt: Date
     /// The date this comment was last updated at
-    public let updatedAt: NSDate
+    public let updatedAt: Date
     /// The body of the comment
     public let body: String
     /// The author of this comment
@@ -36,19 +37,19 @@ public struct Comment: Hashable, CustomStringConvertible {
 
 public func ==(lhs: Comment, rhs: Comment) -> Bool {
     return lhs.ID == rhs.ID
-        && lhs.URL == rhs.URL
+        && lhs.url == rhs.url
         && lhs.body == rhs.body
 }
 
 extension Comment: ResourceType {
-    public static func decode(j: JSON) -> Decoded<Comment> {
+    public static func decode(_ j: JSON) -> Decoded<Comment> {
         let f = curry(Comment.init)
 
         return f
             <^> (j <| "id" >>- toString)
-            <*> (j <| "html_url" >>- toNSURL)
-            <*> (j <| "created_at" >>- toNSDate)
-            <*> (j <| "updated_at" >>- toNSDate)
+            <*> (j <| "html_url" >>- toURL)
+            <*> (j <| "created_at" >>- toDate)
+            <*> (j <| "updated_at" >>- toDate)
             <*> j <| "body"
             <*> j <| "user"
     }
