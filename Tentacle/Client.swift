@@ -349,7 +349,7 @@ public final class Client {
     }
 
     /// Fetch the public repositories on Github
-    public func publicRepositories(_ page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
+    public func publicRepositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
         return fetchMany(.publicRepositories, page: page, pageSize: perPage)
     }
 
