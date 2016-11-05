@@ -22,4 +22,7 @@ extension Release.Asset {
 extension Client {
     @available(*, unavailable, renamed: "download(asset:)")
     public func downloadAsset(_ asset: Release.Asset) -> SignalProducer<URL, Error> { fatalError() }
+
+    @available(*, unavailable, renamed: "user(withLogin:)")
+    public func userWithLogin(_ login: String) -> SignalProducer<(Response, UserInfo), Error> { fatalError() }
 }

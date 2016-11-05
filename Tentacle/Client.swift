@@ -309,7 +309,7 @@ public final class Client {
     }
     
     /// Fetch the user with the given login.
-    public func userWithLogin(_ login: String) -> SignalProducer<(Response, UserInfo), Error> {
+    public func user(withLogin login: String) -> SignalProducer<(Response, UserInfo), Error> {
         return fetchOne(.userInfo(login: login))
     }
 

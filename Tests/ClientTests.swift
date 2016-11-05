@@ -176,6 +176,6 @@ class ClientTests: XCTestCase {
     
     func testUserWithLogin() {
         let fixture = Fixture.UserInfo.mdiep
-        ExpectFixtures(client.userWithLogin(fixture.login), fixture)
+        ExpectFixtures(client.user(withLogin: fixture.login), fixture)
     }
 }
