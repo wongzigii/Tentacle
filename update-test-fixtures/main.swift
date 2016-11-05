@@ -10,7 +10,7 @@
 // This makes it easy to keep the fixtures up-to-date.
 
 import Foundation
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 @testable import Tentacle
 

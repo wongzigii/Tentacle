@@ -8,7 +8,7 @@
 
 import Argo
 import Foundation
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 

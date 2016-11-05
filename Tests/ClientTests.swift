@@ -8,7 +8,7 @@
 
 import Argo
 import OHHTTPStubs
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 import Tentacle
 import XCTest
