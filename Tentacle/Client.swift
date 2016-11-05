@@ -70,7 +70,7 @@ extension URLSession {
 				handle.remove()
 
 				if let url = url {
-                    observer.send(value: url)
+					observer.send(value: url)
 					observer.sendCompleted()
 				} else if let error = error {
 					observer.send(error: error as NSError)
