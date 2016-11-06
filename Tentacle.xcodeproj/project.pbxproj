@@ -93,8 +93,6 @@
 		BE1E03701C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036D1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data */; };
 		BE1E03711C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */; };
 		BE1E03721C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */; };
-		BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */; };
-		BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
 		BE2B6A6D1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
 		BE88E7F61C88C6B30034A112 /* Tentacle.h in Headers */ = {isa = PBXBuildFile; fileRef = BE88E7F51C88C6B30034A112 /* Tentacle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -202,8 +200,6 @@
 		BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseTests.swift; sourceTree = "<group>"; };
 		BE1E036D1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-mdiep-MDPSplitView-releases-tags-1.0.2.data"; sourceTree = "<group>"; };
 		BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-MDPSplitView-releases-tags-1.0.2.response"; sourceTree = "<group>"; };
-		BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
 		BE88E7F21C88C6B30034A112 /* Tentacle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tentacle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E7F51C88C6B30034A112 /* Tentacle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tentacle.h; sourceTree = "<group>"; };
@@ -264,7 +260,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */,
 				619081821C8A2D2B001BE2F8 /* Tentacle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +280,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */,
 				BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,8 +405,6 @@
 		BE88E8271C88C7E90034A112 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */,
-				BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */,
 				BE88E85B1C88ED750034A112 /* Argo.framework */,
 				CD5AE50D1DCDC71F00AD5EFB /* Runes.framework */,
 				BE88E85C1C88ED750034A112 /* Curry.framework */,
