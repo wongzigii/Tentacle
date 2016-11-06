@@ -93,8 +93,6 @@
 		BE1E03701C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036D1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data */; };
 		BE1E03711C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */; };
 		BE1E03721C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response in Resources */ = {isa = PBXBuildFile; fileRef = BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */; };
-		BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */; };
-		BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */; };
 		BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
 		BE2B6A6D1C8B854F0080BFEB /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */; };
 		BE88E7F61C88C6B30034A112 /* Tentacle.h in Headers */ = {isa = PBXBuildFile; fileRef = BE88E7F51C88C6B30034A112 /* Tentacle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -137,6 +135,8 @@
 		BEEE47461C91BB3A000FFC21 /* ArgoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */; };
 		BEEE474E1C92623E000FFC21 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE474D1C92623E000FFC21 /* Response.swift */; };
 		BEEE474F1C92623E000FFC21 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE474D1C92623E000FFC21 /* Response.swift */; };
+		CD1FE64F1DCF36070016639E /* HTTPStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1FE64D1DCF35F60016639E /* HTTPStub.swift */; };
+		CD1FE6501DCF36070016639E /* HTTPStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1FE64D1DCF35F60016639E /* HTTPStub.swift */; };
 		CD5AE50A1DCDC6B600AD5EFB /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5AE5091DCDC6B600AD5EFB /* Runes.framework */; };
 		CD5AE50C1DCDC6BF00AD5EFB /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5AE50B1DCDC6BF00AD5EFB /* ReactiveSwift.framework */; };
 		CD5AE50E1DCDC71F00AD5EFB /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5AE50D1DCDC71F00AD5EFB /* Runes.framework */; };
@@ -200,8 +200,6 @@
 		BE1E036A1C9AD87F001296C2 /* ResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseTests.swift; sourceTree = "<group>"; };
 		BE1E036D1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-mdiep-MDPSplitView-releases-tags-1.0.2.data"; sourceTree = "<group>"; };
 		BE1E036E1C9CF849001296C2 /* repos-mdiep-MDPSplitView-releases-tags-1.0.2.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-MDPSplitView-releases-tags-1.0.2.response"; sourceTree = "<group>"; };
-		BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2B6A6B1C8B854F0080BFEB /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
 		BE88E7F21C88C6B30034A112 /* Tentacle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tentacle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E7F51C88C6B30034A112 /* Tentacle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tentacle.h; sourceTree = "<group>"; };
@@ -237,6 +235,7 @@
 		BEEE47411C91B8DF000FFC21 /* ResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
 		BEEE47441C91BB3A000FFC21 /* ArgoExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoExtensions.swift; sourceTree = "<group>"; };
 		BEEE474D1C92623E000FFC21 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		CD1FE64D1DCF35F60016639E /* HTTPStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStub.swift; sourceTree = "<group>"; };
 		CD5AE5091DCDC6B600AD5EFB /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Runes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5AE50B1DCDC6BF00AD5EFB /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5AE50D1DCDC71F00AD5EFB /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Runes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,7 +260,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE2B6A681C8B84CD0080BFEB /* OHHTTPStubs.framework in Frameworks */,
 				619081821C8A2D2B001BE2F8 /* Tentacle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +280,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE2B6A6A1C8B84D60080BFEB /* OHHTTPStubs.framework in Frameworks */,
 				BE88E7FD1C88C6B30034A112 /* Tentacle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +389,7 @@
 				BE0F409F1C89098E00E3B11A /* Fixture.swift */,
 				BE0F40961C8908CB00E3B11A /* Fixtures */,
 				BEB0765E1C8A019A00ABD373 /* GitHubErrorTests.swift */,
+				CD1FE64D1DCF35F60016639E /* HTTPStub.swift */,
 				BE88E8031C88C6B30034A112 /* Info.plist */,
 				7AAB00FC1CF51FC5005A7319 /* IssuesTests.swift */,
 				BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */,
@@ -407,8 +405,6 @@
 		BE88E8271C88C7E90034A112 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE2B6A691C8B84D60080BFEB /* OHHTTPStubs.framework */,
-				BE2B6A671C8B84CD0080BFEB /* OHHTTPStubs.framework */,
 				BE88E85B1C88ED750034A112 /* Argo.framework */,
 				CD5AE50D1DCDC71F00AD5EFB /* Runes.framework */,
 				BE88E85C1C88ED750034A112 /* Curry.framework */,
@@ -726,6 +722,7 @@
 				BEA86F9B1C9F7C230049360B /* ServerTests.swift in Sources */,
 				7A2F66101CF527EB00463602 /* IssuesTests.swift in Sources */,
 				7A1F20F31D3E873600F275F8 /* Color.swift in Sources */,
+				CD1FE6501DCF36070016639E /* HTTPStub.swift in Sources */,
 				BEA86F9E1C9F7E1E0049360B /* RepositoryTests.swift in Sources */,
 				6190818B1C8A2DB7001BE2F8 /* (null) in Sources */,
 				619081891C8A2DB7001BE2F8 /* GitHubErrorTests.swift in Sources */,
@@ -775,6 +772,7 @@
 				7ABFB4DD1D5159F50067B500 /* RepositoryInfoTests.swift in Sources */,
 				BECB8AA31CBDDF0F005D70A6 /* UserTests.swift in Sources */,
 				7A27887C1D49223B007AC936 /* CommentsTests.swift in Sources */,
+				CD1FE64F1DCF36070016639E /* HTTPStub.swift in Sources */,
 				BE2B6A6C1C8B854F0080BFEB /* ClientTests.swift in Sources */,
 				7A1F20F01D3E86D900F275F8 /* ColorTests.swift in Sources */,
 				BEA86F9A1C9F7C230049360B /* ServerTests.swift in Sources */,
