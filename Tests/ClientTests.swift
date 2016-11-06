@@ -7,7 +7,6 @@
 //
 
 import Argo
-import OHHTTPStubs
 import ReactiveSwift
 import Result
 import Tentacle
@@ -109,14 +108,9 @@ class ClientTests: XCTestCase {
     private let client = Client(.dotCom)
     
     override func setUp() {
-        OHHTTPStubs
-            .stubRequests(passingTest: { request in
-                return true
-            }, withStubResponse: { request -> OHHTTPStubsResponse in
-                let fixture = Fixture.fixtureForURL(request.url!)!
-                let response = fixture.response
-                return OHHTTPStubsResponse(fileURL: fixture.dataFileURL, statusCode: Int32(response.statusCode), headers: response.allHeaderFields)
-            })
+        HTTPStub.shared.stubRequests = { request in
+            return Fixture.fixtureForURL(request.url!)!
+        }
     }
     
     func testReleasesInRepository() {
