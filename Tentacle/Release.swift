@@ -9,7 +9,7 @@
 import Argo
 import Curry
 import Foundation
-
+import Runes
 
 /// A Release of a Repository.
 public struct Release: Hashable, CustomStringConvertible {
@@ -25,25 +25,25 @@ public struct Release: Hashable, CustomStringConvertible {
         public let contentType: String
 
         /// The URL at which the asset can be downloaded directly.
-        public let URL: NSURL
+        public let url: URL
         
         /// The URL at which the asset can be downloaded via the API.
-        public let APIURL: NSURL
+        public let apiURL: URL
 
         public var hashValue: Int {
             return ID.hashValue
         }
 
         public var description: String {
-            return "\(URL)"
+            return "\(url)"
         }
 
-        public init(ID: String, name: String, contentType: String, URL: NSURL, APIURL: NSURL) {
+        public init(ID: String, name: String, contentType: String, url: URL, apiURL: URL) {
             self.ID = ID
             self.name = name
             self.contentType = contentType
-            self.URL = URL
-            self.APIURL = APIURL
+            self.url = url
+            self.apiURL = apiURL
         }
     }
     
@@ -63,7 +63,7 @@ public struct Release: Hashable, CustomStringConvertible {
     public let name: String?
     
     /// The web URL of the release.
-    public let URL: NSURL
+    public let url: URL
     
     /// Any assets attached to the release.
     public let assets: [Asset]
@@ -73,13 +73,13 @@ public struct Release: Hashable, CustomStringConvertible {
     }
     
     public var description: String {
-        return "\(URL)"
+        return "\(url)"
     }
     
-    public init(ID: String, tag: String, URL: NSURL, name: String? = nil, draft: Bool = false, prerelease: Bool = false, assets: [Asset]) {
+    public init(ID: String, tag: String, url: URL, name: String? = nil, draft: Bool = false, prerelease: Bool = false, assets: [Asset]) {
         self.ID = ID
         self.tag = tag
-        self.URL = URL
+        self.url = url
         self.name = name
         self.draft = draft
         self.prerelease = prerelease
@@ -88,13 +88,13 @@ public struct Release: Hashable, CustomStringConvertible {
 }
 
 public func ==(lhs: Release.Asset, rhs: Release.Asset) -> Bool {
-    return lhs.ID == rhs.ID && lhs.URL == rhs.URL
+    return lhs.ID == rhs.ID && lhs.url == rhs.url
 }
 
 public func ==(lhs: Release, rhs: Release) -> Bool {
     return lhs.ID == rhs.ID
         && lhs.tag == rhs.tag
-        && lhs.URL == rhs.URL
+        && lhs.url == rhs.url
         && lhs.name == rhs.name
         && lhs.draft == rhs.draft
         && lhs.prerelease == rhs.prerelease
@@ -102,7 +102,7 @@ public func ==(lhs: Release, rhs: Release) -> Bool {
 }
 
 extension Release.Asset: ResourceType {
-    public static func decode(j: JSON) -> Decoded<Release.Asset> {
+    public static func decode(_ j: JSON) -> Decoded<Release.Asset> {
         return curry(self.init)
             <^> (j <| "id" >>- toString)
             <*> j <| "name"
@@ -113,7 +113,7 @@ extension Release.Asset: ResourceType {
 }
 
 extension Release: ResourceType {
-    public static func decode(j: JSON) -> Decoded<Release> {
+    public static func decode(_ j: JSON) -> Decoded<Release> {
         let f = curry(Release.init)
         return f
             <^> (j <| "id" >>- toString)

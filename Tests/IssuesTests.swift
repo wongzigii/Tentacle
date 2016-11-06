@@ -16,8 +16,8 @@ class IssuesTests: XCTestCase {
         let palleasOpensource = User(
             ID: "15802020",
             login: "Palleas-opensource",
-            URL: NSURL(string: "https://github.com/Palleas-opensource")!,
-            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
+            url: URL(string: "https://github.com/Palleas-opensource")!,
+            avatarURL: URL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
             type: .User
         )
 
@@ -30,22 +30,22 @@ class IssuesTests: XCTestCase {
             creator: palleasOpensource,
             openIssueCount: 1,
             closedIssueCount: 0,
-            createdAt: NSDateFormatter.ISO8601.dateFromString("2016-07-13T16:56:48Z")!,
-            updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-13T16:56:57Z")!,
+            createdAt: DateFormatter.iso8601.date(from: "2016-07-13T16:56:48Z")!,
+            updatedAt: DateFormatter.iso8601.date(from: "2016-07-13T16:56:57Z")!,
             closedAt: nil,
-            dueOn: NSDateFormatter.ISO8601.dateFromString("2016-07-25T04:00:00Z")!,
-            URL: NSURL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/milestones/1")!
+            dueOn: DateFormatter.iso8601.date(from: "2016-07-25T04:00:00Z")!,
+            url: URL(string: "https://api.github.com/repos/Palleas-opensource/Sample-repository/milestones/1")!
         )
 
         let updateReadmePullRequest = PullRequest(
-            URL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3")!,
-            diffURL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3.diff")!,
-            patchURL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3.patch")!
+            url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3")!,
+            diffURL: URL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3.diff")!,
+            patchURL: URL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3.patch")!
         )
 
         let expected = [
             Issue(ID: "165458041",
-                URL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3"),
+                url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3"),
                 number: 3,
                 state: .Open,
                 title: "Add informations in Readme",
@@ -58,10 +58,10 @@ class IssuesTests: XCTestCase {
                 commentCount: 0,
                 pullRequest: updateReadmePullRequest,
                 closedAt: nil,
-                createdAt:  NSDateFormatter.ISO8601.dateFromString("2016-07-14T01:40:08Z")!,
-                updatedAt:  NSDateFormatter.ISO8601.dateFromString("2016-07-14T01:40:08Z")!),
+                createdAt:  DateFormatter.iso8601.date(from: "2016-07-14T01:40:08Z")!,
+                updatedAt:  DateFormatter.iso8601.date(from: "2016-07-14T01:40:08Z")!),
             Issue(ID: "156633109",
-                URL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1")!,
+                url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1")!,
                 number: 1,
                 state: .Open,
                 title: "This issue is open",
@@ -87,8 +87,8 @@ class IssuesTests: XCTestCase {
                 commentCount: 2,
                 pullRequest: nil,
                 closedAt: nil,
-                createdAt: NSDateFormatter.ISO8601.dateFromString("2016-05-24T23:38:39Z")!,
-                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:29:31Z")!
+                createdAt: DateFormatter.iso8601.date(from: "2016-05-24T23:38:39Z")!,
+                updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T01:29:31Z")!
             )
         ]
 

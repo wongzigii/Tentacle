@@ -12,23 +12,23 @@ let LinksRegex = try! NSRegularExpression(pattern: "(?<=\\A|,) *<([^>]+)>( *; *\
 let LinkParamRegex = try! NSRegularExpression(pattern: "; *(\\w+) *= *\"([^\"]+)\"", options: [])
 
 /// Returns any links, keyed by `rel`, from the RFC 5988 link header.
-private func linksInLinkHeader(header: NSString) -> [String: NSURL] {
-    var links: [String: NSURL] = [:]
-    for match in LinksRegex.matchesInString(header as String, options: [], range: NSMakeRange(0, header.length)) {
-        let URI = header.substringWithRange(match.rangeAtIndex(1))
-        let params = header.substringWithRange(match.rangeAtIndex(2)) as NSString
-        guard let URL = NSURL(string: URI) else { continue }
+private func linksInLinkHeader(_ header: NSString) -> [String: URL] {
+    var links: [String: URL] = [:]
+    for match in LinksRegex.matches(in: header as String, options: [], range: NSMakeRange(0, header.length)) {
+        let URI = header.substring(with: match.rangeAt(1))
+        let params = header.substring(with: match.rangeAt(2)) as NSString
+        guard let url = URL(string: URI) else { continue }
         
         var relName: String? = nil
-        for match in LinkParamRegex.matchesInString(params as String, options: [], range: NSMakeRange(0, params.length)) {
-            let name = params.substringWithRange(match.rangeAtIndex(1))
+        for match in LinkParamRegex.matches(in: params as String, options: [], range: NSMakeRange(0, params.length)) {
+            let name = params.substring(with: match.rangeAt(1))
             if name != "rel" { continue }
             
-            relName = params.substringWithRange(match.rangeAtIndex(2))
+            relName = params.substring(with: match.rangeAt(2))
         }
         
         if let relName = relName {
-            links[relName] = URL
+            links[relName] = url
         }
     }
     return links
@@ -42,12 +42,12 @@ public struct Response: Hashable {
     
     /// The time at which the current rate limit window resets, or nil if the server isn't
     /// rate-limited.
-    public let rateLimitReset: NSDate?
+    public let rateLimitReset: Date?
     
     /// Any links that are included in the response.
-    public let links: [String: NSURL]
+    public let links: [String: URL]
     
-    public init(rateLimitRemaining: UInt, rateLimitReset: NSDate, links: [String: NSURL]) {
+    public init(rateLimitRemaining: UInt, rateLimitReset: Date, links: [String: URL]) {
         self.rateLimitRemaining = rateLimitRemaining
         self.rateLimitReset = rateLimitReset
         self.links = links
@@ -57,9 +57,9 @@ public struct Response: Hashable {
     internal init(headerFields: [String : String]) {
         self.rateLimitRemaining = headerFields["X-RateLimit-Remaining"].flatMap { UInt($0) }
         self.rateLimitReset = headerFields["X-RateLimit-Reset"]
-            .flatMap { NSTimeInterval($0) }
-            .map { NSDate(timeIntervalSince1970: $0) }
-        self.links = linksInLinkHeader(headerFields["Link"] ?? "")
+            .flatMap { TimeInterval($0) }
+            .map { Date(timeIntervalSince1970: $0) }
+        self.links = linksInLinkHeader(headerFields["Link"] as NSString? ?? "")
     }
     
     public var hashValue: Int {

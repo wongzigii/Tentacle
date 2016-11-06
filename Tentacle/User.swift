@@ -8,6 +8,7 @@
 
 import Argo
 import Curry
+import Runes
 
 /// A User on GitHub.
 public struct User: Hashable, CustomStringConvertible {
@@ -23,10 +24,10 @@ public struct User: Hashable, CustomStringConvertible {
     public let login: String
     
     /// The URL of the user's GitHub page.
-    public let URL: NSURL
+    public let url: URL
     
     /// The URL of the user's avatar.
-    public let avatarURL: NSURL
+    public let avatarURL: URL
 
     /// The type of user if it's a regular one or an organization
     public let type: UserType
@@ -43,12 +44,12 @@ public struct User: Hashable, CustomStringConvertible {
 public func ==(lhs: User, rhs: User) -> Bool {
     return lhs.ID == rhs.ID
         && lhs.login == rhs.login
-        && lhs.URL == rhs.URL
+        && lhs.url == rhs.url
         && lhs.avatarURL == rhs.avatarURL
 }
 
 extension User: ResourceType {
-    public static func decode(j: JSON) -> Decoded<User> {
+    public static func decode(_ j: JSON) -> Decoded<User> {
         return curry(self.init)
             <^> (j <| "id" >>- toString)
             <*> j <| "login"
@@ -64,7 +65,7 @@ public struct UserInfo {
     public let user: User
     
     /// The date that the user joined GitHub.
-    public let joinedDate: NSDate
+    public let joinedDate: Date
     
     /// The user's name if they've set one.
     public let name: String?
@@ -73,7 +74,7 @@ public struct UserInfo {
     public let email: String?
     
     /// The URL of the user's website if they've set one
-    public let websiteURL: NSURL?
+    public let websiteURL: URL?
     
     /// The user's company if they've set one.
     public let company: String?
@@ -86,7 +87,7 @@ public struct UserInfo {
         return user.description
     }
     
-    public init(user: User, joinedDate: NSDate, name: String?, email: String?, websiteURL: NSURL?, company: String?) {
+    public init(user: User, joinedDate: Date, name: String?, email: String?, websiteURL: URL?, company: String?) {
         self.user = user
         self.joinedDate = joinedDate
         self.name = name
@@ -106,10 +107,10 @@ public func ==(lhs: UserInfo, rhs: UserInfo) -> Bool {
 }
 
 extension UserInfo: ResourceType {
-    public static func decode(j: JSON) -> Decoded<UserInfo> {
+    public static func decode(_ j: JSON) -> Decoded<UserInfo> {
         return curry(self.init)
             <^> j <| []
-            <*> (j <| "created_at" >>- toNSDate)
+            <*> (j <| "created_at" >>- toDate)
             <*> j <|? "name"
             <*> j <|? "email"
             <*> j <|? "blog"

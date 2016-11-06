@@ -10,7 +10,7 @@ client
     }
 ```
 
-Tentacle is built with [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa).
+Tentacle is built with [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift).
 
 ## License
 Tentacle is available under the [MIT License](LICENSE.md)

@@ -16,33 +16,33 @@ class CommentsTests: XCTestCase {
         let palleasOpensource = User(
             ID: "15802020",
             login: "Palleas-opensource",
-            URL: NSURL(string: "https://github.com/Palleas-opensource")!,
-            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
+            url: URL(string: "https://github.com/Palleas-opensource")!,
+            avatarURL: URL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
             type: .User
         )
 
         let palleas = User(
             ID: "48797",
             login: "Palleas",
-            URL: NSURL(string: "https://github.com/Palleas")!,
-            avatarURL: NSURL(string: "https://avatars.githubusercontent.com/u/48797?v=3")!,
+            url: URL(string: "https://github.com/Palleas")!,
+            avatarURL: URL(string: "https://avatars.githubusercontent.com/u/48797?v=3")!,
             type: .User
         )
 
         let expected: [Comment] = [
             Comment(
                 ID: "235455442",
-                URL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1#issuecomment-235455442")!,
-                createdAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:28:21Z")!,
-                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:28:21Z")!,
+                url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1#issuecomment-235455442")!,
+                createdAt: DateFormatter.iso8601.date(from: "2016-07-27T01:28:21Z")!,
+                updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T01:28:21Z")!,
                 body: "I know right?!",
                 author: palleas
             ),
             Comment(
                 ID: "235455603",
-                URL: NSURL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1#issuecomment-235455603")!,
-                createdAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:29:31Z")!,
-                updatedAt: NSDateFormatter.ISO8601.dateFromString("2016-07-27T01:29:31Z")!,
+                url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1#issuecomment-235455603")!,
+                createdAt: DateFormatter.iso8601.date(from: "2016-07-27T01:29:31Z")!,
+                updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T01:29:31Z")!,
                 body: "👍 Good idea to say stuff like that on internet!",
                 author: palleasOpensource
             )

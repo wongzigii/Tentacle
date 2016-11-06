@@ -15,36 +15,30 @@ public struct Repository: Hashable, CustomStringConvertible {
     public let owner: String
     public let name: String
     
-    public init(server: Server = .DotCom, owner: String, name: String) {
+    public init(server: Server = .dotCom, owner: String, name: String) {
         self.server = server
         self.owner = owner
         self.name = name
     }
     
     /// The URL of the repository.
-    public var URL: NSURL {
-        #if swift(>=2.3)
-            return server.URL
-                .URLByAppendingPathComponent(owner)!
-                .URLByAppendingPathComponent(name)!
-        #else
-            return server.URL
-                .URLByAppendingPathComponent(owner)
-                .URLByAppendingPathComponent(name)
-        #endif
+    public var url: URL {
+        return server.url
+            .appendingPathComponent(owner)
+            .appendingPathComponent(name)
     }
     
     public var hashValue: Int {
-        return description.lowercaseString.hashValue
+        return description.lowercased().hashValue
     }
     
     public var description: String {
-        return "\(URL)"
+        return "\(url)"
     }
 }
 
 public func ==(lhs: Repository, rhs: Repository) -> Bool {
     return lhs.server == rhs.server
-        && lhs.owner.caseInsensitiveCompare(rhs.owner) == .OrderedSame
-        && lhs.name.caseInsensitiveCompare(rhs.name) == .OrderedSame
+        && lhs.owner.caseInsensitiveCompare(rhs.owner) == .orderedSame
+        && lhs.name.caseInsensitiveCompare(rhs.name) == .orderedSame
 }
