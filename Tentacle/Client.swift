@@ -258,23 +258,29 @@ public final class Client {
     
     /// The Credentials for the API.
     private let credentials: Credentials?
+
+    /// The `URLSession` instance to use.
+    private let urlSession: URLSession
     
     /// Create an unauthenticated client for the given Server.
-    public init(_ server: Server) {
+    public init(_ server: Server, urlSession: URLSession = .shared) {
         self.server = server
         self.credentials = nil
+        self.urlSession = urlSession
     }
     
     /// Create an authenticated client for the given Server with a token.
-    public init(_ server: Server, token: String) {
+    public init(_ server: Server, token: String, urlSession: URLSession = .shared) {
         self.server = server
         self.credentials = .token(token)
+        self.urlSession = urlSession
     }
     
     /// Create an authenticated client for the given Server with a username and password.
-    public init(_ server: Server, username: String, password: String) {
+    public init(_ server: Server, username: String, password: String, urlSession: URLSession = .shared) {
         self.server = server
         self.credentials = .basic(username: username, password: password)
+        self.urlSession = urlSession
     }
     
     /// Fetch the releases in the given repository, starting at the given page.
@@ -302,8 +308,7 @@ public final class Client {
     ///
     /// The downloaded file will be deleted after the URL has been sent upon the signal.
     public func download(asset: Release.Asset) -> SignalProducer<URL, Error> {
-        return URLSession
-            .shared
+        return urlSession
             .downloadFile(URLRequest.create(asset.apiURL, credentials, contentType: Client.DownloadContentType))
             .mapError(Error.networkError)
     }
@@ -357,8 +362,7 @@ public final class Client {
     private func fetch(_ endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, Any), Error> {
         let url = URL(server, endpoint, page: page, pageSize: pageSize)
         let request = URLRequest.create(url, credentials)
-        return URLSession
-            .shared
+        return urlSession
             .reactive
             .data(with: request)
             .mapError(Error.networkError)
