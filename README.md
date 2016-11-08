@@ -2,11 +2,16 @@
 A Swift framework for the GitHub API
 
 ```swift
-let client = Client(.DotCom, token: "…")
+let client = Client(.dotCom, token: "…")
 client
-    .releaseForTag("tag-name", inRepository: Repository(owner: "ReactiveCocoa", name: "ReactiveCocoa"))
-    .startWithNext { response, release in
-        print("Downloaded release: \(release)")
+    .release(forTag: "tag-name", in: Repository(owner: "ReactiveCocoa", name: "ReactiveCocoa"))
+    .startWithResult { result in
+        switch result {
+        case let .success(response, release):
+            print("Downloaded release: \(release)")
+        case let .failure(error):
+            print("An error occured: \(error)")
+        }
     }
 ```
 
