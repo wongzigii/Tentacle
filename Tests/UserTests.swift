@@ -18,7 +18,7 @@ class UserTests: XCTestCase {
                 login: "mdiep",
                 url: URL(string: "https://github.com/mdiep")!,
                 avatarURL: URL(string: "https://avatars.githubusercontent.com/u/1302?v=3")!,
-                type: .User
+                type: .user
             ),
             joinedDate: Date(timeIntervalSince1970: 1204155107),
             name: "Matt Diephouse",
@@ -36,7 +36,7 @@ class UserTests: XCTestCase {
                 login: "test",
                 url: URL(string: "https://github.com/test")!,
                 avatarURL: URL(string: "https://avatars.githubusercontent.com/u/383316?v=3")!,
-                type: .User
+                type: .user
             ),
             joinedDate: Date(timeIntervalSince1970: 1283337552),
             name: nil,

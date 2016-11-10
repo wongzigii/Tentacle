@@ -13,8 +13,8 @@ import Runes
 /// An Issue on Github
 public struct Issue: Hashable, CustomStringConvertible {
     public enum State: String {
-        case Open = "open"
-        case Closed = "closed"
+        case open = "open"
+        case closed = "closed"
     }
 
     /// The id of the issue

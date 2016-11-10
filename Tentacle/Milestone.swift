@@ -13,8 +13,8 @@ import Runes
 
 public struct Milestone: Hashable, CustomStringConvertible {
     public enum State: String {
-        case Open = "open"
-        case Closed = "closed"
+        case open = "open"
+        case closed = "closed"
     }
 
     /// The ID of the milestone

@@ -13,8 +13,8 @@ import Runes
 /// A User on GitHub.
 public struct User: Hashable, CustomStringConvertible {
     public enum UserType: String {
-        case User = "User"
-        case Organization = "Organization"
+        case user = "User"
+        case organization = "Organization"
     }
 
     /// The unique ID of the user.

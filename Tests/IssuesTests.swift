@@ -18,13 +18,13 @@ class IssuesTests: XCTestCase {
             login: "Palleas-opensource",
             url: URL(string: "https://github.com/Palleas-opensource")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
-            type: .User
+            type: .user
         )
 
         let shipItMilestone = Milestone(
             ID: "1881390",
             number: 1,
-            state: .Open,
+            state: .open,
             title: "Release this app",
             body: "That'd be cool",
             creator: palleasOpensource,
@@ -47,7 +47,7 @@ class IssuesTests: XCTestCase {
             Issue(ID: "165458041",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3"),
                 number: 3,
-                state: .Open,
+                state: .open,
                 title: "Add informations in Readme",
                 body: "![Giphy](http://media2.giphy.com/media/jxhJ8ylaYIPbG/giphy.gif)",
                 user: palleasOpensource,
@@ -63,7 +63,7 @@ class IssuesTests: XCTestCase {
             Issue(ID: "156633109",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1")!,
                 number: 1,
-                state: .Open,
+                state: .open,
                 title: "This issue is open",
                 body: "Issues are pretty cool.",
                 user: palleasOpensource,

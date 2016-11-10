@@ -18,7 +18,7 @@ class CommentsTests: XCTestCase {
             login: "Palleas-opensource",
             url: URL(string: "https://github.com/Palleas-opensource")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
-            type: .User
+            type: .user
         )
 
         let palleas = User(
@@ -26,7 +26,7 @@ class CommentsTests: XCTestCase {
             login: "Palleas",
             url: URL(string: "https://github.com/Palleas")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/48797?v=3")!,
-            type: .User
+            type: .user
         )
 
         let expected: [Comment] = [

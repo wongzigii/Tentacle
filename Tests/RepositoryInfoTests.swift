@@ -18,7 +18,7 @@ class RepositoryInfoTests: XCTestCase {
             login: "Palleas-opensource",
             url: URL(string: "https://github.com/Palleas-opensource")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
-            type: .User
+            type: .user
         )
 
         let expected = [
@@ -53,7 +53,7 @@ class RepositoryInfoTests: XCTestCase {
             login: "RACCommunity",
             url: URL(string: "https://github.com/RACCommunity")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/18710012?v=3")!,
-            type: .Organization
+            type: .organization
         )
 
         let expected = [
