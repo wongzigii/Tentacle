@@ -18,7 +18,7 @@ public struct Issue: Hashable, CustomStringConvertible {
     }
 
     /// The id of the issue
-    public let ID: String
+    public let id: String
 
     /// The URL to view this issue in a browser
     public let url: URL?
@@ -66,15 +66,15 @@ public struct Issue: Hashable, CustomStringConvertible {
     public let updatedAt: Date
 
     public var hashValue: Int {
-        return ID.hashValue
+        return id.hashValue
     }
 
     public var description: String {
         return title
     }
 
-    public init(ID: String, url: URL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: Date?, createdAt: Date, updatedAt: Date) {
-        self.ID = ID
+    public init(id: String, url: URL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: Date?, createdAt: Date, updatedAt: Date) {
+        self.id = id
         self.url = url
         self.number = number
         self.state = state
@@ -95,7 +95,7 @@ public struct Issue: Hashable, CustomStringConvertible {
 }
 
 public func ==(lhs: Issue, rhs: Issue) -> Bool {
-    return lhs.ID == rhs.ID
+    return lhs.id == rhs.id
         && lhs.url == rhs.url
         && lhs.number == rhs.number
         && lhs.state == rhs.state

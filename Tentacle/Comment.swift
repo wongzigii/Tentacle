@@ -14,7 +14,7 @@ import Runes
 public struct Comment: Hashable, CustomStringConvertible {
 
     /// The id of the issue
-    public let ID: String
+    public let id: String
     /// The URL to view this comment in a browser
     public let url: URL
     /// The date this comment was created at
@@ -27,7 +27,7 @@ public struct Comment: Hashable, CustomStringConvertible {
     public let author: User
     
     public var hashValue: Int {
-        return ID.hashValue
+        return id.hashValue
     }
 
     public var description: String {
@@ -36,7 +36,7 @@ public struct Comment: Hashable, CustomStringConvertible {
 }
 
 public func ==(lhs: Comment, rhs: Comment) -> Bool {
-    return lhs.ID == rhs.ID
+    return lhs.id == rhs.id
         && lhs.url == rhs.url
         && lhs.body == rhs.body
 }

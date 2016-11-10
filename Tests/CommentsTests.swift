@@ -14,7 +14,7 @@ class CommentsTests: XCTestCase {
 
     func testDecodedCommentsOnSampleRepositoryIssue() {
         let palleasOpensource = User(
-            ID: "15802020",
+            id: "15802020",
             login: "Palleas-opensource",
             url: URL(string: "https://github.com/Palleas-opensource")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
@@ -22,7 +22,7 @@ class CommentsTests: XCTestCase {
         )
 
         let palleas = User(
-            ID: "48797",
+            id: "48797",
             login: "Palleas",
             url: URL(string: "https://github.com/Palleas")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/48797?v=3")!,
@@ -31,7 +31,7 @@ class CommentsTests: XCTestCase {
 
         let expected: [Comment] = [
             Comment(
-                ID: "235455442",
+                id: "235455442",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1#issuecomment-235455442")!,
                 createdAt: DateFormatter.iso8601.date(from: "2016-07-27T01:28:21Z")!,
                 updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T01:28:21Z")!,
@@ -39,7 +39,7 @@ class CommentsTests: XCTestCase {
                 author: palleas
             ),
             Comment(
-                ID: "235455603",
+                id: "235455603",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1#issuecomment-235455603")!,
                 createdAt: DateFormatter.iso8601.date(from: "2016-07-27T01:29:31Z")!,
                 updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T01:29:31Z")!,

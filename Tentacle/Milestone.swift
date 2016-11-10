@@ -18,7 +18,7 @@ public struct Milestone: Hashable, CustomStringConvertible {
     }
 
     /// The ID of the milestone
-    public let ID: String
+    public let id: String
 
     /// The number of the milestone in the repository it belongs to
     public let number: Int
@@ -57,7 +57,7 @@ public struct Milestone: Hashable, CustomStringConvertible {
     public let url: URL
 
     public var hashValue: Int {
-        return ID.hashValue
+        return id.hashValue
     }
 
     public var description: String {
@@ -67,7 +67,7 @@ public struct Milestone: Hashable, CustomStringConvertible {
 }
 
 public func ==(lhs: Milestone, rhs: Milestone) -> Bool {
-    return lhs.ID == rhs.ID
+    return lhs.id == rhs.id
 }
 
 internal func toMilestoneState(_ string: String) -> Decoded<Milestone.State> {

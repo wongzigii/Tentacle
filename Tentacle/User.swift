@@ -18,7 +18,7 @@ public struct User: Hashable, CustomStringConvertible {
     }
 
     /// The unique ID of the user.
-    public let ID: String
+    public let id: String
     
     /// The user's login/username.
     public let login: String
@@ -33,7 +33,7 @@ public struct User: Hashable, CustomStringConvertible {
     public let type: UserType
 
     public var hashValue: Int {
-        return ID.hashValue
+        return id.hashValue
     }
     
     public var description: String {
@@ -42,7 +42,7 @@ public struct User: Hashable, CustomStringConvertible {
 }
 
 public func ==(lhs: User, rhs: User) -> Bool {
-    return lhs.ID == rhs.ID
+    return lhs.id == rhs.id
         && lhs.login == rhs.login
         && lhs.url == rhs.url
         && lhs.avatarURL == rhs.avatarURL

@@ -14,7 +14,7 @@ class IssuesTests: XCTestCase {
     
     func testDecodedPalleasOpensourceIssues() {
         let palleasOpensource = User(
-            ID: "15802020",
+            id: "15802020",
             login: "Palleas-opensource",
             url: URL(string: "https://github.com/Palleas-opensource")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
@@ -22,7 +22,7 @@ class IssuesTests: XCTestCase {
         )
 
         let shipItMilestone = Milestone(
-            ID: "1881390",
+            id: "1881390",
             number: 1,
             state: .open,
             title: "Release this app",
@@ -44,7 +44,7 @@ class IssuesTests: XCTestCase {
         )
 
         let expected = [
-            Issue(ID: "165458041",
+            Issue(id: "165458041",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/pull/3"),
                 number: 3,
                 state: .open,
@@ -60,7 +60,7 @@ class IssuesTests: XCTestCase {
                 closedAt: nil,
                 createdAt:  DateFormatter.iso8601.date(from: "2016-07-14T01:40:08Z")!,
                 updatedAt:  DateFormatter.iso8601.date(from: "2016-07-14T01:40:08Z")!),
-            Issue(ID: "156633109",
+            Issue(id: "156633109",
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/issues/1")!,
                 number: 1,
                 state: .open,
