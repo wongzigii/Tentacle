@@ -13,13 +13,9 @@ import Foundation
 
 
 /// An error from the GitHub API.
-public struct GitHubError: Hashable, CustomStringConvertible, Error {
+public struct GitHubError: CustomStringConvertible, Error {
     /// The error message from the API.
     public let message: String
-    
-    public var hashValue: Int {
-        return message.hashValue
-    }
     
     public var description: String {
         return message
@@ -30,8 +26,14 @@ public struct GitHubError: Hashable, CustomStringConvertible, Error {
     }
 }
 
-public func ==(lhs: GitHubError, rhs: GitHubError) -> Bool {
-    return lhs.message == rhs.message
+extension GitHubError: Hashable {
+    public static func ==(lhs: GitHubError, rhs: GitHubError) -> Bool {
+        return lhs.message == rhs.message
+    }
+
+    public var hashValue: Int {
+        return message.hashValue
+    }
 }
 
 extension GitHubError: Decodable {

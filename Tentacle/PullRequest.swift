@@ -11,7 +11,7 @@ import Argo
 import Curry
 import Runes
 
-public struct PullRequest: Hashable, CustomStringConvertible {
+public struct PullRequest: CustomStringConvertible {
     /// The URL to view the Pull Request is an browser
     public let url: URL
 
@@ -21,17 +21,19 @@ public struct PullRequest: Hashable, CustomStringConvertible {
     /// The URL to a downloadable patch for this pull request
     public let patchURL: URL
 
-    public var hashValue: Int {
-        return url.hashValue
-    }
-
     public var description: String {
         return url.absoluteString
     }
 }
 
-public func ==(lhs: PullRequest, rhs: PullRequest) -> Bool {
-    return lhs.url == rhs.url
+extension PullRequest: Hashable {
+    public static func ==(lhs: PullRequest, rhs: PullRequest) -> Bool {
+        return lhs.url == rhs.url
+    }
+
+    public var hashValue: Int {
+        return url.hashValue
+    }
 }
 
 extension PullRequest: ResourceType {

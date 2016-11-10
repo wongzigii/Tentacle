@@ -98,7 +98,7 @@ public final class Client {
     internal static let DownloadContentType = "application/octet-stream"
     
     /// An error from the Client.
-    public enum Error: Swift.Error, Hashable {
+    public enum Error: Swift.Error {
         /// An error occurred in a network operation.
         case networkError(NSError)
         
@@ -113,25 +113,6 @@ public final class Client {
         
         /// The requested object does not exist.
         case doesNotExist
-        
-        public var hashValue: Int {
-            switch self {
-            case let .networkError(error):
-                return error.hashValue
-                
-            case let .jsonDeserializationError(error):
-                return error.hashValue
-                
-            case let .jsonDecodingError(error):
-                return error.hashValue
-                
-            case let .apiError(statusCode, response, error):
-                return statusCode.hashValue ^ response.hashValue ^ error.hashValue
-                
-            case .doesNotExist:
-                return 4
-            }
-        }
     }
     
     /// Credentials for the GitHub API.
@@ -152,7 +133,7 @@ public final class Client {
     }
     
     /// A GitHub API endpoint.
-    internal enum Endpoint: Hashable {
+    internal enum Endpoint {
         // https://developer.github.com/v3/repos/releases/#get-a-release-by-tag-name
         case releaseByTagName(owner: String, repository: String, tag: String)
         
@@ -186,7 +167,7 @@ public final class Client {
         // https://developer.github.com/v3/repos/#list-all-public-repositories
         case publicRepositories
 
-        var path: String {
+        internal var path: String {
             switch self {
             case let .releaseByTagName(owner, repo, tag):
                 return "/repos/\(owner)/\(repo)/releases/tags/\(tag)"
@@ -213,34 +194,7 @@ public final class Client {
             }
         }
         
-        var hashValue: Int {
-            switch self {
-            case let .releaseByTagName(owner, repo, tag):
-                return owner.hashValue ^ repo.hashValue ^ tag.hashValue
-            case let .releasesInRepository(owner, repo):
-                return owner.hashValue ^ repo.hashValue
-            case let .userInfo(login):
-                return login.hashValue
-            case .assignedIssues:
-                return "AssignedIssues".hashValue
-            case .issuesInRepository(let owner, let repository):
-                return "Issues".hashValue ^ owner.hashValue ^ repository.hashValue
-            case .commentsOnIssue(let issue, let owner, let repository):
-                return issue.hashValue ^ owner.hashValue ^ repository.hashValue
-            case .authenticatedUser:
-                return "authenticated-user".hashValue
-            case .repositories:
-                return "Repositories".hashValue
-            case .repositoriesForUser(let user):
-                return user.hashValue
-            case .repositoriesForOrganization(let organisation):
-                return organisation.hashValue
-            case .publicRepositories:
-                return "PublicRepositories".hashValue
-            }
-        }
-        
-        var queryItems: [URLQueryItem] {
+        internal var queryItems: [URLQueryItem] {
             return []
         }
     }
@@ -428,37 +382,87 @@ public final class Client {
     }
 }
 
-public func ==(lhs: Client.Error, rhs: Client.Error) -> Bool {
-    switch (lhs, rhs) {
-    case let (.networkError(error1), .networkError(error2)):
-        return error1 == error2
-        
-    case let (.jsonDeserializationError(error1), .jsonDeserializationError(error2)):
-        return error1 == error2
-        
-    case let (.jsonDecodingError(error1), .jsonDecodingError(error2)):
-        return error1 == error2
-        
-    case let (.apiError(statusCode1, response1, error1), .apiError(statusCode2, response2, error2)):
-        return statusCode1 == statusCode2 && response1 == response2 && error1 == error2
-        
-    case (.doesNotExist, .doesNotExist):
-        return true
-        
-    default:
-        return false
+extension Client.Error: Hashable {
+    public static func ==(lhs: Client.Error, rhs: Client.Error) -> Bool {
+        switch (lhs, rhs) {
+        case let (.networkError(error1), .networkError(error2)):
+            return error1 == error2
+
+        case let (.jsonDeserializationError(error1), .jsonDeserializationError(error2)):
+            return error1 == error2
+
+        case let (.jsonDecodingError(error1), .jsonDecodingError(error2)):
+            return error1 == error2
+
+        case let (.apiError(statusCode1, response1, error1), .apiError(statusCode2, response2, error2)):
+            return statusCode1 == statusCode2 && response1 == response2 && error1 == error2
+
+        case (.doesNotExist, .doesNotExist):
+            return true
+
+        default:
+            return false
+        }
+    }
+
+    public var hashValue: Int {
+        switch self {
+        case let .networkError(error):
+            return error.hashValue
+
+        case let .jsonDeserializationError(error):
+            return error.hashValue
+
+        case let .jsonDecodingError(error):
+            return error.hashValue
+
+        case let .apiError(statusCode, response, error):
+            return statusCode.hashValue ^ response.hashValue ^ error.hashValue
+
+        case .doesNotExist:
+            return 4
+        }
     }
 }
 
-internal func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
-    switch (lhs, rhs) {
-    case let (.releaseByTagName(owner1, repo1, tag1), .releaseByTagName(owner2, repo2, tag2)):
-        return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
-    case let (.releasesInRepository(owner1, repo1), .releasesInRepository(owner2, repo2)):
-        return owner1 == owner2 && repo1 == repo2
-    case let (.userInfo(login1), .userInfo(login2)):
-        return login1 == login2
-    default:
-        return false
+extension Client.Endpoint: Hashable {
+    internal static func ==(lhs: Client.Endpoint, rhs: Client.Endpoint) -> Bool {
+        switch (lhs, rhs) {
+        case let (.releaseByTagName(owner1, repo1, tag1), .releaseByTagName(owner2, repo2, tag2)):
+            return owner1 == owner2 && repo1 == repo2 && tag1 == tag2
+        case let (.releasesInRepository(owner1, repo1), .releasesInRepository(owner2, repo2)):
+            return owner1 == owner2 && repo1 == repo2
+        case let (.userInfo(login1), .userInfo(login2)):
+            return login1 == login2
+        default:
+            return false
+        }
+    }
+
+    internal var hashValue: Int {
+        switch self {
+        case let .releaseByTagName(owner, repo, tag):
+            return owner.hashValue ^ repo.hashValue ^ tag.hashValue
+        case let .releasesInRepository(owner, repo):
+            return owner.hashValue ^ repo.hashValue
+        case let .userInfo(login):
+            return login.hashValue
+        case .assignedIssues:
+            return "AssignedIssues".hashValue
+        case .issuesInRepository(let owner, let repository):
+            return "Issues".hashValue ^ owner.hashValue ^ repository.hashValue
+        case .commentsOnIssue(let issue, let owner, let repository):
+            return issue.hashValue ^ owner.hashValue ^ repository.hashValue
+        case .authenticatedUser:
+            return "authenticated-user".hashValue
+        case .repositories:
+            return "Repositories".hashValue
+        case .repositoriesForUser(let user):
+            return user.hashValue
+        case .repositoriesForOrganization(let organisation):
+            return organisation.hashValue
+        case .publicRepositories:
+            return "PublicRepositories".hashValue
+        }
     }
 }

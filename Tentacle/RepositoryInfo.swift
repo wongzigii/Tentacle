@@ -11,7 +11,7 @@ import Argo
 import Curry
 import Runes
 
-public struct RepositoryInfo: Hashable, CustomStringConvertible {
+public struct RepositoryInfo: CustomStringConvertible {
     /// The id of the repository
     public let id: String
     
@@ -60,19 +60,21 @@ public struct RepositoryInfo: Hashable, CustomStringConvertible {
     /// The date the repository was last updated
     public let updatedAt: Date
 
-    public var hashValue: Int {
-        return id.hashValue ^ nameWithOwner.hashValue
-    }
-
     public var description: String {
         return nameWithOwner
     }
 }
 
-public func ==(lhs: RepositoryInfo, rhs: RepositoryInfo) -> Bool {
-    return lhs.id == rhs.id
-        && lhs.name == rhs.name
-        && lhs.nameWithOwner == rhs.nameWithOwner
+extension RepositoryInfo: Hashable {
+    public static func ==(lhs: RepositoryInfo, rhs: RepositoryInfo) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
+            && lhs.nameWithOwner == rhs.nameWithOwner
+    }
+
+    public var hashValue: Int {
+        return id.hashValue ^ nameWithOwner.hashValue
+    }
 }
 
 extension RepositoryInfo: ResourceType {
