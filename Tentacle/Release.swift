@@ -12,11 +12,11 @@ import Foundation
 import Runes
 
 /// A Release of a Repository.
-public struct Release: Hashable, CustomStringConvertible {
+public struct Release: CustomStringConvertible {
     /// An Asset attached to a Release.
-    public struct Asset: Hashable, CustomStringConvertible {
+    public struct Asset: CustomStringConvertible {
         /// The unique ID for this release asset.
-        public let ID: String
+        public let id: String
 
         /// The filename of this asset.
         public let name: String
@@ -30,16 +30,12 @@ public struct Release: Hashable, CustomStringConvertible {
         /// The URL at which the asset can be downloaded via the API.
         public let apiURL: URL
 
-        public var hashValue: Int {
-            return ID.hashValue
-        }
-
         public var description: String {
             return "\(url)"
         }
 
-        public init(ID: String, name: String, contentType: String, url: URL, apiURL: URL) {
-            self.ID = ID
+        public init(id: String, name: String, contentType: String, url: URL, apiURL: URL) {
+            self.id = id
             self.name = name
             self.contentType = contentType
             self.url = url
@@ -48,7 +44,7 @@ public struct Release: Hashable, CustomStringConvertible {
     }
     
     /// The unique ID of the release.
-    public let ID: String
+    public let id: String
 
     /// Whether this release is a draft (only visible to the authenticted user).
     public let draft: Bool
@@ -68,16 +64,12 @@ public struct Release: Hashable, CustomStringConvertible {
     /// Any assets attached to the release.
     public let assets: [Asset]
     
-    public var hashValue: Int {
-        return ID.hashValue
-    }
-    
     public var description: String {
         return "\(url)"
     }
     
-    public init(ID: String, tag: String, url: URL, name: String? = nil, draft: Bool = false, prerelease: Bool = false, assets: [Asset]) {
-        self.ID = ID
+    public init(id: String, tag: String, url: URL, name: String? = nil, draft: Bool = false, prerelease: Bool = false, assets: [Asset]) {
+        self.id = id
         self.tag = tag
         self.url = url
         self.name = name
@@ -87,18 +79,30 @@ public struct Release: Hashable, CustomStringConvertible {
     }
 }
 
-public func ==(lhs: Release.Asset, rhs: Release.Asset) -> Bool {
-    return lhs.ID == rhs.ID && lhs.url == rhs.url
+extension Release.Asset: Hashable {
+    public static func ==(lhs: Release.Asset, rhs: Release.Asset) -> Bool {
+        return lhs.id == rhs.id && lhs.url == rhs.url
+    }
+
+    public var hashValue: Int {
+        return id.hashValue
+    }
 }
 
-public func ==(lhs: Release, rhs: Release) -> Bool {
-    return lhs.ID == rhs.ID
-        && lhs.tag == rhs.tag
-        && lhs.url == rhs.url
-        && lhs.name == rhs.name
-        && lhs.draft == rhs.draft
-        && lhs.prerelease == rhs.prerelease
-        && lhs.assets == rhs.assets
+extension Release: Hashable {
+    public static func ==(lhs: Release, rhs: Release) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.tag == rhs.tag
+            && lhs.url == rhs.url
+            && lhs.name == rhs.name
+            && lhs.draft == rhs.draft
+            && lhs.prerelease == rhs.prerelease
+            && lhs.assets == rhs.assets
+    }
+
+    public var hashValue: Int {
+        return id.hashValue
+    }
 }
 
 extension Release.Asset: ResourceType {

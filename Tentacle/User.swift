@@ -11,14 +11,14 @@ import Curry
 import Runes
 
 /// A User on GitHub.
-public struct User: Hashable, CustomStringConvertible {
+public struct User: CustomStringConvertible {
     public enum UserType: String {
-        case User = "User"
-        case Organization = "Organization"
+        case user = "User"
+        case organization = "Organization"
     }
 
     /// The unique ID of the user.
-    public let ID: String
+    public let id: String
     
     /// The user's login/username.
     public let login: String
@@ -32,20 +32,22 @@ public struct User: Hashable, CustomStringConvertible {
     /// The type of user if it's a regular one or an organization
     public let type: UserType
 
-    public var hashValue: Int {
-        return ID.hashValue
-    }
-    
     public var description: String {
         return login
     }
 }
 
-public func ==(lhs: User, rhs: User) -> Bool {
-    return lhs.ID == rhs.ID
-        && lhs.login == rhs.login
-        && lhs.url == rhs.url
-        && lhs.avatarURL == rhs.avatarURL
+extension User: Hashable {
+    public static func ==(lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.login == rhs.login
+            && lhs.url == rhs.url
+            && lhs.avatarURL == rhs.avatarURL
+    }
+
+    public var hashValue: Int {
+        return id.hashValue
+    }
 }
 
 extension User: ResourceType {
@@ -79,10 +81,6 @@ public struct UserInfo {
     /// The user's company if they've set one.
     public let company: String?
     
-    public var hashValue: Int {
-        return user.hashValue
-    }
-    
     public var description: String {
         return user.description
     }
@@ -97,13 +95,19 @@ public struct UserInfo {
     }
 }
 
-public func ==(lhs: UserInfo, rhs: UserInfo) -> Bool {
-    return lhs.user == rhs.user
-        && lhs.joinedDate == rhs.joinedDate
-        && lhs.name == rhs.name
-        && lhs.email == rhs.email
-        && lhs.websiteURL == rhs.websiteURL
-        && lhs.company == rhs.company
+extension UserInfo: Hashable {
+    public static func ==(lhs: UserInfo, rhs: UserInfo) -> Bool {
+        return lhs.user == rhs.user
+            && lhs.joinedDate == rhs.joinedDate
+            && lhs.name == rhs.name
+            && lhs.email == rhs.email
+            && lhs.websiteURL == rhs.websiteURL
+            && lhs.company == rhs.company
+    }
+
+    public var hashValue: Int {
+        return user.hashValue
+    }
 }
 
 extension UserInfo: ResourceType {

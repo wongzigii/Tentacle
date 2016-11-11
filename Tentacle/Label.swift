@@ -11,21 +11,23 @@ import Argo
 import Curry
 import Runes
 
-public struct Label: Hashable, CustomStringConvertible {
+public struct Label: CustomStringConvertible {
     public let name: String
     public let color: Color
-
-    public var hashValue: Int {
-        return name.hashValue
-    }
 
     public var description: String {
         return name
     }
 }
 
-public func ==(lhs: Label, rhs: Label) -> Bool {
-    return lhs.name == rhs.name
+extension Label: Hashable {
+    public static func ==(lhs: Label, rhs: Label) -> Bool {
+        return lhs.name == rhs.name
+    }
+
+    public var hashValue: Int {
+        return name.hashValue
+    }
 }
 
 extension Label: ResourceType {

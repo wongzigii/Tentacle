@@ -35,7 +35,7 @@ private func linksInLinkHeader(_ header: NSString) -> [String: URL] {
 }
 
 /// A response from the GitHub API.
-public struct Response: Hashable {
+public struct Response {
     /// The number of requests remaining in the current rate limit window, or nil if the server
     /// isn't rate-limited.
     public let rateLimitRemaining: UInt?
@@ -61,16 +61,18 @@ public struct Response: Hashable {
             .map { Date(timeIntervalSince1970: $0) }
         self.links = linksInLinkHeader(headerFields["Link"] as NSString? ?? "")
     }
-    
-    public var hashValue: Int {
-        return (rateLimitRemaining?.hashValue ?? 0)
-             ^ (rateLimitReset?.hashValue ?? 0)
-             ^ Array(links.values).reduce(0) { $0 ^ $1.hashValue }
-    }
 }
 
-public func ==(lhs: Response, rhs: Response) -> Bool {
-    return lhs.rateLimitRemaining == rhs.rateLimitRemaining
-        && lhs.rateLimitReset == rhs.rateLimitReset
-        && lhs.links == rhs.links
+extension Response: Hashable {
+    public static func ==(lhs: Response, rhs: Response) -> Bool {
+        return lhs.rateLimitRemaining == rhs.rateLimitRemaining
+            && lhs.rateLimitReset == rhs.rateLimitReset
+            && lhs.links == rhs.links
+    }
+
+    public var hashValue: Int {
+        return (rateLimitRemaining?.hashValue ?? 0)
+            ^ (rateLimitReset?.hashValue ?? 0)
+            ^ Array(links.values).reduce(0) { $0 ^ $1.hashValue }
+    }
 }

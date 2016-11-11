@@ -13,20 +13,20 @@ import XCTest
 class ReleaseTests: XCTestCase {
     func testDecode() {
         let expected = Release(
-            ID: "2698201",
+            id: "2698201",
             tag: "0.15",
             url: URL(string: "https://github.com/Carthage/Carthage/releases/tag/0.15")!,
             name: "0.15: YOLOL",
             assets: [
                 Release.Asset(
-                    ID: "1358331",
+                    id: "1358331",
                     name: "Carthage.pkg",
                     contentType: "application/octet-stream",
                     url: URL(string: "https://github.com/Carthage/Carthage/releases/download/0.15/Carthage.pkg")!,
                     apiURL: URL(string: "https://api.github.com/repos/Carthage/Carthage/releases/assets/1358331")!
                 ),
                 Release.Asset(
-                    ID: "1358332",
+                    id: "1358332",
                     name: "CarthageKit.framework.zip",
                     contentType: "application/zip",
                     url: URL(string: "https://github.com/Carthage/Carthage/releases/download/0.15/CarthageKit.framework.zip")!,

@@ -11,14 +11,14 @@ import Curry
 import Runes
 
 /// An Issue on Github
-public struct Issue: Hashable, CustomStringConvertible {
+public struct Issue: CustomStringConvertible {
     public enum State: String {
-        case Open = "open"
-        case Closed = "closed"
+        case open = "open"
+        case closed = "closed"
     }
 
     /// The id of the issue
-    public let ID: String
+    public let id: String
 
     /// The URL to view this issue in a browser
     public let url: URL?
@@ -65,16 +65,12 @@ public struct Issue: Hashable, CustomStringConvertible {
     /// The date this issue was updated at
     public let updatedAt: Date
 
-    public var hashValue: Int {
-        return ID.hashValue
-    }
-
     public var description: String {
         return title
     }
 
-    public init(ID: String, url: URL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: Date?, createdAt: Date, updatedAt: Date) {
-        self.ID = ID
+    public init(id: String, url: URL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: Date?, createdAt: Date, updatedAt: Date) {
+        self.id = id
         self.url = url
         self.number = number
         self.state = state
@@ -94,20 +90,26 @@ public struct Issue: Hashable, CustomStringConvertible {
 
 }
 
-public func ==(lhs: Issue, rhs: Issue) -> Bool {
-    return lhs.ID == rhs.ID
-        && lhs.url == rhs.url
-        && lhs.number == rhs.number
-        && lhs.state == rhs.state
-        && lhs.title == rhs.title
-        && lhs.body == rhs.body
-        && lhs.locked == rhs.locked
-        && lhs.commentCount == rhs.commentCount
-        && lhs.createdAt == rhs.createdAt
-        && lhs.updatedAt == rhs.updatedAt
-        && lhs.labels == rhs.labels
-        && lhs.milestone == rhs.milestone
-        && lhs.pullRequest == rhs.pullRequest
+extension Issue: Hashable {
+    public static func ==(lhs: Issue, rhs: Issue) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.url == rhs.url
+            && lhs.number == rhs.number
+            && lhs.state == rhs.state
+            && lhs.title == rhs.title
+            && lhs.body == rhs.body
+            && lhs.locked == rhs.locked
+            && lhs.commentCount == rhs.commentCount
+            && lhs.createdAt == rhs.createdAt
+            && lhs.updatedAt == rhs.updatedAt
+            && lhs.labels == rhs.labels
+            && lhs.milestone == rhs.milestone
+            && lhs.pullRequest == rhs.pullRequest
+    }
+
+    public var hashValue: Int {
+        return id.hashValue
+    }
 }
 
 extension Issue: ResourceType {

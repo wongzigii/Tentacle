@@ -11,10 +11,10 @@ import Curry
 import Argo
 import Runes
 
-public struct Comment: Hashable, CustomStringConvertible {
+public struct Comment: CustomStringConvertible {
 
     /// The id of the issue
-    public let ID: String
+    public let id: String
     /// The URL to view this comment in a browser
     public let url: URL
     /// The date this comment was created at
@@ -26,19 +26,21 @@ public struct Comment: Hashable, CustomStringConvertible {
     /// The author of this comment
     public let author: User
     
-    public var hashValue: Int {
-        return ID.hashValue
-    }
-
     public var description: String {
         return body
     }
 }
 
-public func ==(lhs: Comment, rhs: Comment) -> Bool {
-    return lhs.ID == rhs.ID
-        && lhs.url == rhs.url
-        && lhs.body == rhs.body
+extension Comment: Hashable {
+    public static func ==(lhs: Comment, rhs: Comment) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.url == rhs.url
+            && lhs.body == rhs.body
+    }
+
+    public var hashValue: Int {
+        return id.hashValue
+    }
 }
 
 extension Comment: ResourceType {

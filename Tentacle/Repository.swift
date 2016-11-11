@@ -10,7 +10,7 @@ import Foundation
 
 
 /// A GitHub.com or GitHub Enterprise repository.
-public struct Repository: Hashable, CustomStringConvertible {
+public struct Repository: CustomStringConvertible {
     public let server: Server
     public let owner: String
     public let name: String
@@ -28,17 +28,19 @@ public struct Repository: Hashable, CustomStringConvertible {
             .appendingPathComponent(name)
     }
     
-    public var hashValue: Int {
-        return description.lowercased().hashValue
-    }
-    
     public var description: String {
         return "\(url)"
     }
 }
 
-public func ==(lhs: Repository, rhs: Repository) -> Bool {
-    return lhs.server == rhs.server
-        && lhs.owner.caseInsensitiveCompare(rhs.owner) == .orderedSame
-        && lhs.name.caseInsensitiveCompare(rhs.name) == .orderedSame
+extension Repository: Hashable {
+    public static func ==(lhs: Repository, rhs: Repository) -> Bool {
+        return lhs.server == rhs.server
+            && lhs.owner.caseInsensitiveCompare(rhs.owner) == .orderedSame
+            && lhs.name.caseInsensitiveCompare(rhs.name) == .orderedSame
+    }
+
+    public var hashValue: Int {
+        return description.lowercased().hashValue
+    }
 }

@@ -11,14 +11,14 @@ import Argo
 import Curry
 import Runes
 
-public struct Milestone: Hashable, CustomStringConvertible {
+public struct Milestone: CustomStringConvertible {
     public enum State: String {
-        case Open = "open"
-        case Closed = "closed"
+        case open = "open"
+        case closed = "closed"
     }
 
     /// The ID of the milestone
-    public let ID: String
+    public let id: String
 
     /// The number of the milestone in the repository it belongs to
     public let number: Int
@@ -56,18 +56,19 @@ public struct Milestone: Hashable, CustomStringConvertible {
     /// The URL to view this milestone in a browser
     public let url: URL
 
-    public var hashValue: Int {
-        return ID.hashValue
-    }
-
     public var description: String {
         return title
     }
-
 }
 
-public func ==(lhs: Milestone, rhs: Milestone) -> Bool {
-    return lhs.ID == rhs.ID
+extension Milestone: Hashable {
+    public static func ==(lhs: Milestone, rhs: Milestone) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    public var hashValue: Int {
+        return id.hashValue
+    }
 }
 
 internal func toMilestoneState(_ string: String) -> Decoded<Milestone.State> {

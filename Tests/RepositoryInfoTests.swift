@@ -14,11 +14,11 @@ class RepositoryInfoTests: XCTestCase {
 
     func testUserRepositoryInfoAreEquals() {
         let palleasOpensource = User(
-            ID: "15802020",
+            id: "15802020",
             login: "Palleas-opensource",
             url: URL(string: "https://github.com/Palleas-opensource")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/15802020?v=3")!,
-            type: .User
+            type: .user
         )
 
         let expected = [
@@ -49,11 +49,11 @@ class RepositoryInfoTests: XCTestCase {
 
     func testOrganizationRepositoryAreEqual() {
         let raccommunity = User(
-            ID: "18710012",
+            id: "18710012",
             login: "RACCommunity",
             url: URL(string: "https://github.com/RACCommunity")!,
             avatarURL: URL(string: "https://avatars.githubusercontent.com/u/18710012?v=3")!,
-            type: .Organization
+            type: .organization
         )
 
         let expected = [

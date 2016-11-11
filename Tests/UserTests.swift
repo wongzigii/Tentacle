@@ -14,11 +14,11 @@ class UserTests: XCTestCase {
     func testDecodeMdiep() {
         let expected = UserInfo(
             user: User(
-                ID: "1302",
+                id: "1302",
                 login: "mdiep",
                 url: URL(string: "https://github.com/mdiep")!,
                 avatarURL: URL(string: "https://avatars.githubusercontent.com/u/1302?v=3")!,
-                type: .User
+                type: .user
             ),
             joinedDate: Date(timeIntervalSince1970: 1204155107),
             name: "Matt Diephouse",
@@ -32,11 +32,11 @@ class UserTests: XCTestCase {
     func testDecodeTest() {
         let expected = UserInfo(
             user: User(
-                ID: "383316",
+                id: "383316",
                 login: "test",
                 url: URL(string: "https://github.com/test")!,
                 avatarURL: URL(string: "https://avatars.githubusercontent.com/u/383316?v=3")!,
-                type: .User
+                type: .user
             ),
             joinedDate: Date(timeIntervalSince1970: 1283337552),
             name: nil,

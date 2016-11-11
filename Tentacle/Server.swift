@@ -10,7 +10,7 @@ import Foundation
 
 
 /// A GitHub.com or GitHub Enterprise server.
-public enum Server: Hashable, CustomStringConvertible {
+public enum Server: CustomStringConvertible {
     /// The GitHub.com server.
     case dotCom
     
@@ -38,24 +38,26 @@ public enum Server: Hashable, CustomStringConvertible {
         }
     }
     
-    public var hashValue: Int {
-        return endpoint.lowercased().hashValue
-    }
-    
     public var description: String {
         return "\(url)"
     }
 }
 
-public func ==(lhs: Server, rhs: Server) -> Bool {
-    switch (lhs, rhs) {
-    case (.dotCom, .dotCom):
-        return true
-    
-    case (.enterprise, .enterprise):
-        return lhs.endpoint.caseInsensitiveCompare(rhs.endpoint) == .orderedSame
-        
-    default:
-        return false
+extension Server: Hashable {
+    public static func ==(lhs: Server, rhs: Server) -> Bool {
+        switch (lhs, rhs) {
+        case (.dotCom, .dotCom):
+            return true
+
+        case (.enterprise, .enterprise):
+            return lhs.endpoint.caseInsensitiveCompare(rhs.endpoint) == .orderedSame
+
+        default:
+            return false
+        }
+    }
+
+    public var hashValue: Int {
+        return endpoint.lowercased().hashValue
     }
 }
