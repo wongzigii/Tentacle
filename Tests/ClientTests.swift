@@ -156,9 +156,8 @@ class ClientTests: XCTestCase {
     func testDownloadAsset() {
         let release: Release = Fixture.Release.MDPSplitView1_0_2.decode()!
         let asset = release.assets
-            .filter { $0.name == "MDPSplitView.framework.zip" }
-            .first!
-        
+            .first { $0.name == "MDPSplitView.framework.zip" }!
+
         let result = client
             .download(asset: asset)
             .map { url in

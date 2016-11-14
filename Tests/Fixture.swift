@@ -133,10 +133,7 @@ struct Fixture {
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
     static func fixtureForURL(_ url: URL) -> FixtureType? {
-        if let index = allFixtures.index(where: { $0.url == url }) {
-            return allFixtures[index]
-        }
-        return nil
+        return allFixtures.first { $0.url == url }
     }
     
     struct Release: EndpointFixtureType {
