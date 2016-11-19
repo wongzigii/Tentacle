@@ -20,6 +20,9 @@ extension Release.Asset {
 }
 
 extension Client {
+    @available(*, unavailable, renamed: "isAuthenticated")
+    public var authenticated: Bool { return isAuthenticated }
+
     @available(*, unavailable, renamed: "releases(in:page:perPage:)")
     public func releasesInRepository(_ repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> { fatalError() }
 

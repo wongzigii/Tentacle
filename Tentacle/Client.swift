@@ -206,7 +206,7 @@ public final class Client {
     public let server: Server
     
     /// Whether the Client is authenticated.
-    public var authenticated: Bool {
+    public var isAuthenticated: Bool {
         return credentials != nil
     }
     
