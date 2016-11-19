@@ -14,12 +14,28 @@ extension DateFormatter {
     @nonobjc public static var ISO8601: DateFormatter { fatalError() }
 }
 
+extension Issue {
+    @available(*, unavailable, renamed: "isLocked")
+    public var locked: Bool { return isLocked }
+}
+
+extension Release {
+    @available(*, unavailable, renamed: "isDraft")
+    public var draft: Bool { return isDraft }
+
+    @available(*, unavailable, renamed: "isPrerelease")
+    public var prerelease: Bool { return isPrerelease }
+}
+
 extension Release.Asset {
     @available(*, unavailable, renamed: "apiURL")
     public var APIURL: URL { fatalError() }
 }
 
 extension Client {
+    @available(*, unavailable, renamed: "isAuthenticated")
+    public var authenticated: Bool { return isAuthenticated }
+
     @available(*, unavailable, renamed: "releases(in:page:perPage:)")
     public func releasesInRepository(_ repository: Repository, page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [Release]), Error> { fatalError() }
 
