@@ -48,7 +48,7 @@ public struct Issue: CustomStringConvertible {
     public let milestone: Milestone?
 
     /// True if the issue has been closed by a contributor
-    public let locked: Bool
+    public let isLocked: Bool
 
     /// The number of comments
     public let commentCount: Int
@@ -69,7 +69,7 @@ public struct Issue: CustomStringConvertible {
         return title
     }
 
-    public init(id: String, url: URL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, locked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: Date?, createdAt: Date, updatedAt: Date) {
+    public init(id: String, url: URL?, number: Int, state: State, title: String, body: String, user: User, labels: [Label], assignees: [User], milestone: Milestone?, isLocked: Bool, commentCount: Int, pullRequest: PullRequest?, closedAt: Date?, createdAt: Date, updatedAt: Date) {
         self.id = id
         self.url = url
         self.number = number
@@ -78,7 +78,7 @@ public struct Issue: CustomStringConvertible {
         self.body = body
         self.user = user
         self.milestone = milestone
-        self.locked = locked
+        self.isLocked = isLocked
         self.commentCount = commentCount
         self.pullRequest = pullRequest
         self.labels = labels
@@ -98,7 +98,7 @@ extension Issue: Hashable {
             && lhs.state == rhs.state
             && lhs.title == rhs.title
             && lhs.body == rhs.body
-            && lhs.locked == rhs.locked
+            && lhs.isLocked == rhs.isLocked
             && lhs.commentCount == rhs.commentCount
             && lhs.createdAt == rhs.createdAt
             && lhs.updatedAt == rhs.updatedAt

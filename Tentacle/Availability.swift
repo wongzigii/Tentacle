@@ -14,6 +14,11 @@ extension DateFormatter {
     @nonobjc public static var ISO8601: DateFormatter { fatalError() }
 }
 
+extension Issue {
+    @available(*, unavailable, renamed: "isLocked")
+    public var locked: Bool { return isLocked }
+}
+
 extension Release.Asset {
     @available(*, unavailable, renamed: "apiURL")
     public var APIURL: URL { fatalError() }
