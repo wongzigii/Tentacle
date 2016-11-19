@@ -47,7 +47,7 @@ public struct Release: CustomStringConvertible {
     public let id: String
 
     /// Whether this release is a draft (only visible to the authenticted user).
-    public let draft: Bool
+    public let isDraft: Bool
 
     /// Whether this release represents a prerelease version.
     public let prerelease: Bool
@@ -68,12 +68,12 @@ public struct Release: CustomStringConvertible {
         return "\(url)"
     }
     
-    public init(id: String, tag: String, url: URL, name: String? = nil, draft: Bool = false, prerelease: Bool = false, assets: [Asset]) {
+    public init(id: String, tag: String, url: URL, name: String? = nil, isDraft: Bool = false, prerelease: Bool = false, assets: [Asset]) {
         self.id = id
         self.tag = tag
         self.url = url
         self.name = name
-        self.draft = draft
+        self.isDraft = isDraft
         self.prerelease = prerelease
         self.assets = assets
     }
@@ -95,7 +95,7 @@ extension Release: Hashable {
             && lhs.tag == rhs.tag
             && lhs.url == rhs.url
             && lhs.name == rhs.name
-            && lhs.draft == rhs.draft
+            && lhs.isDraft == rhs.isDraft
             && lhs.prerelease == rhs.prerelease
             && lhs.assets == rhs.assets
     }

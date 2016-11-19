@@ -19,6 +19,11 @@ extension Issue {
     public var locked: Bool { return isLocked }
 }
 
+extension Release {
+    @available(*, unavailable, renamed: "isDraft")
+    public var draft: Bool { return isDraft }
+}
+
 extension Release.Asset {
     @available(*, unavailable, renamed: "apiURL")
     public var APIURL: URL { fatalError() }
