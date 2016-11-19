@@ -22,6 +22,9 @@ extension Issue {
 extension Release {
     @available(*, unavailable, renamed: "isDraft")
     public var draft: Bool { return isDraft }
+
+    @available(*, unavailable, renamed: "isPrerelease")
+    public var prerelease: Bool { return isPrerelease }
 }
 
 extension Release.Asset {
