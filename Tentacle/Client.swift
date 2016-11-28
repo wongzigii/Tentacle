@@ -167,6 +167,9 @@ public final class Client {
         // https://developer.github.com/v3/repos/#list-all-public-repositories
         case publicRepositories
 
+        // https://developer.github.com/v3/repos/contents/#get-contents
+        case file(owner: String, repository: String, path: String)
+
         internal var path: String {
             switch self {
             case let .releaseByTagName(owner, repo, tag):
@@ -191,6 +194,8 @@ public final class Client {
                 return "/orgs/\(organisation)/repos"
             case .publicRepositories:
                 return "/repositories"
+            case .file(let owner, let repository, let path):
+                return "/repos/\(owner)/\(repository)/contents/\(path)"
             }
         }
         
@@ -463,6 +468,8 @@ extension Client.Endpoint: Hashable {
             return organisation.hashValue
         case .publicRepositories:
             return "PublicRepositories".hashValue
+        case .file(let owner, let repository, let path):
+            return "File".hashValue ^ owner.hashValue ^ repository.hashValue ^ path.hashValue
         }
     }
 }
