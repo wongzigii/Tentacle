@@ -1,0 +1,17 @@
+{
+  "_links" : {
+    "git" : "https:\/\/api.github.com\/repos\/ReactiveCocoa\/ReactiveSwift\/git\/trees\/55345ebd4ec28baeacb4041a99d56839428bcaff",
+    "html" : "https:\/\/github.com\/ReactiveCocoa\/ReactiveSwift\/tree\/55345ebd4ec28baeacb4041a99d56839428bcaff",
+    "self" : "https:\/\/api.github.com\/repos\/mdiep\/Tentacle\/contents\/Carthage\/Checkouts\/ReactiveSwift?ref=master"
+  },
+  "git_url" : "https:\/\/api.github.com\/repos\/ReactiveCocoa\/ReactiveSwift\/git\/trees\/55345ebd4ec28baeacb4041a99d56839428bcaff",
+  "html_url" : "https:\/\/github.com\/ReactiveCocoa\/ReactiveSwift\/tree\/55345ebd4ec28baeacb4041a99d56839428bcaff",
+  "download_url" : null,
+  "size" : 0,
+  "submodule_git_url" : "https:\/\/github.com\/ReactiveCocoa\/ReactiveSwift.git",
+  "sha" : "55345ebd4ec28baeacb4041a99d56839428bcaff",
+  "path" : "Carthage\/Checkouts\/ReactiveSwift",
+  "type" : "submodule",
+  "name" : "ReactiveSwift",
+  "url" : "https:\/\/api.github.com\/repos\/mdiep\/Tentacle\/contents\/Carthage\/Checkouts\/ReactiveSwift?ref=master"
+}

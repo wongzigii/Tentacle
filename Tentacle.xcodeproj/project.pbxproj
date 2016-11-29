@@ -70,6 +70,10 @@
 		7ACCF5721DED14140032C912 /* repos-Palleas-opensource-Sample-repository-contents-README.md.response in Resources */ = {isa = PBXBuildFile; fileRef = 7A072D8A1DED115B00CFE58F /* repos-Palleas-opensource-Sample-repository-contents-README.md.response */; };
 		7ACCF5731DED14150032C912 /* repos-Palleas-opensource-Sample-repository-contents-README.md.data in Resources */ = {isa = PBXBuildFile; fileRef = 7A072D891DED115B00CFE58F /* repos-Palleas-opensource-Sample-repository-contents-README.md.data */; };
 		7ACCF5741DED14150032C912 /* repos-Palleas-opensource-Sample-repository-contents-README.md.response in Resources */ = {isa = PBXBuildFile; fileRef = 7A072D8A1DED115B00CFE58F /* repos-Palleas-opensource-Sample-repository-contents-README.md.response */; };
+		7ACCF57B1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.data in Resources */ = {isa = PBXBuildFile; fileRef = 7ACCF5771DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.data */; };
+		7ACCF57C1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.response in Resources */ = {isa = PBXBuildFile; fileRef = 7ACCF5781DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.response */; };
+		7ACCF57D1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.data in Resources */ = {isa = PBXBuildFile; fileRef = 7ACCF5791DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.data */; };
+		7ACCF57E1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.response in Resources */ = {isa = PBXBuildFile; fileRef = 7ACCF57A1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.response */; };
 		BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
 		BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */; };
 		BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A31C89135D00E3B11A /* Decodable.swift */; };
@@ -196,6 +200,10 @@
 		7ABFB4E01D517E5B0067B500 /* users-Palleas-Opensource-repos.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "users-Palleas-Opensource-repos.response"; sourceTree = "<group>"; };
 		7ABFB4E91D5186E50067B500 /* orgs-raccommunity-repos.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "orgs-raccommunity-repos.data"; sourceTree = "<group>"; };
 		7ABFB4EA1D5186E50067B500 /* orgs-raccommunity-repos.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "orgs-raccommunity-repos.response"; sourceTree = "<group>"; };
+		7ACCF5771DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.data"; sourceTree = "<group>"; };
+		7ACCF5781DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.response"; sourceTree = "<group>"; };
+		7ACCF5791DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "repos-mdiep-Tentacle-contents-Tentacle.data"; sourceTree = "<group>"; };
+		7ACCF57A1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.response */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "repos-mdiep-Tentacle-contents-Tentacle.response"; sourceTree = "<group>"; };
 		BE0F409F1C89098E00E3B11A /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Fixture.swift; sourceTree = SOURCE_ROOT; };
 		BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseTests.swift; sourceTree = "<group>"; };
 		BE0F40A31C89135D00E3B11A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
@@ -310,6 +318,10 @@
 		BE0F40961C8908CB00E3B11A /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				7ACCF5771DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.data */,
+				7ACCF5781DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.response */,
+				7ACCF5791DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.data */,
+				7ACCF57A1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.response */,
 				7A072D891DED115B00CFE58F /* repos-Palleas-opensource-Sample-repository-contents-README.md.data */,
 				7A072D8A1DED115B00CFE58F /* repos-Palleas-opensource-Sample-repository-contents-README.md.response */,
 				7ABFB4E91D5186E50067B500 /* orgs-raccommunity-repos.data */,
@@ -657,6 +669,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ACCF57C1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.response in Resources */,
+				7ACCF57D1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.data in Resources */,
+				7ACCF57E1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Tentacle.response in Resources */,
+				7ACCF57B1DEDB9760032C912 /* repos-mdiep-Tentacle-contents-Carthage-Checkouts-ReactiveSwift.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

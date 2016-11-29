@@ -129,7 +129,9 @@ struct Fixture {
         CommentsOnIssue.CommentsOnIssueInSampleRepository,
         RepositoriesForUser.RepositoriesForPalleasOpensource,
         RepositoriesForOrganization.RepositoriesForRACCommunity,
-        FileForRepository.ReadMeForSampleRepository
+        FileForRepository.ReadMeForSampleRepository,
+        FileForRepository.SubmoduleInTentacle,
+        FileForRepository.DirectoryInTentacle,
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -309,7 +311,9 @@ struct Fixture {
 
     struct FileForRepository: EndpointFixtureType {
         static let ReadMeForSampleRepository = FileForRepository(.dotCom, owner: "Palleas-opensource", repository: "Sample-repository", path: "README.md")
-        
+        static let SubmoduleInTentacle = FileForRepository(.dotCom, owner: "mdiep", repository: "Tentacle", path: "Carthage/Checkouts/ReactiveSwift")
+        static let DirectoryInTentacle = FileForRepository(.dotCom, owner: "mdiep", repository: "Tentacle", path: "update-test-fixtures")
+
         let server: Server
         let page: UInt? = nil
         let pageSize: UInt? = nil
