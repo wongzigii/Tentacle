@@ -128,7 +128,8 @@ struct Fixture {
         IssuesInRepository.PalleasOpensource,
         CommentsOnIssue.CommentsOnIssueInSampleRepository,
         RepositoriesForUser.RepositoriesForPalleasOpensource,
-        RepositoriesForOrganization.RepositoriesForRACCommunity
+        RepositoriesForOrganization.RepositoriesForRACCommunity,
+        FileForRepository.ReadMeForSampleRepository
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -304,5 +305,31 @@ struct Fixture {
             self.server = server
             self.organization = organization
         }
+    }
+
+    struct FileForRepository: EndpointFixtureType {
+        static let ReadMeForSampleRepository = FileForRepository(.dotCom, owner: "Palleas-opensource", repository: "Sample-repository", path: "README.md")
+        
+        let server: Server
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+
+        let owner: String
+        let repository: String
+        let path: String
+
+        let contentType = Client.APIContentType
+
+        var endpoint: Client.Endpoint {
+            return .content(owner: owner, repository: repository, path: path)
+        }
+
+        init(_ server: Server, owner: String, repository: String, path: String) {
+            self.server = server
+            self.owner = owner
+            self.repository = repository
+            self.path = path
+        }
+
     }
 }

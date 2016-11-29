@@ -168,7 +168,7 @@ public final class Client {
         case publicRepositories
 
         // https://developer.github.com/v3/repos/contents/#get-contents
-        case file(owner: String, repository: String, path: String)
+        case content(owner: String, repository: String, path: String)
 
         internal var path: String {
             switch self {
@@ -194,7 +194,7 @@ public final class Client {
                 return "/orgs/\(organisation)/repos"
             case .publicRepositories:
                 return "/repositories"
-            case .file(let owner, let repository, let path):
+            case .content(let owner, let repository, let path):
                 return "/repos/\(owner)/\(repository)/contents/\(path)"
             }
         }
@@ -315,6 +315,11 @@ public final class Client {
     /// Fetch the public repositories on Github
     public func publicRepositories(page: UInt = 1, perPage: UInt = 30) -> SignalProducer<(Response, [RepositoryInfo]), Error> {
         return fetchMany(.publicRepositories, page: page, pageSize: perPage)
+    }
+
+    /// Fetch a content in a specific repository
+    public func content(in repository: Repository, at path: String) -> SignalProducer<(Response, Content), Error> {
+        return fetchOne(.content(owner: repository.owner, repository: repository.name, path: path))
     }
 
     /// Fetch an endpoint from the API.
@@ -468,7 +473,7 @@ extension Client.Endpoint: Hashable {
             return organisation.hashValue
         case .publicRepositories:
             return "PublicRepositories".hashValue
-        case .file(let owner, let repository, let path):
+        case .content(let owner, let repository, let path):
             return "File".hashValue ^ owner.hashValue ^ repository.hashValue ^ path.hashValue
         }
     }
