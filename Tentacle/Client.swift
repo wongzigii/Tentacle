@@ -14,7 +14,7 @@ import Result
 
 extension JSONSerialization {
     internal static func deserializeJSON(_ data: Data) -> Result<Any, NSError> {
-        return Result(try JSONSerialization.jsonObject(with: data, options: []))
+        return Result(try JSONSerialization.jsonObject(with: data))
     }
 }
 
@@ -126,7 +126,7 @@ public final class Client {
                 return "token \(token)"
             case let .basic(username, password):
                 let data = "\(username):\(password)".data(using: String.Encoding.utf8)!
-                let encodedString = data.base64EncodedString(options: [])
+                let encodedString = data.base64EncodedString()
                 return "Basic \(encodedString)"
             }
         }

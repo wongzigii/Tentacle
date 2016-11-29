@@ -97,7 +97,7 @@ extension EndpointFixtureType {
     
     /// The JSON from the Endpoint.
     var JSON: Any {
-        return try! JSONSerialization.jsonObject(with: data, options: [])
+        return try! JSONSerialization.jsonObject(with: data)
     }
     
     /// Decode the fixture's JSON as an object of the returned type.
