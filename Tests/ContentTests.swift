@@ -21,7 +21,7 @@ class ContentTests: XCTestCase {
             path: "README.md",
             sha: "28ec72028c4ae47de689964a23ebb223f10cfe80",
             url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/blob/master/README.md")!,
-            downloadUrl: URL(string: "https://raw.githubusercontent.com/Palleas-opensource/Sample-repository/master/README.md")
+            downloadURL: URL(string: "https://raw.githubusercontent.com/Palleas-opensource/Sample-repository/master/README.md")
         )
 
         XCTAssertEqual(Fixture.FileForRepository.ReadMeForSampleRepository.decode()!, expected)

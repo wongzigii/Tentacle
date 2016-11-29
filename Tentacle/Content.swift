@@ -40,7 +40,7 @@ public struct Content: CustomStringConvertible {
     public let url: URL
 
     /// URL to download the content when content is a file or content is a symlink to a file
-    public let downloadUrl: URL?
+    public let downloadURL: URL?
 
     public var description: String {
         return name

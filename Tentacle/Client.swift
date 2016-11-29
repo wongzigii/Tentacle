@@ -194,7 +194,7 @@ public final class Client {
                 return "/orgs/\(organisation)/repos"
             case .publicRepositories:
                 return "/repositories"
-            case .content(let owner, let repository, let path):
+            case let .content(owner, repository, path):
                 return "/repos/\(owner)/\(repository)/contents/\(path)"
             }
         }
@@ -317,8 +317,8 @@ public final class Client {
         return fetchMany(.publicRepositories, page: page, pageSize: perPage)
     }
 
-    /// Fetch a content in a specific repository
-    public func content(in repository: Repository, at path: String) -> SignalProducer<(Response, Content), Error> {
+    /// Fetch the content for a path in the repository
+    public func content(atPath path: String, in repository: Repository) -> SignalProducer<(Response, Content), Error> {
         return fetchOne(.content(owner: repository.owner, repository: repository.name, path: path))
     }
 
@@ -473,7 +473,7 @@ extension Client.Endpoint: Hashable {
             return organisation.hashValue
         case .publicRepositories:
             return "PublicRepositories".hashValue
-        case .content(let owner, let repository, let path):
+        case let .content(owner, repository, path):
             return "File".hashValue ^ owner.hashValue ^ repository.hashValue ^ path.hashValue
         }
     }
