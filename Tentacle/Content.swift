@@ -78,17 +78,19 @@ extension Content: ResourceType {
 
         switch j {
         case .array(_):
-            guard case let .success(decoded) = Array<Content.File>.decode(j) else {
-                return .customError("wtf")
+            switch Array<Content.File>.decode(j) {
+            case let .success(decoded):
+                return .success(Content.directory(decoded))
+            case let .failure(error):
+                return .failure(.custom("\(error)"))
             }
-
-            return .success(Content.directory(decoded))
         case .object(_):
-            guard case let .success(decoded) = Content.File.decode(j) else {
-                return .customError("wtf")
+            switch Content.File.decode(j) {
+            case let .success(decoded):
+                return .success(Content.file(decoded))
+            case let .failure(error):
+                return .failure(.custom("\(error)"))
             }
-
-            return .success(Content.file(decoded))
         default:
             return .failure(.typeMismatch(expected: "", actual: "\(j)"))
         }
