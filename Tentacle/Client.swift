@@ -177,17 +177,17 @@ public final class Client {
                 return "/users/\(login)"
             case .assignedIssues:
                 return "/issues"
-            case .issuesInRepository(let owner, let repository):
+            case let .issuesInRepository(owner, repository):
                 return "/repos/\(owner)/\(repository)/issues"
-            case .commentsOnIssue(let issue, let owner, let repository):
+            case let .commentsOnIssue(issue, owner, repository):
                 return "/repos/\(owner)/\(repository)/issues/\(issue)/comments"
             case .authenticatedUser:
                 return "/user"
             case .repositories:
                 return "/user/repos"
-            case .repositoriesForUser(let user):
+            case let .repositoriesForUser(user):
                 return "/users/\(user)/repos"
-            case .repositoriesForOrganization(let organisation):
+            case let .repositoriesForOrganization(organisation):
                 return "/orgs/\(organisation)/repos"
             case .publicRepositories:
                 return "/repositories"
