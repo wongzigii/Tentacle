@@ -101,6 +101,8 @@ extension Content: ResourceType {
 extension Content.File: Hashable {
     public static func ==(lhs: Content.File, rhs: Content.File) -> Bool {
         return lhs.name == rhs.name
+            && lhs.path == rhs.path
+            && lhs.sha == rhs.sha
     }
 
     public var hashValue: Int {
