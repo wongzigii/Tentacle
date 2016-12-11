@@ -13,21 +13,15 @@ import Runes
 
 public enum Content {
     public struct File: CustomStringConvertible {
-        public enum ContentType: String {
-            case file
-            case dir
-            case symlink
-            case submodule
+        public enum ContentType {
+            case file(size: Int)
+            case directory
+            case symlink(target: String)
+            case submodule(url: String)
         }
 
         /// The type of content
-        public let type: ContentType
-
-        /// Path to actual content when content is a symlink
-        public let target: String?
-
-        /// Size when content is a file
-        public let size: Int
+        public let content: ContentType
 
         /// Name of the file
         public let name: String
@@ -52,6 +46,55 @@ public enum Content {
 
     case file(File)
     case directory([File])
+}
+
+extension Content.File.ContentType: Decodable {
+    public static func decode(_ json: JSON) -> Decoded<Content.File.ContentType> {
+        guard case let .object(payload) = json else {
+            return .failure(.typeMismatch(expected: "object", actual: "\(json)"))
+        }
+
+        guard let type = payload["type"], case let .string(value) = type else {
+            return .failure(.custom("Content type is invalid"))
+        }
+
+        switch value {
+        case "file":
+            guard let sizeNode = payload["size"] else {
+                return .failure(.missingKey("size"))
+            }
+
+            guard case let .number(size) = sizeNode else {
+                return .failure(.typeMismatch(expected: "number", actual: "\(sizeNode)"))
+            }
+            return .success(Content.File.ContentType.file(size: size.intValue))
+
+        case "directory":
+            return .success(Content.File.ContentType.directory)
+
+        case "submodule":
+            guard let urlNode = payload["submodule_git_url"] else {
+                return .failure(.missingKey("submodule_git_url"))
+            }
+
+            guard case let .string(url) = urlNode else {
+                return .failure(.typeMismatch(expected: "string", actual: "\(urlNode)"))
+            }
+            return .success(Content.File.ContentType.submodule(url: url))
+
+        case "symlink":
+            guard let targetNode = payload["target"] else {
+                return .failure(.missingKey("target"))
+            }
+
+            guard case let .string(target) = targetNode else {
+                return .failure(.typeMismatch(expected: "string", actual: "\(targetNode)"))
+            }
+            return .success(Content.File.ContentType.symlink(target: target))
+        default:
+            return .failure(.custom("Content type \(value) is invalid"))
+        }
+    }
 }
 
 extension Content: Hashable {
@@ -110,23 +153,12 @@ extension Content.File: Hashable {
     }
 }
 
-
-internal func toContentType(_ string: String) -> Decoded<Content.File.ContentType> {
-    if let content = Content.File.ContentType(rawValue: string) {
-        return .success(content)
-    } else {
-        return .failure(.custom("Content type is invalid"))
-    }
-}
-
 extension Content.File: ResourceType {
     public static func decode(_ j: JSON) -> Decoded<Content.File> {
         let f = curry(Content.File.init)
 
         return f
-            <^> (j <| "type" >>- toContentType)
-            <*> j <|? "target"
-            <*> j <| "size"
+            <^> Content.File.ContentType.decode(j)
             <*> j <| "name"
             <*> j <| "path"
             <*> j <| "sha"
