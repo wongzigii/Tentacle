@@ -48,6 +48,43 @@ public enum Content {
     case directory([File])
 }
 
+func decodeFile(_ payload: [String: JSON]) -> Decoded<Content.File.ContentType> {
+    guard let sizeNode = payload["size"] else {
+        return .failure(.missingKey("size"))
+    }
+
+    guard case let .number(size) = sizeNode else {
+        return .failure(.typeMismatch(expected: "number", actual: "\(sizeNode)"))
+    }
+
+    return .success(Content.File.ContentType.file(size: size.intValue))
+}
+
+func decodeSymlink(_ payload: [String: JSON]) -> Decoded<Content.File.ContentType> {
+    guard let targetNode = payload["target"] else {
+        return .failure(.missingKey("target"))
+    }
+
+    guard case let .string(target) = targetNode else {
+        return .failure(.typeMismatch(expected: "string", actual: "\(targetNode)"))
+    }
+
+    return .success(Content.File.ContentType.symlink(target: target))
+}
+
+func decodeSubmodule(_ payload: [String: JSON]) -> Decoded<Content.File.ContentType> {
+    guard let urlNode = payload["submodule_git_url"] else {
+        return .failure(.missingKey("submodule_git_url"))
+    }
+
+    guard case let .string(url) = urlNode else {
+        return .failure(.typeMismatch(expected: "string", actual: "\(urlNode)"))
+    }
+
+    return .success(Content.File.ContentType.submodule(url: url))
+}
+
+
 extension Content.File.ContentType: Decodable {
     public static func decode(_ json: JSON) -> Decoded<Content.File.ContentType> {
         guard case let .object(payload) = json else {
@@ -60,37 +97,13 @@ extension Content.File.ContentType: Decodable {
 
         switch value {
         case "file":
-            guard let sizeNode = payload["size"] else {
-                return .failure(.missingKey("size"))
-            }
-
-            guard case let .number(size) = sizeNode else {
-                return .failure(.typeMismatch(expected: "number", actual: "\(sizeNode)"))
-            }
-            return .success(Content.File.ContentType.file(size: size.intValue))
-
+            return decodeFile(payload)
         case "directory":
             return .success(Content.File.ContentType.directory)
-
         case "submodule":
-            guard let urlNode = payload["submodule_git_url"] else {
-                return .failure(.missingKey("submodule_git_url"))
-            }
-
-            guard case let .string(url) = urlNode else {
-                return .failure(.typeMismatch(expected: "string", actual: "\(urlNode)"))
-            }
-            return .success(Content.File.ContentType.submodule(url: url))
-
+            return decodeSubmodule(payload)
         case "symlink":
-            guard let targetNode = payload["target"] else {
-                return .failure(.missingKey("target"))
-            }
-
-            guard case let .string(target) = targetNode else {
-                return .failure(.typeMismatch(expected: "string", actual: "\(targetNode)"))
-            }
-            return .success(Content.File.ContentType.symlink(target: target))
+            return decodeSymlink(payload)
         default:
             return .failure(.custom("Content type \(value) is invalid"))
         }
@@ -112,6 +125,18 @@ extension Content: Hashable {
             return "file".hashValue ^ file.hashValue
         case .directory(let files):
             return files.reduce("directory".hashValue) { $0.hashValue ^ $1.hashValue }
+        }
+    }
+}
+
+extension Content.File.ContentType: Equatable {
+    public static func ==(lhs: Content.File.ContentType, rhs: Content.File.ContentType) -> Bool {
+        switch (lhs, rhs) {
+        case let (.file(size), .file(size2)) where size == size2: return true
+        case (.directory, .directory): return true
+        case let (.submodule(url), .submodule(url2)) where url == url2: return true
+        case let (.symlink(target), .symlink(target2)) where target == target2: return true
+        default: return false
         }
     }
 }
@@ -146,6 +171,7 @@ extension Content.File: Hashable {
         return lhs.name == rhs.name
             && lhs.path == rhs.path
             && lhs.sha == rhs.sha
+            && lhs.content == rhs.content
     }
 
     public var hashValue: Int {

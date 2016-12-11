@@ -14,9 +14,7 @@ class ContentTests: XCTestCase {
 
     func testDecodedFile() {
         let expected: Content = .file(Content.File(
-            type: .file,
-            target: nil,
-            size: 19,
+            content: .file(size: 19),
             name: "README.md",
             path: "README.md",
             sha: "28ec72028c4ae47de689964a23ebb223f10cfe80",
@@ -30,9 +28,7 @@ class ContentTests: XCTestCase {
     func testDecodedDirectory() {
         let expected: Content = .directory([
             Content.File(
-                type: .file,
-                target: nil,
-                size: 1086,
+                content: .file(size: 1086),
                 name: "Info.plist",
                 path: "update-test-fixtures/Info.plist",
                 sha: "3b6fd366cd32ef147c27ad49353b29f1ef5daf1c",
@@ -40,9 +36,7 @@ class ContentTests: XCTestCase {
                 downloadURL: URL(string: "https://raw.githubusercontent.com/mdiep/Tentacle/master/update-test-fixtures/Info.plist")
             ),
             Content.File(
-                type: .file,
-                target: nil,
-                size: 2340,
+                content: .file(size: 2340),
                 name: "main.swift",
                 path: "update-test-fixtures/main.swift",
                 sha: "e3fe7edcb2247a69c6eade1719d1e0cd83595cf9",
@@ -56,9 +50,7 @@ class ContentTests: XCTestCase {
 
     func testDecodedSubmodule() {
         let expected: Content = .file(Content.File(
-            type: .submodule,
-            target: nil,
-            size: 0,
+            content: .submodule(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git"),
             name: "ReactiveSwift",
             path: "Carthage/Checkouts/ReactiveSwift",
             sha: "55345ebd4ec28baeacb4041a99d56839428bcaff",
@@ -71,9 +63,7 @@ class ContentTests: XCTestCase {
 
     func testDecodedSymlink() {
         let expected: Content = .file(Content.File(
-            type: .symlink,
-            target: "/usr/bin/say",
-            size: 12,
+            content: .symlink(target: "/usr/bin/say"),
             name: "say",
             path: "say",
             sha: "1e3f1fd0bc1f65cf4701c217f4d1fd9a3cd50721",
