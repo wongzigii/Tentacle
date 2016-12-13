@@ -160,23 +160,12 @@ extension Content: ResourceType {
 
         switch j {
         case .array(_):
-            switch Array<Content.File>.decode(j) {
-            case let .success(decoded):
-                return .success(Content.directory(decoded))
-            case let .failure(error):
-                return .failure(.custom("\(error)"))
-            }
+            return Array<Content.File>.decode(j).map(Content.directory)
         case .object(_):
-            switch Content.File.decode(j) {
-            case let .success(decoded):
-                return .success(Content.file(decoded))
-            case let .failure(error):
-                return .failure(.custom("\(error)"))
-            }
+            return Content.File.decode(j).map(Content.file)
         default:
-            return .failure(.typeMismatch(expected: "", actual: "\(j)"))
+            return .failure(.typeMismatch(expected: "Array or Object", actual: "\(j)"))
         }
-
     }
 }
 
