@@ -14,9 +14,9 @@ import Runes
 public enum Content {
     public struct File: CustomStringConvertible {
         public enum ContentType {
-            case file(size: Int)
+            case file(size: Int, downloadURL: URL)
             case directory
-            case symlink(target: String)
+            case symlink(target: String, downloadURL: URL?)
             case submodule(url: String)
         }
 
@@ -34,9 +34,6 @@ public enum Content {
 
         /// URL to preview the content
         public let url: URL
-
-        /// URL to download the content when content is a file or content is a symlink to a file
-        public let downloadURL: URL?
 
         public var description: String {
             return name
@@ -57,7 +54,15 @@ func decodeFile(_ payload: [String: JSON]) -> Decoded<Content.File.ContentType> 
         return .failure(.typeMismatch(expected: "number", actual: "\(sizeNode)"))
     }
 
-    return .success(Content.File.ContentType.file(size: size.intValue))
+    guard let downloadURLNode = payload["download_url"] else {
+        return .failure(.missingKey("download_url"))
+    }
+
+    guard case let .string(content) = downloadURLNode, let downloadURL = URL(string: content) else {
+        return .failure(.typeMismatch(expected: "string", actual: "\(downloadURLNode)"))
+    }
+
+    return .success(Content.File.ContentType.file(size: size.intValue, downloadURL: downloadURL))
 }
 
 func decodeSymlink(_ payload: [String: JSON]) -> Decoded<Content.File.ContentType> {
@@ -69,7 +74,16 @@ func decodeSymlink(_ payload: [String: JSON]) -> Decoded<Content.File.ContentTyp
         return .failure(.typeMismatch(expected: "string", actual: "\(targetNode)"))
     }
 
-    return .success(Content.File.ContentType.symlink(target: target))
+    guard let downloadURLNode = payload["download_url"] else {
+        return .failure(.missingKey("download_url"))
+    }
+
+    guard case let .string(content) = downloadURLNode else {
+        return .failure(.typeMismatch(expected: "string", actual: "\(downloadURLNode)"))
+    }
+
+
+    return .success(Content.File.ContentType.symlink(target: target, downloadURL: URL(string: content)))
 }
 
 func decodeSubmodule(_ payload: [String: JSON]) -> Decoded<Content.File.ContentType> {
@@ -132,10 +146,10 @@ extension Content: Hashable {
 extension Content.File.ContentType: Equatable {
     public static func ==(lhs: Content.File.ContentType, rhs: Content.File.ContentType) -> Bool {
         switch (lhs, rhs) {
-        case let (.file(size), .file(size2)) where size == size2: return true
+        case let (.file(size, url), .file(size2, url2)) where size == size2 && url == url2: return true
         case (.directory, .directory): return true
         case let (.submodule(url), .submodule(url2)) where url == url2: return true
-        case let (.symlink(target), .symlink(target2)) where target == target2: return true
+        case let (.symlink(target, url), .symlink(target2, url2)) where target == target2 && url == url2: return true
         default: return false
         }
     }
@@ -189,6 +203,5 @@ extension Content.File: ResourceType {
             <*> j <| "path"
             <*> j <| "sha"
             <*> (j <| "html_url" >>- toURL)
-            <*> (j <|? "download_url" >>- toOptionalURL)
     }
 }
