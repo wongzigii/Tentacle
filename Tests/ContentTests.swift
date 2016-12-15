@@ -27,22 +27,29 @@ class ContentTests: XCTestCase {
     func testDecodedDirectory() {
         let expected: Content = .directory([
             Content.File(
-                content: .file(size: 1086, downloadURL: URL(string: "https://raw.githubusercontent.com/mdiep/Tentacle/master/update-test-fixtures/Info.plist")!),
-                name: "Info.plist",
-                path: "update-test-fixtures/Info.plist",
-                sha: "3b6fd366cd32ef147c27ad49353b29f1ef5daf1c",
-                url: URL(string: "https://github.com/mdiep/Tentacle//master/update-test-fixtures/Info.plist")!
+                content: .file(size: 18, downloadURL: URL(string: "https://raw.githubusercontent.com/Palleas-opensource/Sample-repository/master/Tools/README.markdown")!),
+                name: "README.markdown",
+                path: "Tools/README.markdown",
+                sha: "c3eb8708a0a5aaa4f685aab24ef6403fbfd28efc",
+                url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/blob/master/Tools/README.markdown")!
             ),
             Content.File(
-                content: .file(size: 2340, downloadURL: URL(string: "https://raw.githubusercontent.com/mdiep/Tentacle/master/update-test-fixtures/main.swift")!),
-                name: "main.swift",
-                path: "update-test-fixtures/main.swift",
-                sha: "e3fe7edcb2247a69c6eade1719d1e0cd83595cf9",
-                url: URL(string: "https://github.com/mdiep/Tentacle/blob/master/update-test-fixtures/main.swift")!
+                content: .file(size: 0, downloadURL: nil),
+                name: "Tentacle",
+                path: "Tools/Tentacle",
+                sha: "7a84505a3c553fd8e2879cfa63753b0cd212feb8",
+                url: URL(string: "https://github.com/mdiep/Tentacle/tree/7a84505a3c553fd8e2879cfa63753b0cd212feb8")!
+            ),
+            Content.File(
+                content: .symlink(target: nil, downloadURL: URL(string: "https://raw.githubusercontent.com/Palleas-opensource/Sample-repository/master/Tools/say")!),
+                name: "say",
+                path: "Tools/say",
+                sha: "1e3f1fd0bc1f65cf4701c217f4d1fd9a3cd50721",
+                url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/blob/master/Tools/say")!
             )
         ])
 
-        XCTAssertEqual(Fixture.FileForRepository.DirectoryInTentacle.decode()!, expected)
+        XCTAssertEqual(Fixture.FileForRepository.DirectoryInSampleRepository.decode()!, expected)
     }
 
     func testDecodedSubmodule() {
@@ -59,11 +66,11 @@ class ContentTests: XCTestCase {
 
     func testDecodedSymlink() {
         let expected: Content = .file(Content.File(
-            content: .symlink(target: "/usr/bin/say", downloadURL: URL(string: "https://raw.githubusercontent.com/Palleas-opensource/Sample-repository/master/say")),
+            content: .symlink(target: "/usr/bin/say", downloadURL: URL(string: "https://raw.githubusercontent.com/Palleas-opensource/Sample-repository/master/Tools/say")),
             name: "say",
-            path: "say",
+            path: "Tools/say",
             sha: "1e3f1fd0bc1f65cf4701c217f4d1fd9a3cd50721",
-            url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/blob/master/say")!
+            url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/blob/master/Tools/say")!
         ))
 
         XCTAssertEqual(Fixture.FileForRepository.SymlinkInSampleRepository.decode()!, expected)
