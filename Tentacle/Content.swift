@@ -17,7 +17,7 @@ public enum Content {
             case file(size: Int, downloadURL: URL?)
             case directory
             case symlink(target: String?, downloadURL: URL?)
-            case submodule(url: String)
+            case submodule(url: String?)
         }
 
         /// The type of content
@@ -57,16 +57,9 @@ func decodeSymlink(_ j: JSON) -> Decoded<Content.File.ContentType> {
         <*> (j <|? "download_url" >>- toOptionalURL)
 }
 
-func decodeSubmodule(_ payload: [String: JSON]) -> Decoded<Content.File.ContentType> {
-    guard let urlNode = payload["submodule_git_url"] else {
-        return .failure(.missingKey("submodule_git_url"))
-    }
-
-    guard case let .string(url) = urlNode else {
-        return .failure(.typeMismatch(expected: "string", actual: "\(urlNode)"))
-    }
-
-    return .success(Content.File.ContentType.submodule(url: url))
+func decodeSubmodule(_ j: JSON) -> Decoded<Content.File.ContentType> {
+    return curry(Content.File.ContentType.submodule)
+        <^> j <|? "submodule_git_url"
 }
 
 
@@ -82,11 +75,14 @@ extension Content.File.ContentType: Decodable {
 
         switch value {
         case "file":
+            if payload["download_url"] == .null {
+                return decodeSubmodule(json)
+            }
             return decodeFile(json)
         case "directory":
             return .success(Content.File.ContentType.directory)
         case "submodule":
-            return decodeSubmodule(payload)
+            return decodeSubmodule(json)
         case "symlink":
             return decodeSymlink(json)
         default:

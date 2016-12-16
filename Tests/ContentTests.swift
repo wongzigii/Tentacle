@@ -34,7 +34,7 @@ class ContentTests: XCTestCase {
                 url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/blob/master/Tools/README.markdown")!
             ),
             Content.File(
-                content: .file(size: 0, downloadURL: nil),
+                content: .submodule(url: nil),
                 name: "Tentacle",
                 path: "Tools/Tentacle",
                 sha: "7a84505a3c553fd8e2879cfa63753b0cd212feb8",
