@@ -27,6 +27,13 @@ class ContentTests: XCTestCase {
     func testDecodedDirectory() {
         let expected: Content = .directory([
             Content.File(
+                content: .directory,
+                name: "Directory",
+                path: "Tools/Directory",
+                sha: "5bfad2b3f8e483b6b173d8aaff19597e84626f15",
+                url: URL(string: "https://github.com/Palleas-opensource/Sample-repository/tree/master/Tools/Directory")!
+            ),
+            Content.File(
                 content: .file(size: 18, downloadURL: URL(string: "https://raw.githubusercontent.com/Palleas-opensource/Sample-repository/master/Tools/README.markdown")!),
                 name: "README.markdown",
                 path: "Tools/README.markdown",

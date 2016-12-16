@@ -1,6 +1,22 @@
 [
   {
     "_links" : {
+      "git" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/git\/trees\/5bfad2b3f8e483b6b173d8aaff19597e84626f15",
+      "html" : "https:\/\/github.com\/Palleas-opensource\/Sample-repository\/tree\/master\/Tools\/Directory",
+      "self" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/contents\/Tools\/Directory?ref=master"
+    },
+    "git_url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/git\/trees\/5bfad2b3f8e483b6b173d8aaff19597e84626f15",
+    "html_url" : "https:\/\/github.com\/Palleas-opensource\/Sample-repository\/tree\/master\/Tools\/Directory",
+    "download_url" : null,
+    "size" : 0,
+    "sha" : "5bfad2b3f8e483b6b173d8aaff19597e84626f15",
+    "path" : "Tools\/Directory",
+    "type" : "dir",
+    "name" : "Directory",
+    "url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/contents\/Tools\/Directory?ref=master"
+  },
+  {
+    "_links" : {
       "git" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/git\/blobs\/c3eb8708a0a5aaa4f685aab24ef6403fbfd28efc",
       "html" : "https:\/\/github.com\/Palleas-opensource\/Sample-repository\/blob\/master\/Tools\/README.markdown",
       "self" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/contents\/Tools\/README.markdown?ref=master"

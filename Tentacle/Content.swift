@@ -79,7 +79,7 @@ extension Content.File.ContentType: Decodable {
                 return decodeSubmodule(json)
             }
             return decodeFile(json)
-        case "directory":
+        case "dir":
             return .success(Content.File.ContentType.directory)
         case "submodule":
             return decodeSubmodule(json)
