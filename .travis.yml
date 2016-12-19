@@ -1,6 +1,9 @@
 language: objective-c
 notifications:
   email: false
+branches:
+  only:
+    - master
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
