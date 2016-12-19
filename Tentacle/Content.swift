@@ -28,10 +28,20 @@ public enum Content {
         /// - symlink: a symlink in a repository not targeting a file inside the same repository
         /// - submodule: a submodule in a repository
         public enum ContentType {
-
+            /// A file a in a repository
             case file(size: Int, downloadURL: URL?)
+
+            /// A directory in a repository
             case directory
+
+            /// A symlink in a repository. Target and URL are optional because they are treated as regular files
+            /// when they are the result of a query for a directory
+            /// See https://developer.github.com/v3/repos/contents/
             case symlink(target: String?, downloadURL: URL?)
+
+            /// A submodule in a repository. URL is optional because they are treated as regular files
+            /// when they are the result of a query for a directory
+            /// See https://developer.github.com/v3/repos/contents/
             case submodule(url: String?)
         }
 
