@@ -13,7 +13,7 @@ import Result
 
 
 extension JSONSerialization {
-    internal static func deserializeJSON(_ data: Data) -> Result<Any, NSError> {
+    internal static func deserializeJSON(_ data: Data) -> Result<Any, AnyError> {
         return Result(try JSONSerialization.jsonObject(with: data))
     }
 }
@@ -60,7 +60,7 @@ extension URLRequest {
 extension URLSession {
 	/// Returns a producer that will download a file using the given request. The file will be
 	/// deleted after the producer terminates.
-	internal func downloadFile(_ request: URLRequest) -> SignalProducer<URL, NSError> {
+	internal func downloadFile(_ request: URLRequest) -> SignalProducer<URL, AnyError> {
 		return SignalProducer { observer, disposable in
 			let serialDisposable = SerialDisposable()
 			let handle = disposable.add(serialDisposable)
@@ -73,13 +73,13 @@ extension URLSession {
 					observer.send(value: url)
 					observer.sendCompleted()
 				} else if let error = error {
-					observer.send(error: error as NSError)
+					observer.send(error: AnyError(error))
                 } else {
                     fatalError("Request neither succeeded nor failed: \(request.url)")
                 }
 			}
 
-			serialDisposable.innerDisposable = ActionDisposable {
+			serialDisposable.inner = ActionDisposable {
 				task.cancel()
 			}
 
@@ -100,10 +100,10 @@ public final class Client {
     /// An error from the Client.
     public enum Error: Swift.Error {
         /// An error occurred in a network operation.
-        case networkError(NSError)
+        case networkError(Swift.Error)
         
         /// An error occurred while deserializing JSON.
-        case jsonDeserializationError(NSError)
+        case jsonDeserializationError(Swift.Error)
         
         /// An error occurred while decoding JSON.
         case jsonDecodingError(DecodeError)
@@ -269,7 +269,7 @@ public final class Client {
     public func download(asset: Release.Asset) -> SignalProducer<URL, Error> {
         return urlSession
             .downloadFile(URLRequest.create(asset.apiURL, credentials, contentType: Client.DownloadContentType))
-            .mapError(Error.networkError)
+            .mapError { Error.networkError($0.error) }
     }
     
     /// Fetch the user with the given login.
@@ -329,13 +329,13 @@ public final class Client {
         return urlSession
             .reactive
             .data(with: request)
-            .mapError(Error.networkError)
+            .mapError { Error.networkError($0.error) }
             .flatMap(.concat) { data, response -> SignalProducer<(Response, Any), Error> in
                 let response = response as! HTTPURLResponse
                 let headers = response.allHeaderFields as! [String:String]
                 return SignalProducer
                     .attempt {
-                        return JSONSerialization.deserializeJSON(data).mapError(Error.jsonDeserializationError)
+                        return JSONSerialization.deserializeJSON(data).mapError { Error.jsonDeserializationError($0.error) }
                     }
                     .attemptMap { JSON in
                         if response.statusCode == 404 {
@@ -396,10 +396,10 @@ extension Client.Error: Hashable {
     public static func ==(lhs: Client.Error, rhs: Client.Error) -> Bool {
         switch (lhs, rhs) {
         case let (.networkError(error1), .networkError(error2)):
-            return error1 == error2
+            return (error1 as NSError) == (error2 as NSError)
 
         case let (.jsonDeserializationError(error1), .jsonDeserializationError(error2)):
-            return error1 == error2
+            return (error1 as NSError) == (error2 as NSError)
 
         case let (.jsonDecodingError(error1), .jsonDecodingError(error2)):
             return error1 == error2
@@ -418,10 +418,10 @@ extension Client.Error: Hashable {
     public var hashValue: Int {
         switch self {
         case let .networkError(error):
-            return error.hashValue
+            return (error as NSError).hashValue
 
         case let .jsonDeserializationError(error):
-            return error.hashValue
+            return (error as NSError).hashValue
 
         case let .jsonDecodingError(error):
             return error.hashValue
