@@ -18,8 +18,8 @@ let baseURL = URL(fileURLWithPath: CommandLine.arguments[1])
 
 let fileManager = FileManager.default
 let session = URLSession.shared
-let result = SignalProducer<FixtureType, NSError>(values: Fixture.allFixtures)
-    .flatMap(.concat) { fixture -> SignalProducer<(), NSError> in
+let result = SignalProducer<FixtureType, AnyError>(Fixture.allFixtures)
+    .flatMap(.concat) { fixture -> SignalProducer<(), AnyError> in
         let request = URLRequest.create(fixture.url, nil, contentType: fixture.contentType)
         let dataURL = baseURL.appendingPathComponent(fixture.dataFilename)
         let responseURL = baseURL.appendingPathComponent(fixture.responseFilename)
