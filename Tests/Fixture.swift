@@ -102,11 +102,21 @@ extension EndpointFixtureType {
     
     /// Decode the fixture's JSON as an object of the returned type.
     func decode<Object: Decodable>() -> Object? where Object.DecodedType == Object {
+        let decoded: Decoded<Object> = Argo.decode(JSON)
+        if case let .failure(error) = decoded {
+            print("Failure: \(error)")
+        }
+
         return Argo.decode(JSON).value
     }
     
     /// Decode the fixture's JSON as an array of objects of the returned type.
     func decode<Object: Decodable>() -> [Object]? where Object.DecodedType == Object {
+        let decoded: Decoded<[Object]> = Argo.decode(JSON)
+        if case let .failure(error) = decoded {
+            print("Failure from collection: \(error)")
+        }
+
         return Argo.decode(JSON).value
     }
 }
@@ -128,7 +138,11 @@ struct Fixture {
         IssuesInRepository.PalleasOpensource,
         CommentsOnIssue.CommentsOnIssueInSampleRepository,
         RepositoriesForUser.RepositoriesForPalleasOpensource,
-        RepositoriesForOrganization.RepositoriesForRACCommunity
+        RepositoriesForOrganization.RepositoriesForRACCommunity,
+        FileForRepository.ReadMeForSampleRepository,
+        FileForRepository.SubmoduleInTentacle,
+        FileForRepository.DirectoryInSampleRepository,
+        FileForRepository.SymlinkInSampleRepository
     ]
     
     /// Returns the fixture for the given URL, or nil if no such fixture exists.
@@ -304,5 +318,34 @@ struct Fixture {
             self.server = server
             self.organization = organization
         }
+    }
+
+    struct FileForRepository: EndpointFixtureType {
+        static let ReadMeForSampleRepository = FileForRepository(.dotCom, owner: "Palleas-opensource", repository: "Sample-repository", path: "README.md")
+        static let SubmoduleInTentacle = FileForRepository(.dotCom, owner: "mdiep", repository: "Tentacle", path: "Carthage/Checkouts/ReactiveSwift")
+        static let DirectoryInSampleRepository = FileForRepository(.dotCom, owner: "Palleas-opensource", repository: "Sample-repository", path: "Tools")
+        static let SymlinkInSampleRepository = FileForRepository(.dotCom, owner: "Palleas-opensource", repository: "Sample-repository", path: "Tools/say")
+
+        let server: Server
+        let page: UInt? = nil
+        let pageSize: UInt? = nil
+
+        let owner: String
+        let repository: String
+        let path: String
+
+        let contentType = Client.APIContentType
+
+        var endpoint: Client.Endpoint {
+            return .content(owner: owner, repository: repository, path: path)
+        }
+
+        init(_ server: Server, owner: String, repository: String, path: String) {
+            self.server = server
+            self.owner = owner
+            self.repository = repository
+            self.path = path
+        }
+
     }
 }
