@@ -11,9 +11,24 @@ import Argo
 import Curry
 import Runes
 
+
+/// Content
+/// https://developer.github.com/v3/repos/contents/
+///
+/// - file: a file when queried directly in a repository
+/// - directory: a directory when queried directly in a repository (may contain multiple files)
 public enum Content {
+    /// A file in a repository
     public struct File: CustomStringConvertible {
+
+        /// Type of content in a repository
+        ///
+        /// - file: a file in a repository
+        /// - directory: a directory in a repository
+        /// - symlink: a symlink in a repository not targeting a file inside the same repository
+        /// - submodule: a submodule in a repository
         public enum ContentType {
+
             case file(size: Int, downloadURL: URL?)
             case directory
             case symlink(target: String?, downloadURL: URL?)
