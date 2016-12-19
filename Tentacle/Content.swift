@@ -109,9 +109,12 @@ extension Content.File.ContentType: Decodable {
 extension Content: Hashable {
     public static func ==(lhs: Content, rhs: Content) -> Bool {
         switch (lhs, rhs) {
-        case let (.file(file1), .file(file2)) where file1 == file2: return true
-        case let (.directory(dir1), .directory(dir2)) where dir1 == dir2: return true
-        default: return false
+        case let (.file(file1), .file(file2)):
+            return file1 == file2
+        case let (.directory(dir1), .directory(dir2)):
+            return dir1 == dir2
+        default:
+            return false
         }
     }
 
@@ -128,11 +131,16 @@ extension Content: Hashable {
 extension Content.File.ContentType: Equatable {
     public static func ==(lhs: Content.File.ContentType, rhs: Content.File.ContentType) -> Bool {
         switch (lhs, rhs) {
-        case let (.file(size, url), .file(size2, url2)) where size == size2 && url == url2: return true
-        case (.directory, .directory): return true
-        case let (.submodule(url), .submodule(url2)) where url == url2: return true
-        case let (.symlink(target, url), .symlink(target2, url2)) where target == target2 && url == url2: return true
-        default: return false
+        case let (.file(size, url), .file(size2, url2)):
+            return size == size2 && url == url2
+        case (.directory, .directory):
+            return true
+        case let (.submodule(url), .submodule(url2)):
+            return url == url2
+        case let (.symlink(target, url), .symlink(target2, url2)):
+            return target == target2 && url == url2
+        default:
+            return false
         }
     }
 }
