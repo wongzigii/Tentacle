@@ -128,7 +128,24 @@ class RepositoryInfoTests: XCTestCase {
                 pushedAt: DateFormatter.iso8601.date(from: "2016-06-07T23:47:44Z")!,
                 createdAt: DateFormatter.iso8601.date(from: "2016-05-18T14:47:59Z")!,
                 updatedAt: DateFormatter.iso8601.date(from: "2016-07-27T11:39:11Z")!
-            )
+            ),
+            RepositoryInfo(
+                id: "75979247",
+                owner: raccommunity,
+                name: "ReactiveCollections",
+                nameWithOwner: "RACCommunity/ReactiveCollections",
+                body: "Reactive collections for Swift using ReactiveSwift 🚗 🚕 🚙 ",
+                url: URL(string: "https://github.com/RACCommunity/ReactiveCollections")!,
+                homepage: nil,
+                isPrivate: false,
+                isFork: false,
+                forksCount: 0,
+                stargazersCount: 6,
+                watchersCount: 6,
+                openIssuesCount: 7,
+                pushedAt: DateFormatter.iso8601.date(from: "2016-12-21T19:32:19Z")!,
+                createdAt: DateFormatter.iso8601.date(from: "2016-12-08T22:08:36Z")!,
+                updatedAt: DateFormatter.iso8601.date(from: "2016-12-21T17:53:43Z")!)
         ]
 
         let decoded: [RepositoryInfo] = Fixture.RepositoriesForOrganization.RepositoriesForRACCommunity.decode()!

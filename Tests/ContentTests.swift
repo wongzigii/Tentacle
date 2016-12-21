@@ -64,8 +64,8 @@ class ContentTests: XCTestCase {
             content: .submodule(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git"),
             name: "ReactiveSwift",
             path: "Carthage/Checkouts/ReactiveSwift",
-            sha: "55345ebd4ec28baeacb4041a99d56839428bcaff",
-            url: URL(string: "https://github.com/ReactiveCocoa/ReactiveSwift/tree/55345ebd4ec28baeacb4041a99d56839428bcaff")!
+            sha: "df08a05210157143d7f06c87feb6f9ad3c7603d6",
+            url: URL(string: "https://github.com/ReactiveCocoa/ReactiveSwift/tree/df08a05210157143d7f06c87feb6f9ad3c7603d6")!
         ))
 
         XCTAssertEqual(Fixture.FileForRepository.SubmoduleInTentacle.decode()!, expected)

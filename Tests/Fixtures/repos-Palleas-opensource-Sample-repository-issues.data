@@ -18,7 +18,7 @@
       "html_url" : "https:\/\/github.com\/Palleas-opensource\/Sample-repository\/pull\/3"
     },
     "state" : "open",
-    "body" : "![Giphy](http:\/\/media2.giphy.com\/media\/jxhJ8ylaYIPbG\/giphy.gif)",
+    "body" : "![Giphy](http:\/\/media2.giphy.com\/media\/jxhJ8ylaYIPbG\/giphy.gif)\n",
     "id" : 165458041,
     "number" : 3,
     "repository_url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository",
@@ -53,16 +53,22 @@
   {
     "labels" : [
       {
+        "id" : 381957828,
+        "default" : true,
         "url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/labels\/bug",
         "name" : "bug",
         "color" : "ee0701"
       },
       {
+        "id" : 381957829,
+        "default" : true,
         "url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/labels\/duplicate",
         "name" : "duplicate",
         "color" : "cccccc"
       },
       {
+        "id" : 381957830,
+        "default" : true,
         "url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/labels\/enhancement",
         "name" : "enhancement",
         "color" : "84b6eb"
@@ -98,10 +104,10 @@
         "gravatar_id" : "",
         "followers_url" : "https:\/\/api.github.com\/users\/Palleas-opensource\/followers"
       },
-      "html_url" : "https:\/\/github.com\/Palleas-opensource\/Sample-repository\/milestones\/Release%20this%20app",
+      "html_url" : "https:\/\/github.com\/Palleas-opensource\/Sample-repository\/milestone\/1",
       "number" : 1,
       "updated_at" : "2016-07-13T16:56:57Z",
-      "due_on" : "2016-07-25T04:00:00Z",
+      "due_on" : "2016-07-25T07:00:00Z",
       "closed_at" : null
     },
     "title" : "This issue is open",
@@ -129,7 +135,7 @@
       "followers_url" : "https:\/\/api.github.com\/users\/Palleas-opensource\/followers"
     },
     "state" : "open",
-    "body" : "Issues are pretty cool.",
+    "body" : "Issues are pretty cool.\n",
     "id" : 156633109,
     "number" : 1,
     "repository_url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository",

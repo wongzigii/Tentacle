@@ -49,7 +49,7 @@ class IssuesTests: XCTestCase {
                 number: 3,
                 state: .open,
                 title: "Add informations in Readme",
-                body: "![Giphy](http://media2.giphy.com/media/jxhJ8ylaYIPbG/giphy.gif)",
+                body: "![Giphy](http://media2.giphy.com/media/jxhJ8ylaYIPbG/giphy.gif)\n",
                 user: palleasOpensource,
                 labels: [],
                 assignees: [],
@@ -65,7 +65,7 @@ class IssuesTests: XCTestCase {
                 number: 1,
                 state: .open,
                 title: "This issue is open",
-                body: "Issues are pretty cool.",
+                body: "Issues are pretty cool.\n",
                 user: palleasOpensource,
                 labels: [
                     Label(
