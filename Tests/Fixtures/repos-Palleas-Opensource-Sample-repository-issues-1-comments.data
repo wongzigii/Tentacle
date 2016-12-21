@@ -24,7 +24,7 @@
     "created_at" : "2016-07-27T01:28:21Z",
     "issue_url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/issues\/1",
     "updated_at" : "2016-07-27T01:28:21Z",
-    "body" : "I know right?!",
+    "body" : "I know right?!\n",
     "url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/issues\/comments\/235455442"
   },
   {
@@ -52,7 +52,7 @@
     "created_at" : "2016-07-27T01:29:31Z",
     "issue_url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/issues\/1",
     "updated_at" : "2016-07-27T01:29:31Z",
-    "body" : "👍 Good idea to say stuff like that on internet!",
+    "body" : "👍 Good idea to say stuff like that on internet!\n",
     "url" : "https:\/\/api.github.com\/repos\/Palleas-opensource\/Sample-repository\/issues\/comments\/235455603"
   }
 ]

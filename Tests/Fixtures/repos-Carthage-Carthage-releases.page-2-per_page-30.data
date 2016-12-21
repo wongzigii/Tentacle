@@ -1,5 +1,177 @@
 [
   {
+    "id" : 1157733,
+    "draft" : false,
+    "published_at" : "2015-04-13T05:16:06Z",
+    "assets" : [
+      {
+        "id" : 520301,
+        "uploader" : {
+          "id" : 432536,
+          "organizations_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/orgs",
+          "received_events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/received_events",
+          "following_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/following{\/other_user}",
+          "login" : "jspahrsummers",
+          "avatar_url" : "https:\/\/avatars.githubusercontent.com\/u\/432536?v=3",
+          "url" : "https:\/\/api.github.com\/users\/jspahrsummers",
+          "subscriptions_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/subscriptions",
+          "type" : "User",
+          "repos_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/repos",
+          "html_url" : "https:\/\/github.com\/jspahrsummers",
+          "events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/events{\/privacy}",
+          "site_admin" : false,
+          "starred_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/starred{\/owner}{\/repo}",
+          "gists_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/gists{\/gist_id}",
+          "gravatar_id" : "",
+          "followers_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/followers"
+        },
+        "label" : "",
+        "state" : "uploaded",
+        "created_at" : "2015-04-13T05:34:09Z",
+        "content_type" : "application\/octet-stream",
+        "url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/releases\/assets\/520301",
+        "size" : 3205454,
+        "updated_at" : "2015-04-13T05:34:13Z",
+        "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.6.5\/Carthage.pkg",
+        "name" : "Carthage.pkg",
+        "download_count" : 806
+      },
+      {
+        "id" : 520303,
+        "uploader" : {
+          "id" : 432536,
+          "organizations_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/orgs",
+          "received_events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/received_events",
+          "following_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/following{\/other_user}",
+          "login" : "jspahrsummers",
+          "avatar_url" : "https:\/\/avatars.githubusercontent.com\/u\/432536?v=3",
+          "url" : "https:\/\/api.github.com\/users\/jspahrsummers",
+          "subscriptions_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/subscriptions",
+          "type" : "User",
+          "repos_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/repos",
+          "html_url" : "https:\/\/github.com\/jspahrsummers",
+          "events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/events{\/privacy}",
+          "site_admin" : false,
+          "starred_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/starred{\/owner}{\/repo}",
+          "gists_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/gists{\/gist_id}",
+          "gravatar_id" : "",
+          "followers_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/followers"
+        },
+        "label" : null,
+        "state" : "uploaded",
+        "created_at" : "2015-04-13T05:35:43Z",
+        "content_type" : "application\/zip",
+        "url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/releases\/assets\/520303",
+        "size" : 3041309,
+        "updated_at" : "2015-04-13T05:35:46Z",
+        "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.6.5\/CarthageKit.framework.zip",
+        "name" : "CarthageKit.framework.zip",
+        "download_count" : 44
+      }
+    ],
+    "prerelease" : false,
+    "author" : {
+      "id" : 432536,
+      "organizations_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/orgs",
+      "received_events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/received_events",
+      "following_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/following{\/other_user}",
+      "login" : "jspahrsummers",
+      "avatar_url" : "https:\/\/avatars.githubusercontent.com\/u\/432536?v=3",
+      "url" : "https:\/\/api.github.com\/users\/jspahrsummers",
+      "subscriptions_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/subscriptions",
+      "type" : "User",
+      "repos_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/repos",
+      "html_url" : "https:\/\/github.com\/jspahrsummers",
+      "events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/events{\/privacy}",
+      "site_admin" : false,
+      "starred_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/starred{\/owner}{\/repo}",
+      "gists_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/gists{\/gist_id}",
+      "gravatar_id" : "",
+      "followers_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/followers"
+    },
+    "created_at" : "2015-04-13T05:08:03Z",
+    "zipball_url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/zipball\/0.6.5",
+    "url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/releases\/1157733",
+    "body" : "[Increases the timeout](https:\/\/github.com\/Carthage\/Carthage\/pull\/423) that results in the [“project has no shared schemes” error](https:\/\/github.com\/Carthage\/Carthage\/issues\/299), and adds clearer messaging around it. Thanks, @bavarious!",
+    "target_commitish" : "master",
+    "tarball_url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/tarball\/0.6.5",
+    "html_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/tag\/0.6.5",
+    "assets_url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/releases\/1157733\/assets",
+    "upload_url" : "https:\/\/uploads.github.com\/repos\/Carthage\/Carthage\/releases\/1157733\/assets{?name,label}",
+    "tag_name" : "0.6.5",
+    "name" : "0.6.5: Eight Seconds in Heaven is Better Than Four Seconds in Heaven"
+  },
+  {
+    "id" : 1131692,
+    "draft" : false,
+    "published_at" : "2015-04-07T05:22:24Z",
+    "assets" : [
+      {
+        "id" : 509903,
+        "uploader" : {
+          "id" : 432536,
+          "organizations_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/orgs",
+          "received_events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/received_events",
+          "following_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/following{\/other_user}",
+          "login" : "jspahrsummers",
+          "avatar_url" : "https:\/\/avatars.githubusercontent.com\/u\/432536?v=3",
+          "url" : "https:\/\/api.github.com\/users\/jspahrsummers",
+          "subscriptions_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/subscriptions",
+          "type" : "User",
+          "repos_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/repos",
+          "html_url" : "https:\/\/github.com\/jspahrsummers",
+          "events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/events{\/privacy}",
+          "site_admin" : false,
+          "starred_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/starred{\/owner}{\/repo}",
+          "gists_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/gists{\/gist_id}",
+          "gravatar_id" : "",
+          "followers_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/followers"
+        },
+        "label" : null,
+        "state" : "uploaded",
+        "created_at" : "2015-04-07T05:38:54Z",
+        "content_type" : "application\/octet-stream",
+        "url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/releases\/assets\/509903",
+        "size" : 3199721,
+        "updated_at" : "2015-04-07T05:38:57Z",
+        "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.6.4\/Carthage.pkg",
+        "name" : "Carthage.pkg",
+        "download_count" : 233
+      }
+    ],
+    "prerelease" : false,
+    "author" : {
+      "id" : 432536,
+      "organizations_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/orgs",
+      "received_events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/received_events",
+      "following_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/following{\/other_user}",
+      "login" : "jspahrsummers",
+      "avatar_url" : "https:\/\/avatars.githubusercontent.com\/u\/432536?v=3",
+      "url" : "https:\/\/api.github.com\/users\/jspahrsummers",
+      "subscriptions_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/subscriptions",
+      "type" : "User",
+      "repos_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/repos",
+      "html_url" : "https:\/\/github.com\/jspahrsummers",
+      "events_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/events{\/privacy}",
+      "site_admin" : false,
+      "starred_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/starred{\/owner}{\/repo}",
+      "gists_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/gists{\/gist_id}",
+      "gravatar_id" : "",
+      "followers_url" : "https:\/\/api.github.com\/users\/jspahrsummers\/followers"
+    },
+    "created_at" : "2015-04-07T05:12:33Z",
+    "zipball_url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/zipball\/0.6.4",
+    "url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/releases\/1131692",
+    "body" : "Changes in this release:\r\n\r\n* Releases without a name will [no longer display](https:\/\/github.com\/Carthage\/Carthage\/pull\/388) `Downloading ProjectName at \"\"`, instead showing the tag name (thanks @l4u!)\r\n* Fixes [`fatal: reference is not a tree`](https:\/\/github.com\/Carthage\/Carthage\/issues\/320) errors when using Carthage to update submodules\r\n* Build errors from Xcode are [now included](https:\/\/github.com\/Carthage\/Carthage\/pull\/414) in output even when `--verbose` is not used",
+    "target_commitish" : "master",
+    "tarball_url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/tarball\/0.6.4",
+    "html_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/tag\/0.6.4",
+    "assets_url" : "https:\/\/api.github.com\/repos\/Carthage\/Carthage\/releases\/1131692\/assets",
+    "upload_url" : "https:\/\/uploads.github.com\/repos\/Carthage\/Carthage\/releases\/1131692\/assets{?name,label}",
+    "tag_name" : "0.6.4",
+    "name" : "0.6.4: The Arrow of Time"
+  },
+  {
     "id" : 1031270,
     "draft" : false,
     "published_at" : "2015-03-09T20:13:50Z",
@@ -384,7 +556,7 @@
         "updated_at" : "2015-01-15T20:12:57Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.5.2\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 395
+        "download_count" : 396
       }
     ],
     "prerelease" : false,
@@ -454,7 +626,7 @@
         "updated_at" : "2015-01-02T05:22:10Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.5.1\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 850
+        "download_count" : 851
       }
     ],
     "prerelease" : false,
@@ -524,7 +696,7 @@
         "updated_at" : "2014-12-25T19:19:31Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.5\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 139
+        "download_count" : 145
       }
     ],
     "prerelease" : false,
@@ -734,7 +906,7 @@
         "updated_at" : "2014-12-04T04:55:43Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.3\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 343
+        "download_count" : 344
       }
     ],
     "prerelease" : false,
@@ -1014,7 +1186,7 @@
         "updated_at" : "2014-11-18T06:41:19Z",
         "browser_download_url" : "https:\/\/github.com\/Carthage\/Carthage\/releases\/download\/0.1\/Carthage.pkg",
         "name" : "Carthage.pkg",
-        "download_count" : 25
+        "download_count" : 26
       }
     ],
     "prerelease" : false,
