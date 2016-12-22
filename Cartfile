@@ -1,3 +1,4 @@
 github "ReactiveCocoa/ReactiveSwift" "1.0.0-rc.2"
 github "thoughtbot/Argo" ~> 4.1.1
 github "thoughtbot/Curry" ~> 3.0
+github "edwardaux/Ogra" ~> 4.1

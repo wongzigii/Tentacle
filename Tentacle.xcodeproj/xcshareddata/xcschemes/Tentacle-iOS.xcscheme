@@ -104,6 +104,20 @@
                ReferencedContainer = "container:Tentacle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BFF261B21B66432500C5552D"
+               BuildableName = "Ogra.framework"
+               BlueprintName = "Ogra-iOS"
+               ReferencedContainer = "container:Carthage/Checkouts/Ogra/Ogra.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

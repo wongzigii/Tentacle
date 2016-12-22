@@ -126,6 +126,11 @@
 		7ABFB4D81D51519B0067B500 /* RepositoryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFB4D61D51519B0067B500 /* RepositoryInfo.swift */; };
 		7ABFB4DD1D5159F50067B500 /* RepositoryInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFB4DC1D5159F50067B500 /* RepositoryInfoTests.swift */; };
 		7ABFB4DE1D515A350067B500 /* RepositoryInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFB4DC1D5159F50067B500 /* RepositoryInfoTests.swift */; };
+		927847F51E0B28B1003B9EE6 /* Ogra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927847F41E0B28B1003B9EE6 /* Ogra.framework */; };
+		927847F71E0B28CF003B9EE6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927847F61E0B28CF003B9EE6 /* File.swift */; };
+		927847F81E0B28FB003B9EE6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927847F61E0B28CF003B9EE6 /* File.swift */; };
+		927847FA1E0C74B2003B9EE6 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927847F91E0C74B2003B9EE6 /* Commit.swift */; };
+		927847FB1E0C75B1003B9EE6 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927847F91E0C74B2003B9EE6 /* Commit.swift */; };
 		BE0F40A01C89098E00E3B11A /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F409F1C89098E00E3B11A /* Fixture.swift */; };
 		BE0F40A21C8909EB00E3B11A /* ReleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */; };
 		BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F40A31C89135D00E3B11A /* Decodable.swift */; };
@@ -244,6 +249,9 @@
 		7AAB00FC1CF51FC5005A7319 /* IssuesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuesTests.swift; sourceTree = "<group>"; };
 		7ABFB4D61D51519B0067B500 /* RepositoryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryInfo.swift; sourceTree = "<group>"; };
 		7ABFB4DC1D5159F50067B500 /* RepositoryInfoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryInfoTests.swift; sourceTree = "<group>"; };
+		927847F41E0B28B1003B9EE6 /* Ogra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogra.framework; path = "../../../Library/Developer/Xcode/DerivedData/Tentacle-bqioixzqvwloakfnodqjigugjqbv/Build/Products/Debug-iphonesimulator/Ogra.framework"; sourceTree = "<group>"; };
+		927847F61E0B28CF003B9EE6 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		927847F91E0C74B2003B9EE6 /* Commit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		BE0F409F1C89098E00E3B11A /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Fixture.swift; sourceTree = SOURCE_ROOT; };
 		BE0F40A11C8909EB00E3B11A /* ReleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseTests.swift; sourceTree = "<group>"; };
 		BE0F40A31C89135D00E3B11A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
@@ -310,6 +318,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				927847F51E0B28B1003B9EE6 /* Ogra.framework in Frameworks */,
 				BE88E84D1C88E6D60034A112 /* Argo.framework in Frameworks */,
 				CD5AE50A1DCDC6B600AD5EFB /* Runes.framework in Frameworks */,
 				BE88E84E1C88E6D60034A112 /* Curry.framework in Frameworks */,
@@ -416,6 +425,7 @@
 				7A2788791D4920DA007AC936 /* Comment.swift */,
 				7A6F94C01DECF5FA006E9BAD /* Content.swift */,
 				BE0F40A31C89135D00E3B11A /* Decodable.swift */,
+				927847F61E0B28CF003B9EE6 /* File.swift */,
 				BECB8A8D1CBDD919005D70A6 /* FoundationExtensions.swift */,
 				BEB0765C1C8A001C00ABD373 /* GitHubError.swift */,
 				BE88E7F71C88C6B30034A112 /* Info.plist */,
@@ -431,6 +441,7 @@
 				BE88E82C1C88C94D0034A112 /* Server.swift */,
 				BE88E7F51C88C6B30034A112 /* Tentacle.h */,
 				BECB8A8A1CBDCD17005D70A6 /* User.swift */,
+				927847F91E0C74B2003B9EE6 /* Commit.swift */,
 			);
 			path = Tentacle;
 			sourceTree = "<group>";
@@ -461,6 +472,7 @@
 		BE88E8271C88C7E90034A112 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				927847F41E0B28B1003B9EE6 /* Ogra.framework */,
 				BE88E85B1C88ED750034A112 /* Argo.framework */,
 				CD5AE50D1DCDC71F00AD5EFB /* Runes.framework */,
 				BE88E85C1C88ED750034A112 /* Curry.framework */,
@@ -771,6 +783,7 @@
 			files = (
 				BEEE47461C91BB3A000FFC21 /* ArgoExtensions.swift in Sources */,
 				61377C791C8A2B760081FF24 /* Client.swift in Sources */,
+				927847FB1E0C75B1003B9EE6 /* Commit.swift in Sources */,
 				BEEE47431C91B8DF000FFC21 /* ResourceType.swift in Sources */,
 				7A6F94C21DECF93E006E9BAD /* Content.swift in Sources */,
 				7A2F66141CF5281200463602 /* PullRequest.swift in Sources */,
@@ -785,6 +798,7 @@
 				61377C7D1C8A2B760081FF24 /* Repository.swift in Sources */,
 				BECB8A8F1CBDD91D005D70A6 /* FoundationExtensions.swift in Sources */,
 				61377C7B1C8A2B760081FF24 /* GitHubError.swift in Sources */,
+				927847F81E0B28FB003B9EE6 /* File.swift in Sources */,
 				61377C7E1C8A2B760081FF24 /* Server.swift in Sources */,
 				61377C7A1C8A2B760081FF24 /* Decodable.swift in Sources */,
 				BECB8A901CBDD920005D70A6 /* User.swift in Sources */,
@@ -821,6 +835,7 @@
 			files = (
 				BEEE47451C91BB3A000FFC21 /* ArgoExtensions.swift in Sources */,
 				BE88E82D1C88C94D0034A112 /* Server.swift in Sources */,
+				927847FA1E0C74B2003B9EE6 /* Commit.swift in Sources */,
 				BEEE47421C91B8DF000FFC21 /* ResourceType.swift in Sources */,
 				7A6F94C11DECF5FA006E9BAD /* Content.swift in Sources */,
 				7A1A825E1CF3E5B60076E2DD /* PullRequest.swift in Sources */,
@@ -835,6 +850,7 @@
 				BE88E8321C88D33D0034A112 /* Release.swift in Sources */,
 				BE88E80D1C88C72B0034A112 /* Client.swift in Sources */,
 				BE0F40A41C89135D00E3B11A /* Decodable.swift in Sources */,
+				927847F71E0B28CF003B9EE6 /* File.swift in Sources */,
 				BECB8A8B1CBDCD17005D70A6 /* User.swift in Sources */,
 				BECB8A8E1CBDD919005D70A6 /* FoundationExtensions.swift in Sources */,
 				BE88E8301C88CDAB0034A112 /* Repository.swift in Sources */,

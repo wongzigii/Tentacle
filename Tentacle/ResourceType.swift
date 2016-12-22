@@ -7,8 +7,13 @@
 //
 
 import Argo
+import Ogra
 
 /// A Resource from the GitHub API.
 public protocol ResourceType: Decodable, Hashable {
     static func decode(_ json: JSON) -> Decoded<Self>
+}
+
+public protocol InputType: Encodable, Hashable {
+    associatedtype Response: Decodable
 }
