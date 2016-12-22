@@ -12,58 +12,12 @@ import Argo
 import Runes
 import Curry
 
-struct Author {
-    let name: String
-    let email: String
-}
-
-extension Author: Encodable {
-    func encode() -> JSON {
-        return JSON.object([
-            "name": self.name.encode(),
-            "email": self.email.encode()
-        ])
-    }
-}
-
-extension Author: Hashable, Equatable {
-    var hashValue: Int {
-        return name.hashValue ^ email.hashValue
-    }
-
-    static func ==(lhs: Author, rhs: Author) -> Bool {
-        return lhs.name == rhs.name
-            && lhs.email == rhs.email
-    }
-}
-
 struct File {
     let message: String
     let committer: Author?
     let author: Author?
     let content: Data
     let branch: String?
-}
-
-struct FileResponse {
-    let content: Content
-    let commit: Commit
-}
-
-extension FileResponse: ResourceType {
-    static func decode(_ j: JSON) -> Decoded<FileResponse> {
-        return curry(FileResponse.init)
-            <^> j <| "content"
-            <*> j <| "commit"
-    }
-
-    var hashValue: Int {
-        return content.hashValue ^ commit.hashValue
-    }
-
-    static func ==(lhs: FileResponse, rhs: FileResponse) -> Bool {
-        return true
-    }
 }
 
 extension File: InputType {
@@ -84,8 +38,6 @@ extension File: InputType {
     }
 
     static func ==(lhs: File, rhs: File) -> Bool {
-
-
         return lhs.message == rhs.message
             && lhs.committer == rhs.committer
             && lhs.author == rhs.committer
