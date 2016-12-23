@@ -321,6 +321,10 @@ public final class Client {
         return fetchOne(.content(owner: repository.owner, repository: repository.name, path: path))
     }
 
+    public func create(file: File, atPath path: String, in repository: Repository) -> SignalProducer<(Response, FileResponse), Error> {
+        return send(file, to: .content(owner: repository.owner, repository: repository.name, path: path), method: "PUT")
+    }
+
     /// Fetch an endpoint from the API.
     private func fetch(_ endpoint: Endpoint, page: UInt?, pageSize: UInt?) -> SignalProducer<(Response, Any), Error> {
         let url = URL(server, endpoint, page: page, pageSize: pageSize)
@@ -390,7 +394,7 @@ public final class Client {
             }
     }
 
-    internal func send<Request: RequestType>(to endpoint: Endpoint, request: Request, method: String) -> SignalProducer<(Response, Request.Response), Error> where Request.Response == Request.Response.DecodedType {
+    internal func send<Request: RequestType>(_ request: Request, to endpoint: Endpoint, method: String) -> SignalProducer<(Response, Request.Response), Error> where Request.Response == Request.Response.DecodedType {
         let url = URL(server, endpoint)
 
         var urlRequest = URLRequest.create(url, credentials)

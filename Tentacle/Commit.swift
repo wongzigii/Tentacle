@@ -11,20 +11,20 @@ import Argo
 import Curry
 import Runes
 
-struct Commit {
-    let sha: String
+public struct Commit {
+    public let sha: String
 }
 
 extension Commit: ResourceType {
-    var hashValue: Int {
+    public var hashValue: Int {
         return sha.hashValue
     }
 
-    static func ==(lhs: Commit, rhs: Commit) -> Bool {
+    public static func ==(lhs: Commit, rhs: Commit) -> Bool {
         return lhs.sha == rhs.sha
     }
 
-    static func decode(_ j: JSON) -> Decoded<Commit> {
+    public static func decode(_ j: JSON) -> Decoded<Commit> {
         return curry(Commit.init)
             <^> (j <| "sha")
     }

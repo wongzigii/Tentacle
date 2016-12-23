@@ -10,13 +10,13 @@ import Foundation
 import Ogra
 import Argo
 
-struct Author {
+public struct Author {
     let name: String
     let email: String
 }
 
 extension Author: Encodable {
-    func encode() -> JSON {
+    public func encode() -> JSON {
         return JSON.object([
             "name": self.name.encode(),
             "email": self.email.encode()
@@ -25,11 +25,11 @@ extension Author: Encodable {
 }
 
 extension Author: Hashable, Equatable {
-    var hashValue: Int {
+    public var hashValue: Int {
         return name.hashValue ^ email.hashValue
     }
 
-    static func ==(lhs: Author, rhs: Author) -> Bool {
+    static public func ==(lhs: Author, rhs: Author) -> Bool {
         return lhs.name == rhs.name
             && lhs.email == rhs.email
     }

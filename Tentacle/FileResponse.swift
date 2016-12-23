@@ -11,23 +11,23 @@ import Argo
 import Curry
 import Runes
 
-struct FileResponse {
+public struct FileResponse {
     let content: Content
     let commit: Commit
 }
 
 extension FileResponse: ResourceType {
-    static func decode(_ j: JSON) -> Decoded<FileResponse> {
+    static public func decode(_ j: JSON) -> Decoded<FileResponse> {
         return curry(FileResponse.init)
             <^> j <| "content"
             <*> j <| "commit"
     }
 
-    var hashValue: Int {
+    public var hashValue: Int {
         return content.hashValue ^ commit.hashValue
     }
 
-    static func ==(lhs: FileResponse, rhs: FileResponse) -> Bool {
+    public static func ==(lhs: FileResponse, rhs: FileResponse) -> Bool {
         return true
     }
 }

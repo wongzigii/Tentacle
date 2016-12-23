@@ -12,22 +12,22 @@ import Argo
 import Runes
 import Curry
 
-struct File {
-    let message: String
-    let committer: Author?
-    let author: Author?
-    let content: Data
-    let branch: String?
+public struct File {
+    public let message: String
+    public let committer: Author?
+    public let author: Author?
+    public let content: Data
+    public let branch: String?
 }
 
 extension File: RequestType {
-    typealias Response = FileResponse
+    public typealias Response = FileResponse
 
-    var hashValue: Int {
+    public var hashValue: Int {
         return message.hashValue
     }
 
-    func encode() -> JSON {
+    public func encode() -> JSON {
         return JSON.object([
             "message": self.message.encode(),
             "committer": self.committer?.encode() ?? .null,
@@ -37,7 +37,7 @@ extension File: RequestType {
         ])
     }
 
-    static func ==(lhs: File, rhs: File) -> Bool {
+    public static func ==(lhs: File, rhs: File) -> Bool {
         return lhs.message == rhs.message
             && lhs.committer == rhs.committer
             && lhs.author == rhs.committer
