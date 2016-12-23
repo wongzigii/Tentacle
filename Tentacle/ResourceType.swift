@@ -14,6 +14,6 @@ public protocol ResourceType: Decodable, Hashable {
     static func decode(_ json: JSON) -> Decoded<Self>
 }
 
-public protocol InputType: Encodable, Hashable {
+public protocol RequestType: Encodable, Hashable {
     associatedtype Response: Decodable
 }

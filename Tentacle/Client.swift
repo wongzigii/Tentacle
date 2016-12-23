@@ -390,6 +390,26 @@ public final class Client {
             }
     }
 
+    internal func send<Request: RequestType>(to endpoint: Endpoint, request: Request, method: String) -> SignalProducer<(Response, Request.Response), Error> {
+        let url = URL(server, endpoint)
+
+        var urlRequest = URLRequest.create(url, credentials)
+        urlRequest.httpMethod = method
+
+        let object = request.encode().JSONObject()
+        if let payload = try? JSONSerialization.data(withJSONObject: object, options: []) {
+            urlRequest.httpBody = payload
+        }
+
+        return urlSession
+            .reactive
+            .data(with: urlRequest)
+            .mapError(Error.networkError)
+            .flatMap(.concat) { data, response -> SignalProducer<(Response, Request.Response), Error> in
+                return .empty
+            }
+    }
+
 
 }
 

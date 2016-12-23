@@ -20,7 +20,7 @@ struct File {
     let branch: String?
 }
 
-extension File: InputType {
+extension File: RequestType {
     typealias Response = FileResponse
 
     var hashValue: Int {
