@@ -413,23 +413,16 @@ public final class Client {
                     return JSONSerialization
                         .deserializeJSON(data)
                         .mapError { Error.jsonDeserializationError($0.error) }
-                        .map(JSON.init)
                 }
-                .attemptMap { j -> Result<Request.Response, Client.Error> in
-                    switch Request.Response.decode(j) {
-                    case let .success(value):
-                        return .success(value)
-                    case let .failure(error):
-                        return .failure(Client.Error.jsonDeserializationError(error))
-                    }
+                .attemptMap { j in
+                    return decode(j)
+                        .mapError(Error.jsonDecodingError)
                 }
                 .map {
                     return (Response(headerFields: headers), $0)
                 }
             }
     }
-
-
 }
 
 extension Client.Error: Hashable {
