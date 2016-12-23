@@ -390,7 +390,7 @@ public final class Client {
             }
     }
 
-    internal func send<Request: RequestType>(to endpoint: Endpoint, request: Request, method: String) -> SignalProducer<(Response, Request.Response), Error> {
+    internal func send<Request: RequestType>(to endpoint: Endpoint, request: Request, method: String) -> SignalProducer<(Response, Request.Response), Error> where Request.Response == Request.Response.DecodedType {
         let url = URL(server, endpoint)
 
         var urlRequest = URLRequest.create(url, credentials)
@@ -406,7 +406,26 @@ public final class Client {
             .data(with: urlRequest)
             .mapError(Error.networkError)
             .flatMap(.concat) { data, response -> SignalProducer<(Response, Request.Response), Error> in
-                return .empty
+                let response = response as! HTTPURLResponse
+                let headers = response.allHeaderFields as! [String:String]
+
+                return SignalProducer.attempt {
+                    return JSONSerialization
+                        .deserializeJSON(data)
+                        .mapError { Error.jsonDeserializationError($0.error) }
+                        .map(JSON.init)
+                }
+                .attemptMap { j -> Result<Request.Response, Client.Error> in
+                    switch Request.Response.decode(j) {
+                    case let .success(value):
+                        return .success(value)
+                    case let .failure(error):
+                        return .failure(Client.Error.jsonDeserializationError(error))
+                    }
+                }
+                .map {
+                    return (Response(headerFields: headers), $0)
+                }
             }
     }
 
