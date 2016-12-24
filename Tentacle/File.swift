@@ -18,6 +18,14 @@ public struct File {
     public let author: Author?
     public let content: Data
     public let branch: String?
+
+    public init(message: String, committer: Author?, author: Author?, content: Data, branch: String?) {
+        self.message = message
+        self.committer = committer
+        self.author = author
+        self.content = content
+        self.branch = branch
+    }
 }
 
 extension File: RequestType {
