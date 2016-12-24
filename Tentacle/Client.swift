@@ -418,6 +418,20 @@ public final class Client {
                         .deserializeJSON(data)
                         .mapError { Error.jsonDeserializationError($0.error) }
                 }
+                .attemptMap { JSON -> Result<Any, Client.Error> in
+                    if response.statusCode == 404 {
+                        return .failure(.doesNotExist)
+                    }
+                    if response.statusCode >= 400 && response.statusCode < 600 {
+                        return decode(JSON)
+                            .mapError(Error.jsonDecodingError)
+                            .flatMap { error in
+                                .failure(Error.apiError(response.statusCode, Response(headerFields: headers), error))
+                        }
+                    }
+                    return .success(JSON)
+
+                }
                 .attemptMap { j in
                     return decode(j)
                         .mapError(Error.jsonDecodingError)
