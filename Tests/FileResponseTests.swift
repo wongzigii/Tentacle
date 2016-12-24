@@ -24,7 +24,25 @@ class FileResponseTests: XCTestCase {
             sha: "95b966ae1c166bd92f8ae7d1c313e738c731dfc3", url: URL(string: "https://github.com/octocat/Hello-World/blob/master/notes/hello.txt")!
         ))
 
-        let commit = Commit(sha: "7638417db6d59f3c431d3e1f261cc637155684cd")
+        let author = Commit.Author(
+            date: DateFormatter.iso8601.date(from: "2014-11-07T22:01:45Z")!,
+            name: "Scott Chacon",
+            email: "schacon@gmail.com"
+        )
+
+        let commit = Commit(
+            sha: "7638417db6d59f3c431d3e1f261cc637155684cd",
+            author: author,
+            committer: author,
+            message: "my commit message",
+            url: URL(string: "https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd")!,
+            parents: [
+                Commit.Parent(
+                    url: URL(string: "https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5")!,
+                    sha: "1acc419d4d6a9ce985db7be48c6349a0475975b5"
+                )
+            ]
+        )
 
         let expected = FileResponse(content: content, commit: commit)
 
