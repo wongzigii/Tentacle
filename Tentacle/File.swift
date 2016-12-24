@@ -13,10 +13,15 @@ import Runes
 import Curry
 
 public struct File {
+    /// Commit message
     public let message: String
+    /// The committer of the commit
     public let committer: Author?
+    /// The author of the commit
     public let author: Author?
+    /// Content of the file to create
     public let content: Data
+    /// Branch in which the file will be created
     public let branch: String?
 
     public init(message: String, committer: Author?, author: Author?, content: Data, branch: String?) {

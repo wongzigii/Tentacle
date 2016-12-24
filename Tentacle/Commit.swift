@@ -12,6 +12,7 @@ import Curry
 import Runes
 
 public struct Commit {
+    /// SHA of the commit
     public let sha: String
 }
 

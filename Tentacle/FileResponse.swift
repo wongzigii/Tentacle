@@ -12,7 +12,9 @@ import Curry
 import Runes
 
 public struct FileResponse {
+    /// Created file
     let content: Content
+    /// Commit associated with the file that was created
     let commit: Commit
 }
 

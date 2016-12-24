@@ -11,7 +11,9 @@ import Ogra
 import Argo
 
 public struct Author {
+    /// Name of the Author
     let name: String
+    /// Email of the Author
     let email: String
 
     public init(name: String, email: String) {
