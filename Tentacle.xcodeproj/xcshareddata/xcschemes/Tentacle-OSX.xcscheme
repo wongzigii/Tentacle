@@ -20,6 +20,90 @@
                ReferencedContainer = "container:Tentacle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F89335531A4CE83000B88685"
+               BuildableName = "Argo.framework"
+               BlueprintName = "Argo-Mac"
+               ReferencedContainer = "container:Carthage/Checkouts/Argo/Argo.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F886307C1B4EF9F800F53969"
+               BuildableName = "Curry.framework"
+               BlueprintName = "Curry-Mac"
+               ReferencedContainer = "container:Carthage/Checkouts/Curry/Curry.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BFF261D11B66435100C5552D"
+               BuildableName = "Ogra.framework"
+               BlueprintName = "Ogra-Mac"
+               ReferencedContainer = "container:Carthage/Checkouts/Ogra/Ogra.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D04725E919E49ED7006002AA"
+               BuildableName = "ReactiveSwift.framework"
+               BlueprintName = "ReactiveSwift-macOS"
+               ReferencedContainer = "container:Carthage/Checkouts/ReactiveSwift/ReactiveSwift.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D45480561A9572F5009D7229"
+               BuildableName = "Result.framework"
+               BlueprintName = "Result-Mac"
+               ReferencedContainer = "container:Carthage/Checkouts/Result/Result.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F86B2E0A1A5F2B8D00C3B8BD"
+               BuildableName = "Runes.framework"
+               BlueprintName = "Runes-Mac"
+               ReferencedContainer = "container:Carthage/Checkouts/Runes/Runes.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
