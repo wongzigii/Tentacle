@@ -13,9 +13,9 @@ import Runes
 
 public struct FileResponse {
     /// Created file
-    let content: Content
+    public let content: Content
     /// Commit associated with the file that was created
-    let commit: Commit
+    public let commit: Commit
 }
 
 extension FileResponse: ResourceType {
