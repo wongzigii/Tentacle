@@ -54,6 +54,18 @@ extension URLRequest {
         
         return request
     }
+
+    internal static func create<Request: RequestType>(_ url: URL, _ request: Request, _ credentials: Client.Credentials?, contentType: String? = Client.APIContentType) -> URLRequest {
+        var URLRequest = create(url, credentials, contentType: contentType)
+        URLRequest.httpMethod = request.method.rawValue
+
+        let object = request.encode().JSONObject()
+        if let payload = try? JSONSerialization.data(withJSONObject: object, options: []) {
+            URLRequest.httpBody = payload
+        }
+
+        return URLRequest
+    }
 }
 
 extension URLSession {
@@ -85,6 +97,14 @@ extension URLSession {
 			task.resume()
 		}
 	}
+}
+
+public enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case head = "HEAD"
+    case options = "OPTIONS"
 }
 
 /// A GitHub API Client
@@ -322,7 +342,7 @@ public final class Client {
     }
 
     public func create(file: File, atPath path: String, in repository: Repository) -> SignalProducer<(Response, FileResponse), Error> {
-        return send(file, to: .content(owner: repository.owner, repository: repository.name, path: path), method: "PUT")
+        return send(file, to: .content(owner: repository.owner, repository: repository.name, path: path))
     }
 
     /// Fetch an endpoint from the API.
@@ -394,16 +414,8 @@ public final class Client {
             }
     }
 
-    internal func send<Request: RequestType>(_ request: Request, to endpoint: Endpoint, method: String) -> SignalProducer<(Response, Request.Response), Error> where Request.Response == Request.Response.DecodedType {
-        let url = URL(server, endpoint)
-
-        var urlRequest = URLRequest.create(url, credentials)
-        urlRequest.httpMethod = method
-
-        let object = request.encode().JSONObject()
-        if let payload = try? JSONSerialization.data(withJSONObject: object, options: []) {
-            urlRequest.httpBody = payload
-        }
+    internal func send<Request: RequestType>(_ request: Request, to endpoint: Endpoint) -> SignalProducer<(Response, Request.Response), Error> where Request.Response == Request.Response.DecodedType {
+        let urlRequest = URLRequest.create(URL(server, endpoint), request, credentials)
 
         return urlSession
             .reactive

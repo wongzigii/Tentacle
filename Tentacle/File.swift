@@ -40,6 +40,10 @@ extension File: RequestType {
         return message.hashValue
     }
 
+    public var method: HTTPMethod {
+        return .put
+    }
+
     public func encode() -> JSON {
         return JSON.object([
             "message": self.message.encode(),
