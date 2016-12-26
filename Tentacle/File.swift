@@ -45,15 +45,23 @@ extension File: RequestType {
     }
 
     public func encode() -> JSON {
-        return JSON.object([
+        var payload: [String: JSON] = [
             "message": self.message.encode(),
-            "committer": self.committer?.encode() ?? .null,
-            "author": self.committer?.encode() ?? .null,
             "content": self.content.base64EncodedString().encode(),
             "branch": self.branch?.encode() ?? .null
-        ])
-    }
+        ]
 
+        if let author = author {
+            payload["author"] = author.encode()
+        }
+
+        if let committer = committer {
+            payload["committer"] = committer.encode()
+        }
+
+        return JSON.object(payload)
+    }
+    
     public static func ==(lhs: File, rhs: File) -> Bool {
         return lhs.message == rhs.message
             && lhs.committer == rhs.committer
