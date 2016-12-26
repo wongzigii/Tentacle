@@ -13,7 +13,7 @@ import Runes
 
 public struct Commit {
     /// SHA of the commit
-    public let sha: String
+    public let sha: SHA
 
     /// Author of the commit
     public let author: Author
@@ -35,7 +35,7 @@ public struct Commit {
         public let url: URL
 
         /// SHA of the parent commit
-        public let sha: String
+        public let sha: SHA
     }
 
     public struct Author {
@@ -59,7 +59,7 @@ extension Commit: ResourceType {
 
     public static func decode(_ j: JSON) -> Decoded<Commit> {
         return curry(Commit.init)
-            <^> (j <| "sha")
+            <^> (j <| "sha" >>- toSHA)
             <*> j <| "author"
             <*> j <| "committer"
             <*> j <| "message"
@@ -91,7 +91,7 @@ extension Commit.Parent: ResourceType {
     public static func decode(_ j: JSON) -> Decoded<Commit.Parent> {
         return curry(Commit.Parent.init)
             <^> (j <| "url" >>- toURL)
-            <*> j <| "sha"
+            <*> (j <| "sha" >>- toSHA)
     }
 
     public var hashValue: Int {

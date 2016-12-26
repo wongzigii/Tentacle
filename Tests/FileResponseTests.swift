@@ -31,7 +31,7 @@ class FileResponseTests: XCTestCase {
         )
 
         let commit = Commit(
-            sha: "7638417db6d59f3c431d3e1f261cc637155684cd",
+            sha: SHA(hash: "7638417db6d59f3c431d3e1f261cc637155684cd"),
             author: author,
             committer: author,
             message: "my commit message",
@@ -39,7 +39,7 @@ class FileResponseTests: XCTestCase {
             parents: [
                 Commit.Parent(
                     url: URL(string: "https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5")!,
-                    sha: "1acc419d4d6a9ce985db7be48c6349a0475975b5"
+                    sha: SHA(hash: "1acc419d4d6a9ce985db7be48c6349a0475975b5")
                 )
             ]
         )

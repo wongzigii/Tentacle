@@ -92,3 +92,7 @@ internal func toUserType(_ string: String) -> Decoded<User.UserType> {
         return .failure(.custom("String \(string) does not represent a valid user type"))
     }
 }
+
+internal func toSHA(_ string: String) -> Decoded<SHA> {
+    return .success(SHA(hash: string))
+}
